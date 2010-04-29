@@ -1,0 +1,60 @@
+﻿using System;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+
+
+namespace Gestures.Rules.Objects
+{
+    public class TouchPathLength : IRuleData
+    {
+        private double _min = 0f;
+        public double Min
+        {
+            get
+            {
+                return _min;
+            }
+            set
+            {
+                _min = value;
+            }
+        }
+
+        private double _max = 0f;
+        public double Max
+        {
+            get
+            {
+                return _max;
+            }
+            set
+            {
+                _max = value;
+            }
+        }
+
+        public bool Equals(IRuleData rule)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void Union(IRuleData value)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public string ToGDL()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
