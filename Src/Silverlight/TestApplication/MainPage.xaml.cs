@@ -1,0 +1,267 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using Gestures.ReturnTypes;
+using Framework.HardwareListeners;
+using Gestures.Feedbacks.TouchFeedbacks;
+using Framework;
+using System.Windows.Media.Imaging;
+using Framework.TouchInputProviders;
+using Gestures.Feedbacks.GestureFeedbacks;
+using System.Threading;
+
+namespace TestApplication
+{
+    public partial class MainPage : UserControl
+    {
+        public MainPage()
+        {
+            InitializeComponent();
+            this.Loaded += MainPage_Loaded;
+        }
+
+        void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Initialize Gesture Framework
+            TouchInputProvider inputProvider = new SilverlightTouchInputProvider();
+            GestureFramework.Initialize(inputProvider, LayoutRoot);
+
+            // Add touch feedbacks
+            GestureFramework.AddTouchFeedback(typeof(BubblesPath));
+
+            // Add gesture feedbacks
+            GestureFramework.AddGesturFeedback("lasso", typeof(HighlightSelectedArea));
+
+            InitializeApplication();
+        }
+
+        private void InitializeApplication()
+        {
+            // Load images from embedded resource
+            var bitmaps = GetImages();
+            foreach (var bitmap in bitmaps)
+            {
+                Image img = new Image();
+
+                // Load the image in UI
+                img.Source = bitmap;
+                SetImageLocation(img);
+                LayoutRoot.Children.Add(img);
+
+                // Subscribe to gesture events for image
+                GestureFramework.EventManager.AddEvent(img, "zoom", ZoomCallback);
+                GestureFramework.EventManager.AddEvent(img, "pinch", PinchCallback);
+                GestureFramework.EventManager.AddEvent(img, "drag", DragCallback);
+                GestureFramework.EventManager.AddEvent(img, "rotate", RotateCallback);
+            }
+
+            // Subscribe to gesture events for the LayoutRoot
+            GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
+        }
+
+        #region Setting image properties
+        double imageLeftPosition = 100;
+        private void SetImageLocation(Image img)
+        {
+            img.SetValue(Canvas.TopProperty, 100.0);
+            img.SetValue(Canvas.LeftProperty, imageLeftPosition);
+            img.Width = 120;
+            img.Height = 90;
+
+            // Update location for the next image
+            imageLeftPosition = imageLeftPosition + img.Width + 10;
+        }
+
+        /// <summary>
+        /// Returns the images from assebly embedded resource
+        /// </summary>
+        /// <returns></returns>
+        private List<BitmapImage> GetImages()
+        {
+            string[] imageNames = { "Hydrangeas.jpg", "Jellyfish.jpg", "Koala.jpg", "Lighthouse.jpg" };
+            List<BitmapImage> images = new List<BitmapImage>();
+            foreach (string imgName in imageNames)
+            {
+                BitmapImage img = Framework.Utility.ContentHelper.GetEmbeddedImage(this, imgName);
+                images.Add(img);
+            }
+
+            return images;
+        }
+        #endregion
+
+        #region Gesture Events
+        private void ZoomCallback(UIElement sender, List<IReturnType> values)
+        {
+            var dis = values.Get<DistanceChanged>();
+            if (dis != null)
+                Resize(sender as Image, dis.Delta);
+        }
+
+        private void RotateCallback(UIElement sender, List<IReturnType> values)
+        {
+            var slopeChanged = values.Get<SlopeChanged>();
+            if (slopeChanged != null)
+            {
+                var img = sender as Image;
+                if (img != null)
+                    Rotate(img, Math.Round(slopeChanged.Delta, 1));
+            }
+        }
+
+        bool rotateInProgress = false;
+        private void Rotate(Image img, double delta)
+        {
+            if (!rotateInProgress & delta != 0)
+            {
+                rotateInProgress = true;
+                RotateTransform rt = img.RenderTransform as RotateTransform;
+
+                if (rt == null)
+                    rt = new RotateTransform();
+
+                rt.Angle += delta;
+                rt.CenterX = img.Width / 2;
+                rt.CenterY = img.Height / 2;
+
+                img.RenderTransform = rt;
+
+                rotateInProgress = false;
+            }
+        }
+
+        private void PinchCallback(UIElement sender, List<IReturnType> values)
+        {
+            var dis = values.Get<DistanceChanged>();
+            if (dis != null)
+                Resize(sender as Image, dis.Delta);
+        }
+
+        private void DragCallback(UIElement sender, List<IReturnType> values)
+        {
+            var posChanged = values.Get<PositionChanged>();
+            if (posChanged != null)
+            {
+                MoveItem(sender, posChanged);
+            }
+        }
+
+        private void LassoCallback(UIElement sender, List<IReturnType> values)
+        {
+            TouchPoints touchPoints = values.Get<TouchPoints>();
+
+            // Create a dummy polygon shape using the points of lasso
+            // to run a hit test to find the selected elements
+            Polygon polygon = CreatePolygon(touchPoints);
+            polygon.Fill = new SolidColorBrush(Colors.White);
+
+            polygon.Opacity = .01;
+            polygon.Tag = "LASSO_TEST";
+            LayoutRoot.Children.Add(polygon);
+
+            Thread t = new Thread(new ParameterizedThreadStart(HighlightItems));
+
+
+            t.Start(polygon);
+        }
+
+        private void MoveItem(UIElement sender, PositionChanged posChanged)
+        {
+            Image item = sender as Image;
+            double x = (double)item.GetValue(Canvas.LeftProperty);
+            double y = (double)item.GetValue(Canvas.TopProperty);
+
+            item.SetValue(Canvas.LeftProperty, x + posChanged.X);
+            item.SetValue(Canvas.TopProperty, y + posChanged.Y);
+        }
+
+        private void Resize(Image image, double delta)
+        {
+            if (image.Height + delta > 0)
+                image.Height += delta;
+
+            if (image.Width + delta > 0)
+                image.Width += delta;
+        }
+
+        #endregion
+
+        #region UI Helper Methods
+        private void DrawLine(Point p1, Point p2)
+        {
+            System.Windows.Shapes.Line line = new System.Windows.Shapes.Line();
+
+            line.X1 = p1.X;
+            line.X2 = p2.X;
+            line.Y1 = p1.Y;
+            line.Y2 = p2.Y;
+            line.Stroke = new SolidColorBrush(Colors.Red);
+
+            LayoutRoot.Children.Add(line);
+        }
+
+        Polygon CreatePolygon(TouchPoints points)
+        {
+            Polygon p = new Polygon();
+
+            foreach (var point in points)
+            {
+                p.Points.Add(point);
+            }
+
+            return p;
+        }
+
+        private void HighlightItems(object param)
+        {
+            Thread.Sleep(10);
+
+            Action action = () =>
+            {
+                Polygon selectedArea = param as Polygon;
+
+                //TODO: For test only, we need to find more efficient approach
+                foreach (var item in LayoutRoot.Children)
+                {
+                    if (item is Image)
+                    {
+                        Image img = item as Image;
+                        Point p1 = new Point((double)img.GetValue(Canvas.LeftProperty), (double)img.GetValue(Canvas.TopProperty));
+                        Rect area = new Rect(p1, new Point(p1.X + img.Width, p1.Y + img.Height));
+
+                        var elements = VisualTreeHelper.FindElementsInHostCoordinates(area, LayoutRoot);
+
+                        var list = elements.ToList();
+
+                        foreach (var e in elements)
+                        {
+                            if (e is Polygon)
+                            {
+                                if (e == selectedArea)
+                                {
+                                    img.Opacity = 0.5;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Hit-test completed, remove the dummy polygon
+                LayoutRoot.Children.Remove(selectedArea);
+            };
+
+            Dispatcher.BeginInvoke(action);
+        }
+        #endregion
+
+    }
+}
