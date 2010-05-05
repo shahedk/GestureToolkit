@@ -18,6 +18,8 @@ using Framework.HardwareListeners;
 using System.Threading;
 using Gestures.Objects;
 using Framework.Utility;
+using Framework.Exceptions;
+using System.Collections.ObjectModel;
 
 namespace Framework.UI
 {
@@ -32,110 +34,25 @@ namespace Framework.UI
             public const string StopGesture = "Stop";
         }
 
-        private ParameterizedThreadStart _backgroundThreadStart;
-        private Thread _backgroundThread;
         private bool _reloadExistingProjectList = true;
-
-        private TouchInputRecorder _recorder = new TouchInputRecorder();
-        private IsolatedStorageSettings _appSettings = IsolatedStorageSettings.ApplicationSettings;
-        private GestureServiceSoapClient _clientService = new GestureServiceSoapClient();
-
-        public GestureRecordingPanel()
-        {
-            InitializeComponent();
-
-            Init();
-        }
-        #endregion
-
-        #region AppSettings
-        private DateTime LastSyncTime
-        {
-            get
-            {
-                if (_appSettings.Contains("lastsynctime"))
-                    return (DateTime)_appSettings["lastsynctime"];
-                else
-                    return DateTime.MinValue;
-            }
-            set
-            {
-                _appSettings["lastsynctime"] = value;
-                _appSettings.Save();
-            }
-        }
-
-        private string UserName
-        {
-            get
-            {
-                if (_appSettings.Contains("username"))
-                    return _appSettings["username"] as string;
-
-                return null;
-            }
-            set
-            {
-                _appSettings["username"] = value;
-                _appSettings.Save();
-            }
-        }
-
-        public Dictionary<string, List<string>>.KeyCollection ProjectList
-        {
-            get
-            {
-                return GestureDictionary.Keys;
-            }
-        }
+        private TouchInputRecorder _recorder;
 
         public List<string> GestureList
         {
             get
             {
                 if (ExistingProjectNameComboBox.SelectedValue != null)
-                    if (GestureDictionary[ExistingProjectNameComboBox.SelectedValue as string] != null)
-                        return GestureDictionary[ExistingProjectNameComboBox.SelectedValue as string] as List<string>;
-
-                return new List<string>();
-            }
-        }
-
-        public Dictionary<string, List<string>> GestureDictionary
-        {
-            get
-            {
-                if (!_appSettings.Contains("projectsAndGesture"))
-                {
-                    _appSettings["projectsAndGesture"] = new Dictionary<string, List<string>>();
-                    _appSettings.Save();
-                }
-
-                return _appSettings["projectsAndGesture"] as Dictionary<string, List<string>>;
-            }
-        }
-
-        bool isCacheValid = false;
-        DateTime lastCacheValidated = DateTime.MinValue;
-        public bool IsCacheValid
-        {
-            get
-            {
-                // If it was validated more than 3 mins ago, then check again. 
-                // User may work in multiple machines at the same time
-                if ((DateTime.Now - lastCacheValidated).TotalMinutes > 3)
-                    return false;
+                    return _recorder.GetGestureList(ExistingProjectNameComboBox.SelectedValue as string);
                 else
-                    return isCacheValid;
-
-            }
-            set
-            {
-                isCacheValid = value;
+                    return new List<string>();
             }
         }
 
-        IsolatedStorageSettings _userSettings = IsolatedStorageSettings.ApplicationSettings;
+        public GestureRecordingPanel()
+        {
+            InitializeComponent();
+            Init();
+        }
         #endregion
 
         #region Gesture Recording
@@ -153,78 +70,8 @@ namespace Framework.UI
         private void SaveRecordedData(string data)
         {
             string projectName = ProjectNameTextBox.Text.Trim();
-            string gestureName = GetUniqueGestureName();
-
-            string gestureDataKey = UserName + projectName + gestureName;
-
-            // Gesture data
-            _userSettings.Add(gestureDataKey, data);
-            if (CheckIsolatedStorageAvaliableSpace(data))
-                _userSettings.Save();
-
-
-            // Project name
-            if (!ProjectList.Contains(projectName))
-            {
-                GestureDictionary[projectName] = new List<string>();
-                _reloadExistingProjectList = true;
-            }
-            else
-            {
-                _reloadExistingProjectList = false;
-            }
-
-            // Gesture name
-            GestureDictionary[projectName].Add(gestureName);
-
-            // ** Save in server
-            _clientService.AddGestureDataAsync(UserName, projectName, gestureName, data);
-
-        }
-
-        private bool CheckIsolatedStorageAvaliableSpace(string data)
-        {
-            Int64 requiredSpace = data.Count() * 2;
-            Int64 fiveMB = 1024 * 1024 * 5;
-            bool enoughSpaceAvailable = false;
-
-            IsolatedStorageFile storage = null;
-            try
-            {
-                storage = IsolatedStorageFile.GetUserStoreForApplication();
-                if (storage.AvailableFreeSpace < requiredSpace)
-                {
-                    long newQuota = storage.Quota + fiveMB;
-                    enoughSpaceAvailable = storage.IncreaseQuotaTo(newQuota);
-
-                    if (!enoughSpaceAvailable)
-                    {
-                        MessageBox.Show("Failed to save content in local cache due to space limitation!");
-                    }
-                }
-                else
-                {
-                    enoughSpaceAvailable = true;
-                }
-            }
-            catch
-            {
-                //TODO: handle possible error
-            }
-
-            return enoughSpaceAvailable;
-        }
-
-        private string GetUniqueGestureName()
-        {
-            string projectName = ProjectNameTextBox.Text.Trim();
             string gestureName = GestureNameTextBox.Text.Trim();
-
-            if (GestureDictionary.Keys.Contains(projectName))
-                if (GestureDictionary[projectName].Contains(gestureName))
-                    gestureName += "_" + DateTime.Now.Ticks.ToString();
-
-            return gestureName;
+            _recorder.Save(data, projectName, gestureName);
         }
 
         #endregion
@@ -232,49 +79,81 @@ namespace Framework.UI
         #region Init & Content Loading
         private void Init()
         {
-            // Initializing background thread to playback recorded gestures
-            _backgroundThreadStart = new ParameterizedThreadStart(_recorder.RunGesture);
-
             // Set control captions
             RunButton.Content = ControlCaptions.RunGesture;
             StartRecordingButton.Content = ControlCaptions.StartRecording;
 
-            // Subscribe to service callbacks
-            _clientService.ConnectivityCheckCompleted += client_ConnectivityCheckCompleted;
-            _clientService.LastUpdatedAtCompleted += clientService_LastUpdatedAtCompleted;
-            _clientService.AddGestureDataCompleted += _clientService_AddGestureDataCompleted;
-            _clientService.GetProjectsByUserCompleted += clientService_GetProjectsByUserCompleted;
-            _clientService.GetGestureDataCompleted += clientService_GetGestureDataCompleted;
+            // Initialize the recorder
+            try
+            {
+                _recorder = new TouchInputRecorder(Dispatcher);
+                _recorder.GestureSaved += _recorder_GestureSaved;
+                _recorder.ConnectivityCheckCompleted += _recorder_ConnectivityCheckCompleted;
+                _recorder.ExistingContentDownloadCompleted += _recorder_ExistingContentDownloadCompleted;
+                _recorder.ProjectListDownloadCompleted += _recorder_ProjectListDownloadCompleted;
+                _recorder.PlaybackCompleted += _recorder_PlaybackCompleted;
+            }
+            catch (FrameworkException ex)
+            {
+                ShowErrorMessage(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                //TODO: Log unhandled exception and notify user
+            }
 
-            // Step 1: Check server connectivity
-            _clientService.ConnectivityCheckAsync();
         }
 
-        void clientService_GetGestureDataCompleted(object sender, GetGestureDataCompletedEventArgs e)
+        void _recorder_PlaybackCompleted()
         {
-            if (e.Error != null)
+            Dispatcher.BeginInvoke(() =>
             {
-                ShowErrorMessage("Unable to download gesture data!");
+                RunButton.IsEnabled = true;
+                RunButton.Content = ControlCaptions.RunGesture;
+            });
+        }
+
+        void _recorder_ProjectListDownloadCompleted(object sender, EventArgs e)
+        {
+            ReloadProjectComboBox();
+            LoadingUserData.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        void _recorder_ExistingContentDownloadCompleted(object sender, EventArgs e)
+        {
+            // Since dynamic data binding will autometically show the data in comboBox, 
+            // just make the panel visible
+            LoadingUserData.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        void _recorder_ConnectivityCheckCompleted(object sender, EventArgs e)
+        {
+            LoadingScreen.Visibility = Visibility.Collapsed;
+            LoadUserData();
+        }
+
+        void _recorder_GestureSaved(object sender, EventArgs e)
+        {
+            // Check if we need to reload the project list
+            string projectName = ProjectNameTextBox.Text.Trim();
+            if (!_recorder.ProjectList.Contains(projectName))
+            {
+                _recorder.GestureDictionary[projectName] = new List<string>();
+                _reloadExistingProjectList = true;
             }
             else
             {
-                string gestureKey = e.UserState as string;
-                if (CheckIsolatedStorageAvaliableSpace(e.Result))
-                    _userSettings[gestureKey] = e.Result;
-
-                GestureInfo gestureInfo = SerializationHelper.Desirialize(e.Result);
-                RunGesture(gestureInfo);
-
+                _reloadExistingProjectList = false;
             }
-        }
 
-        void _clientService_AddGestureDataCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
+            // Refresh project/gesture list in UI
             if (_reloadExistingProjectList)
                 ReloadProjectComboBox();
 
             if (ProjectNameTextBox.Text.Trim() == (string)ExistingProjectNameComboBox.SelectedItem)
                 ReloadGestureList();
+
+
         }
 
         private void ReloadGestureList()
@@ -286,19 +165,19 @@ namespace Framework.UI
 
         private void LoadUserData()
         {
-            if (UserName == null)
+            if (_recorder.UserName == null)
             {
                 ShowLoginScreen();
             }
             else
             {
                 // Show registered user screen
-                UserNameTextBlock.Text = UserName;
+                UserNameTextBlock.Text = _recorder.UserName;
                 LoginScreenGrid.Visibility = System.Windows.Visibility.Collapsed;
                 RegisteredUserGrid.Visibility = System.Windows.Visibility.Visible;
 
                 // Do we need to get latest data from Server??
-                ValidateCache();
+                _recorder.ValidateCache();
             }
         }
 
@@ -309,10 +188,7 @@ namespace Framework.UI
             RegisteredUserGrid.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        private void ValidateCache()
-        {
-            _clientService.LastUpdatedAtAsync(UserName);
-        }
+
         #endregion
 
         #region Utility Methods
@@ -321,81 +197,12 @@ namespace Framework.UI
             MessageBox.Show(msg);
             MessageTextBlock.Text = msg;
         }
-        #endregion
-
-        #region Service Callbacks
-        void client_ConnectivityCheckCompleted(object sender, ConnectivityCheckCompletedEventArgs e)
-        {
-            // Step 2: If connection available, load user screen otherwise disable this control and ask user to fix internet
-            if (e.Error != null || e.Result == false)
-            {
-                ShowErrorMessage("Unable to establish server connection. Please check your internet connection!");
-            }
-            else
-            {
-                LoadingScreen.Visibility = Visibility.Collapsed;
-
-                // Step 3: Load user data
-                LoadUserData();
-            }
-        }
-
-        void clientService_LastUpdatedAtCompleted(object sender, LastUpdatedAtCompletedEventArgs e)
-        {
-            if (e.Error == null)
-            {
-                if (e.Result == DateTime.MinValue || e.Result > LastSyncTime)
-                {
-                    IsCacheValid = false;
-
-                    // Download project list
-                    _clientService.GetProjectsByUserAsync(UserName);
-                }
-                else
-                {
-                    // Since dynamic data binding will autometically show the data in comboBox, 
-                    // just make the panel visible
-                    LoadingUserData.Visibility = System.Windows.Visibility.Collapsed;
-                }
-            }
-            else
-            {
-                ShowErrorMessage("Unable to download content, please check your internet connection");
-            }
-        }
-
-        void clientService_GetProjectsByUserCompleted(object sender, GetProjectsByUserCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                ShowErrorMessage("Sorry, the system failed to load project list!");
-            }
-            else
-            {
-                // Clear exising cache
-                GestureDictionary.Clear();
-
-                // Rebuild cache
-                foreach (var projectInfo in e.Result)
-                    foreach (var gestureName in projectInfo.GestureNames)
-                    {
-                        if (!GestureDictionary.Keys.Contains(projectInfo.ProjectName))
-                            GestureDictionary[projectInfo.ProjectName] = new List<string>();
-
-                        GestureDictionary[projectInfo.ProjectName].Add(gestureName);
-                    }
-                ReloadProjectComboBox();
-                LoadingUserData.Visibility = System.Windows.Visibility.Collapsed;
-            }
-        }
 
         private void ReloadProjectComboBox()
         {
             // Reload project list
             ExistingProjectNameComboBox.ItemsSource = new string[0];
-            ExistingProjectNameComboBox.ItemsSource = ProjectList;
-
-
+            ExistingProjectNameComboBox.ItemsSource = _recorder.ProjectList;
         }
 
         #endregion
@@ -412,7 +219,7 @@ namespace Framework.UI
                 string projName = (string)ExistingProjectNameComboBox.SelectedItem;
                 string gestureName = (string)ExistingGestureNameComboBox.SelectedItem;
 
-                RunGesture(projName, gestureName);
+                _recorder.RunGesture(projName, gestureName);
 
                 // Run Gesture
                 // Show remaining time
@@ -424,43 +231,6 @@ namespace Framework.UI
                 MessageBox.Show("Please select the \"Gesture\" you want to run!");
             }
         }
-
-        private void RunGesture(string projName, string gestureName)
-        {
-            GestureInfo gestureInfo = null;
-
-            string gestureDataKey = UserName + projName + gestureName;
-            if (_userSettings.Contains(gestureDataKey))
-            {
-                string data = (string)_userSettings[gestureDataKey];
-                gestureInfo = SerializationHelper.Desirialize(data);
-
-                RunGesture(gestureInfo);
-            }
-            else
-            {
-                _clientService.GetGestureDataAsync(UserName, projName, gestureName, gestureDataKey);
-            }
-
-        }
-
-        private void RunGesture(GestureInfo gestureInfo)
-        {
-            _backgroundThread = new Thread(_backgroundThreadStart);
-            Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted> args = new Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted>(gestureInfo, StopGesture);
-            _backgroundThread.Start(args);
-        }
-
-
-
-        private void StopGesture()
-        {
-            Dispatcher.BeginInvoke(() =>
-            {
-                RunButton.IsEnabled = true;
-                RunButton.Content = ControlCaptions.RunGesture;
-            });
-        }
         #endregion
 
         #region UI Events
@@ -468,7 +238,7 @@ namespace Framework.UI
         {
             if (UserNameTextBox.Text.Trim().Length > 0)
             {
-                UserName = UserNameTextBox.Text;
+                _recorder.UserName = UserNameTextBox.Text;
                 Init();
             }
             else
@@ -499,8 +269,7 @@ namespace Framework.UI
             }
             else if ((string)RunButton.Content == ControlCaptions.StopGesture)
             {
-                StopGesture();
-
+                _recorder.StopPlayback();
             }
         }
 

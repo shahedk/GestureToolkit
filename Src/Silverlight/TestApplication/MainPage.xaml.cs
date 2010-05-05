@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using Framework.TouchInputProviders;
 using Gestures.Feedbacks.GestureFeedbacks;
 using System.Threading;
+using Framework.Components.GestureRecording;
 
 namespace TestApplication
 {
@@ -26,6 +27,7 @@ namespace TestApplication
         {
             InitializeComponent();
             this.Loaded += MainPage_Loaded;
+
         }
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -40,10 +42,15 @@ namespace TestApplication
             // Add gesture feedbacks
             GestureFramework.AddGesturFeedback("lasso", typeof(HighlightSelectedArea));
 
-            InitializeApplication();
+            // Show Recording Panel
+            //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
+
+            // Load UI
+            LoadImages(false);
+
         }
 
-        private void InitializeApplication()
+        private void LoadImages(bool randomPosition)
         {
             // Load images from embedded resource
             var bitmaps = GetImages();
@@ -53,7 +60,7 @@ namespace TestApplication
 
                 // Load the image in UI
                 img.Source = bitmap;
-                SetImageLocation(img);
+                SetImageLocation(img, randomPosition);
                 LayoutRoot.Children.Add(img);
 
                 // Subscribe to gesture events for image
@@ -68,16 +75,28 @@ namespace TestApplication
         }
 
         #region Setting image properties
-        double imageLeftPosition = 100;
-        private void SetImageLocation(Image img)
+        Random randomNumberGenerator = new Random();
+        double lastImageLeftPost = 50;
+        private void SetImageLocation(Image img, bool randomPosition)
         {
-            img.SetValue(Canvas.TopProperty, 100.0);
-            img.SetValue(Canvas.LeftProperty, imageLeftPosition);
+            double topPosition, leftPosition;
+            if (randomPosition)
+            {
+                topPosition = randomNumberGenerator.Next(100, 700);
+                leftPosition = randomNumberGenerator.Next(100, 1200);
+            }
+            else
+            {
+                topPosition = 100;
+                leftPosition = lastImageLeftPost;
+            }
+
+            img.SetValue(Canvas.TopProperty, topPosition);
+            img.SetValue(Canvas.LeftProperty, leftPosition);
             img.Width = 120;
             img.Height = 90;
 
-            // Update location for the next image
-            imageLeftPosition = imageLeftPosition + img.Width + 10;
+            lastImageLeftPost = leftPosition+130;
         }
 
         /// <summary>
