@@ -213,7 +213,6 @@ namespace Framework
         private static IRuleValidator GetInstanceByTypeName(string className)
         {
             Type type = GetType(className);
-
             return Activator.CreateInstance(type) as IRuleValidator;
         }
 
