@@ -48,13 +48,20 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
-            throw new NotImplementedException();
+            TouchPathLength touchPathLength = value as TouchPathLength;
+
+            if (this.Min > touchPathLength.Min)
+                this.Min = touchPathLength.Min;
+
+            if (this.Max < touchPathLength.Max)
+                this.Max = touchPathLength.Max;
+
         }
 
 
         public string ToGDL()
         {
-            throw new NotImplementedException();
+            return string.Format("Touch path length: {0}..{1}", this.Min, this.Max);
         }
     }
 }

@@ -85,7 +85,7 @@ namespace Gestures.Rules.Objects
 
         public string ToGDL()
         {
-            throw new NotImplementedException();
+            return string.Format("Touch step: {0} touches within {1} {2}", this.TouchCount, this.TimeLimit, this.Unit);
         }
     }
 }

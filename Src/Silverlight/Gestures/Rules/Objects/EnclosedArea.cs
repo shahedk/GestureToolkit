@@ -52,13 +52,18 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
-            throw new NotImplementedException();
+            EnclosedArea encArea = value as EnclosedArea;
+
+            if (this.Min > encArea.Min)
+                this.Min = encArea.Min;
+            if (this.Max < encArea.Max)
+                this.Max = encArea.Max;
         }
 
 
         public string ToGDL()
         {
-            throw new NotImplementedException();
+            return string.Format("Enclosed Area: {0}..{1}", this.Min, this.Max);
         }
     }
 }

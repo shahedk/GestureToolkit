@@ -94,13 +94,57 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
-            throw new NotImplementedException();
+
+            TouchArea tArea = value as TouchArea;
+            int height, width;
+            string NewValue = string.Empty;
+
+            if (this.Height < tArea.Height)
+                height = tArea.Height;
+            else
+                height = this.Height;
+
+            if (this.Width < tArea.Width)
+                width = tArea.Width;
+            else
+                width = this.Width;
+
+
+            if (this.Type == "Ellipse" && tArea.Type == "Ellipse")
+            {
+                NewValue = string.Format("{0}x{1}", height, width);
+            }
+            else if (this.Type == "Rect" && tArea.Type == "Rect")
+            {
+                NewValue = string.Format("{0}x{1}", height, width);
+            }
+            else if (this.Type == "Circle" && tArea.Type == "Circle")
+            {
+                NewValue = string.Format("{0}", height);
+            }
+            else if ((this.Type == "Ellipse" || this.Type == "Circle") && tArea.Type == "Rect")
+            {
+                NewValue = string.Format("{0}x{1}", height, width);
+                this.Type = "Rect";
+            }
+            else if (this.Type == "Rect" && (tArea.Type == "Ellipse" || tArea.Type == "Circle"))
+            {
+                NewValue = string.Format("{0}x{1}", height, width);
+                this.Type = "Rect";
+            }
+            else if ((this.Type == "Ellipse" || this.Type == "Circle") && (tArea.Type == "Circle" || tArea.Type == "Ellipse"))
+            {
+                NewValue = string.Format("{0}x{1}", height, width);
+                this.Type = "Rect";
+            }
+
+            Value = NewValue;
         }
 
 
         public string ToGDL()
         {
-            throw new NotImplementedException();
+            return string.Format("TouchArea: {0} {1}", this.Type, this.Value);
         }
     }
 }
