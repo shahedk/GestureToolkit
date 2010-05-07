@@ -74,13 +74,27 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
-            throw new NotImplementedException();
+
+            TouchPathBoundingBox touchPBox = value as TouchPathBoundingBox;
+
+            if (this.MinHeight > touchPBox.MinHeight)
+                this.MinHeight = touchPBox.MinHeight;
+
+            if (this.MaxHeight < touchPBox.MaxHeight)
+                this.MaxHeight = touchPBox.MaxHeight;
+
+            if (this.MinWidth > touchPBox.MinWidth)
+                this.MinWidth = touchPBox.MinWidth;
+
+            if (this.MaxWidth < touchPBox.MaxWidth)
+                this.MaxWidth = touchPBox.MaxWidth;
+
         }
 
 
         public string ToGDL()
         {
-            throw new NotImplementedException();
+            return string.Format("Touch path bounding box: {0}x{1}..{2}x{3}", this.MinHeight, this.MinWidth, this.MaxHeight, this.MaxWidth);
         }
     }
 }

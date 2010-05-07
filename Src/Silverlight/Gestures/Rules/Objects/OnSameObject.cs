@@ -39,13 +39,21 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
-            throw new NotImplementedException();
+
+            OnSameObject onObject = value as OnSameObject;
+
+            if (this.Condition == true || onObject.Condition == true)
+                this.Condition = true;
+
         }
 
 
         public string ToGDL()
         {
-            throw new NotImplementedException();
+            if (this.Condition == true)
+                return string.Format("On same object");
+            else
+                return string.Empty;
         }
     }
 }

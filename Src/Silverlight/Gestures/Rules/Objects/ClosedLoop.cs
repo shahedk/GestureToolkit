@@ -39,15 +39,21 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
-            throw new NotImplementedException();
+            ClosedLoop cLoop = value as ClosedLoop;
+
+            if (this.State == "false" || cLoop.State == "false")
+                this.State = "false";
+            else
+                this.State = "true";
+
         }
-
-
-
 
         public string ToGDL()
         {
-            throw new NotImplementedException();
+            if (this.State == "true")
+                return string.Format("Closed loop");
+            else
+                return string.Empty;
         }
     }
 }
