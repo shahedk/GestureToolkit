@@ -92,8 +92,6 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\GestureDefBuilder\GestureDefBuilder.cs" />
-    <Compile Include="Components\GestureRecorder\TouchInputRecorder.cs" />
     <Compile Include="GestureEventHandler.cs" />
     <Compile Include="EventRequestDirectory.cs" />
     <Compile Include="Exceptions\FrameworkException.cs" />
@@ -113,13 +111,6 @@
     <Compile Include="TouchInputProviders\SilverlightTouchInputProvider.cs" />
     <Compile Include="TouchInputProviders\VirtualTouchInputProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\GestureDefinitionBuilder.xaml.cs">
-      <DependentUpon>GestureDefinitionBuilder.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="UI\GestureRecordingPanel.xaml.cs">
-      <DependentUpon>GestureRecordingPanel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Utility\CommonExtensions.cs" />
     <Compile Include="Utility\ContentHelper.cs" />
     <Compile Include="Utility\GestureHelper.cs" />
@@ -152,7 +143,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Components\GestureDefBuilder\GestureDefinitionTemplate.txt" />
     <Content Include="TouchInputProviders\readme.txt" />
     <Content Include="ThirdParty\System.Windows.Input.Manipulations.dll" />
   </ItemGroup>
@@ -173,16 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\DataService\gestureservice.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="UI\GestureDefinitionBuilder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\GestureRecordingPanel.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

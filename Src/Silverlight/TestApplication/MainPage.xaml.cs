@@ -17,7 +17,6 @@ using System.Windows.Media.Imaging;
 using Framework.TouchInputProviders;
 using Gestures.Feedbacks.GestureFeedbacks;
 using System.Threading;
-using Framework.Components.GestureRecording;
 
 namespace TestApplication
 {
