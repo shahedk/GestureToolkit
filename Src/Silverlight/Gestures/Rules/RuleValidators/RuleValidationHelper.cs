@@ -17,19 +17,19 @@ namespace Gestures.Rules.RuleValidators
 {
     public class RuleValidationHelper
     {
-        static Panel _layoutRoot;
-        public static void Init(Panel root)
-        {
-            _layoutRoot = root;
-        }
+        //static Panel _layoutRoot;
+        //public static void Init(Panel root)
+        //{
+        //    _layoutRoot = root;
+        //}
 
-        public static Panel LayoutRoot
-        {
-            get
-            {
-                return _layoutRoot;
-            }
-        }
+        //public static Panel LayoutRoot
+        //{
+        //    get
+        //    {
+        //        return GestureFramework.LayoutRoot;
+        //    }
+        //}
 
         public static Rect GetBoundingBox(TouchPoint2 point)
         {

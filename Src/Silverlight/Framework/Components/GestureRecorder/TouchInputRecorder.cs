@@ -20,12 +20,13 @@ using Framework.DataService;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Threading;
+using Framework.Storage;
 
 namespace Framework.Components.GestureRecording
 {
     public class TouchInputRecorder
     {
-        private IsolatedStorageSettings _appSettings = IsolatedStorageSettings.ApplicationSettings;
+        //private IsolatedStorageSettings _appSettings = IsolatedStorageSettings.ApplicationSettings;
         private GestureServiceSoapClient _clientService = new GestureServiceSoapClient();
         private ParameterizedThreadStart _backgroundThreadStart;
         private Thread _backgroundThread;
@@ -36,7 +37,7 @@ namespace Framework.Components.GestureRecording
         public event EventHandler ExistingContentDownloadCompleted;
         public event EventHandler ProjectListDownloadCompleted;
         public event GesturePlaybackCompleted PlaybackCompleted;
-        
+
         public delegate void GesturePlaybackCompleted();
 
         #region AppSettings
@@ -44,15 +45,15 @@ namespace Framework.Components.GestureRecording
         {
             get
             {
-                if (_appSettings.Contains("lastsynctime"))
-                    return (DateTime)_appSettings["lastsynctime"];
-                else
+                DateTime? value = DataStorage.Instance.Get<DateTime?>("lastsynctime");
+                if (value == null)
                     return DateTime.MinValue;
+                else
+                    return value.Value;
             }
             set
             {
-                _appSettings["lastsynctime"] = value;
-                _appSettings.Save();
+                DataStorage.Instance.Save("lastsynctime", value);
             }
         }
 
@@ -60,15 +61,11 @@ namespace Framework.Components.GestureRecording
         {
             get
             {
-                if (_appSettings.Contains("username"))
-                    return _appSettings["username"] as string;
-
-                return null;
+                return DataStorage.Instance.Get<string>("username");
             }
             set
             {
-                _appSettings["username"] = value;
-                _appSettings.Save();
+                DataStorage.Instance.Save("username", value);
             }
         }
 
@@ -93,13 +90,14 @@ namespace Framework.Components.GestureRecording
         {
             get
             {
-                if (!_appSettings.Contains("projectsAndGesture"))
+                Dictionary<string, List<string>> dictionary = DataStorage.Instance.Get<Dictionary<string, List<string>>>("projectsAndGesture");
+                if (dictionary == null)
                 {
-                    _appSettings["projectsAndGesture"] = new Dictionary<string, List<string>>();
-                    _appSettings.Save();
+                    dictionary = new Dictionary<string, List<string>>();
+                    DataStorage.Instance.Save("projectsAndGesture", dictionary);
                 }
 
-                return _appSettings["projectsAndGesture"] as Dictionary<string, List<string>>;
+                return dictionary;
             }
         }
 
@@ -123,7 +121,6 @@ namespace Framework.Components.GestureRecording
             }
         }
 
-        IsolatedStorageSettings _userSettings = IsolatedStorageSettings.ApplicationSettings;
         #endregion
 
         public TouchInputRecorder(string userName, Dispatcher uiThread)
@@ -143,6 +140,9 @@ namespace Framework.Components.GestureRecording
         {
             // Initializing background thread to playback recorded gestures
             _backgroundThreadStart = new ParameterizedThreadStart(RunGesture);
+
+            DataService.GestureServiceSoapClient c = new GestureServiceSoapClient();
+            c.AddGestureData(
 
             // Subscribe to service callbacks
             _clientService.ConnectivityCheckCompleted += client_ConnectivityCheckCompleted;
@@ -266,10 +266,8 @@ namespace Framework.Components.GestureRecording
             string gestureDataKey = UserName + projectName + gestureName;
 
             // Gesture data
-            _userSettings.Add(gestureDataKey, data);
-            if (CheckIsolatedStorageAvaliableSpace(data))
-                _userSettings.Save();
-
+            DataStorage.Instance.SaveFile(gestureDataKey, data);
+            
             // If its a new project, initialize the dictionary for the new project
             if (!GestureDictionary.Keys.Contains(projectName))
                 GestureDictionary.Add(projectName, new List<string>());
@@ -367,7 +365,7 @@ namespace Framework.Components.GestureRecording
             Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted> args = new Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted>(gestureInfo, PlaybackEnded);
             _backgroundThread.Start(args);
         }
-        
+
         /// <summary>
         /// Simulates the touch(s) as specified using the virtual touch input provider
         /// </summary>
@@ -430,39 +428,6 @@ namespace Framework.Components.GestureRecording
             }
         }
         #endregion
-
-        private bool CheckIsolatedStorageAvaliableSpace(string data)
-        {
-            Int64 requiredSpace = data.Count() * 2;
-            Int64 fiveMB = 1024 * 1024 * 5;
-            bool isEnoughSpaceAvailable = false;
-
-            IsolatedStorageFile storage = null;
-            try
-            {
-                storage = IsolatedStorageFile.GetUserStoreForApplication();
-                if (storage.AvailableFreeSpace < requiredSpace)
-                {
-                    long newQuota = storage.Quota + fiveMB;
-                    isEnoughSpaceAvailable = storage.IncreaseQuotaTo(newQuota);
-
-                    if (!isEnoughSpaceAvailable)
-                    {
-                        MessageBox.Show("Failed to save content in local cache due to space limitation!");
-                    }
-                }
-                else
-                {
-                    isEnoughSpaceAvailable = true;
-                }
-            }
-            catch
-            {
-                //TODO: handle possible error
-            }
-
-            return isEnoughSpaceAvailable;
-        }
 
         private string GetUniqueGestureName(string projectName, string gestureName)
         {

@@ -15,19 +15,13 @@ using Gestures.Exceptions;
 using Gestures.Utility;
 using System.Collections.Generic;
 using Gestures.Objects;
+using BehaviourTypes = Gestures.Rules.Objects.DistanceBetweenPoints.BehaviourTypes;
 
 namespace Gestures.Rules.RuleValidators
 {
     public class DistanceBetweenPointsValidator : IRuleValidator
     {
-        class Behaviour
-        {
-            public const string Increasing = "increasing";
-            public const string Decreasing = "decreasing";
-            public const string Range = "range";
-            public const string UnChanged = "unchanged";
-        }
-
+        
         DistanceBetweenPoints _data;
 
         #region IRuleValidator Members
@@ -39,7 +33,11 @@ namespace Gestures.Rules.RuleValidators
 
         public bool Equals(IRuleValidator rule)
         {
-            throw new NotImplementedException();
+            if (rule != null)
+                if (rule.GetType() == this.GetType())
+                    return true;
+
+            return false;
         }
 
         public ValidSetOfPointsCollection Validate(List<TouchPoint2> points)
@@ -48,7 +46,11 @@ namespace Gestures.Rules.RuleValidators
             ValidSetOfPointsCollection sets = new ValidSetOfPointsCollection();
 
             bool result = false;
-            if (points.Count > 2)
+            if (points == null)
+            {
+                return sets;
+            }
+            else if (points.Count > 2)
             {
                 // Assumption: If there are more that 2 points, then each point should 
                 // match the condition with another point in at least one condition
@@ -115,9 +117,9 @@ namespace Gestures.Rules.RuleValidators
                 StylusPoint p2 = arr[1].Stroke.StylusPoints[secondStrokeLen - n];
                 distanceN = TrigonometricCalculationHelper.GetDistanceBetweenPoints(p1, p2);
 
-                if (_data.Behaviour.ToLower() == Behaviour.Increasing
-                    || _data.Behaviour.ToLower() == Behaviour.Decreasing
-                    || _data.Behaviour.ToLower() == Behaviour.UnChanged)
+                if (_data.Behaviour.ToLower() == BehaviourTypes.Increasing
+                    || _data.Behaviour.ToLower() == BehaviourTypes.Decreasing
+                    || _data.Behaviour.ToLower() == BehaviourTypes.UnChanged)
                 {
                     if (firstStrokeLen - n - 1 < 0 || secondStrokeLen - n - 1 < 0)
                         break;
@@ -128,8 +130,8 @@ namespace Gestures.Rules.RuleValidators
                     distanceN_1 = TrigonometricCalculationHelper.GetDistanceBetweenPoints(p1, p2);
                 }
 
-                // Validate expected behaviour pattern
-                if (_data.Behaviour.ToLower() == Behaviour.Increasing)
+                // Validate expected  pattern
+                if (_data.Behaviour.ToLower() == BehaviourTypes.Increasing)
                 {
                     if (distanceN > distanceN_1)
                     {
@@ -137,7 +139,7 @@ namespace Gestures.Rules.RuleValidators
                         break;
                     }
                 }
-                else if (_data.Behaviour.ToLower() == Behaviour.Decreasing)
+                else if (_data.Behaviour.ToLower() == BehaviourTypes.Decreasing)
                 {
                     if (distanceN < distanceN_1)
                     {
@@ -145,7 +147,7 @@ namespace Gestures.Rules.RuleValidators
                         break;
                     }
                 }
-                else if (_data.Behaviour.ToLower() == Behaviour.Range)
+                else if (_data.Behaviour.ToLower() == BehaviourTypes.Range)
                 {
                     if (distanceN >= _data.Min && distanceN <= _data.Max)
                     {
@@ -153,14 +155,14 @@ namespace Gestures.Rules.RuleValidators
                         break;
                     }
                 }
-                else if (_data.Behaviour.ToLower() == Behaviour.UnChanged)
+                else if (_data.Behaviour.ToLower() == BehaviourTypes.UnChanged)
                 {
                     // Note: Check if the change is within acceptable range
                     // For example: unchanged 10% means if the change is 
                     // below 10% of the distance than consider it acceptable
 
                     double diff = Math.Abs(distanceN - distanceN_1);
-                    if (diff < distanceN / _data.Min) 
+                    if (diff < distanceN / _data.Min)
                     {
                         result = true;
                         break;
@@ -175,12 +177,15 @@ namespace Gestures.Rules.RuleValidators
         {
             ValidSetOfPointsCollection validSets = new ValidSetOfPointsCollection();
 
-            foreach (var set in sets)
+            if (sets != null)
             {
-                ValidSetOfPointsCollection list = Validate(set);
-                foreach (var item in list)
+                foreach (var set in sets)
                 {
-                    validSets.Add(item);
+                    ValidSetOfPointsCollection list = Validate(set);
+                    foreach (var item in list)
+                    {
+                        validSets.Add(item);
+                    }
                 }
             }
 

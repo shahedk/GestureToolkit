@@ -66,18 +66,25 @@ namespace Gestures.Feedbacks.TouchFeedbacks
         {
             Action action = () =>
                 {
+                    List<ProxyObject> itemsToRemove = new List<ProxyObject>();
                     foreach (var po in _proxyObjects)
                     {
                         if (po.Age > 4)
                         {
                             // Its old enough to die :)
-                            _rootPanel.Children.Remove(po);
-                            _proxyObjects.Remove(po);
+                            itemsToRemove.Add(po);
                         }
                         else
                         {
                             po.UpdateUI();
                         }
+                    }
+
+                    // Remove aged items
+                    foreach (var po in itemsToRemove)
+                    {
+                        _rootPanel.Children.Remove(po);
+                        _proxyObjects.Remove(po);
                     }
                 };
 
@@ -122,6 +129,7 @@ namespace Gestures.Feedbacks.TouchFeedbacks
                 }
                 else
                 {
+                    this.Age++;
                     this.Height -= sizeDecayRate;
                     this.Width -= sizeDecayRate;
                     this.Opacity -= opacityDecayRate;

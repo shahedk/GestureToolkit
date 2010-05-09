@@ -67,7 +67,7 @@ namespace Framework
         public static dynamic GetAllUIElements()
         {
             dynamic uiElements = (from r in eventRequests
-                              select new { r.UIElement }).Distinct();
+                                  select new { r.UIElement }).Distinct();
 
             return uiElements;
         }
@@ -75,10 +75,35 @@ namespace Framework
         internal static List<EventRequest> GetRequests(string gestureName)
         {
             var requests = from r in eventRequests
-                           where r.Gesture.Name == gestureName 
+                           where r.Gesture.Name == gestureName
                            select r;
 
             return requests.ToList<EventRequest>();
+        }
+
+        /// <summary>
+        /// Returns the event-requests of specified type of gesture for the specified uiElements
+        /// </summary>
+        /// <param name="gestureName"></param>
+        /// <param name="uiElements"></param>
+        /// <returns></returns>
+        internal static List<EventRequest> GetRequests(string gestureName, List<UIElement> uiElements)
+        {
+            List<EventRequest> uniqueRequests = new List<EventRequest>();
+
+            foreach (UIElement uiElement in uiElements)
+            {
+                var list = GetRequests(gestureName, uiElement);
+                foreach (var eventRequest in list)
+                {
+                    if (!uniqueRequests.Contains(eventRequest))
+                    {
+                        uniqueRequests.Add(eventRequest);
+                    }
+                }
+            }
+
+            return uniqueRequests;
         }
 
         internal static List<EventRequest> GetRequests(string gestureName, UIElement uiElement)
@@ -110,7 +135,14 @@ namespace Framework
                            where r.UIElement == uiElement
                            select r;
 
-            return (requests.Count() > 0) ;
+            return (requests.Count() > 0);
+        }
+
+        public static List<Gesture> GetGestures(List<UIElement> uiElements)
+        {
+            var list = uiElements.Join(eventRequests, u => u, e => e.UIElement, (u, e) => e.Gesture ).ToList<Gesture>();
+
+            return list;
         }
     }
 }

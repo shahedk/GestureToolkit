@@ -160,6 +160,7 @@
     <Compile Include="Utility\CommonHelperMethods.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utility\TouchHelpers\TouchPointExtensions.cs" />
     <Compile Include="Utility\TrigonometricCalculationHelper.cs" />
     <Compile Include="Utility\ShapeRecognizers\ConvexHull\CDLL.cs" />
     <Compile Include="Utility\ShapeRecognizers\ConvexHull\Convexhull.cs" />

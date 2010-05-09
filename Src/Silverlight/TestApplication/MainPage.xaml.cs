@@ -53,12 +53,17 @@ namespace TestApplication
         {
             // Load images from embedded resource
             var bitmaps = GetImages();
+            int count = 0;
             foreach (var bitmap in bitmaps)
             {
                 Image img = new Image();
 
                 // Load the image in UI
                 img.Source = bitmap;
+
+                // TODO: For debugging
+                img.Tag = count++;
+                
                 SetImageLocation(img, randomPosition);
                 LayoutRoot.Children.Add(img);
 
@@ -120,6 +125,7 @@ namespace TestApplication
         private void ZoomCallback(UIElement sender, List<IReturnType> values)
         {
             var dis = values.Get<DistanceChanged>();
+            
             if (dis != null)
                 Resize(sender as Image, dis.Delta);
         }

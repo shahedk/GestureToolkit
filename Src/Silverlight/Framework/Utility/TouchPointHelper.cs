@@ -29,6 +29,27 @@ namespace Framework.Utility
             return list;
         }
 
+        public static List<TouchInfo> ToTouchInfo(this TouchPointCollection self)
+        {
+            List<TouchInfo> list = new List<TouchInfo>(self.Count);
+            foreach (var item in self)
+            {
+                list.Add(item.ToTouchInfo());
+            }
+
+            return list;
+        }
+
+        public static TouchInfo ToTouchInfo(this TouchPoint self)
+        {
+            return new TouchInfo()
+            {
+                ActionType = self.Action.ToTouchActions(),
+                Position = self.Position,
+                TouchDeviceId = self.TouchDevice.Id
+            };
+        }
+
         public static TouchPoint ToTouchPoint(this TouchInfo self)
         {
 
@@ -161,5 +182,32 @@ namespace Framework.Utility
             else
                 throw new FrameworkException("Unknown touch action type");
         }
+
+#if SILVERLIGHT
+        /// <summary>
+        /// Determines the source ui-element of the specified touch using hit-test
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static UIElement UpdateSource(this TouchPoint2 self)
+        {
+            UIElement uiElement = null;
+            Point point = self.Stroke.StylusPoints[0].ToPoint();
+
+            // This code block is only for Silverlight platform. We do not need hitTesting to find the UIElement as
+            // the touchDown event already provides this data
+            var list = VisualTreeHelper.FindElementsInHostCoordinates(point, GestureFramework.LayoutRoot);
+            var e1 = list.GetEnumerator();
+
+            if (e1.MoveNext())
+                uiElement = e1.Current;
+
+            self.Source = uiElement;
+
+            return uiElement;
+        }
+
+#endif
+
     }
 }

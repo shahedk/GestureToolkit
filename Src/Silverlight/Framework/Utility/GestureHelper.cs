@@ -31,5 +31,24 @@ namespace Framework.Utility
             }
             return null;
         }
+
+        /// <summary>
+        /// Returns the list of unique source ui-elements from the specified touch points
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static List<UIElement> GetUIElements(this List<TouchPoint2> self)
+        {
+            List<UIElement> list = new List<UIElement>();
+            foreach (var touchPoint in self)
+            {
+                if (!list.Contains(touchPoint.Source))
+                {
+                    list.Add(touchPoint.Source);
+                }
+            }
+
+            return list;
+        }
     }
 }
