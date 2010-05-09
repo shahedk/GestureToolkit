@@ -93,7 +93,7 @@ namespace Framework
             LayoutRoot = layoutRoot as Canvas;
 
             // TODO: temporary bypass code... follow proper design
-            RuleValidationHelper.Init(layoutRoot);
+            //RuleValidationHelper.Init(layoutRoot);
 
             // Initialize input provider
             //TouchInputProvider hl = Activator.CreateInstance(listenerType) as TouchInputProvider;

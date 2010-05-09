@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using Gestures.Objects;
 using Framework.Utility;
 using Framework.TouchInputProviders;
+using System.Windows.Media;
 
 namespace Framework.HardwareListeners
 {
@@ -30,6 +31,9 @@ namespace Framework.HardwareListeners
             Touch.FrameReported += Touch_FrameReported;
         }
 
+        
+
+
         int lastTimeStamp = 0;
         private void Touch_FrameReported(object sender, TouchFrameEventArgs e)
         {
@@ -44,6 +48,15 @@ namespace Framework.HardwareListeners
             TouchPointCollection slPoints = e.GetTouchPoints(GestureFramework.LayoutRoot);
             List<TouchInfo> touchInfos = slPoints.ToTouchInfo();
             List<TouchPoint2> touchPoints = base.UpdateActiveTouchPoints(touchInfos);
+
+            // Determine touch source for any new touch point
+            foreach (var touchPoint in touchPoints)
+            {
+                if (touchPoint.Action == TouchAction.Down)
+                {
+                    touchPoint.UpdateSource();
+                }
+            }
 
             // Raw data, frame changed
             if (FrameChanged != null)

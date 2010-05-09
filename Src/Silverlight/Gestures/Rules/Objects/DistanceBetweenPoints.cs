@@ -14,6 +14,14 @@ namespace Gestures.Rules.Objects
 {
     public class DistanceBetweenPoints : IRuleData
     {
+        public class BehaviourTypes
+        {
+            public const string Increasing = "increasing";
+            public const string Decreasing = "decreasing";
+            public const string Range = "range";
+            public const string UnChanged = "unchanged";
+        }
+
         private string _behaviour = string.Empty;
         public string Behaviour
         {
@@ -53,15 +61,25 @@ namespace Gestures.Rules.Objects
             }
         }
 
-        #region IRuleData Members
-
         public bool Equals(IRuleData rule)
         {
-            throw new NotImplementedException();
+            DistanceBetweenPoints value = rule as DistanceBetweenPoints;
+
+            if (value == null)
+            {
+                // Failed to cast to same time
+                return false;
+            }
+            else
+            {
+                if (value.Behaviour == this.Behaviour &&
+                    value.Max == this.Max &&
+                    value.Min == this.Min)
+                    return true;
+                else
+                    return false;
+            }
         }
-
-        #endregion
-
 
         public void Union(IRuleData value)
         {
@@ -70,45 +88,45 @@ namespace Gestures.Rules.Objects
             if (this.Behaviour != distanceBtwPoints.Behaviour)
             {
 
-                if (this.Behaviour == "increasing" && distanceBtwPoints.Behaviour == "decreasing")
+                if (this.Behaviour == BehaviourTypes.Increasing && distanceBtwPoints.Behaviour == BehaviourTypes.Decreasing)
                 {
                     throw new Exception("Invalid Union Type");
                 }
-                else if (this.Behaviour == "decreasing" && distanceBtwPoints.Behaviour == "increasing")
+                else if (this.Behaviour == BehaviourTypes.Decreasing && distanceBtwPoints.Behaviour == BehaviourTypes.Increasing)
                 {
                     throw new Exception("Invalid Union Type");
                 }
-                else if (this.Behaviour == "unchanged" && distanceBtwPoints.Behaviour == "increasing")
+                else if (this.Behaviour == BehaviourTypes.UnChanged && distanceBtwPoints.Behaviour == BehaviourTypes.Increasing)
                 {
                     this.Max = distanceBtwPoints.Max;
-                    this.Behaviour = "increasing";
+                    this.Behaviour = BehaviourTypes.Increasing;
                 }
-                else if (this.Behaviour == "unchanged" && distanceBtwPoints.Behaviour == "decreasing")
+                else if (this.Behaviour == BehaviourTypes.UnChanged && distanceBtwPoints.Behaviour == BehaviourTypes.Decreasing)
                 {
                     this.Min = distanceBtwPoints.Min;
-                    this.Behaviour = "decreasing";
+                    this.Behaviour = BehaviourTypes.Decreasing;
                 }
-                else if (this.Behaviour == "unchanged" && distanceBtwPoints.Behaviour == "unchanged")
+                else if (this.Behaviour == BehaviourTypes.UnChanged && distanceBtwPoints.Behaviour == BehaviourTypes.UnChanged)
                 {
                     //do nothing
                 }
-                else if (this.Behaviour == "increasing" && distanceBtwPoints.Behaviour == "unchanged")
+                else if (this.Behaviour == BehaviourTypes.Increasing && distanceBtwPoints.Behaviour == BehaviourTypes.UnChanged)
                 {
                     //do nothing
                 }
-                else if (this.Behaviour == "increasing" && distanceBtwPoints.Behaviour == "increasing")
+                else if (this.Behaviour == BehaviourTypes.Increasing && distanceBtwPoints.Behaviour == BehaviourTypes.Increasing)
                 {
                     this.Max = distanceBtwPoints.Max;
-                    this.Behaviour = "increasing";
+                    this.Behaviour = BehaviourTypes.Increasing;
                 }
-                else if (this.Behaviour == "decreasing" && distanceBtwPoints.Behaviour == "unchanged")
+                else if (this.Behaviour == BehaviourTypes.Decreasing && distanceBtwPoints.Behaviour == BehaviourTypes.UnChanged)
                 {
                     //do nothing
                 }
-                else if (this.Behaviour == "decreasing" && distanceBtwPoints.Behaviour == "decreasing")
+                else if (this.Behaviour == BehaviourTypes.Decreasing && distanceBtwPoints.Behaviour == BehaviourTypes.Decreasing)
                 {
                     this.Min = distanceBtwPoints.Min;
-                    this.Behaviour = "decreasing";
+                    this.Behaviour = BehaviourTypes.Decreasing;
                 }
             }
         }
@@ -116,14 +134,11 @@ namespace Gestures.Rules.Objects
 
         public string ToGDL()
         {
-            if (this.Behaviour == "unchanged")
-                return string.Format("Distance between points : unchanged {0}%", this.Min);
-
-            else if (this.Behaviour == "increasing")
-                return string.Format("Distance between points : increasing");
+            if (this.Behaviour == BehaviourTypes.UnChanged)
+                return string.Format("Distance between points : {0} {1}%", BehaviourTypes.UnChanged, this.Min);
 
             else
-                return string.Format("Distance between points : decreasing");
+                return string.Format("Distance between points : {1}", this.Behaviour);
         }
     }
 }

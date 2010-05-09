@@ -12,16 +12,13 @@ using System.Windows.Controls;
 using Gestures.Objects;
 using Framework.Utility;
 using Framework.TouchInputProviders;
+using Framework.Exceptions;
+using System.Windows.Media;
 
 namespace Framework.TouchInputProviders
 {
     public abstract class TouchInputProvider : IDisposable
     {
-        public virtual void Init()
-        {
-        }
-
-
         // Allows application to subscribe to raw touch data
         public delegate void FrameChangeEventHandler(object sender, FrameInfo frameInfo);//(object sender, TouchFrameEventArgs e);
         public abstract event FrameChangeEventHandler FrameChanged;
@@ -40,6 +37,10 @@ namespace Framework.TouchInputProviders
         public List<TouchAction2> TouchStates = new List<TouchAction2>();
         public Dictionary<int, TouchPoint2> ActiveTouchPoints = new Dictionary<int, TouchPoint2>();
         private List<int> inactiveTouchPoints = new List<int>();
+
+        public virtual void Init()
+        { }
+
 
         //TODO: may need to re-think for more efficient way
         public int GetTouchStateCount(TouchAction actionType)
@@ -77,24 +78,38 @@ namespace Framework.TouchInputProviders
             UpdateActiveTouchPoint(null, touchInfo);
         }
 
-        private void UpdateActiveTouchPoint(List<TouchPoint2> updateTouchPoints, TouchInfo info)
+        public TouchPoint2 AddNewTouchPoint(TouchInfo info, UIElement source)
         {
-            // Update touch stroke & details
+            TouchPoint2 newTouchPoint = null;
             if (!ActiveTouchPoints.ContainsKey(info.TouchDeviceId))
             {
-                TouchPoint2 newTouchPoint = new TouchPoint2(info);
+                newTouchPoint = new TouchPoint2(info, source);
                 ActiveTouchPoints.Add(info.TouchDeviceId, newTouchPoint);
-
-                if (updateTouchPoints != null)
-                    updateTouchPoints.Add(newTouchPoint);
             }
             else
             {
+                newTouchPoint = ActiveTouchPoints[info.TouchDeviceId];
+                newTouchPoint.Source = source;
+            }
+
+            return newTouchPoint;
+        }
+
+        private void UpdateActiveTouchPoint(List<TouchPoint2> updateTouchPoints, TouchInfo info)
+        {
+            // Update touch details (i.e. touch path)
+            if (ActiveTouchPoints.ContainsKey(info.TouchDeviceId))
+            {
                 TouchPoint2 tPoint = ActiveTouchPoints[info.TouchDeviceId];
-                tPoint.UpdatePosition(info);
+                tPoint.Update(info);
 
                 if (updateTouchPoints != null)
                     updateTouchPoints.Add(tPoint);
+            }
+            else
+            {
+                TouchPoint2 tPoint = AddNewTouchPoint(info, null);
+                updateTouchPoints.Add(tPoint);
             }
 
             // Touches that are going to be inactive in next frame
@@ -120,7 +135,6 @@ namespace Framework.TouchInputProviders
 
                 ActiveTouchPoints.Remove(touchId);
             }
-
 
             // All done, clear the pending-removal queue
             inactiveTouchPoints.Clear();

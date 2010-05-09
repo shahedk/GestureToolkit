@@ -284,6 +284,9 @@
     <Compile Include="..\..\Silverlight\Gestures\Utility\TouchHelpers\TouchHistoryTracker.cs">
       <Link>Utility\TouchHelpers\TouchHistoryTracker.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Utility\TouchHelpers\TouchPointExtensions.cs">
+      <Link>Utility\TouchHelpers\TouchPointExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\TrigonometricCalculationHelper.cs">
       <Link>Utility\TrigonometricCalculationHelper.cs</Link>
     </Compile>
@@ -311,6 +314,8 @@
     <None Include="..\..\Silverlight\Gestures\Gesture Definitions\zoom.g">
       <Link>Gesture Definitions\zoom.g</Link>
     </None>
+    <EmbeddedResource Include="bin\gestures.gx" />
+    <EmbeddedResource Include="bin\rulenames.gx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\Silverlight\Gestures\Gesture Definitions\ReadMe.txt">

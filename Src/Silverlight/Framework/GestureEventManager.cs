@@ -129,6 +129,8 @@ namespace Framework.GestureEvents
 
             //TODO: This is a temporary implementation. Although it works properly 
             // but is not an efficient implement. Consider using RETE algorithm
+
+            //List<Gesture> gestures = EventRequestDirectory.GetGestures(availableTouchPoints.GetUIElements());
             foreach (Gesture gesture in GestureLanguageProcessor.ActiveGestures.Values)
             {
                 ValidSetOfPointsCollection touchPointsUsed = ValidateGesture(gesture, availableTouchPoints);
@@ -169,50 +171,15 @@ namespace Framework.GestureEvents
                     }
 
                     // Invoke the callback to notify the subscriber(s)
-                    List<EventRequest> eventReqs = EventRequestDirectory.GetRequests(gesture.Name);
-                    List<EventRequest> validItems = new List<EventRequest>();
+                    List<EventRequest> eventReqs = EventRequestDirectory.GetRequests(gesture.Name,validSetOfPoint.GetUIElements());
                     foreach (var eventRequest in eventReqs)
                     {
-                        // Is the touch points that caused the gesture started on the requested object
-                        if (AreTouchesOnUIElement(gesture.Name, validSetOfPoint, eventRequest.UIElement))
-                        {
-                            validItems.Add(eventRequest);
-                        }
-                    }
-
-                    if (validItems.Count > 0)
-                    {
-                        // raise event for the highest Z-indexed element
-                        EventRequest selectedItem = validItems[0];
-                        foreach (var item in validItems)
-                        {
-                            if ((int)selectedItem.UIElement.GetValue(Canvas.ZIndexProperty) < (int)
-                            item.UIElement.GetValue(Canvas.ZIndexProperty))
-                            {
-                                selectedItem = item;
-                            }
-                        }
-
-                        selectedItem.EventHandler(selectedItem.UIElement, returnObjs);
+                        eventRequest.EventHandler(eventRequest.UIElement, returnObjs);
                     }
                 }
             }
 
             return validSets;
-        }
-
-        private bool AreTouchesOnUIElement(string gestureName, ValidSetOfTouchPoints validSetOfPoint, UIElement uIElement)
-        {
-            bool result = true;
-            foreach (var point in validSetOfPoint)
-            {
-                result = IsPointOriginatedOnElement(point, uIElement);
-
-                if (!result)
-                    break; // found mismatch, no need to continue
-            }
-
-            return result;
         }
 
         private bool IsPointOriginatedOnElement(TouchPoint2 point, UIElement uIElement)
