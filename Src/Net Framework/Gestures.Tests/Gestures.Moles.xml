@@ -2373,14 +2373,6 @@
             <summary>Sets the mole of <see cref="M:Gestures.Rules.RuleValidators.RuleValidationHelper.HasPreviousTouchPoints(T:System.Windows.Rect,T:Gestures.Objects.TouchPoint2,T:System.Int32,T:System.DateTime,System.Collections.Generic.List`1{T:Gestures.Objects.TouchPoint2})"/>
             </summary>
         </member>
-        <member name="P:Gestures.Rules.RuleValidators.Moles.MRuleValidationHelper.InitPanel">
-            <summary>Sets the mole of <see cref="M:Gestures.Rules.RuleValidators.RuleValidationHelper.Init(T:System.Windows.Controls.Panel)"/>
-            </summary>
-        </member>
-        <member name="P:Gestures.Rules.RuleValidators.Moles.MRuleValidationHelper.LayoutRootGet">
-            <summary>Sets the mole of <see cref="P:Gestures.Rules.RuleValidators.RuleValidationHelper.LayoutRoot"/>
-            </summary>
-        </member>
         <member name="T:Gestures.Rules.RuleValidators.Moles.MRuleValidationHelper.AllInstances">
             <summary>Define moles for all instances members</summary>
         </member>
@@ -3494,8 +3486,8 @@
         <member name="P:Gestures.Objects.Moles.MTouchPoint2.Behavior">
             <summary>Assigns the behavior for all methods of the moled type</summary>
         </member>
-        <member name="P:Gestures.Objects.Moles.MTouchPoint2.ConstructorTouchInfo">
-            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.#ctor(T:Gestures.Objects.TouchInfo)"/>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.ConstructorTouchInfoUIElement">
+            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.#ctor(T:Gestures.Objects.TouchInfo,T:System.Windows.UIElement)"/>
             </summary>
         </member>
         <member name="P:Gestures.Objects.Moles.MTouchPoint2.EndTimeGet">
@@ -3512,6 +3504,14 @@
         </member>
         <member name="P:Gestures.Objects.Moles.MTouchPoint2.PositionSetPoint">
             <summary>Sets the mole of <see cref="P:Gestures.Objects.TouchPoint2.Position"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.SourceGet">
+            <summary>Sets the mole of <see cref="P:Gestures.Objects.TouchPoint2.Source"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.SourceSetUIElement">
+            <summary>Sets the mole of <see cref="P:Gestures.Objects.TouchPoint2.Source"/>
             </summary>
         </member>
         <member name="P:Gestures.Objects.Moles.MTouchPoint2.StartPointGet">
@@ -3550,8 +3550,16 @@
             <summary>Sets the mole of <see cref="P:Gestures.Objects.TouchPoint2.UniqueId"/>
             </summary>
         </member>
-        <member name="P:Gestures.Objects.Moles.MTouchPoint2.UpdatePositionTouchInfo">
-            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.UpdatePosition(T:Gestures.Objects.TouchInfo)"/>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.UpdateTouchInfo">
+            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.Update(T:Gestures.Objects.TouchInfo)"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.UpdateTouchInfoTouchInfo">
+            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.UpdateTouchInfo(T:Gestures.Objects.TouchInfo)"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.UpdateTouchStrokeTouchInfo">
+            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.UpdateTouchStroke(T:Gestures.Objects.TouchInfo)"/>
             </summary>
         </member>
         <member name="T:Gestures.Objects.Moles.MTouchPoint2.AllInstances">
@@ -3583,6 +3591,14 @@
         </member>
         <member name="P:Gestures.Objects.Moles.MTouchPoint2.AllInstances.PositionSetPoint">
             <summary>Sets the mole of <see cref="P:Gestures.Objects.TouchPoint2.Position"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.AllInstances.SourceGet">
+            <summary>Sets the mole of <see cref="P:Gestures.Objects.TouchPoint2.Source"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.AllInstances.SourceSetUIElement">
+            <summary>Sets the mole of <see cref="P:Gestures.Objects.TouchPoint2.Source"/>
             </summary>
         </member>
         <member name="P:Gestures.Objects.Moles.MTouchPoint2.AllInstances.StartPointGet">
@@ -3621,8 +3637,37 @@
             <summary>Sets the mole of <see cref="P:Gestures.Objects.TouchPoint2.UniqueId"/>
             </summary>
         </member>
-        <member name="P:Gestures.Objects.Moles.MTouchPoint2.AllInstances.UpdatePositionTouchInfo">
-            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.UpdatePosition(T:Gestures.Objects.TouchInfo)"/>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.AllInstances.UpdateTouchInfo">
+            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.Update(T:Gestures.Objects.TouchInfo)"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.AllInstances.UpdateTouchInfoTouchInfo">
+            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.UpdateTouchInfo(T:Gestures.Objects.TouchInfo)"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Objects.Moles.MTouchPoint2.AllInstances.UpdateTouchStrokeTouchInfo">
+            <summary>Sets the mole of <see cref="M:Gestures.Objects.TouchPoint2.UpdateTouchStroke(T:Gestures.Objects.TouchInfo)"/>
+            </summary>
+        </member>
+        <member name="T:Gestures.Utility.TouchHelpers.Moles.MTouchPointExtensions">
+            <summary>Mole type of <see cref="T:Gestures.Utility.TouchHelpers.TouchPointExtensions"/>
+            .</summary>
+        </member>
+        <member name="M:Gestures.Utility.TouchHelpers.Moles.MTouchPointExtensions.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Gestures.Utility.TouchHelpers.Moles.MTouchPointExtensions.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Gestures.Utility.TouchHelpers.Moles.MTouchPointExtensions.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Gestures.Utility.TouchHelpers.Moles.MTouchPointExtensions.ToTouchActionTouchAction">
+            <summary>Sets the mole of <see cref="M:Gestures.Utility.TouchHelpers.TouchPointExtensions.ToTouchAction(T:System.Windows.Input.TouchAction)"/>
+            </summary>
+        </member>
+        <member name="P:Gestures.Utility.TouchHelpers.Moles.MTouchPointExtensions.ToTouchActionTouchAction2">
+            <summary>Sets the mole of <see cref="M:Gestures.Utility.TouchHelpers.TouchPointExtensions.ToTouchAction(T:Gestures.Objects.TouchAction2)"/>
             </summary>
         </member>
         <member name="T:Gestures.ReturnTypes.Moles.MTouchPoints">
@@ -5495,7 +5540,7 @@
             <summary>Stub type of <see cref="T:Gestures.Objects.TouchPoint2"/>
             .</summary>
         </member>
-        <member name="M:Gestures.Objects.Moles.STouchPoint2.#ctor(Gestures.Objects.TouchInfo)">
+        <member name="M:Gestures.Objects.Moles.STouchPoint2.#ctor(Gestures.Objects.TouchInfo,System.Windows.UIElement)">
             <summary>Initializes a new instance</summary>
         </member>
         <member name="M:Gestures.Objects.Moles.STouchPoint2.InitializeStub">
