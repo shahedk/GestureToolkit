@@ -106,28 +106,16 @@ namespace Gestures.Rules.Objects
                     this.Min = distanceBtwPoints.Min;
                     this.Behaviour = BehaviourTypes.Decreasing;
                 }
-                else if (this.Behaviour == BehaviourTypes.UnChanged && distanceBtwPoints.Behaviour == BehaviourTypes.UnChanged)
-                {
-                    //do nothing
-                }
-                else if (this.Behaviour == BehaviourTypes.Increasing && distanceBtwPoints.Behaviour == BehaviourTypes.UnChanged)
-                {
-                    //do nothing
-                }
-                else if (this.Behaviour == BehaviourTypes.Increasing && distanceBtwPoints.Behaviour == BehaviourTypes.Increasing)
-                {
-                    this.Max = distanceBtwPoints.Max;
-                    this.Behaviour = BehaviourTypes.Increasing;
-                }
-                else if (this.Behaviour == BehaviourTypes.Decreasing && distanceBtwPoints.Behaviour == BehaviourTypes.UnChanged)
-                {
-                    //do nothing
-                }
-                else if (this.Behaviour == BehaviourTypes.Decreasing && distanceBtwPoints.Behaviour == BehaviourTypes.Decreasing)
-                {
-                    this.Min = distanceBtwPoints.Min;
-                    this.Behaviour = BehaviourTypes.Decreasing;
-                }
+            }
+            else if (this.Behaviour == BehaviourTypes.Increasing && distanceBtwPoints.Behaviour == BehaviourTypes.Increasing)
+            {
+                this.Max = distanceBtwPoints.Max;
+                this.Behaviour = BehaviourTypes.Increasing;
+            }
+            else if (this.Behaviour == BehaviourTypes.Decreasing && distanceBtwPoints.Behaviour == BehaviourTypes.Decreasing)
+            {
+                this.Min = distanceBtwPoints.Min;
+                this.Behaviour = BehaviourTypes.Decreasing;
             }
         }
 
@@ -135,11 +123,11 @@ namespace Gestures.Rules.Objects
         public string ToGDL()
         {
             if (this.Behaviour == BehaviourTypes.UnChanged)
-                return string.Format("Distance between points : {0} {1}%", BehaviourTypes.UnChanged, this.Min);
+                return string.Format("Distance between points: {0} {1}%", BehaviourTypes.UnChanged, this.Min);
             else if (this.Behaviour == BehaviourTypes.Range)
-                return string.Format("Distance between points : {0}..{1}", this.Min, this.Max);
+                return string.Format("Distance between points: {0}..{1}", this.Min, this.Max);
             else
-                return string.Format("Distance between points : {1}", this.Behaviour);
+                return string.Format("Distance between points: {0}", this.Behaviour);
         }
     }
 }
