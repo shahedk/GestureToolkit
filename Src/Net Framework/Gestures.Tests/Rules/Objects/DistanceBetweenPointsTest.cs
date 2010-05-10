@@ -150,5 +150,24 @@ namespace Gestures.Tests.Rules.Objects
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod()]
+        public void toGDL_Unchanged_test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.UnChanged,
+                Max = 2,
+                Min = 0
+            };
+
+
+            // Since the ruleData are of different type, it should not be equal
+            bool expected = true;
+            bool actual = target.ToGDL().Equals("Distance between points: 0..2");
+
+            Assert.AreEqual(expected, actual, "Behavior for type should be unchanged");
+        }
     }
 }

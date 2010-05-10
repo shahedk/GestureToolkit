@@ -136,7 +136,8 @@ namespace Gestures.Rules.Objects
         {
             if (this.Behaviour == BehaviourTypes.UnChanged)
                 return string.Format("Distance between points : {0} {1}%", BehaviourTypes.UnChanged, this.Min);
-
+            else if (this.Behaviour == BehaviourTypes.Range)
+                return string.Format("Distance between points : {0}..{1}", this.Min, this.Max);
             else
                 return string.Format("Distance between points : {1}", this.Behaviour);
         }
