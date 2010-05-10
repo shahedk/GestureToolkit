@@ -112,7 +112,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="TouchInputProviders\SmartTableTopTouchInputProvider.cs" />
     <Compile Include="TouchInputProviders\Windows7TouchInputProvider.cs" />
   </ItemGroup>
   <ItemGroup>
