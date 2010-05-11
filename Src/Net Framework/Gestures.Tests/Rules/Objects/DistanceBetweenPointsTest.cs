@@ -207,7 +207,6 @@ namespace Gestures.Tests.Rules.Objects
             // Since the behavior is different (decreasing and increasing), appropriate exception should be shown
             target.Union(anotherRuleData);
         }
-        #endregion
 
         [TestMethod()]
         public void Union_Unchanged_and_Increasing()
@@ -448,6 +447,8 @@ namespace Gestures.Tests.Rules.Objects
             Assert.AreEqual(expected, actual);
         }
 
+        #endregion
+
         #region toGDL Tests
 
         [TestMethod()]
@@ -527,5 +528,182 @@ namespace Gestures.Tests.Rules.Objects
         }
 
         #endregion
+
+        #region Behavior Tests
+
+        [TestMethod()]
+        public void Behavior_Setter_Not_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {};
+
+            //Since the Behavior was not set, the string should be empty
+            bool expected = true;
+            bool actual = target.Behaviour.Equals(string.Empty);
+
+            //Assert they are the equal
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod()]
+        public void Behavior_Setter_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints() 
+            { 
+               Behaviour = BehaviourTypes.Decreasing
+            };
+
+            //Since the Behavior was set to decreasing, we want to check that this was set
+            bool expected = true;
+            bool actual = target.Behaviour.Equals(BehaviourTypes.Decreasing);
+
+            //Assert they are the equal
+            Assert.AreEqual(expected, actual);
+
+        }
+
+
+        [TestMethod()]
+        public void Behavior_Getter_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.Increasing
+            };
+
+            //Since the Behavior was set to decreasing, we want to check that this was set
+            bool expected = true;
+            bool actual = BehaviourTypes.Increasing.Equals(target.Behaviour);
+
+            //Assert they are the equal
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        #endregion
+
+        #region Min Tests
+
+        [TestMethod()]
+        public void Min_Setter_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.UnChanged,
+                Min = 0
+            };
+
+            //The min was set to 0, so we confirm that the min was indeed set to 0
+            bool expected = true;
+            bool actual = target.Min.Equals(0);
+
+            //Assert they are equal
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod()]
+        public void Min_Setter_Not_Set_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.UnChanged,
+            };
+
+            //Since the min was not set, we are verifying that it was set to 0 as specified in original code
+            bool expected = true;
+            bool actual = target.Min.Equals(0);
+
+            //Assert they are equal
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void Min_Getter_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.UnChanged,
+                Min = -1
+            };
+
+            //The max was set to 5, so test the getter to check if it returns 5
+            bool expected = true;
+            int actualMin = -1;
+            bool actual = actualMin.Equals(target.Min);
+
+            //Assert they are equal
+            Assert.AreEqual(expected, actual);
+        }
+
+        #endregion
+
+        #region Max Tests
+
+        [TestMethod()]
+        public void Max_Setter_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.UnChanged,
+                Max = 3
+            };
+
+            //The max was set to 3, so we confirm that the min was indeed set to 3
+            bool expected = true;
+            bool actual = target.Max.Equals(3);
+
+            //Assert they are equal
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod()]
+        public void Max_Setter_Not_Set_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.UnChanged,
+            };
+
+            //Since the max was not set, we are verifying that it was set to 0 as specified in original code
+            bool expected = true;
+            bool actual = target.Max.Equals(0);
+
+            //Assert they are equal
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod()]
+        public void Max_Getter_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.UnChanged,
+                Max = 5
+            };
+
+            //The max was set to 5, so test the getter to check if it returns 5
+            bool expected = true;
+            int actualMax = 5;
+            bool actual = actualMax.Equals(target.Max);
+
+            //Assert they are equal
+            Assert.AreEqual(expected, actual);
+        }
+
+        #endregion
+
     }
 }
