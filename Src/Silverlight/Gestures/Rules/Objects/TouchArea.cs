@@ -86,6 +86,10 @@ namespace Gestures.Rules.Objects
 
         public bool Equals(IRuleData ruleData)
         {
+            if (ruleData == null || !(ruleData is TouchArea))
+            {
+                return false;
+            }
             var data = ruleData as TouchArea;
 
             return (data.Type == this.Type && data.Value == this.Value);
