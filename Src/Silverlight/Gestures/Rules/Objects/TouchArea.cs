@@ -79,7 +79,10 @@ namespace Gestures.Rules.Objects
         {
             get
             {
-                // TODO: refactor
+                if( Value.Split("x".ToCharArray()).Length < 2)
+                {
+                    return int.Parse(Value.Split("x".ToCharArray())[0]);
+                }
                 return int.Parse(Value.Split("x".ToCharArray())[1]);
             }
         }
@@ -137,17 +140,7 @@ namespace Gestures.Rules.Objects
             {
                 NewValue = string.Format("{0}", height);
             }
-            else if ((this.Type == "Ellipse" || this.Type == "Circle") && tArea.Type == "Rect")
-            {
-                NewValue = string.Format("{0}x{1}", height, width);
-                this.Type = "Rect";
-            }
-            else if (this.Type == "Rect" && (tArea.Type == "Ellipse" || tArea.Type == "Circle"))
-            {
-                NewValue = string.Format("{0}x{1}", height, width);
-                this.Type = "Rect";
-            }
-            else if ((this.Type == "Ellipse" || this.Type == "Circle") && (tArea.Type == "Circle" || tArea.Type == "Ellipse"))
+            else //Different types always union to be a rect
             {
                 NewValue = string.Format("{0}x{1}", height, width);
                 this.Type = "Rect";
