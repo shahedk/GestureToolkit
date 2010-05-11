@@ -56,6 +56,7 @@ namespace Gestures.Rules.Objects
 
             if (this.Min > encArea.Min)
                 this.Min = encArea.Min;
+
             if (this.Max < encArea.Max)
                 this.Max = encArea.Max;
         }

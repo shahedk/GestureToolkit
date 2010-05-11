@@ -208,6 +208,25 @@ namespace Gestures.Tests.Rules.Objects
             target.Union(anotherRuleData);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException), "Object reference not set to an instance of an object")]
+        public void Union_With_A_Null_Test()
+        {
+            // The type we are testing
+            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            {
+                Behaviour = BehaviourTypes.UnChanged,
+                Max = 2,
+                Min = 1
+            };
+
+            // Since the ruleData is null, the union should fail
+            IRuleData anotherRuleData = null;
+
+            //Union should fail
+            target.Union(anotherRuleData);
+        }
+
         [TestMethod()]
         public void Union_Unchanged_and_Increasing()
         {
@@ -377,7 +396,6 @@ namespace Gestures.Tests.Rules.Objects
             actual = target.Behaviour.Equals("decreasing");
             Assert.AreEqual(expected, actual);
         }
-
         
         [TestMethod()]
         public void Union_Increasing_and_Increasing()
@@ -589,7 +607,7 @@ namespace Gestures.Tests.Rules.Objects
         #region Min Tests
 
         [TestMethod()]
-        public void Min_Setter_Test()
+        public void DistanceBtwPoints_Min_Setter_Test()
         {
             // The type we are testing
             DistanceBetweenPoints target = new DistanceBetweenPoints()
@@ -608,7 +626,7 @@ namespace Gestures.Tests.Rules.Objects
         }
 
         [TestMethod()]
-        public void Min_Setter_Not_Set_Test()
+        public void DistanceBtwPoints_Min_Setter_Not_Set_Test()
         {
             // The type we are testing
             DistanceBetweenPoints target = new DistanceBetweenPoints()
@@ -625,7 +643,7 @@ namespace Gestures.Tests.Rules.Objects
         }
 
         [TestMethod()]
-        public void Min_Getter_Test()
+        public void DistanceBtwPoints_Min_Getter_Test()
         {
             // The type we are testing
             DistanceBetweenPoints target = new DistanceBetweenPoints()
@@ -648,7 +666,7 @@ namespace Gestures.Tests.Rules.Objects
         #region Max Tests
 
         [TestMethod()]
-        public void Max_Setter_Test()
+        public void DistanceBtwPoints_Max_Setter_Test()
         {
             // The type we are testing
             DistanceBetweenPoints target = new DistanceBetweenPoints()
@@ -667,7 +685,7 @@ namespace Gestures.Tests.Rules.Objects
         }
 
         [TestMethod()]
-        public void Max_Setter_Not_Set_Test()
+        public void DistanceBtwPoints_Max_Setter_Not_Set_Test()
         {
             // The type we are testing
             DistanceBetweenPoints target = new DistanceBetweenPoints()
@@ -685,7 +703,7 @@ namespace Gestures.Tests.Rules.Objects
         }
 
         [TestMethod()]
-        public void Max_Getter_Test()
+        public void DistanceBtwPoints_Max_Getter_Test()
         {
             // The type we are testing
             DistanceBetweenPoints target = new DistanceBetweenPoints()
