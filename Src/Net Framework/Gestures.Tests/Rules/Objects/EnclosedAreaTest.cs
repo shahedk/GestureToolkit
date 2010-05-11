@@ -13,8 +13,6 @@ namespace Gestures.Tests
     [TestClass()]
     public class EnclosedAreaTest
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -65,11 +63,10 @@ namespace Gestures.Tests
 
         //TODO complete equals method for EnclosedArea
 
-
         #region Union Tests
 
         [TestMethod()]
-        public void Union_Test_Min()
+        public void EnclosedArea_Union_Test_Min()
         {
 
             // The type we are testing
@@ -102,7 +99,7 @@ namespace Gestures.Tests
         }
 
         [TestMethod()]
-        public void Union_Test_Max()
+        public void EnclosedArea_Union_Test_Max()
         {
 
             // The type we are testing
@@ -135,7 +132,7 @@ namespace Gestures.Tests
         }
 
         [TestMethod()]
-        public void Union_With_Nothing_Set_In_Resulting_Union()
+        public void EnclosedArea_Union_With_Nothing_Set_In_Resulting_Union()
         {
             // The type we are testing
             EnclosedArea target = new EnclosedArea()
@@ -167,7 +164,7 @@ namespace Gestures.Tests
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException), "Object reference not set to an instance of an object")]
-        public void Union_With_A_Null_Test()
+        public void EnclosedArea_Union_With_A_Null_Test()
         {
             // The type we are testing
 
