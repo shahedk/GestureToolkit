@@ -86,7 +86,11 @@ namespace Gestures.Rules.Objects
 
         public bool Equals(IRuleData ruleData)
         {
-            if (ruleData == null || !(ruleData is TouchArea))
+            if (ruleData == null)
+            {
+                throw new Exception("Null value exception");
+            }
+            if (!(ruleData is TouchArea))
             {
                 return false;
             }
@@ -98,7 +102,14 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
-
+            if (value == null)
+            {
+                throw new Exception("Null value exception");
+            }
+            if (!(value is TouchArea))
+            {
+                throw new Exception("TouchArea union not TouchArea exception");
+            }
             TouchArea tArea = value as TouchArea;
             int height, width;
             string NewValue = string.Empty;
