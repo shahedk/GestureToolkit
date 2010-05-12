@@ -39,6 +39,14 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
+            if (value == null)
+            {
+                throw new Exception("Null Value Exception");
+            }
+            if (!(value is ClosedLoop))
+            {
+                throw new Exception("Invalid Type Exception");
+            }
             ClosedLoop cLoop = value as ClosedLoop;
 
             if (this.State == "false" || cLoop.State == "false")
