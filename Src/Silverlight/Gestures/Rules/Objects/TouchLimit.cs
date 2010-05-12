@@ -73,7 +73,7 @@ namespace Gestures.Rules.Objects
         {
             TouchLimit touchLimit = value as TouchLimit;
 
-            if (this.Min < touchLimit.Min)
+            if (this.Min > touchLimit.Min)
                 this.Min = touchLimit.Min;
 
             if ((this.Max != 0 || touchLimit.Max != 0))
