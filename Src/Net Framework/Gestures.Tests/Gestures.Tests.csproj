@@ -80,6 +80,7 @@
     <Compile Include="Properties\PexAssemblyInfo.cs" />
     <Compile Include="Rules\Objects\TouchAreaTest.cs" />
     <Compile Include="Rules\Objects\TouchPathLengthTest.cs" />
+    <Compile Include="Rules\Objects\TouchLimitTest.cs" />
     <Compile Include="Rules\Objects\TouchPathBoundingBoxTest.cs" />
   </ItemGroup>
   <ItemGroup>
