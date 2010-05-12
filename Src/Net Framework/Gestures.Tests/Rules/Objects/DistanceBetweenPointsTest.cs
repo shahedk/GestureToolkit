@@ -655,7 +655,7 @@ namespace Gestures.Tests.Rules.Objects
             //The max was set to 5, so test the getter to check if it returns 5
             bool expected = true;
             int actualMin = -1;
-            bool actual = actualMin.Equals(target.Min);
+            bool actual = actualMin == (target.Min);
 
             //Assert they are equal
             Assert.AreEqual(expected, actual);
@@ -715,7 +715,7 @@ namespace Gestures.Tests.Rules.Objects
             //The max was set to 5, so test the getter to check if it returns 5
             bool expected = true;
             int actualMax = 5;
-            bool actual = actualMax.Equals(target.Max);
+            bool actual = actualMax == (target.Max);
 
             //Assert they are equal
             Assert.AreEqual(expected, actual);

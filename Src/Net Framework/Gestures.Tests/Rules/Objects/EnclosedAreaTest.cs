@@ -226,7 +226,7 @@ namespace Gestures.Tests
         public void EnclosedArea_Min_Setter_Test()
         {
             // The type we are testing
-            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            EnclosedArea target = new EnclosedArea()
             {
                 Min = 0
             };
@@ -244,7 +244,7 @@ namespace Gestures.Tests
         public void EnclosedArea_Min_Setter_Not_Set_Test()
         {
             // The type we are testing
-            DistanceBetweenPoints target = new DistanceBetweenPoints();
+            EnclosedArea target = new EnclosedArea();
 
             //Since the min was not set, we are verifying that it was set to 0 as specified in original code
             bool expected = true;
@@ -258,7 +258,7 @@ namespace Gestures.Tests
         public void EnclosedArea_Min_Getter_Test()
         {
             // The type we are testing
-            DistanceBetweenPoints target = new DistanceBetweenPoints()
+            EnclosedArea target = new EnclosedArea()
             {
                 Min = -1
             };
@@ -266,7 +266,7 @@ namespace Gestures.Tests
             //The max was set to 5, so test the getter to check if it returns 5
             bool expected = true;
             int actualMin = -1;
-            bool actual = actualMin.Equals(target.Min);
+            bool actual = actualMin == (target.Min);
 
             //Assert they are equal
             Assert.AreEqual(expected, actual);
@@ -321,7 +321,7 @@ namespace Gestures.Tests
             //The max was set to 5, so test the getter to check if it returns 5
             bool expected = true;
             int actualMax = 5;
-            bool actual = actualMax.Equals(target.Max);
+            bool actual = actualMax == (target.Max);
 
             //Assert they are equal
             Assert.AreEqual(expected, actual);
