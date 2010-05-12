@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="Rules\Objects\ClosedLoopTest.cs" />
     <Compile Include="OnSameObjectTest.cs" />
     <Compile Include="Rules\Objects\EnclosedAreaTest.cs" />
     <Compile Include="Rules\RuleValidator\DistanceBetweenPointsValidatorTest.cs" />
