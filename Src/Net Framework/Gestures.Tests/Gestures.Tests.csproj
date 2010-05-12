@@ -73,7 +73,6 @@
   <ItemGroup>
     <Compile Include="Rules\Objects\OnSameObjectTest.cs" />
     <Compile Include="Rules\Objects\ClosedLoopTest.cs" />
-    <Compile Include="OnSameObjectTest.cs" />
     <Compile Include="Rules\Objects\EnclosedAreaTest.cs" />
     <Compile Include="Rules\RuleValidator\DistanceBetweenPointsValidatorTest.cs" />
     <Compile Include="Rules\Objects\DistanceBetweenPointsTest.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Properties\PexAssemblyInfo.cs" />
     <Compile Include="Rules\Objects\TouchAreaTest.cs" />
     <Compile Include="Rules\Objects\TouchPathLengthTest.cs" />
+    <Compile Include="Rules\Objects\TouchPathBoundingBoxTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\Gestures.accessor" />
