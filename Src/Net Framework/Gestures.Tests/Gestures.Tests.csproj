@@ -81,6 +81,7 @@
     <Compile Include="Properties\PexAssemblyInfo.cs" />
     <Compile Include="Rules\Objects\TouchAreaTest.cs" />
     <Compile Include="Rules\Objects\TouchPathLengthTest.cs" />
+    <Compile Include="Rules\Objects\TouchLimitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\Gestures.accessor" />
