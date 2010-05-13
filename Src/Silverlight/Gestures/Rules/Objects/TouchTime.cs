@@ -54,9 +54,42 @@ namespace Gestures.Rules.Objects
                 if (this.Value < touchTime.Value)
                     this.Value = touchTime.Value;
             }
+            else if (this.Unit == string.Empty && touchTime.Unit != string.Empty)
+            {
+                this.Unit = touchTime.Unit;
+                this.Value = touchTime.Value;
+            }
             else
             {
-                throw new NotImplementedException();
+                if ((this.Unit == "sec" || this.Unit == "secs") && (touchTime.Unit == "msec" || touchTime.Unit == "msecs"))
+                {
+                    if ((this.Value * 1000) < touchTime.Value)
+                    {
+                        this.Value = touchTime.Value / 1000;
+                    }
+
+                }
+                else if ((this.Unit == "msec" || this.Unit == "msecs") && (touchTime.Unit == "sec" || touchTime.Unit == "secs"))
+                {
+                    if ((this.Value) < (touchTime.Value * 1000))
+                    {
+                        this.Value = touchTime.Value * 1000;
+                    }
+                }
+                else if ((this.Unit == "msec" || this.Unit == "msecs") && (touchTime.Unit == "msec" || touchTime.Unit == "msecs"))
+                {
+                    if ((this.Value) < (touchTime.Value))
+                    {
+                        this.Value = touchTime.Value;
+                    }
+                }
+                else
+                {
+                    if ((this.Value) < (touchTime.Value))
+                    {
+                        this.Value = touchTime.Value;
+                    }
+                }
             }
         }
 

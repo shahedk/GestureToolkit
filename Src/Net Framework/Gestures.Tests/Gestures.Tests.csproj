@@ -83,6 +83,7 @@
     <Compile Include="Rules\Objects\TouchLimitTest.cs" />
     <Compile Include="Rules\Objects\TouchPathBoundingBoxTest.cs" />
     <Compile Include="Rules\Objects\TouchStepTest.cs" />
+    <Compile Include="Rules\Objects\TouchTimeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\Gestures.accessor" />
