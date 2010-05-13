@@ -40,6 +40,14 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
+            if (value == null)
+            {
+                throw new Exception("Null Value Exception");
+            }
+            if (!(value is TouchState))
+            {
+                throw new Exception("Wrong Type Exception");
+            }
             TouchState touchState = value as TouchState;
 
             bool matchFound = false;
@@ -61,7 +69,7 @@ namespace Gestures.Rules.Objects
         {
             string uniqueStates = string.Join(" ", States);
             
-            return string.Format("Touch states: {0}", States);
+            return string.Format("Touch states: {0}", uniqueStates);
         }
     }
 }
