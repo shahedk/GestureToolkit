@@ -76,10 +76,29 @@ namespace Gestures.Rules.Objects
                 if (this.TimeLimit < touchStep.TimeLimit)
                     this.TimeLimit = touchStep.TimeLimit;
             }
+            else if (this.Unit == string.Empty && touchStep.Unit != string.Empty)
+            {
+                this.Unit = touchStep.Unit;
+                this.TouchCount = touchStep.TouchCount;
+                this.TimeLimit = touchStep.TimeLimit;
+            }
             else
             {
-                // TODO: We need to consider different units while considering expending the range
-                throw new NotImplementedException();
+                if (this.Unit == "sec" && touchStep.Unit == "msec")
+                {
+                    if ((this.TimeLimit * 1000) < touchStep.TimeLimit)
+                    {
+                        this.TimeLimit = touchStep.TimeLimit/1000;
+                    }
+
+                }
+                else if (this.Unit == "msec" && touchStep.Unit == "sec")
+                {
+                    if ((this.TimeLimit) < (touchStep.TimeLimit*1000))
+                    {
+                        this.TimeLimit = touchStep.TimeLimit * 1000;
+                    }
+                }
             }
         }
 
