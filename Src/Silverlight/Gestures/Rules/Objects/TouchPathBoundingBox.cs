@@ -74,14 +74,7 @@ namespace Gestures.Rules.Objects
 
         public void Union(IRuleData value)
         {
-            if (value == null)
-            {
-                throw new Exception("Null Value Exception");
-            }
-            if (!(value is TouchPathBoundingBox))
-            {
-                throw new Exception("Wrong Input Type Exception");
-            }
+
             TouchPathBoundingBox touchPBox = value as TouchPathBoundingBox;
 
             if (this.MinHeight > touchPBox.MinHeight)

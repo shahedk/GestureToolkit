@@ -4,6 +4,6 @@
         Title="MainWindow" Height="650" Width="1025"  >
     <Canvas Name="LayoutRoot" Background="White">
         <TextBlock  Name="messageTextBlock" Text="message..." />
-        <Rectangle Height="100" Width=" 100" Fill="LightGray" Margin="300,0"/>
+        <Rectangle Name="rectangle" Height="100" Width=" 100" Fill="LightGray" Canvas.Left="100" Canvas.Top="100"/>
     </Canvas>
 </Window>
