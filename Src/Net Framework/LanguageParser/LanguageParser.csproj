@@ -74,6 +74,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MGraphXamlReader">
+      <HintPath>bin\MGraphXamlReader.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.M, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SdkBinPath)\Microsoft.M.dll</HintPath>
@@ -157,12 +160,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MGraphXamlReader\MGraphXamlReader.csproj">
-      <Project>{DEACFB56-AE22-47B4-9B27-5BE248779C8B}</Project>
-      <Name>MGraphXamlReader</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\GDL.mg" />
