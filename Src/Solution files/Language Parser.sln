@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MGraphXamlReader", "MGraphXamlReader\MGraphXamlReader.csproj", "{DEACFB56-AE22-47B4-9B27-5BE248779C8B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageParser", "LanguageParser\LanguageParser.csproj", "{952FD53A-BFA3-45FA-8231-549AA8E0FDBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageParser", "..\Net Framework\LanguageParser\LanguageParser.csproj", "{952FD53A-BFA3-45FA-8231-549AA8E0FDBB}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
@@ -22,21 +20,6 @@ Global
 		Test|x86 = Test|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Release|x86.ActiveCfg = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Test|Any CPU.ActiveCfg = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Test|Any CPU.Build.0 = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Test|Mixed Platforms.Build.0 = Release|Any CPU
-		{DEACFB56-AE22-47B4-9B27-5BE248779C8B}.Test|x86.ActiveCfg = Release|Any CPU
 		{952FD53A-BFA3-45FA-8231-549AA8E0FDBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{952FD53A-BFA3-45FA-8231-549AA8E0FDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952FD53A-BFA3-45FA-8231-549AA8E0FDBB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
