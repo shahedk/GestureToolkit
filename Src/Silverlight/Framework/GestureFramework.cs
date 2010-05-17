@@ -42,7 +42,7 @@ namespace Framework
             Contract.Invariant(LayoutRoot != null, "LayoutRoot cannot be set to null as different modules can interact with the UI from different thread.");
         }
 
-        internal static Canvas LayoutRoot
+        public static Canvas LayoutRoot
         {
             get;
             private set;
