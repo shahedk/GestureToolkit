@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using Microsoft.Surface;
 using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
+using SurfaceApplication.Providers;
 
 namespace SurfaceApplication
 {
@@ -28,9 +29,14 @@ namespace SurfaceApplication
         public SurfaceWindow1()
         {
             InitializeComponent();
-
+            this.Loaded += new RoutedEventHandler(SurfaceWindow1_Loaded);
             // Add handlers for Application activation events
             AddActivationHandlers();
+        }
+
+        void SurfaceWindow1_Loaded(object sender, RoutedEventArgs e)
+        {
+            var provider = new SurfaceTouchInputProvider(this);
         }
 
 
