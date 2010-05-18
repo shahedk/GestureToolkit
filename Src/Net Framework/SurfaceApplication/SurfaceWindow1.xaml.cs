@@ -15,6 +15,7 @@ using Microsoft.Surface;
 using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using SurfaceApplication.Providers;
+using Gestures.Objects;
 
 namespace SurfaceApplication
 {
@@ -30,13 +31,30 @@ namespace SurfaceApplication
         {
             InitializeComponent();
             this.Loaded += new RoutedEventHandler(SurfaceWindow1_Loaded);
+
             // Add handlers for Application activation events
             AddActivationHandlers();
         }
 
         void SurfaceWindow1_Loaded(object sender, RoutedEventArgs e)
         {
+
             var provider = new SurfaceTouchInputProvider(this);
+            provider.SingleTouchChanged += new Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler(provider_SingleTouchChanged);
+
+        }
+
+        void provider_SingleTouchChanged(object sender, Framework.TouchInputProviders.SingleTouchEventArgs e)
+        {
+            if (e.TouchPoint != null)
+            {
+                //testingBox.Items.Add(e.TouchPoint.Action);
+                testingBox.Items.Add(e.TouchPoint.Action);
+            }
+            else
+            {
+                testingBox.Items.Add("move..");
+            }
         }
 
 
