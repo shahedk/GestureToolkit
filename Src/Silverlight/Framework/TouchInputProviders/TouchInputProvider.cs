@@ -67,15 +67,10 @@ namespace Framework.TouchInputProviders
             // Update Active touch points
             foreach (TouchInfo info in touchInfos)
             {
-                UpdateActiveTouchPoint(updateTouchPoints, info);
+                updateTouchPoints.Add(UpdateActiveTouchPoint(info));
             }
 
             return updateTouchPoints;
-        }
-
-        public void UpdateActiveTouchPoint(TouchInfo touchInfo)
-        {
-            UpdateActiveTouchPoint(null, touchInfo);
         }
 
         public TouchPoint2 AddNewTouchPoint(TouchInfo info, UIElement source)
@@ -95,28 +90,26 @@ namespace Framework.TouchInputProviders
             return newTouchPoint;
         }
 
-        private void UpdateActiveTouchPoint(List<TouchPoint2> updateTouchPoints, TouchInfo info)
+        private TouchPoint2 UpdateActiveTouchPoint(TouchInfo info)
         {
+            TouchPoint2 tPoint = null;
+
             // Update touch details (i.e. touch path)
             if (ActiveTouchPoints.ContainsKey(info.TouchDeviceId))
             {
-                TouchPoint2 tPoint = ActiveTouchPoints[info.TouchDeviceId];
+                tPoint = ActiveTouchPoints[info.TouchDeviceId];
                 tPoint.Update(info);
-
-                if (updateTouchPoints != null)
-                    updateTouchPoints.Add(tPoint);
             }
             else
             {
-                TouchPoint2 tPoint = AddNewTouchPoint(info, null);
-
-                if (updateTouchPoints != null)
-                    updateTouchPoints.Add(tPoint);
+                tPoint = AddNewTouchPoint(info, null);
             }
 
             // Touches that are going to be inactive in next frame
             if (info.ActionType == TouchAction.Up.ToTouchActions())
                 inactiveTouchPoints.Add(info.TouchDeviceId);
+
+            return tPoint;
         }
 
         private void UpdateTouchStates(List<TouchInfo> points)
