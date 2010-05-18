@@ -26,17 +26,20 @@ namespace SurfaceApplication.Providers
         public SurfaceTouchInputProvider(SurfaceWindow window)
         {
             _window = window;
+
+            Init();
         }
 
         public override void Init()
         {
             //Add the necessary event handlers
-            _window.ContactDown+=new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactDown);
-            
-            _window.ContactChanged+= new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactChanged);
+            _window.ContactDown += new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactDown);
 
-            _window.ContactLeave+=new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactLeave);
-            
+            _window.ContactChanged += new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactChanged);
+
+            _window.ContactLeave += new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactLeave);
+
+
         }
 
         public void _window_ContactLeave(object sender, ContactEventArgs e)
@@ -74,24 +77,25 @@ namespace SurfaceApplication.Providers
             //Set the deviceid of the touchinfo to the id of the contact
             info.TouchDeviceId = e.Contact.Id;
 
+            TouchPoint2 touchPoint = null;
             //If it is contact down, we want to add the point, otherwise we want to update that particular point
             if (action == TouchAction2.Down)
             {
                 //add the new touch point to the base
-                var touchPoint = base.AddNewTouchPoint(info, e.OriginalSource as UIElement);
-
-                //Create the call back for the single touch point
-                if (SingleTouchChanged != null)
-                {
-                    SingleTouchChanged(this, new SingleTouchEventArgs(touchPoint));
-                }
+                touchPoint = base.AddNewTouchPoint(info, e.OriginalSource as UIElement);
             }
-            else 
+            else
             {
                 //add the new touch point to the base
                 base.UpdateActiveTouchPoint(info);
 
                 //work in progress, update the UpdateActiveTouchPoint 
+            }
+
+            //Create the call back for the single touch point
+            if (SingleTouchChanged != null)
+            {
+                SingleTouchChanged(this, new SingleTouchEventArgs(touchPoint));
             }
         }
     }

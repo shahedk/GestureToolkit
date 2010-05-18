@@ -109,7 +109,9 @@ namespace Framework.TouchInputProviders
             else
             {
                 TouchPoint2 tPoint = AddNewTouchPoint(info, null);
-                updateTouchPoints.Add(tPoint);
+
+                if (updateTouchPoints != null)
+                    updateTouchPoints.Add(tPoint);
             }
 
             // Touches that are going to be inactive in next frame
