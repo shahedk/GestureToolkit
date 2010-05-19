@@ -16,6 +16,9 @@ using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using SurfaceApplication.Providers;
 using Gestures.Objects;
+using Framework;
+using Gestures.Feedbacks.TouchFeedbacks;
+using Gestures.ReturnTypes;
 
 namespace SurfaceApplication
 {
@@ -36,28 +39,7 @@ namespace SurfaceApplication
             AddActivationHandlers();
         }
 
-        void SurfaceWindow1_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            var provider = new SurfaceTouchInputProvider(this);
-            provider.SingleTouchChanged += new Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler(provider_SingleTouchChanged);
-
-        }
-
-        void provider_SingleTouchChanged(object sender, Framework.TouchInputProviders.SingleTouchEventArgs e)
-        {
-            if (e.TouchPoint != null)
-            {
-                //testingBox.Items.Add(e.TouchPoint.Action);
-                testingBox.Items.Add(e.TouchPoint.Action);
-            }
-            else
-            {
-                testingBox.Items.Add("move..");
-            }
-        }
-
-
+        #region ...
         /// <summary>
         /// Occurs when the window is about to close. 
         /// </summary>
@@ -122,6 +104,50 @@ namespace SurfaceApplication
         private void OnApplicationDeactivated(object sender, EventArgs e)
         {
             //TODO: disable audio, animations here
+        }
+        #endregion
+
+        void SurfaceWindow1_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Initialize Gesture Framework
+            var provider = new SurfaceTouchInputProvider(this);
+            GestureFramework.Initialize(provider, LayoutRoot);
+            GestureFramework.AddTouchFeedback(typeof(BubblesPath));
+
+            GestureFramework.EventManager.AddEvent(rectangle, "Zoom", ResizeCallback);
+            GestureFramework.EventManager.AddEvent(rectangle, "Pinch", ResizeCallback);
+            GestureFramework.EventManager.AddEvent(rectangle, "Drag", DragCallback);
+        }
+
+        public void DragCallback(object sender, List<IReturnType> values)
+        {
+            PositionChanged posChanged = values.Get<PositionChanged>();
+
+            MoveItem(sender as Rectangle, posChanged);
+        }
+
+        public void ResizeCallback(object sender, List<IReturnType> values)
+        {
+            var distanceChanged = values.Get<DistanceChanged>();
+            Resize(sender as Rectangle, distanceChanged.Delta);
+        }
+
+        private void MoveItem(Rectangle sender, PositionChanged posChanged)
+        {
+            double x = (double)sender.GetValue(Canvas.LeftProperty);
+            double y = (double)sender.GetValue(Canvas.TopProperty);
+
+            sender.SetValue(Canvas.LeftProperty, x + posChanged.X);
+            sender.SetValue(Canvas.TopProperty, y + posChanged.Y);
+        }
+
+        private void Resize(Rectangle item, double delta)
+        {
+            if (item.Height + delta > 0)
+                item.Height += delta;
+
+            if (item.Width + delta > 0)
+                item.Width += delta;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Gestures.Objects
             }
         }
 
-        public int TimeStamp { get; set; }
+        public long TimeStamp { get; set; }
         public int WaitTime { get; set; }
     }
 }

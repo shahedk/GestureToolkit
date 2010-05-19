@@ -7,7 +7,8 @@
     <ImageBrush x:Key="WindowBackground" Stretch="None" Opacity="0.6" ImageSource="pack://application:,,,/Resources/WindowBackground.jpg"/>
   </s:SurfaceWindow.Resources>
 
-  <Grid Background="{StaticResource WindowBackground}" >
-        <s:SurfaceListBox Height="150" Width="150" Margin="184,175,20,12" Name="testingBox"/>
-    </Grid>
+  <Canvas Background="{StaticResource WindowBackground}" Name="LayoutRoot">
+
+        <Rectangle Height="100" Width="100" Fill="LightBlue" Canvas.Left="185" Canvas.Top="231" Name="rectangle"/>
+    </Canvas>
 </s:SurfaceWindow>

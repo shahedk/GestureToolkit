@@ -90,7 +90,7 @@ namespace Framework.TouchInputProviders
             return newTouchPoint;
         }
 
-        private TouchPoint2 UpdateActiveTouchPoint(TouchInfo info)
+        public TouchPoint2 UpdateActiveTouchPoint(TouchInfo info)
         {
             TouchPoint2 tPoint = null;
 

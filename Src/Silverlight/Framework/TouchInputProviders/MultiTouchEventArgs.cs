@@ -16,7 +16,7 @@ namespace Framework.TouchInputProviders
 {
     public class MultiTouchEventArgs : EventArgs
     {
-        internal MultiTouchEventArgs(List<TouchPoint2> points)
+        public MultiTouchEventArgs(List<TouchPoint2> points)
         {
             touchPoints = points;
         }
