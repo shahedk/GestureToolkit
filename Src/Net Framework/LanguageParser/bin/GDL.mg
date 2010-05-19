@@ -104,7 +104,7 @@
         /* Touch direction */
          syntax TouchDirection
             = "Touch direction" ":" d:DirectionOptions
-            =>TouchDirection{Direction=>d};
+            =>TouchDirection{Values=>d};
             
          token DirectionOptions
             = x: "Left" =>x
