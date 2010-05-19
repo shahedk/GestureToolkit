@@ -117,6 +117,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Hydrangeas.jpg" />
+    <Resource Include="Images\Jellyfish.jpg" />
+    <Resource Include="Images\Koala.jpg" />
+    <Resource Include="Images\Lighthouse.jpg" />
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

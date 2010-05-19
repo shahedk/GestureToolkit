@@ -7,8 +7,10 @@
     <ImageBrush x:Key="WindowBackground" Stretch="None" Opacity="0.6" ImageSource="pack://application:,,,/Resources/WindowBackground.jpg"/>
   </s:SurfaceWindow.Resources>
 
-  <Canvas Background="{StaticResource WindowBackground}" Name="LayoutRoot">
-
-        <Rectangle Height="100" Width="100" Fill="LightBlue" Canvas.Left="185" Canvas.Top="231" Name="rectangle"/>
+  <Canvas Background="{StaticResource WindowBackground}" Name="LayoutRoot" Height="1024" Width="768">
+        <Image Name="image1" Source="pack://application:,,,/Images/Hydrangeas.jpg" Height="123" Width="130" Canvas.Left="30" Canvas.Top="185" />
+        <Image Canvas.Left="210" Canvas.Top="185" Height="123" Name="image2" Source="pack://application:,,,/Images/Jellyfish.jpg" Width="130" />
+        <Image Canvas.Left="394" Canvas.Top="185" Height="123" Name="image3" Source="pack://application:,,,/Images/Koala.jpg" Width="130" />
+        <Image Canvas.Left="587" Canvas.Top="185" Height="123" Name="image4" Source="pack://application:,,,/Images/Lighthouse.jpg" Width="130" />
     </Canvas>
 </s:SurfaceWindow>

@@ -19,6 +19,7 @@ using Gestures.Objects;
 using Framework;
 using Gestures.Feedbacks.TouchFeedbacks;
 using Gestures.ReturnTypes;
+using System.Threading;
 
 namespace SurfaceApplication
 {
@@ -114,40 +115,105 @@ namespace SurfaceApplication
             GestureFramework.Initialize(provider, LayoutRoot);
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
 
-            GestureFramework.EventManager.AddEvent(rectangle, "Zoom", ResizeCallback);
-            GestureFramework.EventManager.AddEvent(rectangle, "Pinch", ResizeCallback);
-            GestureFramework.EventManager.AddEvent(rectangle, "Drag", DragCallback);
+            SetImages(false);
         }
 
-        public void DragCallback(object sender, List<IReturnType> values)
+        //Sets the events of the images
+        private void SetImages(bool randomPosition)
         {
-            PositionChanged posChanged = values.Get<PositionChanged>();
+            foreach (var bitmap in LayoutRoot.Children)
+            {
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Zoom", ZoomCallback);
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Pinch", PinchCallback);
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Drag", DragCallback);
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Rotate", RotateCallback);
+            }
 
-            MoveItem(sender as Rectangle, posChanged);
+            //Uncomment here to add lasso functionality
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
         }
 
-        public void ResizeCallback(object sender, List<IReturnType> values)
+        #region CallBacks
+
+        private void DragCallback(UIElement sender, List<IReturnType> values)
         {
-            var distanceChanged = values.Get<DistanceChanged>();
-            Resize(sender as Rectangle, distanceChanged.Delta);
+            var posChanged = values.Get<PositionChanged>();
+            if (posChanged != null)
+            {
+                MoveItem(sender, posChanged);
+            }
         }
 
-        private void MoveItem(Rectangle sender, PositionChanged posChanged)
+        private void ZoomCallback(UIElement sender, List<IReturnType> values)
         {
-            double x = (double)sender.GetValue(Canvas.LeftProperty);
-            double y = (double)sender.GetValue(Canvas.TopProperty);
+            var dis = values.Get<DistanceChanged>();
 
-            sender.SetValue(Canvas.LeftProperty, x + posChanged.X);
-            sender.SetValue(Canvas.TopProperty, y + posChanged.Y);
+            if (dis != null)
+                Resize(sender as Image, dis.Delta);
         }
 
-        private void Resize(Rectangle item, double delta)
+        private void PinchCallback(UIElement sender, List<IReturnType> values)
         {
-            if (item.Height + delta > 0)
-                item.Height += delta;
-
-            if (item.Width + delta > 0)
-                item.Width += delta;
+            var dis = values.Get<DistanceChanged>();
+            if (dis != null)
+                Resize(sender as Image, dis.Delta);
         }
+
+        private void RotateCallback(UIElement sender, List<IReturnType> values)
+        {
+            var slopeChanged = values.Get<SlopeChanged>();
+            if (slopeChanged != null)
+            {
+                var img = sender as Image;
+                if (img != null)
+                    Rotate(img, Math.Round(slopeChanged.Delta, 1));
+            }
+        }
+
+        #endregion 
+
+        #region Helper Functions
+
+        bool rotateInProgress = false;
+        private void Rotate(Image img, double delta)
+        {
+            if (!rotateInProgress & delta != 0)
+            {
+                rotateInProgress = true;
+                RotateTransform rt = img.RenderTransform as RotateTransform;
+
+                if (rt == null)
+                    rt = new RotateTransform();
+
+                rt.Angle += delta;
+                rt.CenterX = img.Width / 2;
+                rt.CenterY = img.Height / 2;
+
+                img.RenderTransform = rt;
+
+                rotateInProgress = false;
+            }
+        }
+
+        private void Resize(Image image, double delta)
+        {
+            if (image.Height + delta > 0)
+                image.Height += delta;
+
+            if (image.Width + delta > 0)
+                image.Width += delta;
+        }
+
+        private void MoveItem(UIElement sender, PositionChanged posChanged)
+        {
+            Image item = sender as Image;
+            double x = (double)item.GetValue(Canvas.LeftProperty);
+            double y = (double)item.GetValue(Canvas.TopProperty);
+
+            item.SetValue(Canvas.LeftProperty, x + posChanged.X);
+            item.SetValue(Canvas.TopProperty, y + posChanged.Y);
+        }
+
+        #endregion
     }
 }
