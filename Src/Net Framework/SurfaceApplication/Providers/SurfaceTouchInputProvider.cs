@@ -9,58 +9,96 @@ using Microsoft.Surface;
 using Microsoft.Surface.Presentation.Controls;
 using Framework;
 using System.Windows;
-using Microsoft.Surface.Presentation;
+using Microsoft.Surface.Core;
+using ContactEventHandler = Microsoft.Surface.Presentation.ContactEventHandler;
 
 namespace SurfaceApplication.Providers
 {
     public class SurfaceTouchInputProvider : TouchInputProvider
     {
         public override event TouchInputProvider.FrameChangeEventHandler FrameChanged;
-
         public override event TouchInputProvider.SingleTouchChangeEventHandler SingleTouchChanged;
-
         public override event TouchInputProvider.MultiTouchChangeEventHandler MultiTouchChanged;
 
         private SurfaceWindow _window;
+        public ContactTarget _contactTarget;
 
         public SurfaceTouchInputProvider(SurfaceWindow window)
         {
             _window = window;
-
-            Init();
         }
+
+        private Dictionary<int, TouchPoint2> _activeTouchPoints = new Dictionary<int, TouchPoint2>();
+        private Dictionary<int, TouchInfo> _activeTouchInfos = new Dictionary<int, TouchInfo>();
 
         public override void Init()
         {
-            //Add the necessary event handlers
-            _window.ContactDown += new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactDown);
+            // Add the necessary event handlers
+            _window.ContactDown += ContactDown;
+            _window.ContactChanged += ContactChanged;
+            _window.ContactLeave += ContactLeave;
 
-            _window.ContactChanged += new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactChanged);
+            IntPtr hwnd = new System.Windows.Interop.WindowInteropHelper(_window).Handle;
+            _contactTarget = new Microsoft.Surface.Core.ContactTarget(hwnd);
 
-            _window.ContactLeave += new Microsoft.Surface.Presentation.ContactEventHandler(_window_ContactLeave);
-
-
+            _contactTarget.FrameReceived += new EventHandler<FrameReceivedEventArgs>(_contactTarget_FrameReceived);
+            _contactTarget.EnableInput();
         }
 
-        public void _window_ContactLeave(object sender, ContactEventArgs e)
+        void _contactTarget_FrameReceived(object sender, FrameReceivedEventArgs e)
         {
-            //Call helper function to create appropriate touch point and register its call back
-            _touchPoint_and_CallBack_Creator(TouchAction2.Up, e);
+            List<TouchInfo> touchInfoList = _activeTouchInfos.Values.ToList<TouchInfo>();
+            List<TouchPoint2> touchPoints = _activeTouchPoints.Values.ToList<TouchPoint2>();
+
+            // Raise "SingleTouchChanged" event if necessary
+            if (SingleTouchChanged != null)
+            {
+                foreach (var touchPoint in touchPoints)
+                {
+                    SingleTouchChanged(this, new SingleTouchEventArgs(touchPoint));
+                }
+            }
+
+            // Raise "MultiTouchChanged" event if necessary
+            if (MultiTouchChanged != null)
+            {
+                MultiTouchChanged(this, new MultiTouchEventArgs(touchPoints));
+            }
+
+            // Raise "MultiTouchChanged" event if necessary
+            if (FrameChanged != null)
+            {
+                var frameInfo = new FrameInfo() { TimeStamp = e.FrameTimestamp, Touches = touchInfoList };
+                FrameChanged(this, frameInfo);
+            }
+
+            // Clean up local cache
+            foreach (var touchInfo in touchInfoList)
+            {
+                if (touchInfo.ActionType == TouchAction2.Up)
+                {
+                    _activeTouchInfos.Remove(touchInfo.TouchDeviceId);
+                    _activeTouchPoints.Remove(touchInfo.TouchDeviceId);
+                }
+            }
         }
 
-        public void _window_ContactChanged(object sender, ContactEventArgs e)
+        public void ContactLeave(object sender, Microsoft.Surface.Presentation.ContactEventArgs e)
         {
-            //Call helper function to create appropriate touch point and register its call back
-            _touchPoint_and_CallBack_Creator(TouchAction2.Move, e);
+            UpdateActiveTouchPoints(TouchAction2.Up, e);
         }
 
-        public void _window_ContactDown(object sender, ContactEventArgs e)
+        public void ContactChanged(object sender, Microsoft.Surface.Presentation.ContactEventArgs e)
         {
-            //Call helper function to create appropriate touch point and register its call back
-            _touchPoint_and_CallBack_Creator(TouchAction2.Down, e);
+            UpdateActiveTouchPoints(TouchAction2.Move, e);
         }
 
-        public void _touchPoint_and_CallBack_Creator(TouchAction2 action, ContactEventArgs e)
+        public void ContactDown(object sender, Microsoft.Surface.Presentation.ContactEventArgs e)
+        {
+            UpdateActiveTouchPoints(TouchAction2.Down, e);
+        }
+
+        public void UpdateActiveTouchPoints(TouchAction2 action, Microsoft.Surface.Presentation.ContactEventArgs e)
         {
             //Get the  point position from the ContactEventArgs (can optionally use e.Contact.getCenterPosition here for more accuracy)
             Point position = e.GetPosition(GestureFramework.LayoutRoot);
@@ -78,6 +116,7 @@ namespace SurfaceApplication.Providers
             info.TouchDeviceId = e.Contact.Id;
 
             TouchPoint2 touchPoint = null;
+
             //If it is contact down, we want to add the point, otherwise we want to update that particular point
             if (action == TouchAction2.Down)
             {
@@ -87,15 +126,19 @@ namespace SurfaceApplication.Providers
             else
             {
                 //add the new touch point to the base
-                base.UpdateActiveTouchPoint(info);
-
-                //work in progress, update the UpdateActiveTouchPoint 
+                touchPoint = base.UpdateActiveTouchPoint(info);
             }
 
-            //Create the call back for the single touch point
-            if (SingleTouchChanged != null)
+            // Update local cache
+            if (_activeTouchPoints.ContainsKey(info.TouchDeviceId))
             {
-                SingleTouchChanged(this, new SingleTouchEventArgs(touchPoint));
+                _activeTouchPoints[info.TouchDeviceId] = touchPoint;
+                _activeTouchInfos[info.TouchDeviceId] = info;
+            }
+            else
+            {
+                _activeTouchPoints.Add(info.TouchDeviceId, touchPoint);
+                _activeTouchInfos.Add(info.TouchDeviceId, info);
             }
         }
     }
