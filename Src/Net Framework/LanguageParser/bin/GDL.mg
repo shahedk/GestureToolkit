@@ -98,7 +98,19 @@
             | r:EnclosedArea => r
             | r:OnSameObject => r
             | r:DistanceBetweenPoints => r
-            | r:TouchPathBoundingBox =>r;
+            | r:TouchPathBoundingBox =>r
+            | r:TouchDirection =>r;
+            
+        /* Touch direction */
+         syntax TouchDirection
+            = "Touch direction" ":" d:DirectionOptions
+            =>TouchDirection{Direction=>d};
+            
+         token DirectionOptions
+            = x: "Left" =>x
+            | x: "Up" =>x
+            | x: "Down" => x
+            | x: "Right" => x;
             
         /* TouchPathBoundingBox */
          syntax TouchPathBoundingBox
@@ -236,7 +248,7 @@
         interleave AND = "and";
         interleave Space = " ";
         interleave CarriageReturn = '\u000D';
-        interleave Tab = 't';
+        interleave Tab = '\t';
         interleave ParagraphSeparator  = '\u2029';
         interleave NewLine = "\u000A";
         interleave Comment = CommentDelimited
