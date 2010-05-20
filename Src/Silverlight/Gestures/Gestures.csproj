@@ -185,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Gesture Definitions\ReadMe.txt" />
+    <None Include="Gesture Definitions\right.g" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

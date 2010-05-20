@@ -13,21 +13,17 @@ namespace Gestures.Utility
     public class TrigonometricCalculationHelper
     {
 
-        public static double GetSlopBetweenPoints(Point p1, Point p2)
+        public static double GetSlopeBetweenPoints(Point p1, Point p2)
         {
-            return GetSlopBetweenPoints(new StylusPoint(p1.X, p1.Y), new StylusPoint(p2.X, p2.Y));
+            return GetSlopeBetweenPoints(new StylusPoint(p1.X, p1.Y), new StylusPoint(p2.X, p2.Y));
         }
 
         // NOTE: The overload with 'StylusPoint' is used more frequently than the other one.
-        public static double GetSlopBetweenPoints(StylusPoint p1, StylusPoint p2)
+        public static double GetSlopeBetweenPoints(StylusPoint p1, StylusPoint p2)
         {
-            double m = (p1.Y - p2.Y) / (p1.X - p2.X);
-            double slope = Math.Atan(m) * 180 / 3.14;
-
-            //if (p1.X < p2.X)
-            //    slope += 180;
-
-            return slope;
+            double DeltaY = p2.Y - p1.Y;
+            double DeltaX = p2.X - p1.X;
+            return Math.Atan2(DeltaY, DeltaX);
         }
 
         public static double GetDistanceBetweenPoints(Point p1, Point p2)

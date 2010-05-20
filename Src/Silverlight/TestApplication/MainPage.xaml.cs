@@ -18,6 +18,8 @@ using Framework.TouchInputProviders;
 using Gestures.Feedbacks.GestureFeedbacks;
 using System.Threading;
 
+using System.Text;
+
 namespace TestApplication
 {
     public partial class MainPage : UserControl
@@ -46,7 +48,6 @@ namespace TestApplication
 
             // Load UI
             LoadImages(false);
-
         }
 
         private void LoadImages(bool randomPosition)
@@ -72,6 +73,8 @@ namespace TestApplication
                 GestureFramework.EventManager.AddEvent(img, "pinch", PinchCallback);
                 GestureFramework.EventManager.AddEvent(img, "drag", DragCallback);
                 GestureFramework.EventManager.AddEvent(img, "rotate", RotateCallback);
+                GestureFramework.EventManager.AddEvent(LayoutRoot, "left", LeftCallBack);
+                GestureFramework.EventManager.AddEvent(LayoutRoot, "right", RightCallBack);
             }
 
             // Subscribe to gesture events for the LayoutRoot
@@ -122,6 +125,33 @@ namespace TestApplication
         #endregion
 
         #region Gesture Events
+        private void RightCallBack(UIElement sender, List<IReturnType> values)
+        {  
+            foreach (var element in LayoutRoot.Children)
+            {
+                Image img = element as Image;
+                lastImageLeftPost = 50;
+                if (img != null)
+                {
+                    SetImageLocation(img, true);
+                }
+            }
+        }
+        private void LeftCallBack(UIElement sender, List<IReturnType> values)
+        {
+            double x = 50;
+            double y = 100;
+            foreach (var element in LayoutRoot.Children)
+            {
+                Image img = element as Image;
+                if (img != null)
+                {
+                    img.SetValue(Canvas.TopProperty, y);
+                    img.SetValue(Canvas.LeftProperty, x);
+                    x += 130;
+                }
+            }
+        }
         private void ZoomCallback(UIElement sender, List<IReturnType> values)
         {
             var dis = values.Get<DistanceChanged>();
