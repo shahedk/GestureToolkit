@@ -25,13 +25,13 @@ namespace Gestures.ReturnTypes
                 throw new InvalidDataSetException("Slope can only be calculated for two touch points!");
 
             // Calculate current slope
-            sc.NewSlope = TrigonometricCalculationHelper.GetSlopBetweenPoints(set[0].Position, set[1].Position);
+            sc.NewSlope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(set[0].Position, set[1].Position);
 
             // Check if enough history data is available
             if (set[0].Stroke.StylusPoints.Count > 1 && set[1].Stroke.StylusPoints.Count > 1)
             {
                 // Calculate slope for last position
-                double prevSlope = TrigonometricCalculationHelper.GetSlopBetweenPoints(
+                double prevSlope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(
                     set[0].Stroke.StylusPoints[set[0].Stroke.StylusPoints.Count - 2],
                     set[1].Stroke.StylusPoints[set[1].Stroke.StylusPoints.Count - 2]);
 
