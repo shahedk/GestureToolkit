@@ -42,10 +42,22 @@ namespace Gestures.Rules.RuleValidators
 
                 int length = point.Stroke.StylusPoints.Count;
                 bool result = true;
-                for (int i = 0; i + 1 < length; i++)
+                int step = 6;
+                for (int i = 0; i + step < length; i = i + step)
                 {
-                    double slope = TrigonometricCalculationHelper.GetSlopBetweenPoints(point.Stroke.StylusPoints[i], point.Stroke.StylusPoints[i + 1]);
-                    if (!SlopeToDirection(slope).Equals(_data.Values))
+                    string debug = point.Stroke.StylusPoints[i].X + " "
+                        + point.Stroke.StylusPoints[i].Y + " "
+                        + point.Stroke.StylusPoints[i + step].X + " "
+                        + point.Stroke.StylusPoints[i + step].Y + " ";
+                    System.Diagnostics.Debug.WriteLine(debug);
+
+                    double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point.Stroke.StylusPoints[i], 
+                        point.Stroke.StylusPoints[i + step]);
+                    String stringSlope = SlopeToDirection(slope);
+
+                    string debug2 = slope + " " + stringSlope;
+                    System.Diagnostics.Debug.WriteLine(debug2);
+                    if (!stringSlope.Equals(_data.Values))
                     {
                         result = false;
                     }
@@ -83,49 +95,48 @@ namespace Gestures.Rules.RuleValidators
             throw new NotImplementedException();
         }
 
-        private double FindSlope(TouchPoint2 pointa, TouchPoint2 pointb)
-        {
-            double DeltaY = pointb.Position.Y - pointa.Position.Y;
-            double DeltaX = pointb.Position.X - pointa.Position.X;
-            return Math.Atan2(DeltaY, DeltaX);
-        }
-
         private String SlopeToDirection(double slope)
         {
             String direction = "";
 
-            if (slope >= 15 * Math.PI / 8 && slope <= Math.PI / 8)
+            slope = slope % (Math.PI);
+
+            if ( (slope >= 0 && slope < Math.PI / 8) ||
+                (slope >= -Math.PI / 8 && slope < 0) )
             {
                 direction = "Right";
             }
-            else if (slope > Math.PI / 8 && slope < 3 * Math.PI / 8)
+            else if (slope >= Math.PI / 8 && slope < 3 * Math.PI / 8)
             {
                 direction = "UpRight";
             }
-            else if (slope >= 3 * Math.PI / 8 && slope <= 5 * Math.PI / 8)
+            else if (slope >= 3 * Math.PI / 8 && slope < 5 * Math.PI / 8)
             {
                 direction = "Up";
             }
-            else if (slope > 5 * Math.PI / 8 && slope < 7 * Math.PI / 8)
+            else if (slope >= 5 * Math.PI / 8 && slope < 7 * Math.PI / 8)
             {
                 direction = "UpLeft";
             }
-            else if (slope >= 7 * Math.PI / 8 && slope <= 9 * Math.PI / 8)
+            else if ( (slope >= 7 * Math.PI / 8 && slope <=  Math.PI) ||
+                (slope >= -Math.PI && slope < -7 * Math.PI/8) )
             {
                 direction = "Left";
             }
-            else if (slope > 9 * Math.PI / 8 && slope < 11 * Math.PI / 8)
+            else if (slope >= -7 * Math.PI / 8 && slope < -5 * Math.PI / 8)
             {
                 direction = "DownLeft";
             }
-            else if (slope >= 11 * Math.PI / 8 && slope <= 13 * Math.PI / 8)
+            else if (slope >= -5 * Math.PI / 8 && slope < -3 * Math.PI / 8)
             {
                 direction = "Down";
             }
-            else if (slope > 13 * Math.PI / 8 && slope < 15 * Math.PI / 8)
+            else if (slope >= -3 * Math.PI / 8 && slope <= -1 * Math.PI / 8)
             {
                 direction = "DownRight";
             }
+            string debug = direction + " " + slope;
+//            System.Diagnostics.Debug.WriteLine(debug);
             return direction;
         }
 
