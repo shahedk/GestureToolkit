@@ -29,11 +29,35 @@ namespace Gestures.Rules.Objects
             //       that would make gestures dependent on Screen Orentation/position
         }
 
+        private String _values;
+        public String Values
+        {
+            get
+            {
+                return _values;
+            }
+            set
+            {
+                _values = value;
+            }
+        }
+
+
         #region IRuleData Members
 
         public bool Equals(IRuleData rule)
         {
-            throw new NotImplementedException();
+            if (!(rule is TouchDirection))
+            {
+                throw new Exception("Wrong Type Exception");
+            }
+            if (rule == null)
+            {
+                throw new Exception("Null Input Exception");
+            }
+            TouchDirection directionRule = rule as TouchDirection;
+
+            return directionRule.Values.Equals( this.Values );
         }
 
         #endregion
@@ -47,7 +71,7 @@ namespace Gestures.Rules.Objects
 
         public string ToGDL()
         {
-            throw new NotImplementedException();
+            return this.Values;
         }
     }
 }
