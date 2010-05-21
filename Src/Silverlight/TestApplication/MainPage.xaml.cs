@@ -126,32 +126,17 @@ namespace TestApplication
 
         #region Gesture Events
         private void RightCallBack(UIElement sender, List<IReturnType> values)
-        {  
-            foreach (var element in LayoutRoot.Children)
-            {
-                Image img = element as Image;
-                lastImageLeftPost = 50;
-                if (img != null)
-                {
-                    SetImageLocation(img, true);
-                }
-            }
+        {
+            Thread t = new Thread(Scatter);
+            t.Start();
+            
         }
         private void LeftCallBack(UIElement sender, List<IReturnType> values)
         {
-            double x = 50;
-            double y = 100;
-            foreach (var element in LayoutRoot.Children)
-            {
-                Image img = element as Image;
-                if (img != null)
-                {
-                    img.SetValue(Canvas.TopProperty, y);
-                    img.SetValue(Canvas.LeftProperty, x);
-                    x += 130;
-                }
-            }
+            Thread t = new Thread(Revert);
+            t.Start();
         }
+
         private void ZoomCallback(UIElement sender, List<IReturnType> values)
         {
             var dis = values.Get<DistanceChanged>();
@@ -313,6 +298,44 @@ namespace TestApplication
                 LayoutRoot.Children.Remove(selectedArea);
             };
 
+            Dispatcher.BeginInvoke(action);
+        }
+
+        private void Scatter()
+        {
+            Thread.Sleep(105);
+            Action action = () =>
+            {
+                foreach (var element in LayoutRoot.Children)
+                {
+                    Image img = element as Image;
+                    lastImageLeftPost = 50;
+                    if (img != null)
+                    {
+                        SetImageLocation(img, true);
+                    }
+                }
+            };
+            Dispatcher.BeginInvoke(action);
+        }
+        private void Revert()
+        {
+            Thread.Sleep(105);
+            Action action = () =>
+            {
+                double x = 50;
+                double y = 100;
+                foreach (var element in LayoutRoot.Children)
+                {
+                    Image img = element as Image;
+                    if (img != null)
+                    {
+                        img.SetValue(Canvas.TopProperty, y);
+                        img.SetValue(Canvas.LeftProperty, x);
+                        x += 130;
+                    }
+                }
+            };
             Dispatcher.BeginInvoke(action);
         }
         #endregion
