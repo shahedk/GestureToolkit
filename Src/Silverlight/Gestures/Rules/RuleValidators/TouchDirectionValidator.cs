@@ -45,18 +45,10 @@ namespace Gestures.Rules.RuleValidators
                 int step = 6;
                 for (int i = 0; i + step < length; i = i + step)
                 {
-                    string debug = point.Stroke.StylusPoints[i].X + " "
-                        + point.Stroke.StylusPoints[i].Y + " "
-                        + point.Stroke.StylusPoints[i + step].X + " "
-                        + point.Stroke.StylusPoints[i + step].Y + " ";
-                    System.Diagnostics.Debug.WriteLine(debug);
-
                     double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point.Stroke.StylusPoints[i], 
                         point.Stroke.StylusPoints[i + step]);
                     String stringSlope = SlopeToDirection(slope);
 
-                    string debug2 = slope + " " + stringSlope;
-                    System.Diagnostics.Debug.WriteLine(debug2);
                     if (!stringSlope.Equals(_data.Values))
                     {
                         result = false;
@@ -101,8 +93,8 @@ namespace Gestures.Rules.RuleValidators
 
             slope = slope % (Math.PI);
 
-            if ( (slope >= 0 && slope < Math.PI / 8) ||
-                (slope >= -Math.PI / 8 && slope < 0) )
+            if ( (slope >= 0.01 && slope < Math.PI / 8) ||
+                (slope >= -Math.PI / 8 && slope < -0.01) )
             {
                 direction = "Right";
             }
@@ -119,7 +111,7 @@ namespace Gestures.Rules.RuleValidators
                 direction = "UpLeft";
             }
             else if ( (slope >= 7 * Math.PI / 8 && slope <=  Math.PI) ||
-                (slope >= -Math.PI && slope < -7 * Math.PI/8) )
+                (slope >= -Math.PI && slope < -7 * Math.PI/8) || slope == 0)
             {
                 direction = "Left";
             }
@@ -135,8 +127,6 @@ namespace Gestures.Rules.RuleValidators
             {
                 direction = "DownRight";
             }
-            string debug = direction + " " + slope;
-//            System.Diagnostics.Debug.WriteLine(debug);
             return direction;
         }
 
