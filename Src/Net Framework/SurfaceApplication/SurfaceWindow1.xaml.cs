@@ -36,7 +36,7 @@ namespace SurfaceApplication
             InitializeComponent();
             this.Loaded += new RoutedEventHandler(SurfaceWindow1_Loaded);
 
-            // Add handlers for Application activation events
+            //Add handlers for Application activation events
             AddActivationHandlers();
         }
 
