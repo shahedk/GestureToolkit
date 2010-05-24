@@ -17,7 +17,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ProjectInfo", Namespace="http://labs.shahed.net/")]
     [System.SerializableAttribute()]
-    public partial class ProjectInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    internal partial class ProjectInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -39,7 +39,7 @@ namespace Framework.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string ProjectName {
+        internal string ProjectName {
             get {
                 return this.ProjectNameField;
             }
@@ -52,7 +52,7 @@ namespace Framework.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public Framework.DataService.ArrayOfString GestureNames {
+        internal Framework.DataService.ArrayOfString GestureNames {
             get {
                 return this.GestureNamesField;
             }
@@ -78,45 +78,80 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfString", Namespace="http://labs.shahed.net/", ItemName="string")]
     [System.SerializableAttribute()]
-    public class ArrayOfString : System.Collections.Generic.List<string> {
+    internal class ArrayOfString : System.Collections.Generic.List<string> {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://labs.shahed.net/", ConfigurationName="DataService.GestureServiceSoap")]
-    public interface GestureServiceSoap {
+    internal interface GestureServiceSoap {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/ConnectivityCheck", ReplyAction="*")]
         bool ConnectivityCheck();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/ConnectivityCheck", ReplyAction="*")]
+        System.IAsyncResult BeginConnectivityCheck(System.AsyncCallback callback, object asyncState);
+        
+        bool EndConnectivityCheck(System.IAsyncResult result);
         
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/AddGestureData", ReplyAction="*")]
         Framework.DataService.AddGestureDataResponse AddGestureData(Framework.DataService.AddGestureDataRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/AddGestureData", ReplyAction="*")]
+        System.IAsyncResult BeginAddGestureData(Framework.DataService.AddGestureDataRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Framework.DataService.AddGestureDataResponse EndAddGestureData(System.IAsyncResult result);
+        
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/GetProjectsByUser", ReplyAction="*")]
         Framework.DataService.GetProjectsByUserResponse GetProjectsByUser(Framework.DataService.GetProjectsByUserRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/GetProjectsByUser", ReplyAction="*")]
+        System.IAsyncResult BeginGetProjectsByUser(Framework.DataService.GetProjectsByUserRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Framework.DataService.GetProjectsByUserResponse EndGetProjectsByUser(System.IAsyncResult result);
         
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/GetGestureData", ReplyAction="*")]
         Framework.DataService.GetGestureDataResponse GetGestureData(Framework.DataService.GetGestureDataRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/GetGestureData", ReplyAction="*")]
+        System.IAsyncResult BeginGetGestureData(Framework.DataService.GetGestureDataRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Framework.DataService.GetGestureDataResponse EndGetGestureData(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/Delete", ReplyAction="*")]
         void Delete(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/Delete", ReplyAction="*")]
+        System.IAsyncResult BeginDelete(int id, System.AsyncCallback callback, object asyncState);
+        
+        void EndDelete(System.IAsyncResult result);
         
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/IsUserNameUnique", ReplyAction="*")]
         Framework.DataService.IsUserNameUniqueResponse IsUserNameUnique(Framework.DataService.IsUserNameUniqueRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/IsUserNameUnique", ReplyAction="*")]
+        System.IAsyncResult BeginIsUserNameUnique(Framework.DataService.IsUserNameUniqueRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Framework.DataService.IsUserNameUniqueResponse EndIsUserNameUnique(System.IAsyncResult result);
+        
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/LastUpdatedAt", ReplyAction="*")]
         Framework.DataService.LastUpdatedAtResponse LastUpdatedAt(Framework.DataService.LastUpdatedAtRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/LastUpdatedAt", ReplyAction="*")]
+        System.IAsyncResult BeginLastUpdatedAt(Framework.DataService.LastUpdatedAtRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Framework.DataService.LastUpdatedAtResponse EndLastUpdatedAt(System.IAsyncResult result);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class AddGestureDataRequest {
+    internal partial class AddGestureDataRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AddGestureData", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.AddGestureDataRequestBody Body;
@@ -133,7 +168,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class AddGestureDataRequestBody {
+    internal partial class AddGestureDataRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string userName;
@@ -162,7 +197,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class AddGestureDataResponse {
+    internal partial class AddGestureDataResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AddGestureDataResponse", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.AddGestureDataResponseBody Body;
@@ -179,7 +214,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class AddGestureDataResponseBody {
+    internal partial class AddGestureDataResponseBody {
         
         public AddGestureDataResponseBody() {
         }
@@ -189,7 +224,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetProjectsByUserRequest {
+    internal partial class GetProjectsByUserRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetProjectsByUser", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.GetProjectsByUserRequestBody Body;
@@ -206,7 +241,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class GetProjectsByUserRequestBody {
+    internal partial class GetProjectsByUserRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string userName;
@@ -223,7 +258,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetProjectsByUserResponse {
+    internal partial class GetProjectsByUserResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetProjectsByUserResponse", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.GetProjectsByUserResponseBody Body;
@@ -240,7 +275,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class GetProjectsByUserResponseBody {
+    internal partial class GetProjectsByUserResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public Framework.DataService.ProjectInfo[] GetProjectsByUserResult;
@@ -257,7 +292,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetGestureDataRequest {
+    internal partial class GetGestureDataRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetGestureData", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.GetGestureDataRequestBody Body;
@@ -274,7 +309,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class GetGestureDataRequestBody {
+    internal partial class GetGestureDataRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string userName;
@@ -299,7 +334,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetGestureDataResponse {
+    internal partial class GetGestureDataResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetGestureDataResponse", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.GetGestureDataResponseBody Body;
@@ -316,7 +351,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class GetGestureDataResponseBody {
+    internal partial class GetGestureDataResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string GetGestureDataResult;
@@ -333,7 +368,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class IsUserNameUniqueRequest {
+    internal partial class IsUserNameUniqueRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUserNameUnique", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.IsUserNameUniqueRequestBody Body;
@@ -350,7 +385,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class IsUserNameUniqueRequestBody {
+    internal partial class IsUserNameUniqueRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string userName;
@@ -367,7 +402,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class IsUserNameUniqueResponse {
+    internal partial class IsUserNameUniqueResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUserNameUniqueResponse", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.IsUserNameUniqueResponseBody Body;
@@ -384,7 +419,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class IsUserNameUniqueResponseBody {
+    internal partial class IsUserNameUniqueResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
         public bool IsUserNameUniqueResult;
@@ -401,7 +436,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class LastUpdatedAtRequest {
+    internal partial class LastUpdatedAtRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="LastUpdatedAt", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.LastUpdatedAtRequestBody Body;
@@ -418,7 +453,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class LastUpdatedAtRequestBody {
+    internal partial class LastUpdatedAtRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string userName;
@@ -435,7 +470,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class LastUpdatedAtResponse {
+    internal partial class LastUpdatedAtResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="LastUpdatedAtResponse", Namespace="http://labs.shahed.net/", Order=0)]
         public Framework.DataService.LastUpdatedAtResponseBody Body;
@@ -452,7 +487,7 @@ namespace Framework.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
-    public partial class LastUpdatedAtResponseBody {
+    internal partial class LastUpdatedAtResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
         public System.DateTime LastUpdatedAtResult;
@@ -466,12 +501,149 @@ namespace Framework.DataService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface GestureServiceSoapChannel : Framework.DataService.GestureServiceSoap, System.ServiceModel.IClientChannel {
+    internal interface GestureServiceSoapChannel : Framework.DataService.GestureServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GestureServiceSoapClient : System.ServiceModel.ClientBase<Framework.DataService.GestureServiceSoap>, Framework.DataService.GestureServiceSoap {
+    internal partial class ConnectivityCheckCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ConnectivityCheckCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    internal partial class GetProjectsByUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetProjectsByUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public Framework.DataService.ProjectInfo[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((Framework.DataService.ProjectInfo[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    internal partial class GetGestureDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetGestureDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    internal partial class IsUserNameUniqueCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public IsUserNameUniqueCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    internal partial class LastUpdatedAtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public LastUpdatedAtCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.DateTime Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.DateTime)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    internal partial class GestureServiceSoapClient : System.ServiceModel.ClientBase<Framework.DataService.GestureServiceSoap>, Framework.DataService.GestureServiceSoap {
+        
+        private BeginOperationDelegate onBeginConnectivityCheckDelegate;
+        
+        private EndOperationDelegate onEndConnectivityCheckDelegate;
+        
+        private System.Threading.SendOrPostCallback onConnectivityCheckCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginAddGestureDataDelegate;
+        
+        private EndOperationDelegate onEndAddGestureDataDelegate;
+        
+        private System.Threading.SendOrPostCallback onAddGestureDataCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetProjectsByUserDelegate;
+        
+        private EndOperationDelegate onEndGetProjectsByUserDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetProjectsByUserCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetGestureDataDelegate;
+        
+        private EndOperationDelegate onEndGetGestureDataDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetGestureDataCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDeleteDelegate;
+        
+        private EndOperationDelegate onEndDeleteDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeleteCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginIsUserNameUniqueDelegate;
+        
+        private EndOperationDelegate onEndIsUserNameUniqueDelegate;
+        
+        private System.Threading.SendOrPostCallback onIsUserNameUniqueCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginLastUpdatedAtDelegate;
+        
+        private EndOperationDelegate onEndLastUpdatedAtDelegate;
+        
+        private System.Threading.SendOrPostCallback onLastUpdatedAtCompletedDelegate;
         
         public GestureServiceSoapClient() {
         }
@@ -492,8 +664,66 @@ namespace Framework.DataService {
                 base(binding, remoteAddress) {
         }
         
+        public event System.EventHandler<ConnectivityCheckCompletedEventArgs> ConnectivityCheckCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> AddGestureDataCompleted;
+        
+        public event System.EventHandler<GetProjectsByUserCompletedEventArgs> GetProjectsByUserCompleted;
+        
+        public event System.EventHandler<GetGestureDataCompletedEventArgs> GetGestureDataCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeleteCompleted;
+        
+        public event System.EventHandler<IsUserNameUniqueCompletedEventArgs> IsUserNameUniqueCompleted;
+        
+        public event System.EventHandler<LastUpdatedAtCompletedEventArgs> LastUpdatedAtCompleted;
+        
         public bool ConnectivityCheck() {
             return base.Channel.ConnectivityCheck();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginConnectivityCheck(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginConnectivityCheck(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public bool EndConnectivityCheck(System.IAsyncResult result) {
+            return base.Channel.EndConnectivityCheck(result);
+        }
+        
+        private System.IAsyncResult OnBeginConnectivityCheck(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginConnectivityCheck(callback, asyncState);
+        }
+        
+        private object[] OnEndConnectivityCheck(System.IAsyncResult result) {
+            bool retVal = this.EndConnectivityCheck(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnConnectivityCheckCompleted(object state) {
+            if ((this.ConnectivityCheckCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ConnectivityCheckCompleted(this, new ConnectivityCheckCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ConnectivityCheckAsync() {
+            this.ConnectivityCheckAsync(null);
+        }
+        
+        public void ConnectivityCheckAsync(object userState) {
+            if ((this.onBeginConnectivityCheckDelegate == null)) {
+                this.onBeginConnectivityCheckDelegate = new BeginOperationDelegate(this.OnBeginConnectivityCheck);
+            }
+            if ((this.onEndConnectivityCheckDelegate == null)) {
+                this.onEndConnectivityCheckDelegate = new EndOperationDelegate(this.OnEndConnectivityCheck);
+            }
+            if ((this.onConnectivityCheckCompletedDelegate == null)) {
+                this.onConnectivityCheckCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnConnectivityCheckCompleted);
+            }
+            base.InvokeAsync(this.onBeginConnectivityCheckDelegate, null, this.onEndConnectivityCheckDelegate, this.onConnectivityCheckCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -512,6 +742,73 @@ namespace Framework.DataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginAddGestureData(Framework.DataService.AddGestureDataRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginAddGestureData(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginAddGestureData(string userName, string projectName, string gestureName, string gestureData, System.AsyncCallback callback, object asyncState) {
+            Framework.DataService.AddGestureDataRequest inValue = new Framework.DataService.AddGestureDataRequest();
+            inValue.Body = new Framework.DataService.AddGestureDataRequestBody();
+            inValue.Body.userName = userName;
+            inValue.Body.projectName = projectName;
+            inValue.Body.gestureName = gestureName;
+            inValue.Body.gestureData = gestureData;
+            return ((Framework.DataService.GestureServiceSoap)(this)).BeginAddGestureData(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Framework.DataService.AddGestureDataResponse Framework.DataService.GestureServiceSoap.EndAddGestureData(System.IAsyncResult result) {
+            return base.Channel.EndAddGestureData(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndAddGestureData(System.IAsyncResult result) {
+            Framework.DataService.AddGestureDataResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndAddGestureData(result);
+        }
+        
+        private System.IAsyncResult OnBeginAddGestureData(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userName = ((string)(inValues[0]));
+            string projectName = ((string)(inValues[1]));
+            string gestureName = ((string)(inValues[2]));
+            string gestureData = ((string)(inValues[3]));
+            return this.BeginAddGestureData(userName, projectName, gestureName, gestureData, callback, asyncState);
+        }
+        
+        private object[] OnEndAddGestureData(System.IAsyncResult result) {
+            this.EndAddGestureData(result);
+            return null;
+        }
+        
+        private void OnAddGestureDataCompleted(object state) {
+            if ((this.AddGestureDataCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.AddGestureDataCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void AddGestureDataAsync(string userName, string projectName, string gestureName, string gestureData) {
+            this.AddGestureDataAsync(userName, projectName, gestureName, gestureData, null);
+        }
+        
+        public void AddGestureDataAsync(string userName, string projectName, string gestureName, string gestureData, object userState) {
+            if ((this.onBeginAddGestureDataDelegate == null)) {
+                this.onBeginAddGestureDataDelegate = new BeginOperationDelegate(this.OnBeginAddGestureData);
+            }
+            if ((this.onEndAddGestureDataDelegate == null)) {
+                this.onEndAddGestureDataDelegate = new EndOperationDelegate(this.OnEndAddGestureData);
+            }
+            if ((this.onAddGestureDataCompletedDelegate == null)) {
+                this.onAddGestureDataCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnAddGestureDataCompleted);
+            }
+            base.InvokeAsync(this.onBeginAddGestureDataDelegate, new object[] {
+                        userName,
+                        projectName,
+                        gestureName,
+                        gestureData}, this.onEndAddGestureDataDelegate, this.onAddGestureDataCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Framework.DataService.GetProjectsByUserResponse Framework.DataService.GestureServiceSoap.GetProjectsByUser(Framework.DataService.GetProjectsByUserRequest request) {
             return base.Channel.GetProjectsByUser(request);
         }
@@ -522,6 +819,66 @@ namespace Framework.DataService {
             inValue.Body.userName = userName;
             Framework.DataService.GetProjectsByUserResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).GetProjectsByUser(inValue);
             return retVal.Body.GetProjectsByUserResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginGetProjectsByUser(Framework.DataService.GetProjectsByUserRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetProjectsByUser(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetProjectsByUser(string userName, System.AsyncCallback callback, object asyncState) {
+            Framework.DataService.GetProjectsByUserRequest inValue = new Framework.DataService.GetProjectsByUserRequest();
+            inValue.Body = new Framework.DataService.GetProjectsByUserRequestBody();
+            inValue.Body.userName = userName;
+            return ((Framework.DataService.GestureServiceSoap)(this)).BeginGetProjectsByUser(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Framework.DataService.GetProjectsByUserResponse Framework.DataService.GestureServiceSoap.EndGetProjectsByUser(System.IAsyncResult result) {
+            return base.Channel.EndGetProjectsByUser(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public Framework.DataService.ProjectInfo[] EndGetProjectsByUser(System.IAsyncResult result) {
+            Framework.DataService.GetProjectsByUserResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndGetProjectsByUser(result);
+            return retVal.Body.GetProjectsByUserResult;
+        }
+        
+        private System.IAsyncResult OnBeginGetProjectsByUser(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userName = ((string)(inValues[0]));
+            return this.BeginGetProjectsByUser(userName, callback, asyncState);
+        }
+        
+        private object[] OnEndGetProjectsByUser(System.IAsyncResult result) {
+            Framework.DataService.ProjectInfo[] retVal = this.EndGetProjectsByUser(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetProjectsByUserCompleted(object state) {
+            if ((this.GetProjectsByUserCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetProjectsByUserCompleted(this, new GetProjectsByUserCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetProjectsByUserAsync(string userName) {
+            this.GetProjectsByUserAsync(userName, null);
+        }
+        
+        public void GetProjectsByUserAsync(string userName, object userState) {
+            if ((this.onBeginGetProjectsByUserDelegate == null)) {
+                this.onBeginGetProjectsByUserDelegate = new BeginOperationDelegate(this.OnBeginGetProjectsByUser);
+            }
+            if ((this.onEndGetProjectsByUserDelegate == null)) {
+                this.onEndGetProjectsByUserDelegate = new EndOperationDelegate(this.OnEndGetProjectsByUser);
+            }
+            if ((this.onGetProjectsByUserCompletedDelegate == null)) {
+                this.onGetProjectsByUserCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetProjectsByUserCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetProjectsByUserDelegate, new object[] {
+                        userName}, this.onEndGetProjectsByUserDelegate, this.onGetProjectsByUserCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -539,8 +896,119 @@ namespace Framework.DataService {
             return retVal.Body.GetGestureDataResult;
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginGetGestureData(Framework.DataService.GetGestureDataRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetGestureData(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetGestureData(string userName, string projectName, string gestureName, System.AsyncCallback callback, object asyncState) {
+            Framework.DataService.GetGestureDataRequest inValue = new Framework.DataService.GetGestureDataRequest();
+            inValue.Body = new Framework.DataService.GetGestureDataRequestBody();
+            inValue.Body.userName = userName;
+            inValue.Body.projectName = projectName;
+            inValue.Body.gestureName = gestureName;
+            return ((Framework.DataService.GestureServiceSoap)(this)).BeginGetGestureData(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Framework.DataService.GetGestureDataResponse Framework.DataService.GestureServiceSoap.EndGetGestureData(System.IAsyncResult result) {
+            return base.Channel.EndGetGestureData(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndGetGestureData(System.IAsyncResult result) {
+            Framework.DataService.GetGestureDataResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndGetGestureData(result);
+            return retVal.Body.GetGestureDataResult;
+        }
+        
+        private System.IAsyncResult OnBeginGetGestureData(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userName = ((string)(inValues[0]));
+            string projectName = ((string)(inValues[1]));
+            string gestureName = ((string)(inValues[2]));
+            return this.BeginGetGestureData(userName, projectName, gestureName, callback, asyncState);
+        }
+        
+        private object[] OnEndGetGestureData(System.IAsyncResult result) {
+            string retVal = this.EndGetGestureData(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetGestureDataCompleted(object state) {
+            if ((this.GetGestureDataCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetGestureDataCompleted(this, new GetGestureDataCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetGestureDataAsync(string userName, string projectName, string gestureName) {
+            this.GetGestureDataAsync(userName, projectName, gestureName, null);
+        }
+        
+        public void GetGestureDataAsync(string userName, string projectName, string gestureName, object userState) {
+            if ((this.onBeginGetGestureDataDelegate == null)) {
+                this.onBeginGetGestureDataDelegate = new BeginOperationDelegate(this.OnBeginGetGestureData);
+            }
+            if ((this.onEndGetGestureDataDelegate == null)) {
+                this.onEndGetGestureDataDelegate = new EndOperationDelegate(this.OnEndGetGestureData);
+            }
+            if ((this.onGetGestureDataCompletedDelegate == null)) {
+                this.onGetGestureDataCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetGestureDataCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetGestureDataDelegate, new object[] {
+                        userName,
+                        projectName,
+                        gestureName}, this.onEndGetGestureDataDelegate, this.onGetGestureDataCompletedDelegate, userState);
+        }
+        
         public void Delete(int id) {
             base.Channel.Delete(id);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginDelete(int id, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDelete(id, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndDelete(System.IAsyncResult result) {
+            base.Channel.EndDelete(result);
+        }
+        
+        private System.IAsyncResult OnBeginDelete(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int id = ((int)(inValues[0]));
+            return this.BeginDelete(id, callback, asyncState);
+        }
+        
+        private object[] OnEndDelete(System.IAsyncResult result) {
+            this.EndDelete(result);
+            return null;
+        }
+        
+        private void OnDeleteCompleted(object state) {
+            if ((this.DeleteCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeleteCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeleteAsync(int id) {
+            this.DeleteAsync(id, null);
+        }
+        
+        public void DeleteAsync(int id, object userState) {
+            if ((this.onBeginDeleteDelegate == null)) {
+                this.onBeginDeleteDelegate = new BeginOperationDelegate(this.OnBeginDelete);
+            }
+            if ((this.onEndDeleteDelegate == null)) {
+                this.onEndDeleteDelegate = new EndOperationDelegate(this.OnEndDelete);
+            }
+            if ((this.onDeleteCompletedDelegate == null)) {
+                this.onDeleteCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeleteCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeleteDelegate, new object[] {
+                        id}, this.onEndDeleteDelegate, this.onDeleteCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -557,6 +1025,66 @@ namespace Framework.DataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginIsUserNameUnique(Framework.DataService.IsUserNameUniqueRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginIsUserNameUnique(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginIsUserNameUnique(string userName, System.AsyncCallback callback, object asyncState) {
+            Framework.DataService.IsUserNameUniqueRequest inValue = new Framework.DataService.IsUserNameUniqueRequest();
+            inValue.Body = new Framework.DataService.IsUserNameUniqueRequestBody();
+            inValue.Body.userName = userName;
+            return ((Framework.DataService.GestureServiceSoap)(this)).BeginIsUserNameUnique(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Framework.DataService.IsUserNameUniqueResponse Framework.DataService.GestureServiceSoap.EndIsUserNameUnique(System.IAsyncResult result) {
+            return base.Channel.EndIsUserNameUnique(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public bool EndIsUserNameUnique(System.IAsyncResult result) {
+            Framework.DataService.IsUserNameUniqueResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndIsUserNameUnique(result);
+            return retVal.Body.IsUserNameUniqueResult;
+        }
+        
+        private System.IAsyncResult OnBeginIsUserNameUnique(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userName = ((string)(inValues[0]));
+            return this.BeginIsUserNameUnique(userName, callback, asyncState);
+        }
+        
+        private object[] OnEndIsUserNameUnique(System.IAsyncResult result) {
+            bool retVal = this.EndIsUserNameUnique(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnIsUserNameUniqueCompleted(object state) {
+            if ((this.IsUserNameUniqueCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.IsUserNameUniqueCompleted(this, new IsUserNameUniqueCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void IsUserNameUniqueAsync(string userName) {
+            this.IsUserNameUniqueAsync(userName, null);
+        }
+        
+        public void IsUserNameUniqueAsync(string userName, object userState) {
+            if ((this.onBeginIsUserNameUniqueDelegate == null)) {
+                this.onBeginIsUserNameUniqueDelegate = new BeginOperationDelegate(this.OnBeginIsUserNameUnique);
+            }
+            if ((this.onEndIsUserNameUniqueDelegate == null)) {
+                this.onEndIsUserNameUniqueDelegate = new EndOperationDelegate(this.OnEndIsUserNameUnique);
+            }
+            if ((this.onIsUserNameUniqueCompletedDelegate == null)) {
+                this.onIsUserNameUniqueCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnIsUserNameUniqueCompleted);
+            }
+            base.InvokeAsync(this.onBeginIsUserNameUniqueDelegate, new object[] {
+                        userName}, this.onEndIsUserNameUniqueDelegate, this.onIsUserNameUniqueCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Framework.DataService.LastUpdatedAtResponse Framework.DataService.GestureServiceSoap.LastUpdatedAt(Framework.DataService.LastUpdatedAtRequest request) {
             return base.Channel.LastUpdatedAt(request);
         }
@@ -567,6 +1095,66 @@ namespace Framework.DataService {
             inValue.Body.userName = userName;
             Framework.DataService.LastUpdatedAtResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).LastUpdatedAt(inValue);
             return retVal.Body.LastUpdatedAtResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginLastUpdatedAt(Framework.DataService.LastUpdatedAtRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginLastUpdatedAt(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginLastUpdatedAt(string userName, System.AsyncCallback callback, object asyncState) {
+            Framework.DataService.LastUpdatedAtRequest inValue = new Framework.DataService.LastUpdatedAtRequest();
+            inValue.Body = new Framework.DataService.LastUpdatedAtRequestBody();
+            inValue.Body.userName = userName;
+            return ((Framework.DataService.GestureServiceSoap)(this)).BeginLastUpdatedAt(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Framework.DataService.LastUpdatedAtResponse Framework.DataService.GestureServiceSoap.EndLastUpdatedAt(System.IAsyncResult result) {
+            return base.Channel.EndLastUpdatedAt(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.DateTime EndLastUpdatedAt(System.IAsyncResult result) {
+            Framework.DataService.LastUpdatedAtResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndLastUpdatedAt(result);
+            return retVal.Body.LastUpdatedAtResult;
+        }
+        
+        private System.IAsyncResult OnBeginLastUpdatedAt(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userName = ((string)(inValues[0]));
+            return this.BeginLastUpdatedAt(userName, callback, asyncState);
+        }
+        
+        private object[] OnEndLastUpdatedAt(System.IAsyncResult result) {
+            System.DateTime retVal = this.EndLastUpdatedAt(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnLastUpdatedAtCompleted(object state) {
+            if ((this.LastUpdatedAtCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.LastUpdatedAtCompleted(this, new LastUpdatedAtCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void LastUpdatedAtAsync(string userName) {
+            this.LastUpdatedAtAsync(userName, null);
+        }
+        
+        public void LastUpdatedAtAsync(string userName, object userState) {
+            if ((this.onBeginLastUpdatedAtDelegate == null)) {
+                this.onBeginLastUpdatedAtDelegate = new BeginOperationDelegate(this.OnBeginLastUpdatedAt);
+            }
+            if ((this.onEndLastUpdatedAtDelegate == null)) {
+                this.onEndLastUpdatedAtDelegate = new EndOperationDelegate(this.OnEndLastUpdatedAt);
+            }
+            if ((this.onLastUpdatedAtCompletedDelegate == null)) {
+                this.onLastUpdatedAtCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnLastUpdatedAtCompleted);
+            }
+            base.InvokeAsync(this.onBeginLastUpdatedAtDelegate, new object[] {
+                        userName}, this.onEndLastUpdatedAtDelegate, this.onLastUpdatedAtCompletedDelegate, userState);
         }
     }
 }

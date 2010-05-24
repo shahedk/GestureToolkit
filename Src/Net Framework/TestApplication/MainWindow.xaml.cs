@@ -42,16 +42,16 @@ namespace TestApplication
             GestureFramework.EventManager.AddEvent(rectangle, "Drag", DragCallback);
         }
 
-        public void DragCallback(object sender, List<IReturnType> values)
+        public void DragCallback(object sender, GestureEventArgs e)
         {
-            PositionChanged posChanged = values.Get<PositionChanged>();
+            PositionChanged posChanged = e.Values.Get<PositionChanged>();
 
             MoveItem(sender as Rectangle, posChanged);
         }
 
-        public void ResizeCallback(object sender, List<IReturnType> values)
+        public void ResizeCallback(object sender, GestureEventArgs e)
         {
-            var distanceChanged = values.Get<DistanceChanged>();
+            var distanceChanged = e.Values.Get<DistanceChanged>();
 
             messageTextBlock.Text = distanceChanged.Delta.ToString();
 

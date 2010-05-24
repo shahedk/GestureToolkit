@@ -67,6 +67,15 @@
     <Compile Include="..\..\Silverlight\Framework\GestureLanguageProcessor.cs">
       <Link>GestureLanguageProcessor.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Framework\Storage\Delegates.cs">
+      <Link>Storage\Delegates.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Framework\Storage\IDataStorage.cs">
+      <Link>Storage\IDataStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Framework\Storage\StorageManager.cs">
+      <Link>Storage\StorageManager.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Framework\TouchInputManager.cs">
       <Link>TouchInputManager.cs</Link>
     </Compile>
@@ -106,11 +115,22 @@
     <Compile Include="..\..\Silverlight\Framework\Utility\Vector.cs">
       <Link>Utility\Vector.cs</Link>
     </Compile>
+    <Compile Include="Components\GestureRecorder\TouchInputRecorder.cs" />
+    <Compile Include="GestureTestFramework.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DataService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Storage\LocalFileStorage.cs" />
+    <Compile Include="Storage\NETClientStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Storage\WebStorage.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="TouchInputProviders\Windows7TouchInputProvider.cs" />
   </ItemGroup>

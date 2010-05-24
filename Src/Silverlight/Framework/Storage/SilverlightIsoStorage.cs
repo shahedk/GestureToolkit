@@ -5,13 +5,22 @@ using System.Text;
 
 namespace Framework.Storage
 {
-    internal class LocalFileStorage : IDataStorage
+    internal class SilverlightIsoStorage : IDataStorage
     {
+        private string _userName = string.Empty;
+        public SilverlightIsoStorage(string userName)
+        {
+            _userName = userName;
+        }
+
         #region IDataStorage Members
 
         public string UserName
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return _userName;
+            }
         }
 
         public void SaveGesture(string projectName, string gestureName, string value, SaveGestureCallback callback)
@@ -20,6 +29,11 @@ namespace Framework.Storage
         }
 
         public void GetGesture(string projectName, string gestureName, GetGestureCallback callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetGestureNames(string projectName, GetGestureNamesCallback callback)
         {
             throw new NotImplementedException();
         }

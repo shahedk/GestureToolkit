@@ -171,10 +171,11 @@ namespace Framework.GestureEvents
                     }
 
                     // Invoke the callback to notify the subscriber(s)
-                    List<EventRequest> eventReqs = EventRequestDirectory.GetRequests(gesture.Name,validSetOfPoint.GetUIElements());
+                    List<EventRequest> eventReqs = EventRequestDirectory.GetRequests(gesture.Name, validSetOfPoint.GetUIElements());
                     foreach (var eventRequest in eventReqs)
                     {
-                        eventRequest.EventHandler(eventRequest.UIElement, returnObjs);
+                        GestureEventArgs e = new GestureEventArgs() { Values = returnObjs };
+                        eventRequest.EventHandler(eventRequest.UIElement, e);
                     }
                 }
             }

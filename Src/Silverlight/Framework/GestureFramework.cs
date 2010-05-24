@@ -24,6 +24,9 @@ namespace Framework
 {
     public class GestureFramework
     {
+        protected GestureFramework()
+        { }
+
         public enum DebugPanels
         {
             GestureRecorder,

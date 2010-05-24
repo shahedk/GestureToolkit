@@ -104,6 +104,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Storage\IDataStorage.cs" />
+    <Compile Include="Storage\Delegates.cs" />
+    <Compile Include="Storage\SilverlightIsoStorage.cs" />
+    <Compile Include="Storage\StorageManager.cs" />
+    <Compile Include="Storage\WebStorage.cs" />
     <Compile Include="TouchInputManager.cs" />
     <Compile Include="TouchInputProviders\MultiTouchEventArgs.cs" />
     <Compile Include="TouchInputProviders\SingleTouchEventArgs.cs" />
