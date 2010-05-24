@@ -2,8 +2,15 @@
 
 using System.Windows;
 using Gestures.ReturnTypes;
+using System;
 
 namespace Framework
 {
-    public delegate void GestureEventHandler(UIElement sender, List<IReturnType> values);
+    public class GestureEventArgs : EventArgs
+    {
+        public List<IReturnType> Values = new List<IReturnType>();
+        public Exception Error = null;
+    }
+
+    public delegate void GestureEventHandler(UIElement sender, GestureEventArgs e);
 }

@@ -69,8 +69,15 @@
       <Name>Gestures</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <None Include="..\Framework\app.config">
+      <Link>app.config</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gesture Definitions\ZoomGestureTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Rules\Objects\OnSameObjectTest.cs" />
     <Compile Include="Rules\Objects\ClosedLoopTest.cs" />
     <Compile Include="Rules\Objects\EnclosedAreaTest.cs" />
