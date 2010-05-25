@@ -98,6 +98,9 @@ namespace Framework.Tests.Storage
         [TestMethod()]
         public void GetAllProjectsTest()
         {
+            var threadBlocker = new AutoResetEvent(false);
+            bool asyncCallbackReceived = false;
+
             // Data set
             string userName = GetUniqueUserName(),
                 projectName = GetUniqueProjectName(),
@@ -125,16 +128,23 @@ namespace Framework.Tests.Storage
                                     if (projects[0].GestureNames[0] == gestureData)
                                     {
                                         Assert.AreSame(projects[0].GestureNames[0], gestureData, "Method failed to return expected values.");
+
                                     }
                                 }
                             }
                         }
                     }
                 }
+
+                asyncCallbackReceived = true;
+                threadBlocker.Set();
             };
 
             // 3. Test the method; the callback will validate the return values
             target.GetAllProjects(callback);
+
+            threadBlocker.WaitOne();
+            Assert.IsTrue(asyncCallbackReceived, "Failed to receive the async callback");
         }
 
         /// <summary>
@@ -143,6 +153,9 @@ namespace Framework.Tests.Storage
         [TestMethod()]
         public void GetGestureTest()
         {
+            bool callbackReceived = false;
+            var threadBlocker = new AutoResetEvent(false);
+
             // Data set
             string userName = GetUniqueGestureName(),
                 gestureName = GetUniqueGestureName(),
@@ -158,29 +171,31 @@ namespace Framework.Tests.Storage
                 {
                     // 2. Get the data from storage and validate
                     target.GetGesture(projectName, gestureName, (projName, gesName, gesData, errorOnGet) =>
+                    {
+                        if (errorOnGet == null)
                         {
-                            if (errorOnGet == null)
-                            {
-                                // 4. Check the validation result
-                                Assert.AreSame(projectName, projName, "Project name doesn't match with the expected value");
-                                Assert.AreSame(gestureName, gesName, "Gesture name doesn't match with the expected value");
-                                Assert.AreSame(gestureData, gesData, "Gesture data doesn't match with the expected value");
-
-                                Assert.Fail("fdaf");
-                            }
-                            else
-                            {
-                                Assert.Fail(errorOnGet.Message);
-                            }
-                        });
+                            // 4. Check the validation result
+                            Assert.AreSame(projectName, projName, "Project name doesn't match with the expected value");
+                            Assert.AreSame(gestureName, gesName, "Gesture name doesn't match with the expected value");
+                            Assert.AreSame(gestureData, gesData, "Gesture data doesn't match with the expected value");
+                        }
+                        else
+                        {
+                            Assert.Fail(errorOnGet.Message);
+                        }
+                    });
                 }
                 else
                 {
                     Assert.Fail(errorOnSave.Message);
                 }
+
+                callbackReceived = true;
+                threadBlocker.Set();
             });
 
-            int x = 0;
+            threadBlocker.WaitOne();
+            Assert.IsTrue(callbackReceived, "Failed to receive the callback from async method");
         }
 
 
@@ -190,6 +205,9 @@ namespace Framework.Tests.Storage
         [TestMethod()]
         public void SaveGestureTest()
         {
+            var threadBlocker = new AutoResetEvent(false);
+            bool asyncCallbackReceived = false;
+
             // Data set
             string userName = GetUniqueGestureName(),
                 gestureName = GetUniqueGestureName(),
@@ -220,7 +238,13 @@ namespace Framework.Tests.Storage
                 {
                     Assert.Fail(errorOnSave.Message);
                 }
+
+                asyncCallbackReceived = true;
+                threadBlocker.Set();
             });
+
+            threadBlocker.WaitOne();
+            Assert.IsTrue(asyncCallbackReceived, "Failed to receive callback from the async method");
         }
     }
 }

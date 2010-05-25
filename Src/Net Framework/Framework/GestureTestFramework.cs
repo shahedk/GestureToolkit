@@ -47,6 +47,8 @@ namespace Framework
         /// <param name="projectName"></param>
         public static void Init(string accountName, string projectName)
         {
+            _userName = accountName;
+            _projectname = projectName;
             _layoutRoot = new Canvas();
             _touchProvider = new VirtualTouchInputProvider();
             _storage = new StorageManager(accountName);
