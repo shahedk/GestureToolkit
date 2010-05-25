@@ -21,6 +21,7 @@ namespace Gestures.ReturnTypes
         }
 
         public double Distance { get; set; }
+
         public double Delta { get; set; }
     }
 }

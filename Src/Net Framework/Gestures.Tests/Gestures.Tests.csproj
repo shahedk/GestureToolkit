@@ -75,6 +75,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Return Types\DistanceChangedTest.cs" />
     <Compile Include="Rules\Objects\OnSameObjectTest.cs" />
     <Compile Include="Rules\Objects\ClosedLoopTest.cs" />
     <Compile Include="Rules\Objects\EnclosedAreaTest.cs" />
