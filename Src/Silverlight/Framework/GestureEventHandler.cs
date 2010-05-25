@@ -12,5 +12,6 @@ namespace Framework
         public Exception Error = null;
     }
 
+    //public delegate void GestureEventHandler(UIElement sender, List<IReturnType> e);
     public delegate void GestureEventHandler(UIElement sender, GestureEventArgs e);
 }

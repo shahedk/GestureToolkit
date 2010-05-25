@@ -1,7 +1,7 @@
 ﻿name: Right
 
 validation state
-	Touch state: TouchMove
+	Touch state: TouchUp
 	Touch limit: 1
 
 condition
