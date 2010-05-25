@@ -25,10 +25,10 @@ namespace Gestures.ReturnTypes
         {
             if (set.Count > 0)
             {
-
+                int len = set[0].Stroke.StylusPoints.Count;
                 Position p = new Position();
-                p.X = set[0].Stroke.GetBounds().Left;
-                p.Y = set[0].Stroke.GetBounds().Top;
+                p.X = set[0].Stroke.StylusPoints[len - 1].X;
+                p.Y = set[0].Stroke.StylusPoints[len - 1].Y;
 
                 return p;
             }

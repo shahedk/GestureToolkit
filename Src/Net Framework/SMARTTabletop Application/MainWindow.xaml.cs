@@ -61,10 +61,13 @@ namespace SMARTTabletop_Application
 
         private void DragCallback(UIElement sender, GestureEventArgs e)
         {
-            var posChanged = e.Values.Get<PositionChanged>();
-            if (posChanged != null)
+            var pos = e.Values.Get<Position>();
+            if (pos != null)
             {
-                MoveItem(sender, posChanged);
+                sender.SetValue(Canvas.TopProperty, pos.Y);
+                sender.SetValue(Canvas.LeftProperty, pos.X);
+
+                Console.WriteLine(pos);
             }
         }
 
