@@ -96,6 +96,7 @@
     <Compile Include="ReturnTypes\SlopeChangedCalculator.cs" />
     <Compile Include="ReturnTypes\TouchPoints.cs" />
     <Compile Include="ReturnTypes\TouchPointsCalculator.cs" />
+    <Compile Include="Rules\Objects\TouchShape.cs" />
     <Compile Include="Rules\RuleValidators\IRuleValidator.cs" />
     <Compile Include="Rules\Objects\IRuleData.cs" />
     <Compile Include="Objects\ReturnTypeInfo.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Rules\RuleValidators\TouchLimitValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchPathBoundingBoxValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchPathLengthValidator.cs" />
+    <Compile Include="Rules\RuleValidators\TouchShapeValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchStepValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchTimeValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchStateValidator.cs" />
