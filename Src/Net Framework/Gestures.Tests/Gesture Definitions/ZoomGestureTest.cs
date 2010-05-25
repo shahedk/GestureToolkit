@@ -8,6 +8,7 @@ using Framework.HardwareListeners;
 using Framework;
 using Gestures.Utility;
 using Gestures.ReturnTypes;
+using System.Threading;
 
 namespace Gestures.Tests.Gesture_Definitions
 {
@@ -67,15 +68,17 @@ namespace Gestures.Tests.Gesture_Definitions
         [ClassInitialize()]
         public static void InitializeTest(TestContext testContext)
         {
-            GestureTestFramework.Init("MT", "demo");
+            GestureTestFramework.Init("LiveDemo-shahed", "X1");
         }
 
 
         [TestMethod]
         public void Zoom()
         {
-            int x = 0;
-            GestureTestFramework.Validate("zoom", "resoze", (sender, e) =>
+            bool callbackReceived = false;
+            var threadHolder = new AutoResetEvent(false);
+
+            GestureTestFramework.Validate("zoom", "resize2", (sender, e) =>
                 {
                     if (e.Error == null)
                     {
@@ -87,9 +90,13 @@ namespace Gestures.Tests.Gesture_Definitions
                     {
                         Assert.Fail(e.Error.Message);
                     }
+
+                    callbackReceived = true;
+                    threadHolder.Set();
                 });
 
-            x = 1;
+            threadHolder.WaitOne();
+            Assert.IsTrue(callbackReceived, "Failed to receive the callback from async method call");
         }
     }
 }

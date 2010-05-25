@@ -125,29 +125,29 @@ namespace TestApplication
         #endregion
 
         #region Gesture Events
-        private void RightCallBack(UIElement sender, GestureEventArgs e)
+        private void RightCallBack(UIElement sender, List<IReturnType> values)
         {
             Thread t = new Thread(Scatter);
             t.Start();
             
         }
-        private void LeftCallBack(UIElement sender, GestureEventArgs e)
+        private void LeftCallBack(UIElement sender, List<IReturnType> values)
         {
             Thread t = new Thread(Revert);
             t.Start();
         }
 
-        private void ZoomCallback(UIElement sender, GestureEventArgs e)
+        private void ZoomCallback(UIElement sender, List<IReturnType> values)
         {
-            var dis = e.Values.Get<DistanceChanged>();
+            var dis = values.Get<DistanceChanged>();
             
             if (dis != null)
                 Resize(sender as Image, dis.Delta);
         }
 
-        private void RotateCallback(UIElement sender, GestureEventArgs e)
+        private void RotateCallback(UIElement sender, List<IReturnType> values)
         {
-            var slopeChanged = e.Values.Get<SlopeChanged>();
+            var slopeChanged = values.Get<SlopeChanged>();
             if (slopeChanged != null)
             {
                 var img = sender as Image;
@@ -177,25 +177,25 @@ namespace TestApplication
             }
         }
 
-        private void PinchCallback(UIElement sender, GestureEventArgs e)
+        private void PinchCallback(UIElement sender, List<IReturnType> values)
         {
-            var dis = e.Values.Get<DistanceChanged>();
+            var dis = values.Get<DistanceChanged>();
             if (dis != null)
                 Resize(sender as Image, dis.Delta);
         }
 
-        private void DragCallback(UIElement sender, GestureEventArgs e)
+        private void DragCallback(UIElement sender, List<IReturnType> values)
         {
-            var posChanged = e.Values.Get<PositionChanged>();
+            var posChanged = values.Get<PositionChanged>();
             if (posChanged != null)
             {
                 MoveItem(sender, posChanged);
             }
         }
 
-        private void LassoCallback(UIElement sender, GestureEventArgs e)
+        private void LassoCallback(UIElement sender, List<IReturnType> values)
         {
-            TouchPoints touchPoints = e.Values.Get<TouchPoints>();
+            TouchPoints touchPoints = values.Get<TouchPoints>();
 
             // Create a dummy polygon shape using the points of lasso
             // to run a hit test to find the selected elements
