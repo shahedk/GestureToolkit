@@ -30,7 +30,7 @@ namespace Framework.Components.GestureRecording
         private GestureServiceSoapClient _clientService = new GestureServiceSoapClient();
         private ParameterizedThreadStart _backgroundThreadStart;
         private Thread _backgroundThread;
-        private Dispatcher _dispatcher;
+        //private Dispatcher _dispatcher;
 
         public event EventHandler GestureSaved;
         public event EventHandler ConnectivityCheckCompleted;
@@ -123,16 +123,16 @@ namespace Framework.Components.GestureRecording
 
         #endregion
 
-        public TouchInputRecorder(string userName, Dispatcher uiThread)
+        public TouchInputRecorder(string userName)//, Dispatcher uiThread)
         {
             UserName = userName;
-            _dispatcher = uiThread;
+            //_dispatcher = uiThread;
             Init();
         }
 
-        public TouchInputRecorder(Dispatcher uiThread)
+        public TouchInputRecorder()//(Dispatcher uiThread)
         {
-            _dispatcher = uiThread;
+            //_dispatcher = uiThread;
             Init();
         }
 
@@ -141,18 +141,18 @@ namespace Framework.Components.GestureRecording
             // Initializing background thread to playback recorded gestures
             _backgroundThreadStart = new ParameterizedThreadStart(RunGesture);
 
-            DataService.GestureServiceSoapClient c = new GestureServiceSoapClient();
-            c.AddGestureData(
+            //DataService.GestureServiceSoapClient c = new GestureServiceSoapClient();
+            //c.AddGestureData(
 
-            // Subscribe to service callbacks
-            _clientService.ConnectivityCheckCompleted += client_ConnectivityCheckCompleted;
-            _clientService.LastUpdatedAtCompleted += clientService_LastUpdatedAtCompleted;
-            _clientService.AddGestureDataCompleted += _clientService_AddGestureDataCompleted;
-            _clientService.GetProjectsByUserCompleted += clientService_GetProjectsByUserCompleted;
-            _clientService.GetGestureDataCompleted += clientService_GetGestureDataCompleted;
+            //// Subscribe to service callbacks
+            //_clientService.ConnectivityCheckCompleted += client_ConnectivityCheckCompleted;
+            //_clientService.LastUpdatedAtCompleted += clientService_LastUpdatedAtCompleted;
+            //_clientService.AddGestureDataCompleted += _clientService_AddGestureDataCompleted;
+            //_clientService.GetProjectsByUserCompleted += clientService_GetProjectsByUserCompleted;
+            //_clientService.GetGestureDataCompleted += clientService_GetGestureDataCompleted;
 
-            // Step 1: Check server connectivity
-            _clientService.ConnectivityCheckAsync();
+            //// Step 1: Check server connectivity
+            //_clientService.ConnectivityCheckAsync();
         }
 
         #region Service callbacks
@@ -267,7 +267,7 @@ namespace Framework.Components.GestureRecording
 
             // Gesture data
             DataStorage.Instance.SaveFile(gestureDataKey, data);
-            
+
             // If its a new project, initialize the dictionary for the new project
             if (!GestureDictionary.Keys.Contains(projectName))
                 GestureDictionary.Add(projectName, new List<string>());
