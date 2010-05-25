@@ -11,6 +11,7 @@ using Gestures.Objects;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using Framework;
+using System.Threading;
 
 namespace SMARTTabletop_Application.Providers
 {
@@ -21,8 +22,11 @@ namespace SMARTTabletop_Application.Providers
         public override event TouchInputProvider.SingleTouchChangeEventHandler SingleTouchChanged;
 
         public override event TouchInputProvider.MultiTouchChangeEventHandler MultiTouchChanged;
-        
+
         private MainWindow _mainWindow;
+        private const int _frameRate = 30; //every 30 msecs
+        private Thread _backgroundThread;
+        private ThreadStart _backgrounndThreadStart;
 
         private Dictionary<int, TouchPoint2> _activeTouchPoints = new Dictionary<int, TouchPoint2>();
         private Dictionary<int, TouchInfo> _activeTouchInfos = new Dictionary<int, TouchInfo>();
@@ -37,13 +41,15 @@ namespace SMARTTabletop_Application.Providers
             libSMARTMultiTouch.Input.TouchInputManager.AddTouchContactDownHandler(_mainWindow, new TouchContactEventHandler(TouchContactDown));
             libSMARTMultiTouch.Input.TouchInputManager.AddTouchContactUpHandler(_mainWindow, new TouchContactEventHandler(TouchContactUp));
             libSMARTMultiTouch.Input.TouchInputManager.AddTouchContactMoveHandler(_mainWindow, new TouchContactEventHandler(TouchMove));
-        
-            //Thread like implementation of FrameRecieved implement here
+
+            _backgrounndThreadStart = new ThreadStart(RaiseEvents);
+            _backgroundThread = new Thread(_backgrounndThreadStart);
+            _backgroundThread.Start();
         }
 
         private void TouchContactDown(object sender, TouchContactEventArgs e)
         {
-            UpdateActiveTouchPoints(TouchAction2.Down, e);            
+            UpdateActiveTouchPoints(TouchAction2.Down, e);
         }
 
         private void TouchContactUp(object sender, TouchContactEventArgs e)
@@ -54,6 +60,43 @@ namespace SMARTTabletop_Application.Providers
         private void TouchMove(object sender, TouchContactEventArgs e)
         {
             UpdateActiveTouchPoints(TouchAction2.Move, e);
+        }
+
+        private void RaiseEvents()
+        {
+            if (_activeTouchPoints.Count > 0)
+            {
+                Action act = delegate
+                {
+                    if (SingleTouchChanged != null)
+                    {
+                        foreach (var touchPoint in _activeTouchPoints.Values)
+                        {
+                            SingleTouchChanged(this, new SingleTouchEventArgs(touchPoint));
+                        }
+                    }
+
+                    if (MultiTouchChanged != null)
+                    {
+                        MultiTouchChanged(this, new MultiTouchEventArgs(_activeTouchPoints.Values.ToList<TouchPoint2>()));
+                    }
+
+                    if (FrameChanged != null)
+                    {
+                        FrameChanged(this, new FrameInfo() { TimeStamp = DateTime.Now.Ticks, Touches = _activeTouchInfos.Values.ToList<TouchInfo>() });
+                    }
+                };
+
+                GestureFramework.LayoutRoot.Dispatcher.Invoke(act, null);
+
+                // Clear the local cache
+                _activeTouchInfos.Clear();
+                _activeTouchPoints.Clear();
+            }
+
+            // Wait for 30 msecs, then raise the events again
+            Thread.Sleep(_frameRate);
+            RaiseEvents();
         }
 
         public void UpdateActiveTouchPoints(TouchAction2 action, TouchContactEventArgs e)
