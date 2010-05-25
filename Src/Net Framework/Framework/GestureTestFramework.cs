@@ -8,6 +8,7 @@ using Framework.TouchInputProviders;
 using Framework.Storage;
 using Framework.Components;
 using Framework.Exceptions;
+using Framework.Components.GestureRecording;
 
 namespace Framework
 {
