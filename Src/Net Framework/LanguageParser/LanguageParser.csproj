@@ -158,6 +158,7 @@
     <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchTime.cs">
       <Link>LanguageTokens\RuleTokens\TouchTime.cs</Link>
     </Compile>
+    <Compile Include="LanguageTokens\RuleTokens\TouchShape.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

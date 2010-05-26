@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using Gestures.Objects;
 using Gestures.Rules.Objects;
 using Gestures.Utility;
+using Gestures.Utility.TouchHelpers;
 
 namespace Gestures.Rules.RuleValidators
 {
@@ -32,7 +33,7 @@ namespace Gestures.Rules.RuleValidators
             throw new NotImplementedException();
         }
 
-        public ValidSetOfPointsCollection Validate(System.Collections.Generic.List<TouchPoint2> points)
+        public ValidSetOfPointsCollection Validate(List<TouchPoint2> points)
         {
             ValidSetOfPointsCollection sets = new ValidSetOfPointsCollection();
             ValidSetOfTouchPoints list = new ValidSetOfTouchPoints();
@@ -42,12 +43,12 @@ namespace Gestures.Rules.RuleValidators
 
                 int length = point.Stroke.StylusPoints.Count;
                 bool result = true;
-                int step = 6;
-                for (int i = 0; i + step < length; i = i + step)
+                int step = 3;
+                for (int i = 0; i + step < length - step; i = i + step)
                 {
                     double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point.Stroke.StylusPoints[i], 
                         point.Stroke.StylusPoints[i + step]);
-                    String stringSlope = SlopeToDirection(slope);
+                    String stringSlope = TouchPointExtensions.SlopeToDirection(slope);
 
                     if (!stringSlope.Equals(_data.Values))
                     {
@@ -63,6 +64,7 @@ namespace Gestures.Rules.RuleValidators
             {
                 sets.Add(list);
             }
+            
             return sets;
         }
 
@@ -86,49 +88,5 @@ namespace Gestures.Rules.RuleValidators
         {
             throw new NotImplementedException();
         }
-
-        private String SlopeToDirection(double slope)
-        {
-            String direction = "";
-
-            slope = slope % (Math.PI);
-
-            if ( (slope >= 0.01 && slope < Math.PI / 8) ||
-                (slope >= -Math.PI / 8 && slope < -0.01) )
-            {
-                direction = "Right";
-            }
-            else if (slope >= Math.PI / 8 && slope < 3 * Math.PI / 8)
-            {
-                direction = "UpRight";
-            }
-            else if (slope >= 3 * Math.PI / 8 && slope < 5 * Math.PI / 8)
-            {
-                direction = "Up";
-            }
-            else if (slope >= 5 * Math.PI / 8 && slope < 7 * Math.PI / 8)
-            {
-                direction = "UpLeft";
-            }
-            else if ( (slope >= 7 * Math.PI / 8 && slope <=  Math.PI) ||
-                (slope >= -Math.PI && slope < -7 * Math.PI/8) || slope == 0)
-            {
-                direction = "Left";
-            }
-            else if (slope >= -7 * Math.PI / 8 && slope < -5 * Math.PI / 8)
-            {
-                direction = "DownLeft";
-            }
-            else if (slope >= -5 * Math.PI / 8 && slope < -3 * Math.PI / 8)
-            {
-                direction = "Down";
-            }
-            else if (slope >= -3 * Math.PI / 8 && slope <= -1 * Math.PI / 8)
-            {
-                direction = "DownRight";
-            }
-            return direction;
-        }
-
     }
 }
