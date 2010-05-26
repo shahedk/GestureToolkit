@@ -38,5 +38,51 @@ namespace Gestures.Utility.TouchHelpers
             else
                 throw new InvalidDataSetException("Unknown touch action type");
         }
+
+        public static String SlopeToDirection(double slope)
+        {
+            String direction = "";
+            if (slope != Math.PI)
+            {
+                slope = slope % (Math.PI);
+            }
+
+            if ((slope >= 7 * Math.PI / 8 /*&& slope < Math.Math.PI +0.01*/) ||
+                (/*slope >= -Math.PI - 0.01 &&*/ slope < -7 * Math.PI / 8) )
+            {
+                direction = "Left";
+            }
+            else if ( (slope >= 0 && slope < (Math.PI / 8)) ||
+                (slope >= -(Math.PI / 8) && slope < 0) )
+            {
+                direction = "Right";
+            }
+            else if (slope >= Math.PI / 8 && slope < 3 * Math.PI / 8)
+            {
+                direction = "DownRight";
+            }
+            else if (slope >= 3 * Math.PI / 8 && slope < 5 * Math.PI / 8)
+            {
+                direction = "Down";
+            }
+            else if (slope >= 5 * Math.PI / 8 && slope < 7 * Math.PI / 8)
+            {
+                direction = "DownLeft";
+            }
+            
+            else if (slope >= -7 * Math.PI / 8 && slope < -5 * Math.PI / 8)
+            {
+                direction = "UpLeft";
+            }
+            else if (slope >= -5 * Math.PI / 8 && slope < -3 * Math.PI / 8)
+            {
+                direction = "Up";
+            }
+            else if (slope >= -3 * Math.PI / 8 && slope <= -1 * Math.PI / 8)
+            {
+                direction = "UpRight";
+            }
+            return direction;
+        }
     }
 }
