@@ -117,10 +117,18 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Hydrangeas.jpg" />
-    <Resource Include="Images\Jellyfish.jpg" />
-    <Resource Include="Images\Koala.jpg" />
-    <Resource Include="Images\Lighthouse.jpg" />
+    <Resource Include="..\..\Silverlight\TestApplication\Images\Hydrangeas.jpg">
+      <Link>Images\Hydrangeas.jpg</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\TestApplication\Images\Jellyfish.jpg">
+      <Link>Images\Jellyfish.jpg</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\TestApplication\Images\Koala.jpg">
+      <Link>Images\Koala.jpg</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\TestApplication\Images\Lighthouse.jpg">
+      <Link>Images\Lighthouse.jpg</Link>
+    </Resource>
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

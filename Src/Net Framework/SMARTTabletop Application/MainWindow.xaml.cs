@@ -45,11 +45,24 @@ namespace SMARTTabletop_Application
             GestureFramework.Initialize(provider, LayoutRoot);
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
 
-            GestureFramework.EventManager.AddEvent(moveRect, "Drag", DragCallback);
-            GestureFramework.EventManager.AddEvent(moveRect, "Pinch", PinchCallback);
-            GestureFramework.EventManager.AddEvent(moveRect, "Rotate", RotateCallback);
+            SetImages(false);
 
             provider.SingleTouchChanged += new Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler(provider_SingleTouchChanged);
+
+        }
+
+        private void SetImages(bool randomPosition)
+        {
+            foreach (var bitmap in LayoutRoot.Children)
+            {
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Zoom", ZoomCallback);
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Pinch", PinchCallback);
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Drag", DragCallback);
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Rotate", RotateCallback);
+            }
+
+            //Uncomment here to add lasso functionality
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
         }
 
         void provider_SingleTouchChanged(object sender, Framework.TouchInputProviders.SingleTouchEventArgs e)
@@ -76,14 +89,14 @@ namespace SMARTTabletop_Application
             var dis = e.Values.Get<DistanceChanged>();
 
             if (dis != null)
-                Resize(sender as Rectangle, dis.Delta);
+                Resize(sender as Image, dis.Delta);
         }
 
         private void PinchCallback(UIElement sender, GestureEventArgs e)
         {
             var dis = e.Values.Get<DistanceChanged>();
             if (dis != null)
-                Resize(sender as Rectangle, dis.Delta);
+                Resize(sender as Image, dis.Delta);
         }
 
         private void RotateCallback(UIElement sender, GestureEventArgs e)
@@ -91,7 +104,7 @@ namespace SMARTTabletop_Application
             var slopeChanged = e.Values.Get<SlopeChanged>();
             if (slopeChanged != null)
             {
-                var img = sender as Rectangle;
+                var img = sender as Image;
                 if (img != null)
                     Rotate(img, Math.Round(slopeChanged.Delta, 1));
             }
@@ -101,7 +114,7 @@ namespace SMARTTabletop_Application
         #region Helper Functions
 
         bool rotateInProgress = false;
-        private void Rotate(Rectangle img, double delta)
+        private void Rotate(Image img, double delta)
         {
             if (!rotateInProgress & delta != 0)
             {
@@ -121,7 +134,7 @@ namespace SMARTTabletop_Application
             }
         }
 
-        private void Resize(Rectangle image, double delta)
+        private void Resize(Image image, double delta)
         {
             if (image.Height + delta > 0)
                 image.Height += delta;
@@ -132,7 +145,7 @@ namespace SMARTTabletop_Application
 
         private void MoveItem(UIElement sender, PositionChanged posChanged)
         {
-            Rectangle item = sender as Rectangle;
+            Image item = sender as Image;
             double x = (double)item.GetValue(Canvas.LeftProperty);
             double y = (double)item.GetValue(Canvas.TopProperty);
 
