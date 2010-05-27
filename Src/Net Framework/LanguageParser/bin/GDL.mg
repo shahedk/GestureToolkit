@@ -99,7 +99,17 @@
             | r:OnSameObject => r
             | r:DistanceBetweenPoints => r
             | r:TouchPathBoundingBox =>r
-            | r:TouchDirection =>r;
+            | r:TouchDirection =>r
+            | r:TouchShape =>r;
+        
+        /* Touch shape */
+        syntax TouchShape
+            = "Touch shape" ":" s:Shape
+            =>TouchShape{Values=>s};
+        token Shape
+            = x: "Line" => x
+            | x: "Box" => x
+            | x: "Circle" => x;
             
         /* Touch direction */
          syntax TouchDirection

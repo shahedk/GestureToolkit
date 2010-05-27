@@ -29,7 +29,7 @@ namespace Gestures.ReturnTypes
             DistanceChanged value = new DistanceChanged();
             value.Distance = TrigonometricCalculationHelper.GetDistanceBetweenPoints(p1, p2);
 
-            if (set[0].Stroke.StylusPoints.Count > 1 && set[0].Stroke.StylusPoints.Count > 1)
+            if (set[0].Stroke.StylusPoints.Count > 1 && set[1].Stroke.StylusPoints.Count > 1)
             {
                 p1 = set[0].Stroke.StylusPoints[set[0].Stroke.StylusPoints.Count - 2].ToPoint();
                 p2 = set[1].Stroke.StylusPoints[set[1].Stroke.StylusPoints.Count - 2].ToPoint();

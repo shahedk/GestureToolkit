@@ -96,6 +96,7 @@
     <Compile Include="ReturnTypes\SlopeChangedCalculator.cs" />
     <Compile Include="ReturnTypes\TouchPoints.cs" />
     <Compile Include="ReturnTypes\TouchPointsCalculator.cs" />
+    <Compile Include="Rules\Objects\TouchShape.cs" />
     <Compile Include="Rules\RuleValidators\IRuleValidator.cs" />
     <Compile Include="Rules\Objects\IRuleData.cs" />
     <Compile Include="Objects\ReturnTypeInfo.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Rules\RuleValidators\TouchLimitValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchPathBoundingBoxValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchPathLengthValidator.cs" />
+    <Compile Include="Rules\RuleValidators\TouchShapeValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchStepValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchTimeValidator.cs" />
     <Compile Include="Rules\RuleValidators\TouchStateValidator.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Utility\CommonHelperMethods.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utility\ShapeRecognizers\HoughLine.cs" />
     <Compile Include="Utility\TouchHelpers\TouchPointExtensions.cs" />
     <Compile Include="Utility\TrigonometricCalculationHelper.cs" />
     <Compile Include="Utility\ShapeRecognizers\ConvexHull\CDLL.cs" />
@@ -185,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Gesture Definitions\ReadMe.txt" />
+    <None Include="Gesture Definitions\line.g" />
     <None Include="Gesture Definitions\right.g" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
