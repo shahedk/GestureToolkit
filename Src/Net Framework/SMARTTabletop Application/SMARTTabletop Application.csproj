@@ -111,10 +111,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="..\..\Silverlight\TestApplication\Images\Hydrangeas.jpg">
+      <Link>Images\Hydrangeas.jpg</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\TestApplication\Images\Jellyfish.jpg">
+      <Link>Images\Jellyfish.jpg</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\TestApplication\Images\Koala.jpg">
+      <Link>Images\Koala.jpg</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\TestApplication\Images\Lighthouse.jpg">
+      <Link>Images\Lighthouse.jpg</Link>
+    </Resource>
     <Content Include="ThirdParty\Interop.SBSDKComWrapperLib.dll" />
     <Content Include="ThirdParty\libSMARTMultiTouch.dll" />
     <Content Include="ThirdParty\Sdgt 3.0.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
