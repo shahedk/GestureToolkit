@@ -7,24 +7,19 @@ namespace Framework.Storage
 {
     public class NETClientStorage : IDataStorage
     {
-        private WebStorage _webStorage = null;
+        private WebStorage _webStorage = new WebStorage();
         //private LocalFileStorage _localStorage = null;
 
-        private string _userName = string.Empty;
-        public NETClientStorage(string userName)
+        public void Login(string accountName)
         {
-            _userName = userName;
-
-            _webStorage = new WebStorage(userName);
+            _webStorage.Login(accountName);
         }
-
-
 
         #region IDataStorage Members
 
-        public string UserName
+        public string AccountName
         {
-            get { return _userName; }
+            get { return _webStorage.AccountName; }
         }
 
         public void SaveGesture(string projectName, string gestureName, string value, SaveGestureCallback callback)
@@ -40,6 +35,16 @@ namespace Framework.Storage
         public void GetAllProjects(GetAllProjectsCallback callback)
         {
             _webStorage.GetAllProjects(callback);
+        }
+
+        public bool IsLoggedIn()
+        {
+            return _webStorage.IsLoggedIn();
+        }
+
+        public void Logout()
+        {
+            _webStorage.Logout();
         }
 
         #endregion

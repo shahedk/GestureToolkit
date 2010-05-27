@@ -78,20 +78,7 @@ namespace Framework.Tests.Storage
             return "TestUser-" + Guid.NewGuid().ToString();
         }
 
-        /// <summary>
-        ///A test for StorageManager Constructor
-        ///</summary>
-        [TestMethod()]
-        public void StorageManagerConstructorTest()
-        {
-            // Data set
-            string userName = GetUniqueUserName();
-
-            StorageManager target = new StorageManager(userName);
-
-            Assert.AreSame(userName, target.UserName, "The constructor is not storing the specified \"userName\" properly");
-        }
-
+        
         /// <summary>
         ///A test for GetAllProjects
         ///</summary>
@@ -107,7 +94,8 @@ namespace Framework.Tests.Storage
                 gestureName = GetUniqueGestureName(),
                 gestureData = "GestureData-" + Guid.NewGuid().ToString();
 
-            StorageManager target = new StorageManager(userName);
+            StorageManager target = new StorageManager();
+            target.Login(userName);
 
             // 1. Create some gestures and projects
             target.SaveGesture(projectName, gestureName, gestureData, null);
@@ -162,15 +150,16 @@ namespace Framework.Tests.Storage
                 projectName = GetUniqueProjectName(),
                 gestureData = "GestureData-" + Guid.NewGuid();
 
-            StorageManager target = new StorageManager(userName);
+            StorageManager target = new StorageManager();
+            target.Login(userName);
 
             // 1. Save the test data in storage
-            target.SaveGesture(projectName, gestureName, gestureData, (errorOnSave) =>
+            target.SaveGesture(projectName, gestureName, gestureData, (gestureReturnName, errorOnSave) =>
             {
                 if (errorOnSave == null)
                 {
                     // 2. Get the data from storage and validate
-                    target.GetGesture(projectName, gestureName, (projName, gesName, gesData, errorOnGet) =>
+                    target.GetGesture(projectName, gestureReturnName, (projName, gesName, gesData, errorOnGet) =>
                     {
                         if (errorOnGet == null)
                         {
@@ -214,15 +203,16 @@ namespace Framework.Tests.Storage
                 projectName = GetUniqueProjectName(),
                 gestureData = "GestureData-" + Guid.NewGuid();
 
-            StorageManager target = new StorageManager(userName);
+            StorageManager target = new StorageManager();
+            target.Login(userName);
 
             // 1. Save a new gesture
-            target.SaveGesture(projectName, gestureName, gestureData, (errorOnSave) =>
+            target.SaveGesture(projectName, gestureName, gestureData, (gestureReturnName, errorOnSave) =>
             {
                 if (errorOnSave == null)
                 {
                     // 2. Retrive data from storage to match
-                    target.GetGesture(projectName, gestureName, (projName, gesName, gesData, errorOnGet) =>
+                    target.GetGesture(projectName, gestureReturnName, (projName, gesName, gesData, errorOnGet) =>
                     {
                         if (errorOnGet == null)
                         {

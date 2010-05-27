@@ -10,29 +10,20 @@ namespace Framework.Storage
     {
         private IDataStorage _storage = null;
 
-        public StorageManager(string userName)
+        public StorageManager()
         {
 
 #if SILVERLIGHT
-          //  _storage = new SilverlightDataStorage(userName);
+            _storage = new SilverlightDataStorage();
 #elif XNA
-            _storage = new XNAClientStorage(userName);
+            _storage = new XNAClientStorage();
 #else
-            _storage = new NETClientStorage(userName);
+            _storage = new NETClientStorage();
 #endif
-
         }
-
-
-
-
 
         #region IDataStorage Members
 
-        public string UserName
-        {
-            get { return _storage.UserName; }
-        }
 
         public void SaveGesture(string projectName, string gestureName, string value, SaveGestureCallback callback)
         {
@@ -49,6 +40,30 @@ namespace Framework.Storage
             _storage.GetAllProjects(callback);
         }
 
+        public void ValidateCache()
+        {
+
+        }
         #endregion
+
+        public string AccountName
+        {
+            get { return _storage.AccountName; }
+        }
+
+        public bool IsLoggedIn()
+        {
+            return _storage.IsLoggedIn();
+        }
+
+        public void Login(string accountName)
+        {
+            _storage.Login(accountName);
+        }
+
+        public void Logout()
+        {
+            _storage.Logout();
+        }
     }
 }

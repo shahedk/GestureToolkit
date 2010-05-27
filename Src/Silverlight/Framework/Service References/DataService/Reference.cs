@@ -172,10 +172,17 @@ namespace Framework.DataService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://labs.shahed.net/")]
     public partial class AddGestureDataResponseBody {
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string AddGestureDataResult;
+        
         public AddGestureDataResponseBody() {
+        }
+        
+        public AddGestureDataResponseBody(string AddGestureDataResult) {
+            this.AddGestureDataResult = AddGestureDataResult;
         }
     }
     
@@ -484,6 +491,25 @@ namespace Framework.DataService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AddGestureDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public AddGestureDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetProjectsByUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -659,7 +685,7 @@ namespace Framework.DataService {
         
         public event System.EventHandler<ConnectivityCheckCompletedEventArgs> ConnectivityCheckCompleted;
         
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> AddGestureDataCompleted;
+        public event System.EventHandler<AddGestureDataCompletedEventArgs> AddGestureDataCompleted;
         
         public event System.EventHandler<GetProjectsByUserCompletedEventArgs> GetProjectsByUserCompleted;
         
@@ -741,8 +767,9 @@ namespace Framework.DataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private void EndAddGestureData(System.IAsyncResult result) {
+        private string EndAddGestureData(System.IAsyncResult result) {
             Framework.DataService.AddGestureDataResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndAddGestureData(result);
+            return retVal.Body.AddGestureDataResult;
         }
         
         private System.IAsyncResult OnBeginAddGestureData(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -754,14 +781,15 @@ namespace Framework.DataService {
         }
         
         private object[] OnEndAddGestureData(System.IAsyncResult result) {
-            this.EndAddGestureData(result);
-            return null;
+            string retVal = this.EndAddGestureData(result);
+            return new object[] {
+                    retVal};
         }
         
         private void OnAddGestureDataCompleted(object state) {
             if ((this.AddGestureDataCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.AddGestureDataCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                this.AddGestureDataCompleted(this, new AddGestureDataCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         

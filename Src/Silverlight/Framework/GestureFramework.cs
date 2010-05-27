@@ -19,6 +19,7 @@ using Framework.Utility;
 using Framework.Exceptions;
 using System.Diagnostics.Contracts;
 using Framework.TouchInputProviders;
+using Framework.UI;
 
 namespace Framework
 {
@@ -33,7 +34,7 @@ namespace Framework
             CodeTemplateGenerator
         }
 
-        //static GestureRecordingPanel _debugPanel = null;
+        static GestureRecordingPanel _debugPanel = null;
         //static GestureDefinitionBuilder _defBuilder = null;
 
         static List<ITouchFeedback> _commonBehaviors = new List<ITouchFeedback>();
@@ -155,55 +156,50 @@ namespace Framework
             behavior.Dispose();
         }
 
+        /// <summary>
+        /// Renders the specified debug panel at the top left corner of the screen
+        /// </summary>
+        /// <param name="panel"></param>
+        public static void ShowDebugPanel(DebugPanels panel)
+        {
+            if (panel == DebugPanels.GestureRecorder)
+            {
+                ShowGestureRecorder();
+            }
+            else if (panel == DebugPanels.GestureRecorder)
+            {
+                ShowGestureDefBuilder();
+            }
+            else
+            {
+                throw new FrameworkException("Unrecognized debug panel");
+            }
+        }
 
+        private static void ShowGestureRecorder()
+        {
+            if (_debugPanel == null)
+                _debugPanel = new GestureRecordingPanel();
 
-        /*
-                /// <summary>
-                /// Renders the specified debug panel at the top left corner of the screen
-                /// </summary>
-                /// <param name="panel"></param>
-                public static void ShowDebugPanel(DebugPanels panel)
-                {
-                    if (panel == DebugPanels.GestureRecorder)
-                    {
-                        ShowGestureRecorder();
-                    }
-                    else if (panel == DebugPanels.GestureRecorder)
-                    {
-                        ShowGestureDefBuilder();
-                    }
-                    else
-                    {
-                        throw new FrameworkException("Unrecognized debug panel");
-                    }
-                }
+            _debugPanel.VerticalAlignment = VerticalAlignment.Top;
+            LayoutRoot.Children.Add(_debugPanel);
+        }
 
-        
-                private static void ShowGestureRecorder()
-                {
-                    if (_debugPanel == null)
-                        _debugPanel = new GestureRecordingPanel();
+        private static void ShowGestureDefBuilder()
+        {
+            //if (_defBuilder == null)
+            //    _defBuilder = new GestureDefinitionBuilder();
 
-                    _debugPanel.VerticalAlignment = VerticalAlignment.Top;
-                    LayoutRoot.Children.Add(_debugPanel);
-                }
+            //_defBuilder.VerticalAlignment = VerticalAlignment.Top;
+            //LayoutRoot.Children.Add(_defBuilder);
+        }
 
-                private static void ShowGestureDefBuilder()
-                {
-                    if (_defBuilder == null)
-                        _defBuilder = new GestureDefinitionBuilder();
-
-                    _defBuilder.VerticalAlignment = VerticalAlignment.Top;
-                    LayoutRoot.Children.Add(_defBuilder);
-                }
-
-                /// <summary>
-                /// Hides any existing debug panel
-                /// </summary>
-                public static void HideDebugPanel()
-                {
-                    LayoutRoot.Children.Remove(_debugPanel);
-                }
-                 */
+        /// <summary>
+        /// Hides any existing debug panel
+        /// </summary>
+        public static void HideDebugPanel()
+        {
+            LayoutRoot.Children.Remove(_debugPanel);
+        }
     }
 }

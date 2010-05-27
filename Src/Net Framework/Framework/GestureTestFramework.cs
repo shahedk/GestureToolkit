@@ -8,7 +8,6 @@ using Framework.TouchInputProviders;
 using Framework.Storage;
 using Framework.Components;
 using Framework.Exceptions;
-using Framework.Components.GestureRecording;
 
 namespace Framework
 {
@@ -52,7 +51,9 @@ namespace Framework
             _projectname = projectName;
             _layoutRoot = new Canvas();
             _touchProvider = new VirtualTouchInputProvider();
-            _storage = new StorageManager(accountName);
+            _storage = new StorageManager();
+            _storage.Login(accountName);
+
             _recorder = new TouchInputRecorder();
 
             GestureFramework.Initialize(_touchProvider, _layoutRoot);

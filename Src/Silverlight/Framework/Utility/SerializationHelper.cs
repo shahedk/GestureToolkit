@@ -189,8 +189,10 @@ namespace Framework.Utility
 
                 return gInfo;
             }
-            catch
+            catch (Exception e)
             {
+                //TODO: Testing
+                string msg = e.Message;
                 throw;
             }
             finally

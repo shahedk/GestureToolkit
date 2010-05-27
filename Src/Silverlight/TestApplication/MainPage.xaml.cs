@@ -44,7 +44,7 @@ namespace TestApplication
             GestureFramework.AddGesturFeedback("lasso", typeof(HighlightSelectedArea));
 
             // Show Recording Panel
-            //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
+            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
 
             // Load UI
             LoadImages(false);

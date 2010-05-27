@@ -29,6 +29,17 @@ namespace Framework.HardwareListeners
             // Get active touch points including stoke data
             List<TouchPoint2> touchPoints = base.UpdateActiveTouchPoints(frameInfo.Touches);
 
+            // Determine touch source for any new touch point
+            foreach (var touchPoint in touchPoints)
+            {
+                if (touchPoint.Action == TouchAction.Down)
+                {
+#if SILVERLIGHT
+                    touchPoint.UpdateSource();
+#endif
+                }
+            }
+
             // Creating one callback for each touch point
             if (SingleTouchChanged != null)
             {

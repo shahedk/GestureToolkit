@@ -31,9 +31,6 @@ namespace Framework.HardwareListeners
             Touch.FrameReported += Touch_FrameReported;
         }
 
-        
-
-
         int lastTimeStamp = 0;
         private void Touch_FrameReported(object sender, TouchFrameEventArgs e)
         {

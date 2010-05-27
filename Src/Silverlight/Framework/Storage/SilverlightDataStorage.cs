@@ -7,64 +7,72 @@ using Framework.Exceptions;
 
 namespace Framework.Storage
 {
-    internal class SilverlightDataStorage : DataStorage
+    internal class SilverlightDataStorage : IDataStorage
     {
-        IsolatedStorageSettings _userSettings = IsolatedStorageSettings.ApplicationSettings;
+        WebStorage _storage = new WebStorage();
+        static IsolatedStorageSettings _userSettings = IsolatedStorageSettings.ApplicationSettings;
 
-        public override void Save(string key, object value)
+        public string AccountName
         {
-            throw new NotImplementedException();
-        }
-
-        public override T Get<T>(string key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SaveFile(string fileName, string content)
-        {
-            _userSettings.Add(gestureDataKey, data);
-            if (CheckIsolatedStorageAvaliableSpace(data))
+            get
+            {
+                return (string)_userSettings["accountName"];
+            }
+            protected set
+            {
+                _userSettings["accountName"] = value;
                 _userSettings.Save();
-
+            }
         }
 
-        public override string GetFile(string fileName)
+        public bool IsLoggedIn()
+        {
+            if (!string.IsNullOrEmpty(AccountName))
+            {
+                _storage.Login(AccountName);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public void Login(string accountName)
+        {
+            AccountName = accountName;
+            _storage.Login(accountName);
+        }
+
+        public void Logout()
+        {
+            AccountName = string.Empty;
+            _storage.Logout();
+        }
+
+        #region IDataStorage Members
+        public void SaveGesture(string projectName, string gestureName, string value, SaveGestureCallback callback)
+        {
+            _storage.SaveGesture(projectName, gestureName, value, callback);
+        }
+
+        public void GetGesture(string projectName, string gestureName, GetGestureCallback callback)
+        {
+            _storage.GetGesture(projectName, gestureName, callback);
+        }
+
+        public void GetAllProjects(GetAllProjectsCallback callback)
+        {
+            _storage.GetAllProjects(callback);
+        }
+
+        #endregion
+
+        #region ILocalStorage Members
+
+        public void ValidateCache()
         {
             throw new NotImplementedException();
         }
 
-        private bool CheckIsolatedStorageAvaliableSpace(string data)
-        {
-            Int64 requiredSpace = data.Count() * 2;
-            Int64 fiveMB = 1024 * 1024 * 5;
-            bool isEnoughSpaceAvailable = false;
-
-            IsolatedStorageFile storage = null;
-            try
-            {
-                storage = IsolatedStorageFile.GetUserStoreForApplication();
-                if (storage.AvailableFreeSpace < requiredSpace)
-                {
-                    long newQuota = storage.Quota + fiveMB;
-                    isEnoughSpaceAvailable = storage.IncreaseQuotaTo(newQuota);
-
-                    if (!isEnoughSpaceAvailable)
-                    {
-                        throw new FrameworkException("Failed to save content in local cache due to space limitation!");
-                    }
-                }
-                else
-                {
-                    isEnoughSpaceAvailable = true;
-                }
-            }
-            catch
-            {
-                //TODO: handle possible error
-            }
-
-            return isEnoughSpaceAvailable;
-        }
+        #endregion
     }
 }

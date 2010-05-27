@@ -16,10 +16,15 @@ namespace Framework.Storage
     {
         public string ProjectName { get; set; }
         public List<string> GestureNames { get; set; }
+
+        public override string ToString()
+        {
+            return ProjectName;
+        }
     }
 
     public delegate void GetGestureCallback(string projectName, string gestureName, string data, Exception error = null);
     public delegate void GetGestureNamesCallback(string projectName, List<string> gestureNames, Exception error = null);
     public delegate void GetAllProjectsCallback(List<ProjectDetail> projects, Exception error = null);
-    public delegate void SaveGestureCallback(Exception error = null);
+    public delegate void SaveGestureCallback(string gestureName, Exception error = null);
 }

@@ -8,36 +8,40 @@ namespace Framework.Storage
 {
     public class WebStorage : IDataStorage
     {
-        private string _userName = string.Empty;
+        private string _accountName = string.Empty;
         DataService.GestureServiceSoapClient _dataService = new DataService.GestureServiceSoapClient();
 
-        public string UserName
+        public string AccountName
         {
             get
             {
-                return _userName;
+                return _accountName;
             }
         }
 
-        public WebStorage(string userName)
+        public bool IsLoggedIn()
         {
-            _userName = userName;
+            return !string.IsNullOrEmpty(AccountName);
+        }
 
+        public WebStorage()
+        {
             Init();
         }
 
         private void Init()
         {
             // Subscribe to webservice async callback events
-            _dataService.AddGestureDataCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(_dataService_AddGestureDataCompleted);
-            _dataService.GetGestureDataCompleted += new EventHandler<DataService.GetGestureDataCompletedEventArgs>(_dataService_GetGestureDataCompleted);
-            _dataService.GetProjectsByUserCompleted += new EventHandler<DataService.GetProjectsByUserCompletedEventArgs>(_dataService_GetProjectsByUserCompleted);
-            _dataService.ConnectivityCheckCompleted += new EventHandler<DataService.ConnectivityCheckCompletedEventArgs>(_dataService_ConnectivityCheckCompleted);
+            _dataService.AddGestureDataCompleted += _dataService_AddGestureDataCompleted;
+            _dataService.GetGestureDataCompleted += _dataService_GetGestureDataCompleted;
+            _dataService.GetProjectsByUserCompleted += _dataService_GetProjectsByUserCompleted;
+            _dataService.ConnectivityCheckCompleted += _dataService_ConnectivityCheckCompleted;
 
             // Check service connectivity
             _dataService.ConnectivityCheckAsync();
         }
 
+        
         void _dataService_ConnectivityCheckCompleted(object sender, DataService.ConnectivityCheckCompletedEventArgs e)
         {
             if (e.Error != null)
@@ -52,17 +56,19 @@ namespace Framework.Storage
         {
             Tuple<string, string, SaveGestureCallback> state = new Tuple<string, string, SaveGestureCallback>(projectName, gestureName, callback);
 
-            _dataService.AddGestureDataAsync(_userName, projectName, gestureName, data, state);
+            _dataService.AddGestureDataAsync(_accountName, projectName, gestureName, data, state);
         }
 
-        private void _dataService_AddGestureDataCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        private void _dataService_AddGestureDataCompleted(object sender, DataService.AddGestureDataCompletedEventArgs e)
         {
             // Get the asyncState object that was passed while calling the async method
             var asyncState = e.UserState as Tuple<string, string, SaveGestureCallback>;
 
             // Notify client through the callback method
-            asyncState.Item3(e.Error);
+            asyncState.Item3(e.Result, e.Error);
         }
+
+        
         #endregion
 
         #region Get Gesture
@@ -70,7 +76,7 @@ namespace Framework.Storage
         {
             Tuple<string, string, GetGestureCallback> state = new Tuple<string, string, GetGestureCallback>(projectName, gestureName, callback);
 
-            _dataService.GetGestureDataAsync(_userName, projectName, gestureName, state);
+            _dataService.GetGestureDataAsync(_accountName, projectName, gestureName, state);
         }
 
         private void _dataService_GetGestureDataCompleted(object sender, DataService.GetGestureDataCompletedEventArgs e)
@@ -85,7 +91,7 @@ namespace Framework.Storage
         #region Get All Projects
         public void GetAllProjects(GetAllProjectsCallback callback)
         {
-            _dataService.GetProjectsByUserAsync(_userName, callback);
+            _dataService.GetProjectsByUserAsync(_accountName, callback);
         }
 
         void _dataService_GetProjectsByUserCompleted(object sender, DataService.GetProjectsByUserCompletedEventArgs e)
@@ -116,5 +122,15 @@ namespace Framework.Storage
         }
 
         #endregion
+
+        public void Login(string accountName)
+        {
+            _accountName = accountName;
+        }
+
+        public void Logout()
+        {
+            _accountName = string.Empty;
+        }
     }
 }
