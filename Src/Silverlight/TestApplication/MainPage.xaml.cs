@@ -75,6 +75,7 @@ namespace TestApplication
                 GestureFramework.EventManager.AddEvent(img, "rotate", RotateCallback);
                 GestureFramework.EventManager.AddEvent(LayoutRoot, "left", LeftCallBack);
                 GestureFramework.EventManager.AddEvent(LayoutRoot, "right", RightCallBack);
+                GestureFramework.EventManager.AddEvent(LayoutRoot, "line", LineCallBack);
             }
 
             // Subscribe to gesture events for the LayoutRoot
@@ -125,11 +126,17 @@ namespace TestApplication
         #endregion
 
         #region Gesture Events
+        private void LineCallBack(UIElement sender, GestureEventArgs e)
+        {
+            if (e.Values.Get<TouchPoints>().Count > 0)
+            {
+                System.Diagnostics.Debug.WriteLine("Line");
+            }
+        }
         private void RightCallBack(UIElement sender, GestureEventArgs e)
         {
             Thread t = new Thread(Scatter);
             t.Start();
-            
         }
         private void LeftCallBack(UIElement sender, GestureEventArgs e)
         {
