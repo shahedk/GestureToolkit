@@ -149,6 +149,9 @@
     <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchPathLength.cs">
       <Link>LanguageTokens\RuleTokens\TouchPathLength.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchShape.cs">
+      <Link>LanguageTokens\RuleTokens\TouchShape.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchState.cs">
       <Link>LanguageTokens\RuleTokens\TouchState.cs</Link>
     </Compile>
@@ -158,7 +161,6 @@
     <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchTime.cs">
       <Link>LanguageTokens\RuleTokens\TouchTime.cs</Link>
     </Compile>
-    <Compile Include="LanguageTokens\RuleTokens\TouchShape.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
