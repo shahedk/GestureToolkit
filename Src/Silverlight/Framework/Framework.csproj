@@ -97,7 +97,7 @@
     <Compile Include="EventRequestDirectory.cs" />
     <Compile Include="Exceptions\FrameworkException.cs" />
     <Compile Include="Exceptions\UnknowGestureException.cs" />
-    <Compile Include="GestureEventManager.cs" />
+    <Compile Include="EventManager.cs" />
     <Compile Include="GestureFramework.cs" />
     <Compile Include="GestureLanguageProcessor.cs" />
     <Compile Include="Service References\DataService\Reference.cs">

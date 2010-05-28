@@ -28,11 +28,13 @@ namespace Framework.GestureEvents
         SmartTableTop
     }
 
-    public class GestureEventManager
+    public class EventManager
     {
+        public event Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler SingleTouchChanged;
+        public event Framework.TouchInputProviders.TouchInputProvider.MultiTouchChangeEventHandler MultiTouchChanged;
 
         #region Constructor & singleton instance
-        internal GestureEventManager()
+        internal EventManager()
         {
 
         }
@@ -81,16 +83,20 @@ namespace Framework.GestureEvents
             // Subscribe to events
             TouchInputManager.ActiveTouchProvider.FrameChanged += ActiveHardware_FrameChanged;
             TouchInputManager.ActiveTouchProvider.MultiTouchChanged += ActiveHardware_MultiTouchChanged;
+            TouchInputManager.ActiveTouchProvider.SingleTouchChanged += ActiveTouchProvider_SingleTouchChanged;
         }
 
         private void UnSubscribeTouchEvents()
         {
             TouchInputManager.ActiveTouchProvider.FrameChanged -= ActiveHardware_FrameChanged;
             TouchInputManager.ActiveTouchProvider.MultiTouchChanged -= ActiveHardware_MultiTouchChanged;
+            TouchInputManager.ActiveTouchProvider.SingleTouchChanged -= ActiveTouchProvider_SingleTouchChanged;
         }
 
+        
+
         const int CommonBehaviourInterval = 3;
-        void ActiveHardware_FrameChanged(object sender, FrameInfo frameInfo)
+        private void ActiveHardware_FrameChanged(object sender, FrameInfo frameInfo)
         {
             foreach (var cb in GestureFramework.CommonBehaviors)
             {
@@ -105,24 +111,18 @@ namespace Framework.GestureEvents
             }
         }
 
-        // bool? _enableTouchHistory = null;
+        private void ActiveTouchProvider_SingleTouchChanged(object sender, SingleTouchEventArgs e)
+        {
+            if (SingleTouchChanged != null)
+            {
+                SingleTouchChanged(sender, e);
+            }
+        }
+
         private void ActiveHardware_MultiTouchChanged(Object sender, MultiTouchEventArgs e)
         {
-            #region block code
-            // 0. Validate all pre-conditions
-            /* foreach( pre-conditions )
-             *      pre-condition.Validate()
-             */
-
-            // 1. Get gestures that match their pre-conditions
-            /* foreach( gestures )
-             *      if( gesture.IsPreConditionsValid() )        // NOTE: Same pre-condition is cross referenced between multiple gestures, they will be evaluated only once
-             *          if( gesture.IsTouchPatternsValid() )    // NOTE: Same shape recognizer should be cross referenced and be validated once for a particular TouchPoint2 object
-             *          {
-             *              gesture.callback( gesture.BuildReturnObjects() )  // Tips: BuildReturnObjects() can be an Extension method
-             *          }
-             */
-            #endregion
+            if (MultiTouchChanged != null)
+                MultiTouchChanged(sender, e);
 
             // Validate pre-conditions
             ValidSetOfTouchPoints availableTouchPoints = e.TouchPoints.Copy();
