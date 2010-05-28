@@ -74,8 +74,8 @@ namespace Framework
             }
         }
 
-        private static GestureEventManager _eventManager = new GestureEventManager();
-        public static GestureEventManager EventManager
+        private static EventManager _eventManager = new EventManager();
+        public static EventManager EventManager
         {
             get
             {
