@@ -74,8 +74,8 @@ namespace Framework
             }
         }
 
-        private static EventManager _eventManager = new EventManager();
-        public static EventManager EventManager
+        private static Framework.GestureEvents.EventManager _eventManager = new Framework.GestureEvents.EventManager();
+        public static Framework.GestureEvents.EventManager EventManager
         {
             get
             {

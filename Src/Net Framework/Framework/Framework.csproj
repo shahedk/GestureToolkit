@@ -49,6 +49,9 @@
     <Compile Include="..\..\Silverlight\Framework\Components\GestureRecorder\TouchInputRecorder.cs">
       <Link>Components\GestureRecorder\TouchInputRecorder.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Framework\EventManager.cs">
+      <Link>EventManager.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Framework\EventRequestDirectory.cs">
       <Link>EventRequestDirectory.cs</Link>
     </Compile>
@@ -60,9 +63,6 @@
     </Compile>
     <Compile Include="..\..\Silverlight\Framework\GestureEventHandler.cs">
       <Link>GestureEventHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Framework\GestureEventManager.cs">
-      <Link>GestureEventManager.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Framework\GestureFramework.cs">
       <Link>GestureFramework.cs</Link>
