@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace Framework.Storage
+namespace TouchToolkit.Framework.Storage
 {
     public sealed class StorageManager : IDataStorage
     {

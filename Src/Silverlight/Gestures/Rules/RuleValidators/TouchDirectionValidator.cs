@@ -10,12 +10,12 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 using System.Collections.Generic;
-using Gestures.Objects;
-using Gestures.Rules.Objects;
-using Gestures.Utility;
-using Gestures.Utility.TouchHelpers;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.GestureProcessor.Rules.Objects;
+using TouchToolkit.GestureProcessor.Utility;
+using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
 
-namespace Gestures.Rules.RuleValidators
+namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
 {
     public class TouchDirectionValidator : IRuleValidator
     {

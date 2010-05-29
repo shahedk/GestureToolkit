@@ -1,4 +1,4 @@
-﻿namespace Gestures.Objects.LanguageTokens
+﻿namespace TouchToolkit.GestureProcessor.Objects.LanguageTokens
 {
     public class RuleToken : LanguageToken
     {

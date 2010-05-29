@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 using System.Collections.Generic;
 
-namespace Gestures.Rules.Objects
+namespace TouchToolkit.GestureProcessor.Rules.Objects
 {
     public class TouchState : IRuleData
     {

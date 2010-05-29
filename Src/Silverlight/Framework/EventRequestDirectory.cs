@@ -8,13 +8,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Framework;
 using System.Collections.Generic;
 using System.Linq;
 
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Framework
+namespace TouchToolkit.Framework
 {
     internal class EventRequest
     {

@@ -9,11 +9,11 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 using System.Windows.Ink;
-using Gestures.Utility.TouchHelpers;
+using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
 
-namespace Gestures.Objects
+namespace TouchToolkit.GestureProcessor.Objects
 {
     public class TouchPoint2
     {
@@ -38,14 +38,14 @@ namespace Gestures.Objects
             set;
         }
 
-        Guid _uniqueId = Guid.NewGuid();
-        public Guid UniqueId
-        {
-            get
-            {
-                return _uniqueId;
-            }
-        }
+        //Guid _uniqueId = Guid.NewGuid();
+        //public Guid UniqueId
+        //{
+        //    get
+        //    {
+        //        return _uniqueId;
+        //    }
+        //}
 
         private Dictionary<object, dynamic> _tags = new Dictionary<object, dynamic>();
         public Dictionary<object, dynamic> Tags

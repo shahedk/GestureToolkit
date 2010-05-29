@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO.IsolatedStorage;
-using Framework.Exceptions;
+using TouchToolkit.Framework.Exceptions;
 
-namespace Framework.Storage
+namespace TouchToolkit.Framework.Storage
 {
     internal class SilverlightDataStorage : IDataStorage
     {

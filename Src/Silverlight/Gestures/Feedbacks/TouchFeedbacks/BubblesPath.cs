@@ -11,9 +11,9 @@ using System.Windows.Shapes;
 using System.Threading;
 using System.Collections.Generic;
 using System.Windows.Threading;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.Feedbacks.TouchFeedbacks
+namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
 {
     public class BubblesPath : ITouchFeedback
     {

@@ -7,12 +7,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Framework.Utility;
+using TouchToolkit.Framework.Utility;
 using System.Collections.Generic;
-using Gestures.Objects;
-using Framework.TouchInputProviders;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Framework.HardwareListeners
+namespace TouchToolkit.Framework.TouchInputProviders
 {
     public class VirtualTouchInputProvider : TouchInputProvider
     {

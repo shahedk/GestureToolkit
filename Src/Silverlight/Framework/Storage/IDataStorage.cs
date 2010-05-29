@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Framework.Storage
+namespace TouchToolkit.Framework.Storage
 {
     internal interface IDataStorage
     {

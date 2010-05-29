@@ -10,9 +10,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 
-using Gestures.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.Rules.RuleValidators;
 
-namespace Gestures.Objects
+namespace TouchToolkit.GestureProcessor.Objects
 {
     public class RuleCollection : List<IRuleValidator>
     {

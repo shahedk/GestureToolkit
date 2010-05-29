@@ -1,11 +1,11 @@
-﻿using Gestures.Rules.RuleValidators;
+﻿using TouchToolkit.GestureProcessor.Rules.RuleValidators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 using System.Collections.Generic;
-using Gestures.Rules.Objects;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 
-namespace Gestures.Tests.RuleValidator
+namespace TouchToolkit.GestureProcessor.Tests.RuleValidator
 {
 
 

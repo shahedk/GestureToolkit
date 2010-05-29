@@ -5,15 +5,13 @@ using System.Text;
 using System.Collections.Specialized;
 using System.Windows.Input;
 using System.Windows;
-using Framework;
 using System.Windows.Controls;
-
-using Gestures.Objects;
-using Framework.Utility;
-using Framework.TouchInputProviders;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.Utility;
+using TouchToolkit.Framework.TouchInputProviders;
 using System.Windows.Media;
 
-namespace Framework.HardwareListeners
+namespace TouchToolkit.Framework.TouchInputProviders
 {
     public class SilverlightTouchInputProvider : TouchInputProvider
     {

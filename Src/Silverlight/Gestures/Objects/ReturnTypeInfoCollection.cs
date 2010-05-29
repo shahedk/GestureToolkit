@@ -9,10 +9,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
-using Gestures.ReturnTypes;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 
 
-namespace Gestures.Objects
+namespace TouchToolkit.GestureProcessor.Objects
 {
     public class ReturnTypeInfoCollection : List<ReturnTypeInfo>
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Gestures.Rules.Objects;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 
 
-namespace Gestures.Objects.LanguageTokens
+namespace TouchToolkit.GestureProcessor.Objects.LanguageTokens
 {
     public class GestureToken : LanguageToken
     {

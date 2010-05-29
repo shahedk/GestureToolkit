@@ -7,8 +7,8 @@ using System.IO;
 using System.Dataflow;
 using MGraphXamlReader;
 using System.Runtime.Serialization.Json;
-using Gestures.Objects.LanguageTokens;
-using Gestures.Rules.Objects;
+using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 
 using System.Threading;
 

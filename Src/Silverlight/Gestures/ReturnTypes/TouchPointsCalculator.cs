@@ -10,9 +10,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 using System.Collections.Generic;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.ReturnTypes
+namespace TouchToolkit.GestureProcessor.ReturnTypes
 {
     public class TouchPointsCalculator : IReturnTypeCalculator
     {

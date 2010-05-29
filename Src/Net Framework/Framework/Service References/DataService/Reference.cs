@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Framework.DataService {
+namespace TouchToolkit.Framework.DataService {
     using System.Runtime.Serialization;
     using System;
     
@@ -26,7 +26,7 @@ namespace Framework.DataService {
         private string ProjectNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Framework.DataService.ArrayOfString GestureNamesField;
+        private TouchToolkit.Framework.DataService.ArrayOfString GestureNamesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -52,7 +52,7 @@ namespace Framework.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public Framework.DataService.ArrayOfString GestureNames {
+        public TouchToolkit.Framework.DataService.ArrayOfString GestureNames {
             get {
                 return this.GestureNamesField;
             }
@@ -95,30 +95,30 @@ namespace Framework.DataService {
         
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/AddGestureData", ReplyAction="*")]
-        Framework.DataService.AddGestureDataResponse AddGestureData(Framework.DataService.AddGestureDataRequest request);
+        TouchToolkit.Framework.DataService.AddGestureDataResponse AddGestureData(TouchToolkit.Framework.DataService.AddGestureDataRequest request);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/AddGestureData", ReplyAction="*")]
-        System.IAsyncResult BeginAddGestureData(Framework.DataService.AddGestureDataRequest request, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginAddGestureData(TouchToolkit.Framework.DataService.AddGestureDataRequest request, System.AsyncCallback callback, object asyncState);
         
-        Framework.DataService.AddGestureDataResponse EndAddGestureData(System.IAsyncResult result);
+        TouchToolkit.Framework.DataService.AddGestureDataResponse EndAddGestureData(System.IAsyncResult result);
         
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/GetProjectsByUser", ReplyAction="*")]
-        Framework.DataService.GetProjectsByUserResponse GetProjectsByUser(Framework.DataService.GetProjectsByUserRequest request);
+        TouchToolkit.Framework.DataService.GetProjectsByUserResponse GetProjectsByUser(TouchToolkit.Framework.DataService.GetProjectsByUserRequest request);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/GetProjectsByUser", ReplyAction="*")]
-        System.IAsyncResult BeginGetProjectsByUser(Framework.DataService.GetProjectsByUserRequest request, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginGetProjectsByUser(TouchToolkit.Framework.DataService.GetProjectsByUserRequest request, System.AsyncCallback callback, object asyncState);
         
-        Framework.DataService.GetProjectsByUserResponse EndGetProjectsByUser(System.IAsyncResult result);
+        TouchToolkit.Framework.DataService.GetProjectsByUserResponse EndGetProjectsByUser(System.IAsyncResult result);
         
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/GetGestureData", ReplyAction="*")]
-        Framework.DataService.GetGestureDataResponse GetGestureData(Framework.DataService.GetGestureDataRequest request);
+        TouchToolkit.Framework.DataService.GetGestureDataResponse GetGestureData(TouchToolkit.Framework.DataService.GetGestureDataRequest request);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/GetGestureData", ReplyAction="*")]
-        System.IAsyncResult BeginGetGestureData(Framework.DataService.GetGestureDataRequest request, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginGetGestureData(TouchToolkit.Framework.DataService.GetGestureDataRequest request, System.AsyncCallback callback, object asyncState);
         
-        Framework.DataService.GetGestureDataResponse EndGetGestureData(System.IAsyncResult result);
+        TouchToolkit.Framework.DataService.GetGestureDataResponse EndGetGestureData(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/Delete", ReplyAction="*")]
         void Delete(int id);
@@ -130,21 +130,21 @@ namespace Framework.DataService {
         
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/IsUserNameUnique", ReplyAction="*")]
-        Framework.DataService.IsUserNameUniqueResponse IsUserNameUnique(Framework.DataService.IsUserNameUniqueRequest request);
+        TouchToolkit.Framework.DataService.IsUserNameUniqueResponse IsUserNameUnique(TouchToolkit.Framework.DataService.IsUserNameUniqueRequest request);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/IsUserNameUnique", ReplyAction="*")]
-        System.IAsyncResult BeginIsUserNameUnique(Framework.DataService.IsUserNameUniqueRequest request, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginIsUserNameUnique(TouchToolkit.Framework.DataService.IsUserNameUniqueRequest request, System.AsyncCallback callback, object asyncState);
         
-        Framework.DataService.IsUserNameUniqueResponse EndIsUserNameUnique(System.IAsyncResult result);
+        TouchToolkit.Framework.DataService.IsUserNameUniqueResponse EndIsUserNameUnique(System.IAsyncResult result);
         
         // CODEGEN: Generating message contract since element name userName from namespace http://labs.shahed.net/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://labs.shahed.net/LastUpdatedAt", ReplyAction="*")]
-        Framework.DataService.LastUpdatedAtResponse LastUpdatedAt(Framework.DataService.LastUpdatedAtRequest request);
+        TouchToolkit.Framework.DataService.LastUpdatedAtResponse LastUpdatedAt(TouchToolkit.Framework.DataService.LastUpdatedAtRequest request);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://labs.shahed.net/LastUpdatedAt", ReplyAction="*")]
-        System.IAsyncResult BeginLastUpdatedAt(Framework.DataService.LastUpdatedAtRequest request, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginLastUpdatedAt(TouchToolkit.Framework.DataService.LastUpdatedAtRequest request, System.AsyncCallback callback, object asyncState);
         
-        Framework.DataService.LastUpdatedAtResponse EndLastUpdatedAt(System.IAsyncResult result);
+        TouchToolkit.Framework.DataService.LastUpdatedAtResponse EndLastUpdatedAt(System.IAsyncResult result);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -154,12 +154,12 @@ namespace Framework.DataService {
     public partial class AddGestureDataRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AddGestureData", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.AddGestureDataRequestBody Body;
+        public TouchToolkit.Framework.DataService.AddGestureDataRequestBody Body;
         
         public AddGestureDataRequest() {
         }
         
-        public AddGestureDataRequest(Framework.DataService.AddGestureDataRequestBody Body) {
+        public AddGestureDataRequest(TouchToolkit.Framework.DataService.AddGestureDataRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -200,12 +200,12 @@ namespace Framework.DataService {
     public partial class AddGestureDataResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AddGestureDataResponse", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.AddGestureDataResponseBody Body;
+        public TouchToolkit.Framework.DataService.AddGestureDataResponseBody Body;
         
         public AddGestureDataResponse() {
         }
         
-        public AddGestureDataResponse(Framework.DataService.AddGestureDataResponseBody Body) {
+        public AddGestureDataResponse(TouchToolkit.Framework.DataService.AddGestureDataResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -234,12 +234,12 @@ namespace Framework.DataService {
     public partial class GetProjectsByUserRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetProjectsByUser", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.GetProjectsByUserRequestBody Body;
+        public TouchToolkit.Framework.DataService.GetProjectsByUserRequestBody Body;
         
         public GetProjectsByUserRequest() {
         }
         
-        public GetProjectsByUserRequest(Framework.DataService.GetProjectsByUserRequestBody Body) {
+        public GetProjectsByUserRequest(TouchToolkit.Framework.DataService.GetProjectsByUserRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -268,12 +268,12 @@ namespace Framework.DataService {
     public partial class GetProjectsByUserResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetProjectsByUserResponse", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.GetProjectsByUserResponseBody Body;
+        public TouchToolkit.Framework.DataService.GetProjectsByUserResponseBody Body;
         
         public GetProjectsByUserResponse() {
         }
         
-        public GetProjectsByUserResponse(Framework.DataService.GetProjectsByUserResponseBody Body) {
+        public GetProjectsByUserResponse(TouchToolkit.Framework.DataService.GetProjectsByUserResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -285,12 +285,12 @@ namespace Framework.DataService {
     public partial class GetProjectsByUserResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public Framework.DataService.ProjectInfo[] GetProjectsByUserResult;
+        public TouchToolkit.Framework.DataService.ProjectInfo[] GetProjectsByUserResult;
         
         public GetProjectsByUserResponseBody() {
         }
         
-        public GetProjectsByUserResponseBody(Framework.DataService.ProjectInfo[] GetProjectsByUserResult) {
+        public GetProjectsByUserResponseBody(TouchToolkit.Framework.DataService.ProjectInfo[] GetProjectsByUserResult) {
             this.GetProjectsByUserResult = GetProjectsByUserResult;
         }
     }
@@ -302,12 +302,12 @@ namespace Framework.DataService {
     public partial class GetGestureDataRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetGestureData", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.GetGestureDataRequestBody Body;
+        public TouchToolkit.Framework.DataService.GetGestureDataRequestBody Body;
         
         public GetGestureDataRequest() {
         }
         
-        public GetGestureDataRequest(Framework.DataService.GetGestureDataRequestBody Body) {
+        public GetGestureDataRequest(TouchToolkit.Framework.DataService.GetGestureDataRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -344,12 +344,12 @@ namespace Framework.DataService {
     public partial class GetGestureDataResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetGestureDataResponse", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.GetGestureDataResponseBody Body;
+        public TouchToolkit.Framework.DataService.GetGestureDataResponseBody Body;
         
         public GetGestureDataResponse() {
         }
         
-        public GetGestureDataResponse(Framework.DataService.GetGestureDataResponseBody Body) {
+        public GetGestureDataResponse(TouchToolkit.Framework.DataService.GetGestureDataResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -378,12 +378,12 @@ namespace Framework.DataService {
     public partial class IsUserNameUniqueRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUserNameUnique", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.IsUserNameUniqueRequestBody Body;
+        public TouchToolkit.Framework.DataService.IsUserNameUniqueRequestBody Body;
         
         public IsUserNameUniqueRequest() {
         }
         
-        public IsUserNameUniqueRequest(Framework.DataService.IsUserNameUniqueRequestBody Body) {
+        public IsUserNameUniqueRequest(TouchToolkit.Framework.DataService.IsUserNameUniqueRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -412,12 +412,12 @@ namespace Framework.DataService {
     public partial class IsUserNameUniqueResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUserNameUniqueResponse", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.IsUserNameUniqueResponseBody Body;
+        public TouchToolkit.Framework.DataService.IsUserNameUniqueResponseBody Body;
         
         public IsUserNameUniqueResponse() {
         }
         
-        public IsUserNameUniqueResponse(Framework.DataService.IsUserNameUniqueResponseBody Body) {
+        public IsUserNameUniqueResponse(TouchToolkit.Framework.DataService.IsUserNameUniqueResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -446,12 +446,12 @@ namespace Framework.DataService {
     public partial class LastUpdatedAtRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="LastUpdatedAt", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.LastUpdatedAtRequestBody Body;
+        public TouchToolkit.Framework.DataService.LastUpdatedAtRequestBody Body;
         
         public LastUpdatedAtRequest() {
         }
         
-        public LastUpdatedAtRequest(Framework.DataService.LastUpdatedAtRequestBody Body) {
+        public LastUpdatedAtRequest(TouchToolkit.Framework.DataService.LastUpdatedAtRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -480,12 +480,12 @@ namespace Framework.DataService {
     public partial class LastUpdatedAtResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="LastUpdatedAtResponse", Namespace="http://labs.shahed.net/", Order=0)]
-        public Framework.DataService.LastUpdatedAtResponseBody Body;
+        public TouchToolkit.Framework.DataService.LastUpdatedAtResponseBody Body;
         
         public LastUpdatedAtResponse() {
         }
         
-        public LastUpdatedAtResponse(Framework.DataService.LastUpdatedAtResponseBody Body) {
+        public LastUpdatedAtResponse(TouchToolkit.Framework.DataService.LastUpdatedAtResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -508,7 +508,7 @@ namespace Framework.DataService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface GestureServiceSoapChannel : Framework.DataService.GestureServiceSoap, System.ServiceModel.IClientChannel {
+    public interface GestureServiceSoapChannel : TouchToolkit.Framework.DataService.GestureServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -560,10 +560,10 @@ namespace Framework.DataService {
             this.results = results;
         }
         
-        public Framework.DataService.ProjectInfo[] Result {
+        public TouchToolkit.Framework.DataService.ProjectInfo[] Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((Framework.DataService.ProjectInfo[])(this.results[0]));
+                return ((TouchToolkit.Framework.DataService.ProjectInfo[])(this.results[0]));
             }
         }
     }
@@ -627,7 +627,7 @@ namespace Framework.DataService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GestureServiceSoapClient : System.ServiceModel.ClientBase<Framework.DataService.GestureServiceSoap>, Framework.DataService.GestureServiceSoap {
+    public partial class GestureServiceSoapClient : System.ServiceModel.ClientBase<TouchToolkit.Framework.DataService.GestureServiceSoap>, TouchToolkit.Framework.DataService.GestureServiceSoap {
         
         private BeginOperationDelegate onBeginConnectivityCheckDelegate;
         
@@ -753,45 +753,45 @@ namespace Framework.DataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.AddGestureDataResponse Framework.DataService.GestureServiceSoap.AddGestureData(Framework.DataService.AddGestureDataRequest request) {
+        TouchToolkit.Framework.DataService.AddGestureDataResponse TouchToolkit.Framework.DataService.GestureServiceSoap.AddGestureData(TouchToolkit.Framework.DataService.AddGestureDataRequest request) {
             return base.Channel.AddGestureData(request);
         }
         
         public string AddGestureData(string userName, string projectName, string gestureName, string gestureData) {
-            Framework.DataService.AddGestureDataRequest inValue = new Framework.DataService.AddGestureDataRequest();
-            inValue.Body = new Framework.DataService.AddGestureDataRequestBody();
+            TouchToolkit.Framework.DataService.AddGestureDataRequest inValue = new TouchToolkit.Framework.DataService.AddGestureDataRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.AddGestureDataRequestBody();
             inValue.Body.userName = userName;
             inValue.Body.projectName = projectName;
             inValue.Body.gestureName = gestureName;
             inValue.Body.gestureData = gestureData;
-            Framework.DataService.AddGestureDataResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).AddGestureData(inValue);
+            TouchToolkit.Framework.DataService.AddGestureDataResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).AddGestureData(inValue);
             return retVal.Body.AddGestureDataResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginAddGestureData(Framework.DataService.AddGestureDataRequest request, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult TouchToolkit.Framework.DataService.GestureServiceSoap.BeginAddGestureData(TouchToolkit.Framework.DataService.AddGestureDataRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginAddGestureData(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public System.IAsyncResult BeginAddGestureData(string userName, string projectName, string gestureName, string gestureData, System.AsyncCallback callback, object asyncState) {
-            Framework.DataService.AddGestureDataRequest inValue = new Framework.DataService.AddGestureDataRequest();
-            inValue.Body = new Framework.DataService.AddGestureDataRequestBody();
+            TouchToolkit.Framework.DataService.AddGestureDataRequest inValue = new TouchToolkit.Framework.DataService.AddGestureDataRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.AddGestureDataRequestBody();
             inValue.Body.userName = userName;
             inValue.Body.projectName = projectName;
             inValue.Body.gestureName = gestureName;
             inValue.Body.gestureData = gestureData;
-            return ((Framework.DataService.GestureServiceSoap)(this)).BeginAddGestureData(inValue, callback, asyncState);
+            return ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).BeginAddGestureData(inValue, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.AddGestureDataResponse Framework.DataService.GestureServiceSoap.EndAddGestureData(System.IAsyncResult result) {
+        TouchToolkit.Framework.DataService.AddGestureDataResponse TouchToolkit.Framework.DataService.GestureServiceSoap.EndAddGestureData(System.IAsyncResult result) {
             return base.Channel.EndAddGestureData(result);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public string EndAddGestureData(System.IAsyncResult result) {
-            Framework.DataService.AddGestureDataResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndAddGestureData(result);
+            TouchToolkit.Framework.DataService.AddGestureDataResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).EndAddGestureData(result);
             return retVal.Body.AddGestureDataResult;
         }
         
@@ -838,39 +838,39 @@ namespace Framework.DataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.GetProjectsByUserResponse Framework.DataService.GestureServiceSoap.GetProjectsByUser(Framework.DataService.GetProjectsByUserRequest request) {
+        TouchToolkit.Framework.DataService.GetProjectsByUserResponse TouchToolkit.Framework.DataService.GestureServiceSoap.GetProjectsByUser(TouchToolkit.Framework.DataService.GetProjectsByUserRequest request) {
             return base.Channel.GetProjectsByUser(request);
         }
         
-        public Framework.DataService.ProjectInfo[] GetProjectsByUser(string userName) {
-            Framework.DataService.GetProjectsByUserRequest inValue = new Framework.DataService.GetProjectsByUserRequest();
-            inValue.Body = new Framework.DataService.GetProjectsByUserRequestBody();
+        public TouchToolkit.Framework.DataService.ProjectInfo[] GetProjectsByUser(string userName) {
+            TouchToolkit.Framework.DataService.GetProjectsByUserRequest inValue = new TouchToolkit.Framework.DataService.GetProjectsByUserRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.GetProjectsByUserRequestBody();
             inValue.Body.userName = userName;
-            Framework.DataService.GetProjectsByUserResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).GetProjectsByUser(inValue);
+            TouchToolkit.Framework.DataService.GetProjectsByUserResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).GetProjectsByUser(inValue);
             return retVal.Body.GetProjectsByUserResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginGetProjectsByUser(Framework.DataService.GetProjectsByUserRequest request, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult TouchToolkit.Framework.DataService.GestureServiceSoap.BeginGetProjectsByUser(TouchToolkit.Framework.DataService.GetProjectsByUserRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetProjectsByUser(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public System.IAsyncResult BeginGetProjectsByUser(string userName, System.AsyncCallback callback, object asyncState) {
-            Framework.DataService.GetProjectsByUserRequest inValue = new Framework.DataService.GetProjectsByUserRequest();
-            inValue.Body = new Framework.DataService.GetProjectsByUserRequestBody();
+            TouchToolkit.Framework.DataService.GetProjectsByUserRequest inValue = new TouchToolkit.Framework.DataService.GetProjectsByUserRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.GetProjectsByUserRequestBody();
             inValue.Body.userName = userName;
-            return ((Framework.DataService.GestureServiceSoap)(this)).BeginGetProjectsByUser(inValue, callback, asyncState);
+            return ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).BeginGetProjectsByUser(inValue, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.GetProjectsByUserResponse Framework.DataService.GestureServiceSoap.EndGetProjectsByUser(System.IAsyncResult result) {
+        TouchToolkit.Framework.DataService.GetProjectsByUserResponse TouchToolkit.Framework.DataService.GestureServiceSoap.EndGetProjectsByUser(System.IAsyncResult result) {
             return base.Channel.EndGetProjectsByUser(result);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Framework.DataService.ProjectInfo[] EndGetProjectsByUser(System.IAsyncResult result) {
-            Framework.DataService.GetProjectsByUserResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndGetProjectsByUser(result);
+        public TouchToolkit.Framework.DataService.ProjectInfo[] EndGetProjectsByUser(System.IAsyncResult result) {
+            TouchToolkit.Framework.DataService.GetProjectsByUserResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).EndGetProjectsByUser(result);
             return retVal.Body.GetProjectsByUserResult;
         }
         
@@ -880,7 +880,7 @@ namespace Framework.DataService {
         }
         
         private object[] OnEndGetProjectsByUser(System.IAsyncResult result) {
-            Framework.DataService.ProjectInfo[] retVal = this.EndGetProjectsByUser(result);
+            TouchToolkit.Framework.DataService.ProjectInfo[] retVal = this.EndGetProjectsByUser(result);
             return new object[] {
                     retVal};
         }
@@ -911,43 +911,43 @@ namespace Framework.DataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.GetGestureDataResponse Framework.DataService.GestureServiceSoap.GetGestureData(Framework.DataService.GetGestureDataRequest request) {
+        TouchToolkit.Framework.DataService.GetGestureDataResponse TouchToolkit.Framework.DataService.GestureServiceSoap.GetGestureData(TouchToolkit.Framework.DataService.GetGestureDataRequest request) {
             return base.Channel.GetGestureData(request);
         }
         
         public string GetGestureData(string userName, string projectName, string gestureName) {
-            Framework.DataService.GetGestureDataRequest inValue = new Framework.DataService.GetGestureDataRequest();
-            inValue.Body = new Framework.DataService.GetGestureDataRequestBody();
+            TouchToolkit.Framework.DataService.GetGestureDataRequest inValue = new TouchToolkit.Framework.DataService.GetGestureDataRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.GetGestureDataRequestBody();
             inValue.Body.userName = userName;
             inValue.Body.projectName = projectName;
             inValue.Body.gestureName = gestureName;
-            Framework.DataService.GetGestureDataResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).GetGestureData(inValue);
+            TouchToolkit.Framework.DataService.GetGestureDataResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).GetGestureData(inValue);
             return retVal.Body.GetGestureDataResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginGetGestureData(Framework.DataService.GetGestureDataRequest request, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult TouchToolkit.Framework.DataService.GestureServiceSoap.BeginGetGestureData(TouchToolkit.Framework.DataService.GetGestureDataRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetGestureData(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public System.IAsyncResult BeginGetGestureData(string userName, string projectName, string gestureName, System.AsyncCallback callback, object asyncState) {
-            Framework.DataService.GetGestureDataRequest inValue = new Framework.DataService.GetGestureDataRequest();
-            inValue.Body = new Framework.DataService.GetGestureDataRequestBody();
+            TouchToolkit.Framework.DataService.GetGestureDataRequest inValue = new TouchToolkit.Framework.DataService.GetGestureDataRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.GetGestureDataRequestBody();
             inValue.Body.userName = userName;
             inValue.Body.projectName = projectName;
             inValue.Body.gestureName = gestureName;
-            return ((Framework.DataService.GestureServiceSoap)(this)).BeginGetGestureData(inValue, callback, asyncState);
+            return ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).BeginGetGestureData(inValue, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.GetGestureDataResponse Framework.DataService.GestureServiceSoap.EndGetGestureData(System.IAsyncResult result) {
+        TouchToolkit.Framework.DataService.GetGestureDataResponse TouchToolkit.Framework.DataService.GestureServiceSoap.EndGetGestureData(System.IAsyncResult result) {
             return base.Channel.EndGetGestureData(result);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public string EndGetGestureData(System.IAsyncResult result) {
-            Framework.DataService.GetGestureDataResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndGetGestureData(result);
+            TouchToolkit.Framework.DataService.GetGestureDataResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).EndGetGestureData(result);
             return retVal.Body.GetGestureDataResult;
         }
         
@@ -1041,39 +1041,39 @@ namespace Framework.DataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.IsUserNameUniqueResponse Framework.DataService.GestureServiceSoap.IsUserNameUnique(Framework.DataService.IsUserNameUniqueRequest request) {
+        TouchToolkit.Framework.DataService.IsUserNameUniqueResponse TouchToolkit.Framework.DataService.GestureServiceSoap.IsUserNameUnique(TouchToolkit.Framework.DataService.IsUserNameUniqueRequest request) {
             return base.Channel.IsUserNameUnique(request);
         }
         
         public bool IsUserNameUnique(string userName) {
-            Framework.DataService.IsUserNameUniqueRequest inValue = new Framework.DataService.IsUserNameUniqueRequest();
-            inValue.Body = new Framework.DataService.IsUserNameUniqueRequestBody();
+            TouchToolkit.Framework.DataService.IsUserNameUniqueRequest inValue = new TouchToolkit.Framework.DataService.IsUserNameUniqueRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.IsUserNameUniqueRequestBody();
             inValue.Body.userName = userName;
-            Framework.DataService.IsUserNameUniqueResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).IsUserNameUnique(inValue);
+            TouchToolkit.Framework.DataService.IsUserNameUniqueResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).IsUserNameUnique(inValue);
             return retVal.Body.IsUserNameUniqueResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginIsUserNameUnique(Framework.DataService.IsUserNameUniqueRequest request, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult TouchToolkit.Framework.DataService.GestureServiceSoap.BeginIsUserNameUnique(TouchToolkit.Framework.DataService.IsUserNameUniqueRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginIsUserNameUnique(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public System.IAsyncResult BeginIsUserNameUnique(string userName, System.AsyncCallback callback, object asyncState) {
-            Framework.DataService.IsUserNameUniqueRequest inValue = new Framework.DataService.IsUserNameUniqueRequest();
-            inValue.Body = new Framework.DataService.IsUserNameUniqueRequestBody();
+            TouchToolkit.Framework.DataService.IsUserNameUniqueRequest inValue = new TouchToolkit.Framework.DataService.IsUserNameUniqueRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.IsUserNameUniqueRequestBody();
             inValue.Body.userName = userName;
-            return ((Framework.DataService.GestureServiceSoap)(this)).BeginIsUserNameUnique(inValue, callback, asyncState);
+            return ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).BeginIsUserNameUnique(inValue, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.IsUserNameUniqueResponse Framework.DataService.GestureServiceSoap.EndIsUserNameUnique(System.IAsyncResult result) {
+        TouchToolkit.Framework.DataService.IsUserNameUniqueResponse TouchToolkit.Framework.DataService.GestureServiceSoap.EndIsUserNameUnique(System.IAsyncResult result) {
             return base.Channel.EndIsUserNameUnique(result);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public bool EndIsUserNameUnique(System.IAsyncResult result) {
-            Framework.DataService.IsUserNameUniqueResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndIsUserNameUnique(result);
+            TouchToolkit.Framework.DataService.IsUserNameUniqueResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).EndIsUserNameUnique(result);
             return retVal.Body.IsUserNameUniqueResult;
         }
         
@@ -1114,39 +1114,39 @@ namespace Framework.DataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.LastUpdatedAtResponse Framework.DataService.GestureServiceSoap.LastUpdatedAt(Framework.DataService.LastUpdatedAtRequest request) {
+        TouchToolkit.Framework.DataService.LastUpdatedAtResponse TouchToolkit.Framework.DataService.GestureServiceSoap.LastUpdatedAt(TouchToolkit.Framework.DataService.LastUpdatedAtRequest request) {
             return base.Channel.LastUpdatedAt(request);
         }
         
         public System.DateTime LastUpdatedAt(string userName) {
-            Framework.DataService.LastUpdatedAtRequest inValue = new Framework.DataService.LastUpdatedAtRequest();
-            inValue.Body = new Framework.DataService.LastUpdatedAtRequestBody();
+            TouchToolkit.Framework.DataService.LastUpdatedAtRequest inValue = new TouchToolkit.Framework.DataService.LastUpdatedAtRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.LastUpdatedAtRequestBody();
             inValue.Body.userName = userName;
-            Framework.DataService.LastUpdatedAtResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).LastUpdatedAt(inValue);
+            TouchToolkit.Framework.DataService.LastUpdatedAtResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).LastUpdatedAt(inValue);
             return retVal.Body.LastUpdatedAtResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Framework.DataService.GestureServiceSoap.BeginLastUpdatedAt(Framework.DataService.LastUpdatedAtRequest request, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult TouchToolkit.Framework.DataService.GestureServiceSoap.BeginLastUpdatedAt(TouchToolkit.Framework.DataService.LastUpdatedAtRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginLastUpdatedAt(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public System.IAsyncResult BeginLastUpdatedAt(string userName, System.AsyncCallback callback, object asyncState) {
-            Framework.DataService.LastUpdatedAtRequest inValue = new Framework.DataService.LastUpdatedAtRequest();
-            inValue.Body = new Framework.DataService.LastUpdatedAtRequestBody();
+            TouchToolkit.Framework.DataService.LastUpdatedAtRequest inValue = new TouchToolkit.Framework.DataService.LastUpdatedAtRequest();
+            inValue.Body = new TouchToolkit.Framework.DataService.LastUpdatedAtRequestBody();
             inValue.Body.userName = userName;
-            return ((Framework.DataService.GestureServiceSoap)(this)).BeginLastUpdatedAt(inValue, callback, asyncState);
+            return ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).BeginLastUpdatedAt(inValue, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Framework.DataService.LastUpdatedAtResponse Framework.DataService.GestureServiceSoap.EndLastUpdatedAt(System.IAsyncResult result) {
+        TouchToolkit.Framework.DataService.LastUpdatedAtResponse TouchToolkit.Framework.DataService.GestureServiceSoap.EndLastUpdatedAt(System.IAsyncResult result) {
             return base.Channel.EndLastUpdatedAt(result);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public System.DateTime EndLastUpdatedAt(System.IAsyncResult result) {
-            Framework.DataService.LastUpdatedAtResponse retVal = ((Framework.DataService.GestureServiceSoap)(this)).EndLastUpdatedAt(result);
+            TouchToolkit.Framework.DataService.LastUpdatedAtResponse retVal = ((TouchToolkit.Framework.DataService.GestureServiceSoap)(this)).EndLastUpdatedAt(result);
             return retVal.Body.LastUpdatedAtResult;
         }
         

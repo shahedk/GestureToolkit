@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Reflection;
 
-namespace Framework.Utility
+namespace TouchToolkit.Framework.Utility
 {
     public static class CommonExtensions
     {

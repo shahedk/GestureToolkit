@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace Gestures.Rules.Objects
+namespace TouchToolkit.GestureProcessor.Rules.Objects
 {
     public interface IRuleData
     {

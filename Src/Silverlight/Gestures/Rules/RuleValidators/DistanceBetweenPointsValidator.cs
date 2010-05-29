@@ -9,15 +9,15 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-using Gestures.Rules.Objects;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 using Combinatorial;
-using Gestures.Exceptions;
-using Gestures.Utility;
+using TouchToolkit.GestureProcessor.Exceptions;
+using TouchToolkit.GestureProcessor.Utility;
 using System.Collections.Generic;
-using Gestures.Objects;
-using BehaviourTypes = Gestures.Rules.Objects.DistanceBetweenPoints.BehaviourTypes;
+using TouchToolkit.GestureProcessor.Objects;
+using BehaviourTypes = TouchToolkit.GestureProcessor.Rules.Objects.DistanceBetweenPoints.BehaviourTypes;
 
-namespace Gestures.Rules.RuleValidators
+namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
 {
     public class DistanceBetweenPointsValidator : IRuleValidator
     {

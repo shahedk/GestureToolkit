@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TouchToolkit.Framework.Storage;
 
-namespace Framework.Storage
+namespace TouchToolkit.Framework.Storage
 {
     public class NETClientStorage : IDataStorage
     {

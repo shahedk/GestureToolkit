@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 
-namespace Gestures.Objects
+namespace TouchToolkit.GestureProcessor.Objects
 {
     public class ValidSetOfPointsCollection : List<ValidSetOfTouchPoints>
     {

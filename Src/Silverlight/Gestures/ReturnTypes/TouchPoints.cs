@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 using System.Collections.Generic;
 
-namespace Gestures.ReturnTypes
+namespace TouchToolkit.GestureProcessor.ReturnTypes
 {
     public class TouchPoints : List<Point>, IReturnType
     {

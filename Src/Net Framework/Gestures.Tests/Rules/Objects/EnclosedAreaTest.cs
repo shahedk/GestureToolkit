@@ -1,8 +1,8 @@
-﻿using Gestures.Rules.Objects;
+﻿using TouchToolkit.GestureProcessor.Rules.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Gestures.Tests
+namespace TouchToolkit.GestureProcessor.Tests
 {
     
     

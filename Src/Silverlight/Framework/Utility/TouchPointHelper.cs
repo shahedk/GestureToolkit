@@ -10,10 +10,10 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 
-using Gestures.Objects;
-using Framework.Exceptions;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.Exceptions;
 
-namespace Framework.Utility
+namespace TouchToolkit.Framework.Utility
 {
     public static class TouchPointExtensionMethods
     {

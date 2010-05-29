@@ -10,19 +10,18 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.IO.IsolatedStorage;
-using Framework.DataService;
+using TouchToolkit.Framework.DataService;
 using System.Reflection;
 using System.ServiceModel;
-using Framework.HardwareListeners;
 using System.Threading;
-using Gestures.Objects;
-using Framework.Utility;
-using Framework.Exceptions;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.Utility;
+using TouchToolkit.Framework.Exceptions;
 using System.Collections.ObjectModel;
-using Framework.Components;
-using Framework.Storage;
+using TouchToolkit.Framework.Components;
+using TouchToolkit.Framework.Storage;
 
-namespace Framework.UI
+namespace TouchToolkit.Framework.UI
 {
     public partial class GestureRecordingPanel : UserControl
     {

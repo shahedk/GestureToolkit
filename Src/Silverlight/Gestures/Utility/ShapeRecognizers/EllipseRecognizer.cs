@@ -9,7 +9,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using ShapeRecognizers.ConvexHull;
 
-namespace Framework.ShapeRecognizers
+namespace TouchToolkit.Framework.ShapeRecognizers
 {
     public class EllipseRecognizer : IShapeRecognizer
     {

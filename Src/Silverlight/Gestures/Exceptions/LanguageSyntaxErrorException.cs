@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gestures.Exceptions
+namespace TouchToolkit.GestureProcessor.Exceptions
 {
     public class LanguageSyntaxErrorException : Exception
     {

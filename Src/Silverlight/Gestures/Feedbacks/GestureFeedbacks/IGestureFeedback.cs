@@ -10,10 +10,10 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Collections.Generic;
-using Gestures.ReturnTypes;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 
 
-namespace Gestures.Feedbacks.GestureFeedbacks
+namespace TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks
 {
     public interface IGestureFeedback
     {
