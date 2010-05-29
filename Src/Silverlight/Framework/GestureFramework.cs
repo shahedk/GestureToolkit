@@ -8,20 +8,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Framework.GestureEvents;
+using TouchToolkit.Framework.GestureEvents;
 using System.Collections.Generic;
-using Gestures.Feedbacks.TouchFeedbacks;
-using Gestures.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
+using TouchToolkit.GestureProcessor.Rules.RuleValidators;
 
-using Gestures.Feedbacks.GestureFeedbacks;
-using Gestures.Utility.TouchHelpers;
-using Framework.Utility;
-using Framework.Exceptions;
+using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
+using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
+using TouchToolkit.Framework.Utility;
+using TouchToolkit.Framework.Exceptions;
 using System.Diagnostics.Contracts;
-using Framework.TouchInputProviders;
-using Framework.UI;
+using TouchToolkit.Framework.TouchInputProviders;
+using TouchToolkit.Framework.UI;
 
-namespace Framework
+namespace TouchToolkit.Framework
 {
     public class GestureFramework
     {
@@ -74,8 +74,8 @@ namespace Framework
             }
         }
 
-        private static Framework.GestureEvents.EventManager _eventManager = new Framework.GestureEvents.EventManager();
-        public static Framework.GestureEvents.EventManager EventManager
+        private static TouchToolkit.Framework.GestureEvents.EventManager _eventManager = new TouchToolkit.Framework.GestureEvents.EventManager();
+        public static TouchToolkit.Framework.GestureEvents.EventManager EventManager
         {
             get
             {

@@ -9,10 +9,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-using Framework.GestureEvents;
-using Framework.TouchInputProviders;
+using TouchToolkit.Framework.GestureEvents;
+using TouchToolkit.Framework.TouchInputProviders;
 
-namespace Framework
+namespace TouchToolkit.Framework
 {
     public class TouchInputManager
     {

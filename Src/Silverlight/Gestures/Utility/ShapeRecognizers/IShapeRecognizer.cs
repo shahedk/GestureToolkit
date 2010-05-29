@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace Framework.ShapeRecognizers
+namespace TouchToolkit.Framework.ShapeRecognizers
 {
     internal interface IShapeRecognizer
     {

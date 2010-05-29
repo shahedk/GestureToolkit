@@ -9,11 +9,11 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 using System.Collections.Generic;
-using Gestures.Rules.Objects;
-using Gestures.Objects;
-using Gestures.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.Rules.Objects;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.GestureProcessor.Rules.RuleValidators;
 
-namespace Gestures.Rules
+namespace TouchToolkit.GestureProcessor.Rules
 {
     /// <summary>
     /// Validates the lifetime of a touch

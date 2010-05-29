@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows.Controls;
-using Framework.HardwareListeners;
 using Framework;
-using Gestures.Utility;
-using Gestures.ReturnTypes;
+using TouchToolkit.GestureProcessor.Utility;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
+using TouchToolkit.Framework;
 
-namespace Gestures.Tests.Gesture_Definitions
+namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
 {
     /// <summary>
     /// Summary description for ZoomGestureTest

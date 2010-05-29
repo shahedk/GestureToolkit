@@ -2,11 +2,11 @@
 using System.Threading;
 using System.Windows.Threading;
 using System.Windows.Shapes;
-using Gestures.ReturnTypes;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Collections.Generic;
 using System.Windows.Media;
 using System;
-namespace Gestures.Feedbacks.GestureFeedbacks
+namespace TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks
 {
     public class HighlightSelectedArea : IGestureFeedback
     {

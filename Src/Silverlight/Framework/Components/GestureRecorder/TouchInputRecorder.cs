@@ -8,20 +8,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Framework.HardwareListeners;
+using TouchToolkit.Framework.TouchInputProviders;
 using System.Collections.Generic;
-using Framework.Exceptions;
-using Gestures.Objects;
+using TouchToolkit.Framework.Exceptions;
+using TouchToolkit.GestureProcessor.Objects;
 using System.Threading;
-using Framework.Utility;
+using TouchToolkit.Framework.Utility;
 using System.IO.IsolatedStorage;
-using Framework.DataService;
+using TouchToolkit.Framework.DataService;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Threading;
-using Framework.Storage;
+using TouchToolkit.Framework.Storage;
 
-namespace Framework.Components
+namespace TouchToolkit.Framework.Components
 {
     public class TouchInputRecorder
     {

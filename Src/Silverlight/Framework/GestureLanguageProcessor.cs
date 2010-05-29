@@ -9,16 +9,16 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Runtime.Serialization.Json;
-using Framework.Utility;
+using TouchToolkit.Framework.Utility;
 using System.Collections.Generic;
 
-using Gestures.Objects.LanguageTokens;
-using Gestures.ReturnTypes;
-using Gestures.Rules.RuleValidators;
-using Gestures.Objects;
-using Gestures.Rules.Objects;
+using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
+using TouchToolkit.GestureProcessor.ReturnTypes;
+using TouchToolkit.GestureProcessor.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 
-namespace Framework
+namespace TouchToolkit.Framework
 {
     internal class GestureLanguageProcessor
     {

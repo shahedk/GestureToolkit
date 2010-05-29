@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
 using System.Windows;
-using Gestures.ReturnTypes;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 using System;
 
-namespace Framework
+namespace TouchToolkit.Framework
 {
     public class GestureEventArgs : EventArgs
     {

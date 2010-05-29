@@ -8,9 +8,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.ReturnTypes
+namespace TouchToolkit.GestureProcessor.ReturnTypes
 {
     public interface IReturnTypeCalculator
     {

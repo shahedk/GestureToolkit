@@ -9,9 +9,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
-using Gestures.Base;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.Objects
+namespace TouchToolkit.GestureProcessor.Objects
 {
     public class TouchFrame
     {

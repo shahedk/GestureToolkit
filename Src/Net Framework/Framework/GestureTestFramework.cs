@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
-using Framework.HardwareListeners;
-using Framework.TouchInputProviders;
-using Framework.Storage;
-using Framework.Components;
-using Framework.Exceptions;
+using TouchToolkit.Framework.TouchInputProviders;
+using TouchToolkit.Framework.Storage;
+using TouchToolkit.Framework.Components;
+using TouchToolkit.Framework.Exceptions;
 
-namespace Framework
+namespace TouchToolkit.Framework
 {
     public sealed class GestureTestFramework
     {

@@ -10,13 +10,13 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 
-using Gestures.Rules.Objects;
-using Gestures.Objects;
-using Gestures.Utility;
-using Gestures.Utility.TouchHelpers;
-using Framework.ShapeRecognizers;
+using TouchToolkit.GestureProcessor.Rules.Objects;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.GestureProcessor.Utility;
+using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
+using TouchToolkit.Framework.ShapeRecognizers;
 
-namespace Gestures.Rules.RuleValidators
+namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
 {
     public class TouchShapeValidator : IRuleValidator
     {
@@ -93,7 +93,7 @@ namespace Gestures.Rules.RuleValidators
             throw new NotImplementedException();
         }
 
-        public Objects.IRuleData GenerateRuleData(System.Collections.Generic.List<Gestures.Objects.TouchPoint2> points)
+        public Objects.IRuleData GenerateRuleData(System.Collections.Generic.List<TouchToolkit.GestureProcessor.Objects.TouchPoint2> points)
         {
             throw new NotImplementedException();
         }

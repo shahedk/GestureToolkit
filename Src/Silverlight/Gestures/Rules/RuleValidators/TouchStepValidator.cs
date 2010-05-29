@@ -8,13 +8,13 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-using Gestures.Utility.TouchHelpers;
-using Gestures.Rules.Objects;
+using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 using System.Collections.Generic;
-using Gestures.Rules.RuleValidators;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.Rules
+namespace TouchToolkit.GestureProcessor.Rules
 {
     public class TouchStepValidator : IRuleValidator
     {

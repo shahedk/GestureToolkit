@@ -1,8 +1,8 @@
-﻿using Gestures.ReturnTypes;
+﻿using TouchToolkit.GestureProcessor.ReturnTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Gestures.Objects;
-using Gestures.Exceptions;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.GestureProcessor.Exceptions;
 using System.Windows;
 
 namespace Framework.Tests

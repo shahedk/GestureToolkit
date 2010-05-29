@@ -9,9 +9,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.Base
+namespace TouchToolkit.GestureProcessor.Base
 {
     public class RuleResultCache
     {

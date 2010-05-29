@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace Framework.Exceptions
+namespace TouchToolkit.Framework.Exceptions
 {
     public class FrameworkException : Exception
     {

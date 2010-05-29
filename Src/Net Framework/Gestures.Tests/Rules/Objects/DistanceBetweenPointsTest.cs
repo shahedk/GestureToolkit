@@ -1,9 +1,10 @@
-﻿using Gestures.Rules.Objects;
+﻿using TouchToolkit.GestureProcessor.Rules.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using BehaviourTypes = Gestures.Rules.Objects.DistanceBetweenPoints_Accessor.BehaviourTypes;
+using BehaviourTypes = TouchToolkit.GestureProcessor.Rules.Objects.DistanceBetweenPoints_Accessor.BehaviourTypes;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 
-namespace Gestures.Tests.Rules.Objects
+namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
 {
 
 

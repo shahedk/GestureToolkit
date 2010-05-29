@@ -5,17 +5,15 @@ using System.Text;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Input;
-using Framework;
-
-using Gestures.Utility.TouchHelpers;
+using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
 using System.Windows.Controls;
-using Gestures.Objects;
-using Framework.Utility;
-using Framework.TouchInputProviders;
-using Framework.Exceptions;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.Utility;
+using TouchToolkit.Framework.TouchInputProviders;
+using TouchToolkit.Framework.Exceptions;
 using System.Windows.Media;
 
-namespace Framework.TouchInputProviders
+namespace TouchToolkit.Framework.TouchInputProviders
 {
     public abstract class TouchInputProvider : IDisposable
     {

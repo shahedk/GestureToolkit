@@ -4,7 +4,7 @@
 
 
 using System;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
 
 namespace Combinatorial

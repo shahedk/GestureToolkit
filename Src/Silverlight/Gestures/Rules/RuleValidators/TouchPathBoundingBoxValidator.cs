@@ -9,11 +9,11 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-using Gestures.Rules.Objects;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 using System.Collections.Generic;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.Rules.RuleValidators
+namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
 {
     public class TouchPathBoundingBoxValidator : IRuleValidator
     {

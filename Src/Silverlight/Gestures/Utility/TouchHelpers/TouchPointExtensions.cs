@@ -8,10 +8,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Gestures.Objects;
-using Gestures.Exceptions;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.GestureProcessor.Exceptions;
 
-namespace Gestures.Utility.TouchHelpers
+namespace TouchToolkit.GestureProcessor.Utility.TouchHelpers
 {
     public static class TouchPointExtensions
     {

@@ -9,16 +9,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Gestures.ReturnTypes;
-using Framework.HardwareListeners;
-using Gestures.Feedbacks.TouchFeedbacks;
-using Framework;
+using TouchToolkit.GestureProcessor.ReturnTypes;
+using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using System.Windows.Media.Imaging;
-using Framework.TouchInputProviders;
-using Gestures.Feedbacks.GestureFeedbacks;
+using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
 using System.Threading;
-
 using System.Text;
+using TouchToolkit.Framework;
+using TouchToolkit.Framework.TouchInputProviders;
 
 namespace TestApplication
 {
@@ -69,7 +67,7 @@ namespace TestApplication
                 LayoutRoot.Children.Add(img);
 
                 // Subscribe to gesture events for image
-                GestureFramework.EventManager.AddEvent(img, "zoom", ZoomCallback);
+                GestureFramework.EventManager.AddEvent(img, TouchToolkit.GestureProcessor.Gesture_Definitions.Gestures.DoubleTap, ZoomCallback);
                 GestureFramework.EventManager.AddEvent(img, "pinch", PinchCallback);
                 GestureFramework.EventManager.AddEvent(img, "drag", DragCallback);
                 GestureFramework.EventManager.AddEvent(img, "rotate", RotateCallback);
@@ -117,7 +115,7 @@ namespace TestApplication
             List<BitmapImage> images = new List<BitmapImage>();
             foreach (string imgName in imageNames)
             {
-                BitmapImage img = Framework.Utility.ContentHelper.GetEmbeddedImage(this, imgName);
+                BitmapImage img = TouchToolkit.Framework.Utility.ContentHelper.GetEmbeddedImage(this, imgName);
                 images.Add(img);
             }
 

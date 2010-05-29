@@ -12,9 +12,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Framework;
-using Gestures.ReturnTypes;
 using Framework.TouchInputProviders;
-using Gestures.Feedbacks.TouchFeedbacks;
+using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
+using TouchToolkit.GestureProcessor.ReturnTypes;
+using TouchToolkit.Framework;
 
 namespace TestApplication
 {

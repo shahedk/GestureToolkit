@@ -1,4 +1,4 @@
-﻿using Gestures.ReturnTypes;
+﻿using TouchToolkit.GestureProcessor.ReturnTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 

@@ -10,10 +10,10 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 using System.Collections.Generic;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
 /* Helper class that implements the Hough Transform algorithm to find an image with a line*/
-namespace Framework.ShapeRecognizers
+namespace TouchToolkit.Framework.ShapeRecognizers
 {
     public class HoughLine : IShapeRecognizer
     {

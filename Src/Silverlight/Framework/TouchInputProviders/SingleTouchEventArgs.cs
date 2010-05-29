@@ -10,9 +10,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 using System.Collections.Generic;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Framework.TouchInputProviders
+namespace TouchToolkit.Framework.TouchInputProviders
 {
     public class SingleTouchEventArgs : EventArgs
     {

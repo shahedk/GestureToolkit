@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Framework.Exceptions;
+using TouchToolkit.Framework.Exceptions;
 
-namespace Framework.Storage
+namespace TouchToolkit.Framework.Storage
 {
     public class WebStorage : IDataStorage
     {
         private string _accountName = string.Empty;
-        DataService.GestureServiceSoapClient _dataService = new DataService.GestureServiceSoapClient();
+        TouchToolkit.Framework.DataService.GestureServiceSoapClient _dataService = new TouchToolkit.Framework.DataService.GestureServiceSoapClient();
 
         public string AccountName
         {
@@ -42,7 +42,7 @@ namespace Framework.Storage
         }
 
         
-        void _dataService_ConnectivityCheckCompleted(object sender, DataService.ConnectivityCheckCompletedEventArgs e)
+        void _dataService_ConnectivityCheckCompleted(object sender, TouchToolkit.Framework.DataService.ConnectivityCheckCompletedEventArgs e)
         {
             if (e.Error != null)
             {
@@ -59,7 +59,7 @@ namespace Framework.Storage
             _dataService.AddGestureDataAsync(_accountName, projectName, gestureName, data, state);
         }
 
-        private void _dataService_AddGestureDataCompleted(object sender, DataService.AddGestureDataCompletedEventArgs e)
+        private void _dataService_AddGestureDataCompleted(object sender, TouchToolkit.Framework.DataService.AddGestureDataCompletedEventArgs e)
         {
             // Get the asyncState object that was passed while calling the async method
             var asyncState = e.UserState as Tuple<string, string, SaveGestureCallback>;
@@ -79,7 +79,7 @@ namespace Framework.Storage
             _dataService.GetGestureDataAsync(_accountName, projectName, gestureName, state);
         }
 
-        private void _dataService_GetGestureDataCompleted(object sender, DataService.GetGestureDataCompletedEventArgs e)
+        private void _dataService_GetGestureDataCompleted(object sender, TouchToolkit.Framework.DataService.GetGestureDataCompletedEventArgs e)
         {
             // Get the asyncState object that was passed while calling the async method
             var asyncState = e.UserState as Tuple<string, string, GetGestureCallback>;
@@ -94,7 +94,7 @@ namespace Framework.Storage
             _dataService.GetProjectsByUserAsync(_accountName, callback);
         }
 
-        void _dataService_GetProjectsByUserCompleted(object sender, DataService.GetProjectsByUserCompletedEventArgs e)
+        void _dataService_GetProjectsByUserCompleted(object sender, TouchToolkit.Framework.DataService.GetProjectsByUserCompletedEventArgs e)
         {
             GetAllProjectsCallback callback = e.UserState as GetAllProjectsCallback;
 

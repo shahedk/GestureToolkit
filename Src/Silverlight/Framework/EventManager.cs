@@ -4,22 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
-
-using Framework;
-
-using Framework.Exceptions;
-using Framework.Utility;
-using Gestures.Feedbacks.TouchFeedbacks;
+using TouchToolkit.Framework.Exceptions;
+using TouchToolkit.Framework.Utility;
+using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using System.Windows.Controls;
-using Gestures.Rules.RuleValidators;
-using Gestures.Feedbacks.GestureFeedbacks;
+using TouchToolkit.GestureProcessor.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
 using System.Windows.Media;
 using System.Diagnostics;
-using Gestures.Objects;
-using Framework.TouchInputProviders;
-using Gestures.ReturnTypes;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.TouchInputProviders;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 
-namespace Framework.GestureEvents
+namespace TouchToolkit.Framework.GestureEvents
 {
     public enum TouchInputType
     {
@@ -30,8 +27,8 @@ namespace Framework.GestureEvents
 
     public class EventManager
     {
-        public event Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler SingleTouchChanged;
-        public event Framework.TouchInputProviders.TouchInputProvider.MultiTouchChangeEventHandler MultiTouchChanged;
+        public event TouchToolkit.Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler SingleTouchChanged;
+        public event TouchToolkit.Framework.TouchInputProviders.TouchInputProvider.MultiTouchChangeEventHandler MultiTouchChanged;
 
         #region Constructor & singleton instance
         internal EventManager()

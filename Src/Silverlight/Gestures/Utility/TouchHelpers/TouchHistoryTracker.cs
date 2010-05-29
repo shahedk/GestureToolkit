@@ -8,9 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.Utility.TouchHelpers
+namespace TouchToolkit.GestureProcessor.Utility.TouchHelpers
 {
     // The history tracker works like a stack. But there is no max limit, instead it overrides old data
     public class TouchHistoryTracker

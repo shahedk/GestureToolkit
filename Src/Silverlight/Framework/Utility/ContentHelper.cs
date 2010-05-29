@@ -11,12 +11,12 @@ using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Reflection;
-using Framework.Utility;
+using TouchToolkit.Framework.Utility;
 using System.Collections.Generic;
 
-using Gestures.Objects.LanguageTokens;
+using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
 
-namespace Framework.Utility
+namespace TouchToolkit.Framework.Utility
 {
     public static class ContentHelper
     {

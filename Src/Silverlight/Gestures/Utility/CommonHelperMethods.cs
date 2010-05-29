@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace Gestures.Utility
+namespace TouchToolkit.GestureProcessor.Utility
 {
     //TODO: Change to more meaningful name
     public static class CommonHelperMethods

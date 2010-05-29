@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 
-namespace Gestures.ReturnTypes
+namespace TouchToolkit.GestureProcessor.ReturnTypes
 {
     public class Info : IReturnType
     {

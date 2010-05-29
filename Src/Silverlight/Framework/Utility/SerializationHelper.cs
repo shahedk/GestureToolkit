@@ -11,13 +11,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Runtime.Serialization.Json;
-using Gestures.Objects.LanguageTokens;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
+using TouchToolkit.GestureProcessor.Objects;
 using System.Runtime.Serialization;
 using System.Diagnostics.Contracts;
-using Gestures.Rules.Objects;
+using TouchToolkit.GestureProcessor.Rules.Objects;
 
-namespace Framework.Utility
+namespace TouchToolkit.Framework.Utility
 {
     public static class SerializationHelper
     {

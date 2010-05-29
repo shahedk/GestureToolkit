@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Framework.Utility;
+using TouchToolkit.Framework.Utility;
 using System.Windows;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.TouchInputProviders;
+using TouchToolkit.Framework;
 
 namespace Framework.TouchInputProviders
 {

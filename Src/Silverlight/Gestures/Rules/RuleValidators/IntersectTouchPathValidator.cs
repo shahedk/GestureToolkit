@@ -9,10 +9,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
-using Gestures.Rules.Objects;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Rules.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.Rules.RuleValidators
+namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
 {
     public class IntersectTouchPathValidator : IRuleValidator
     {

@@ -7,7 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
 namespace Combinatorial
 {

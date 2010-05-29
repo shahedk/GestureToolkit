@@ -9,12 +9,12 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-using Gestures.Exceptions;
-using Gestures.Utility;
+using TouchToolkit.GestureProcessor.Exceptions;
+using TouchToolkit.GestureProcessor.Utility;
 using System.Diagnostics;
-using Gestures.Objects;
+using TouchToolkit.GestureProcessor.Objects;
 
-namespace Gestures.ReturnTypes
+namespace TouchToolkit.GestureProcessor.ReturnTypes
 {
     public class PositionChangedCalculator : IReturnTypeCalculator
     {
