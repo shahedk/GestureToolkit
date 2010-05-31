@@ -14,10 +14,10 @@ using System.Windows.Shapes;
 using libSMARTMultiTouch.Table;
 using libSMARTMultiTouch.Input;
 using SMARTTabletop_Application.Providers;
-using Framework;
-using Gestures.Feedbacks.TouchFeedbacks;
-using Gestures.ReturnTypes;
-
+using TouchToolkit.Framework;
+using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
+using TouchToolkit.GestureProcessor.ReturnTypes;
+using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 
 namespace SMARTTabletop_Application
 {
@@ -47,7 +47,7 @@ namespace SMARTTabletop_Application
 
             SetImages(false);
 
-            provider.SingleTouchChanged += new Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler(provider_SingleTouchChanged);
+            provider.SingleTouchChanged += new TouchToolkit.Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler(provider_SingleTouchChanged);
 
         }
 
@@ -65,7 +65,7 @@ namespace SMARTTabletop_Application
             //GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
         }
 
-        void provider_SingleTouchChanged(object sender, Framework.TouchInputProviders.SingleTouchEventArgs e)
+        void provider_SingleTouchChanged(object sender, TouchToolkit.Framework.TouchInputProviders.SingleTouchEventArgs e)
         {
             Console.WriteLine(e.TouchPoint.Action.ToString());   
         }

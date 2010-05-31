@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Framework.TouchInputProviders;
+using TouchToolkit.Framework.TouchInputProviders;
 using libSMARTMultiTouch.Table;
 using libSMARTMultiTouch.Input;
 using System.Windows;
 using System.Windows.Controls;
-using Gestures.Objects;
+using TouchToolkit.Framework.GestureEvents;
+using TouchToolkit.GestureProcessor.Objects;
 using System.Windows.Shapes;
 using System.Windows.Media;
-using Framework;
+using TouchToolkit.Framework;
 using System.Threading;
 
 namespace SMARTTabletop_Application.Providers
