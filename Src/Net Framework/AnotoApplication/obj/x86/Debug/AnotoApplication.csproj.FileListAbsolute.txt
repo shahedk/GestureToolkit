@@ -1,0 +1,42 @@
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\MainWindow.baml
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\App.g.cs
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication_MarkupCompile.cache
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication.g.resources
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication.Properties.Resources.resources
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\AnotoApplication.exe
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\AnotoApplication.pdb
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\AnotoPen.dll
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Conoto.net.dll
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Framework.dll
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Franson.BlueTools.350.dll
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Gestures.dll
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Framework.pdb
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Gestures.pdb
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication.exe
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication.pdb
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication.exe
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication.pdb
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\AnotoApplication.exe
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\AnotoApplication.pdb
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\AnotoPen.dll
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Conoto.net.dll
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Framework.dll
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Franson.BlueTools.350.dll
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Gestures.dll
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Framework.pdb
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\bin\Debug\Gestures.pdb
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\ResolveAssemblyReference.cache
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\MainWindow.baml
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\MainWindow.g.cs
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\App.g.cs
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication_MarkupCompile.cache
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication.g.resources
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\AnotoApplication.Properties.Resources.resources
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\GenerateResource.read.1.tlog
+R:\Projects\TouchToolkit\Src\AnotoApplication\AnotoApplication\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\Net Framework\AnotoApplication\obj\x86\Debug\AnotoApplication.exe
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\Src\Net Framework\AnotoApplication\obj\x86\Debug\AnotoApplication.pdb

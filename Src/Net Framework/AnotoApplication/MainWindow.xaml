@@ -1,0 +1,6 @@
+﻿<Window x:Class="AnotoApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="492" Width="788">
+    <Canvas Height="439" Name="LayoutRoot" Width="764" />
+</Window>
