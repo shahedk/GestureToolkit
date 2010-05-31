@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Framework.TouchInputProviders;
-using Framework.Utility;
-using Gestures.Objects;
+using TouchToolkit.Framework.Utility;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.TouchInputProviders;
 using Microsoft.Surface;
 using Microsoft.Surface.Presentation.Controls;
 using Framework;
 using System.Windows;
 using Microsoft.Surface.Core;
 using ContactEventHandler = Microsoft.Surface.Presentation.ContactEventHandler;
+using TouchToolkit.Framework;
 
 namespace SurfaceApplication.Providers
 {

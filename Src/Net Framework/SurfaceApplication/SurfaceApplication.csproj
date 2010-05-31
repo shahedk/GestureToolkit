@@ -166,13 +166,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework\Framework.csproj">
+    <ProjectReference Include="..\Framework\TouchToolkit.Framework.csproj">
       <Project>{0E89118D-B58A-48DB-A05D-0ADBBB145195}</Project>
-      <Name>Framework</Name>
+      <Name>TouchToolkit.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gestures\Gestures.csproj">
+    <ProjectReference Include="..\Gestures\TouchToolkit.GestureProcessor.csproj">
       <Project>{61A73B75-7404-4A80-9953-80AE47BA05DD}</Project>
-      <Name>Gestures</Name>
+      <Name>TouchToolkit.GestureProcessor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

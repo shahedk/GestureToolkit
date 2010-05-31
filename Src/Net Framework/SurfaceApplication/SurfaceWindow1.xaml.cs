@@ -15,10 +15,10 @@ using Microsoft.Surface;
 using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using SurfaceApplication.Providers;
-using Gestures.Objects;
-using Framework;
-using Gestures.Feedbacks.TouchFeedbacks;
-using Gestures.ReturnTypes;
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework;
+using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
 
 namespace SurfaceApplication
