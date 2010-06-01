@@ -48,8 +48,6 @@ namespace SMARTTabletop_Application
 
             SetImages(false);
 
-            provider.SingleTouchChanged += new TouchToolkit.Framework.TouchInputProviders.TouchInputProvider.SingleTouchChangeEventHandler(provider_SingleTouchChanged);
-
         }
 
         private void SetImages(bool randomPosition)
@@ -66,22 +64,16 @@ namespace SMARTTabletop_Application
             GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
         }
 
-        void provider_SingleTouchChanged(object sender, TouchToolkit.Framework.TouchInputProviders.SingleTouchEventArgs e)
-        {
-            Console.WriteLine(e.TouchPoint.Action.ToString());   
-        }
-
         #region CallBacks
 
         private void DragCallback(UIElement sender, GestureEventArgs e)
         {
-            var pos = e.Values.Get<Position>();
+            var pos = e.Values.Get<PositionChanged>();
             if (pos != null)
             {
-                sender.SetValue(Canvas.TopProperty, pos.Y);
-                sender.SetValue(Canvas.LeftProperty, pos.X);
-
-                Console.WriteLine(pos);
+                //sender.SetValue(Canvas.TopProperty, pos.Y);
+                //sender.SetValue(Canvas.LeftProperty, pos.X);
+                MoveItem(sender, pos);
             }
         }
 
@@ -171,6 +163,8 @@ namespace SMARTTabletop_Application
 
             item.SetValue(Canvas.LeftProperty, x + posChanged.X);
             item.SetValue(Canvas.TopProperty, y + posChanged.Y);
+
+            Console.Out.WriteLine(posChanged.ToString());
         }
 
         Polygon CreatePolygon(TouchPoints points)
