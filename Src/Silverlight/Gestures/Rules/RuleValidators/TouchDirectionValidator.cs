@@ -49,7 +49,13 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
                     double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point.Stroke.StylusPoints[i], 
                         point.Stroke.StylusPoints[i + step]);
                     String stringSlope = TouchPointExtensions.SlopeToDirection(slope);
-
+                    double dist = TrigonometricCalculationHelper.GetDistanceBetweenPoints(point.Stroke.StylusPoints[i],
+                        point.Stroke.StylusPoints[i + step]);
+                    if (dist == 0)
+                    {
+                        continue;
+                    }
+                    //System.Diagnostics.Debug.WriteLine(dist + " " + slope + " " + stringSlope);
                     if (!stringSlope.Equals(_data.Values))
                     {
                         result = false;

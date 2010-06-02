@@ -128,7 +128,7 @@ namespace TestApplication
         {
             if (e.Values.Get<TouchPoints>().Count > 0)
             {
-                System.Diagnostics.Debug.WriteLine("Line");
+                
             }
         }
         private void RightCallBack(UIElement sender, GestureEventArgs e)
