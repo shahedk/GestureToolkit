@@ -108,6 +108,23 @@ namespace TouchToolkit.GestureProcessor.Objects
             UpdateTouchInfo(info);
         }
 
+        public TouchPoint2 GetRange(int index1, int index2)
+        {
+            
+            TouchInfo info = new TouchInfo();
+            info.ActionType = Action.ToTouchAction();
+            info.Position = Position;
+            info.TouchDeviceId = TouchDeviceId;
+
+            TouchPoint2 output = new TouchPoint2(info, Source);
+            output.Stroke.StylusPoints = new StylusPointCollection();
+            for(int i = index1; i < index2; i++)
+            {
+                output.Stroke.StylusPoints.Add(Stroke.StylusPoints[i]);
+            }
+            return output;
+        }
+
         private void UpdateTouchInfo(TouchInfo info)
         {
             Action = info.ActionType.ToTouchAction();
