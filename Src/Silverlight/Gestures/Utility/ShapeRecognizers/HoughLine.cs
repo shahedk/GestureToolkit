@@ -11,7 +11,6 @@ using System.Windows.Shapes;
 
 using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.Objects;
-using TouchToolkit.GestureProcessor.Utility.ShapeRecognizers;
 
 /* Helper class that implements the Hough Transform algorithm to find an image with a line*/
 namespace TouchToolkit.Framework.ShapeRecognizers
@@ -19,29 +18,18 @@ namespace TouchToolkit.Framework.ShapeRecognizers
     public class HoughLine : IShapeRecognizer
     {
         private double THRESHHOLD = .4; //Value between 0 and 1
-        private MyLine[,] AccumulatorArray; // A(theta, r)
-        private MyLine[,] ClusteredArray;
-        private MyLine[] Lines;
+        private int[,] AccumulatorArray; // A(theta, r)
         private TouchPoint2 Points;
         private bool IsLine;
         private bool IsRect;
 
-        public int Theta;
-        public int R;
-        public int LineQuorum;
+        public int MaxBin;
 
         public HoughLine(TouchPoint2 p)
         {
             IsRect = false;
-            Lines = new MyLine[4];
-            for (int i = 0; i < Lines.Length; i++)
-            {
-                Lines[i] = null;
-            }
             Points = p;
-            LineQuorum = 0;
-            Theta = 0;
-            R = 0;
+            MaxBin = 0;
             BuildAccumulatorArray();
         }
 
@@ -55,14 +43,14 @@ namespace TouchToolkit.Framework.ShapeRecognizers
             return IsRect;
         }
 
-        private MyLine[,] InitializeArray(int size1, int size2)
+        private int[,] InitializeArray(int size1, int size2)
         {
-            MyLine[,] array = new MyLine[size1, size2];
+            int[,] array = new int[size1, size2];
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    array[i, j] = new MyLine(i, j);
+                    array[i, j] = 0;
                 }
             }
             return array;
@@ -76,8 +64,6 @@ namespace TouchToolkit.Framework.ShapeRecognizers
             //** Initialize Array(s) **//
             AccumulatorArray = InitializeArray(361, range);
 
-            ClusteredArray = InitializeArray(13, (int)Math.Ceiling(range/100) + 1);
-
             //** Begin Voting **//
             for (int theta = 0; theta < 361; theta++)
             {
@@ -89,23 +75,19 @@ namespace TouchToolkit.Framework.ShapeRecognizers
                     double y = Points.Stroke.StylusPoints[i].Y;
                     double r = Math.Abs(x * Math.Cos(theta * DegToRad) +
                                y * Math.Sin(theta * DegToRad));
-                    MyLine thisLine = AccumulatorArray[theta, (int)r];
-                    thisLine.Quorum++;
+                    AccumulatorArray[theta, (int)r]++;
 
-                    if (thisLine.Quorum > LineQuorum)
+                    if (AccumulatorArray[theta, (int)r] > MaxBin)
                     {
-                        R = (int) thisLine.R;
-                        Theta = thisLine.Theta;
-                        LineQuorum = thisLine.Quorum;
+                        MaxBin = AccumulatorArray[theta, (int)r];
                     }
-                    AccumulatorArray[theta, (int)r] = thisLine;
                 }
             }
 
             //** Publish Results into IsLine **//
             int total = Points.Stroke.StylusPoints.Count;
             double determinant = THRESHHOLD * total;
-            IsLine = LineQuorum > determinant;
+            IsLine = MaxBin > determinant;
             
         }
 
