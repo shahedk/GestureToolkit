@@ -284,11 +284,17 @@
     <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\EllipseRecognizer.cs">
       <Link>Utility\ShapeRecognizers\EllipseRecognizer.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\HoughCircle.cs">
+      <Link>Utility\ShapeRecognizers\HoughCircle.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\HoughLine.cs">
       <Link>Utility\ShapeRecognizers\HoughLine.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\IShapeRecognizer.cs">
       <Link>Utility\ShapeRecognizers\IShapeRecognizer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\RectangleParser.cs">
+      <Link>Utility\ShapeRecognizers\RectangleParser.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\TouchHelpers\TouchHistoryTracker.cs">
       <Link>Utility\TouchHelpers\TouchHistoryTracker.cs</Link>

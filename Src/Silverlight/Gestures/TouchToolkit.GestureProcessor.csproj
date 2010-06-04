@@ -164,8 +164,8 @@
     <Compile Include="Utility\CommonHelperMethods.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utility\ShapeRecognizers\HoughCircle.cs" />
     <Compile Include="Utility\ShapeRecognizers\HoughLine.cs" />
-    <Compile Include="Utility\ShapeRecognizers\MyLine.cs" />
     <Compile Include="Utility\ShapeRecognizers\RectangleParser.cs" />
     <Compile Include="Utility\TouchHelpers\TouchPointExtensions.cs" />
     <Compile Include="Utility\TrigonometricCalculationHelper.cs" />
