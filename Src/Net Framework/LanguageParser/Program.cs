@@ -11,26 +11,32 @@ using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
 using TouchToolkit.GestureProcessor.Rules.Objects;
 
 using System.Threading;
+using System.Reflection;
+using TouchToolkit.Framework;
 
 
 namespace LanguageParser
 {
     class Program
     {
+        private static readonly string[] AssembliesToSkip = { "MGraphXamlReader", "Microsoft.Build.Framework", "Microsoft.M", "PresentationCore", "PresentationFramework", "System", "System.Core", "System.Data", "System.Data.DataSetExtensions", "System.Dataflow", "System.Drawing", "System.Runtime.Serialization", "System.Windows.Forms", "System.Xml", "System.Xml.Linq", "WindowsBase", "Xaml", "LanguageParser", "TouchToolkit.Framework", "TouchToolkit.GestureProcessor" };
+
         private static string RuleNamesFilePath { get; set; }
         private static string CompiledGestureDefPath { get; set; }
         private static string GestureDefSourcePath { get; set; }
         private static string LanguageDefPath { get; set; }
         private static string _language = "";
+        private static string AppBinPath { get; set; }
 
         static void Main(string[] args)
         {
-            if (args.Length == 4)
+            if (args.Length == 5)
             {
                 CompiledGestureDefPath = args[0];
                 RuleNamesFilePath = args[1];
                 GestureDefSourcePath = args[2];
                 LanguageDefPath = args[3];
+                LanguageDefPath = args[4];
 
                 // Display arg values
                 WriteMessage("CompiledGestureDefPath:");
@@ -44,6 +50,9 @@ namespace LanguageParser
 
                 WriteMessage("LanguageDefPath:");
                 WriteMessage(LanguageDefPath + Environment.NewLine);
+
+                WriteMessage("Local Application Bin Path:");
+                WriteMessage(AppBinPath + Environment.NewLine);
             }
             else if (args.Length == 0)
             {
@@ -53,6 +62,7 @@ namespace LanguageParser
                 RuleNamesFilePath = @"../../../../Silverlight/Gestures/Bin/rulenames.gx";
                 GestureDefSourcePath = @"../../../../Silverlight/Gestures/Gesture Definitions";
                 LanguageDefPath = "../GDL.mg";
+                AppBinPath = @"../../../../Net Framework/TestApplication/Bin/Debug/";
             }
             else
             {
@@ -177,8 +187,7 @@ namespace LanguageParser
         {
             List<Type> requiredTypes = new List<Type>();
 
-            Type[] types = GetAllTypesInGestureAssembly();
-
+            Type[] types = GetAllTypes();
             foreach (var type in types)
             {
                 Type[] interfaces = type.GetInterfaces();
@@ -192,12 +201,35 @@ namespace LanguageParser
             return requiredTypes;
         }
 
-        private static Type[] GetAllTypesInGestureAssembly()
+        private static Type[] GetAllTypes()
         {
-            GestureToken dummyObject = new GestureToken();
-            Type t = dummyObject.GetType();
 
-            return t.Assembly.GetTypes();
+            List<Type> types = new List<Type>();
+            DirectoryInfo dirInfo = new DirectoryInfo(AppBinPath);
+
+            // Scan all user defined dlls
+            if (dirInfo.Exists)
+            {
+                FileInfo[] assemblyFiles = dirInfo.GetFiles("*.dll");
+                foreach (var assemblyFile in assemblyFiles)
+                {
+                    string assName = assemblyFile.Name.Replace(".dll", string.Empty);
+                    if (AssembliesToSkip.Contains(assName))
+                        continue;
+
+                    Assembly assembly = Assembly.LoadFile(assemblyFile.FullName);
+                    types.AddRange(assembly.GetTypes());
+                }
+            }
+
+            // Scan framework dlls
+            Assembly framework = typeof(GestureFramework).Assembly;
+            types.AddRange(framework.GetTypes());
+            
+            Assembly gestureProcessor = typeof(IRuleData).Assembly;
+            types.AddRange(gestureProcessor.GetTypes());
+
+            return types.ToArray();
         }
         #endregion
 

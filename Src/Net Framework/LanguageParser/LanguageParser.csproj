@@ -86,6 +86,8 @@
       <HintPath>$(SdkBinPath)\System.Dataflow.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
     <Reference Include="Xaml, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -104,63 +106,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Silverlight\Gestures\Objects\LanguageTokens\GestureToken.cs">
-      <Link>LanguageTokens\GestureToken.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Objects\LanguageTokens\LanguageToken.cs">
-      <Link>LanguageTokens\LanguageToken.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Objects\LanguageTokens\ReturnToken.cs">
-      <Link>LanguageTokens\ReturnToken.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Objects\LanguageTokens\RuleToken.cs">
-      <Link>LanguageTokens\RuleToken.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\ClosedLoop.cs">
-      <Link>LanguageTokens\RuleTokens\ClosedLoop.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\DistanceBetweenPoints.cs">
-      <Link>LanguageTokens\RuleTokens\DistanceBetweenPoints.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\EnclosedArea.cs">
-      <Link>LanguageTokens\RuleTokens\EnclosedArea.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\IntersectTouchPath.cs">
-      <Link>LanguageTokens\RuleTokens\IntersectTouchPath.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\IRuleData.cs">
-      <Link>LanguageTokens\RuleTokens\IRuleData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\OnSameObject.cs">
-      <Link>LanguageTokens\RuleTokens\OnSameObject.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchArea.cs">
-      <Link>LanguageTokens\RuleTokens\TouchArea.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchDirection.cs">
-      <Link>LanguageTokens\RuleTokens\TouchDirection.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchLimit.cs">
-      <Link>LanguageTokens\RuleTokens\TouchLimit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchPathBoundingBox.cs">
-      <Link>LanguageTokens\RuleTokens\TouchPathBoundingBox.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchPathLength.cs">
-      <Link>LanguageTokens\RuleTokens\TouchPathLength.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchShape.cs">
-      <Link>LanguageTokens\RuleTokens\TouchShape.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchState.cs">
-      <Link>LanguageTokens\RuleTokens\TouchState.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchStep.cs">
-      <Link>LanguageTokens\RuleTokens\TouchStep.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchTime.cs">
-      <Link>LanguageTokens\RuleTokens\TouchTime.cs</Link>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -193,6 +138,16 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\TouchToolkit.Framework.csproj">
+      <Project>{0E89118D-B58A-48DB-A05D-0ADBBB145195}</Project>
+      <Name>TouchToolkit.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gestures\TouchToolkit.GestureProcessor.csproj">
+      <Project>{61A73B75-7404-4A80-9953-80AE47BA05DD}</Project>
+      <Name>TouchToolkit.GestureProcessor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MTargetsPath)\Microsoft.M.Embedded.targets" />
