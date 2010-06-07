@@ -60,13 +60,14 @@ namespace TouchToolkit.Framework.TouchInputProviders
             List<TouchPoint2> updateTouchPoints = new List<TouchPoint2>();
 
             UpdateTouchStates(touchInfos);
-            RemoveInactiveTouchPoints();
 
             // Update Active touch points
             foreach (TouchInfo info in touchInfos)
             {
                 updateTouchPoints.Add(UpdateActiveTouchPoint(info));
             }
+
+            RemoveInactiveTouchPoints();
 
             return updateTouchPoints;
         }
