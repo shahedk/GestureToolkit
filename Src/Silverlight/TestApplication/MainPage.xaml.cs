@@ -62,12 +62,12 @@ namespace TestApplication
 
                 // TODO: For debugging
                 img.Tag = count++;
-                
+
                 SetImageLocation(img, randomPosition);
                 LayoutRoot.Children.Add(img);
 
                 // Subscribe to gesture events for image
-                GestureFramework.EventManager.AddEvent(img, TouchToolkit.GestureProcessor.Gesture_Definitions.Gestures.DoubleTap, ZoomCallback);
+                GestureFramework.EventManager.AddEvent(img, "zoom", ZoomCallback);
                 GestureFramework.EventManager.AddEvent(img, "pinch", PinchCallback);
                 GestureFramework.EventManager.AddEvent(img, "drag", DragCallback);
                 GestureFramework.EventManager.AddEvent(img, "rotate", RotateCallback);
@@ -102,7 +102,7 @@ namespace TestApplication
             img.Width = 120;
             img.Height = 90;
 
-            lastImageLeftPost = leftPosition+130;
+            lastImageLeftPost = leftPosition + 130;
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace TestApplication
         {
             if (e.Values.Get<TouchPoints>().Count > 0)
             {
-                
+
             }
         }
         private void RightCallBack(UIElement sender, GestureEventArgs e)
@@ -145,7 +145,7 @@ namespace TestApplication
         private void ZoomCallback(UIElement sender, GestureEventArgs e)
         {
             var dis = e.Values.Get<DistanceChanged>();
-            
+
             if (dis != null)
                 Resize(sender as Image, dis.Delta);
         }
