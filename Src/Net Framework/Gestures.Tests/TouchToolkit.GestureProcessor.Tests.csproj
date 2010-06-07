@@ -83,6 +83,7 @@
     <Compile Include="Return Types\PositionChangedCalculatorTest.cs" />
     <Compile Include="Return Types\PositionChangedTest.cs" />
     <Compile Include="Return Types\PositionTest.cs" />
+    <Compile Include="Return Types\SlopeChangedTest.cs" />
     <Compile Include="Rules\Objects\OnSameObjectTest.cs" />
     <Compile Include="Rules\Objects\ClosedLoopTest.cs" />
     <Compile Include="Rules\Objects\EnclosedAreaTest.cs" />
