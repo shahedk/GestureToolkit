@@ -79,6 +79,9 @@
     <Compile Include="Return Types\DistanceChangedTest.cs" />
     <Compile Include="Return Types\InfoCalculatorTest.cs" />
     <Compile Include="Return Types\InfoTest.cs" />
+    <Compile Include="Return Types\PositionCalculatorTest.cs" />
+    <Compile Include="Return Types\PositionChangedCalculatorTest.cs" />
+    <Compile Include="Return Types\PositionChangedTest.cs" />
     <Compile Include="Return Types\PositionTest.cs" />
     <Compile Include="Rules\Objects\OnSameObjectTest.cs" />
     <Compile Include="Rules\Objects\ClosedLoopTest.cs" />
