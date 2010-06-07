@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.GestureProcessor.Utility;
@@ -18,37 +19,27 @@ namespace TouchToolkit.Framework.ShapeRecognizers
     public class HoughCircle : IShapeRecognizer
     {
         private double deg_to_radians = Math.PI / 180;
-        private int tol = 5;
-        private double threshhold = 0.4;
+        private double threshhold = 0.3;
         private bool IsCircle;
         private TouchPoint2 points;
-        private int[,,] Accumulator;
+        private int[] Accumulator;
         private int binmax;
-        private int xmin;
-        private int xmax;
-        private int ymin;
-        private int ymax;
         private int rmax;
 
         public HoughCircle(TouchPoint2 p)
         {
             points = p;
+
             IsCircle = false;
             FindRanges();
             binmax = 0;
-            int xsize = xmax - xmin;
-            int ysize = ymax - ymin;
-            Accumulator = new int[xsize, ysize, rmax];
-            for (int x = 0; x < xsize; x++)
+            Accumulator = new int[rmax];
+            for (int r = 0; r < rmax; r++)
             {
-                for (int y = 0; y < ysize; y++)
-                {
-                    for (int r = 0; r < rmax; r++)
-                    {
-                        Accumulator[x, y, r] = 0;
-                    }
-                }
+                Accumulator[r] = 0;
             }
+
+            
             FindCircle();
         }
 
@@ -60,8 +51,11 @@ namespace TouchToolkit.Framework.ShapeRecognizers
         //Find smallest/largest x,y values of our points
         private void FindRanges()
         {
-            xmin = (int)points.Stroke.StylusPoints[0].X; xmax = (int)points.Stroke.StylusPoints[0].X;
-            ymin = (int)points.Stroke.StylusPoints[0].Y; ymax = (int)points.Stroke.StylusPoints[0].Y;
+            
+            double xmin = points.Stroke.StylusPoints[0].X;
+            double xmax = points.Stroke.StylusPoints[0].X;
+            double ymin = points.Stroke.StylusPoints[0].Y;
+            double ymax = points.Stroke.StylusPoints[0].Y;
 
             foreach (var point in points.Stroke.StylusPoints)
             {
@@ -77,52 +71,92 @@ namespace TouchToolkit.Framework.ShapeRecognizers
             rmax = (int)TrigonometricCalculationHelper.GetDistanceBetweenPoints(new Point(xmin, ymin), new Point(xmax, ymax));
         }
 
+        /*Modified Hough Algorthm where the center of the circle is estimated by taking the average 
+         x and y values of all points */
         private TouchPoint2 FindCircle()
         {
             int length = points.Stroke.StylusPoints.Count;
+
+            /*First add up the x and y lengths of all points then divide by the total length to get the 
+             average */
+            double xdistance = 0;
+            double ydistance = 0;
+            double totdistance = 0;
+            for (int i = 0; i < length - 1; i++)
+            {
+                var point1 = points.Stroke.StylusPoints[i];
+                var point2 = points.Stroke.StylusPoints[i + 1];
+                
+                double distance = TrigonometricCalculationHelper.GetDistanceBetweenPoints(point1, point2);
+                totdistance += distance;
+
+                xdistance += point1.X * distance;
+                ydistance += point1.Y * distance;
+            }
+
+            int avgX = (int) Math.Floor(xdistance / totdistance);
+            int avgY = (int) Math.Floor(ydistance / totdistance);
+
+            /*Using the estimated center, apply the Hough Transform with R as the only free parameter*/
+            double radius = 0;
             foreach (var point in points.Stroke.StylusPoints)
             {
                 double x = point.X;
                 double y = point.Y;
+                StylusPoint center = new StylusPoint(avgX, avgY);
 
-                for (int a = xmin; a < xmax - xmin; a++)
+                int rpoint = (int) Math.Floor(
+                    Math.Abs(TrigonometricCalculationHelper.GetDistanceBetweenPoints(center, point)));
+                    
+                if (rpoint > 0 && rpoint < rmax)
                 {
-                    for (int b = ymin; b < ymax - ymin; b++)
-                    {
-                        for (int r = 0; r < rmax; r++)
-                        {
-                            for (int theta = 0; theta < 360; theta++)
-                            {
-                                double theta_rad = theta * deg_to_radians;
-                                bool xmatch = x - a + r * Math.Cos(theta_rad) < tol;
-                                bool ymatch = y - b + r * Math.Sin(theta_rad) < tol;
-                                if (xmatch && ymatch)
-                                {
-                                    //increment accumulator
-                                    Accumulator[a, b, r]++;
-                                    //check bin size to see if it's max
-                                    if (Accumulator[a, b, r] > binmax)
-                                    {
-                                        binmax = Accumulator[a, b, r];
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    Accumulator[rpoint]++;
+                    Accumulator[rpoint + 1]++;
+                    Accumulator[rpoint - 1]++;
                 }
             }
 
-            IsCircle = binmax > length * threshhold;
+            for (int r = 0; r < rmax; r++)
+            {
+                //check bin size to see if it's max
+                if (Accumulator[r] > binmax)
+                {
+                    binmax = Accumulator[r];
+                    radius = r;
+                }
+            }
+            IsCircle = binmax > length * threshhold && binmax > 10;
 
             if (IsCircle)
             {
+                //Keep track of all points not on the circle
+                Stack<int> removeStack = new Stack<int>();
+                for (int i = 0; i < length; i++)
+                {
+                    var point = points.Stroke.StylusPoints[i];
+                    StylusPoint center = new StylusPoint(avgX, avgY);
+
+                    int rpoint = (int)Math.Floor(
+                        Math.Abs(TrigonometricCalculationHelper.GetDistanceBetweenPoints(center, point)));
+                    
+                    if (Math.Abs(radius - rpoint) > 3)
+                    {
+                        removeStack.Push(i);
+                    }
+                }
+
+                while (removeStack.Count > 0)
+                {
+                    points.Stroke.StylusPoints.RemoveAt(removeStack.Pop());
+                }
                 return points;
             }
             else
             {
+                points.Stroke.StylusPoints.Clear();
                 return points;
             }
         }
+
     }
 }
