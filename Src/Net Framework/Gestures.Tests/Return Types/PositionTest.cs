@@ -70,9 +70,9 @@ namespace Framework.Tests
         {
             Position target = new Position();
 
-            string actual = "X:0,Y:0";
+            string expected = "X:0,Y:0";
 
-            Assert.AreEqual(target.ToString(),actual);
+            Assert.AreEqual(expected, target.ToString());
         }
 
         [TestMethod()]
@@ -84,9 +84,9 @@ namespace Framework.Tests
                 Y = 1
             };
 
-            string actual = "X:2,Y:1";
+            string expected = "X:2,Y:1";
 
-            Assert.AreEqual(target.ToString(), actual);
+            Assert.AreEqual(expected, target.ToString());
         }
 
         [TestMethod()]
