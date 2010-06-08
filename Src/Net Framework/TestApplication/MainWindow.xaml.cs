@@ -41,6 +41,8 @@ namespace TestApplication
             GestureFramework.EventManager.AddEvent(rectangle, "Zoom", ResizeCallback);
             GestureFramework.EventManager.AddEvent(rectangle, "Pinch", ResizeCallback);
             GestureFramework.EventManager.AddEvent(rectangle, "Drag", DragCallback);
+
+            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
         }
 
         public void DragCallback(object sender, GestureEventArgs e)
