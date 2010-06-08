@@ -65,6 +65,9 @@
     <Compile Include="..\..\Silverlight\Gestures\Feedbacks\TouchFeedbacks\ITouchFeedback.cs">
       <Link>Feedbacks\TouchFeedbacks\ITouchFeedback.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Gesture Definitions\Gestures.cs">
+      <Link>Gesture Definitions\Gestures.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\FrameInfo.cs">
       <Link>Objects\FrameInfo.cs</Link>
     </Compile>
