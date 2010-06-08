@@ -183,7 +183,6 @@ namespace TouchToolkit.Framework.Utility
                 throw new FrameworkException("Unknown touch action type");
         }
 
-#if SILVERLIGHT
         /// <summary>
         /// Determines the source ui-element of the specified touch using hit-test
         /// </summary>
@@ -196,18 +195,24 @@ namespace TouchToolkit.Framework.Utility
 
             // This code block is only for Silverlight platform. We do not need hitTesting to find the UIElement as
             // the touchDown event already provides this data
+
+#if SILVERLIGHT
             var list = VisualTreeHelper.FindElementsInHostCoordinates(point, GestureFramework.LayoutRoot);
             var e1 = list.GetEnumerator();
 
             if (e1.MoveNext())
                 uiElement = e1.Current;
+#else
 
+            var hitTestResult = VisualTreeHelper.HitTest(GestureFramework.LayoutRoot, point);
+            uiElement = hitTestResult.VisualHit as UIElement;
+
+#endif
             self.Source = uiElement;
 
             return uiElement;
         }
 
-#endif
 
     }
 }

@@ -33,9 +33,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
             {
                 if (touchPoint.Action == TouchAction.Down)
                 {
-#if SILVERLIGHT
                     touchPoint.UpdateSource();
-#endif
                 }
             }
 
