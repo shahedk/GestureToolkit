@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="650" Width="1025"  >
     <Canvas Name="LayoutRoot" Background="White">
-        <TextBlock  Name="messageTextBlock" Text="message..." />
-        <Rectangle Name="rectangle" Height="100" Width=" 100" Fill="LightGray" Canvas.Left="100" Canvas.Top="100"/>
+        <!--<TextBlock  Name="messageTextBlock" Text="message..." />
+        <Rectangle Name="rectangle" Height="100" Width=" 100" Fill="LightGray" Canvas.Left="100" Canvas.Top="100"/> -->
     </Canvas>
 </Window>

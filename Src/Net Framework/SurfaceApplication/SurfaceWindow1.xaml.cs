@@ -20,6 +20,7 @@ using TouchToolkit.Framework;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
+using Framework.TouchInputProviders;
 
 namespace SurfaceApplication
 {
@@ -111,8 +112,7 @@ namespace SurfaceApplication
         void SurfaceWindow1_Loaded(object sender, RoutedEventArgs e)
         {
             // Initialize Gesture Framework
-            var provider = new SurfaceTouchInputProvider(this);
-
+            var provider = new Windows7TouchInputProvider();
             mainCanvasRoot.Children.Add(new TestControl(provider));
         }
 
