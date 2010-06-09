@@ -71,6 +71,7 @@
   <ItemGroup>
     <None Include="..\Framework\app.config">
       <Link>app.config</Link>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

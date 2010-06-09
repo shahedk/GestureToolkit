@@ -60,7 +60,7 @@ namespace TouchToolkit.Framework
             _isInitialized = true;
         }
 
-        public static void Validate(string gestureName, string dataKey, GestureEventHandler callback = null)
+        public static void Validate(string gestureName, string dataKey, GestureEventHandler gestureDetected = null, TouchToolkit.Framework.Components.TouchInputRecorder.GesturePlaybackCompleted playbackCompleted = null)
         {
             if (!_isInitialized)
                 throw new FrameworkException("You must initialize the framework first!");
@@ -72,24 +72,27 @@ namespace TouchToolkit.Framework
                     if (error != null)
                     {
                         // Failed to retrieve data from storage
-                        if (callback != null)
+                        if (gestureDetected != null)
                         {
                             GestureEventArgs e = new GestureEventArgs();
                             e.Error = error;
 
-                            callback(_layoutRoot, e);
+                            gestureDetected(_layoutRoot, e);
                         }
                     }
                     else
                     {
                         // Subscribe to the specified gesture event
-                        GestureFramework.EventManager.AddEvent(_layoutRoot, gestureName, callback);
+                        GestureFramework.EventManager.AddEvent(_layoutRoot, gestureName, gestureDetected);
 
                         // Playback the user interaction via virtual touch provider
-                        _recorder.RunGesture(data);
+                        _recorder.RunGesture(data, () =>
+                        {
+                            GestureFramework.EventManager.RemoveEvent(_layoutRoot, gestureName);
+                            playbackCompleted();
+                        });
 
-                        // Unsubscrbe the gesture event (back to as before)
-                        GestureFramework.EventManager.RemoveEvent(_layoutRoot, gestureName);
+
                     }
                 });
         }

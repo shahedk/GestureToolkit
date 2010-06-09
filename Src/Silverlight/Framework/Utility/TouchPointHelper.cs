@@ -204,9 +204,18 @@ namespace TouchToolkit.Framework.Utility
                 uiElement = e1.Current;
 #else
 
-            var hitTestResult = VisualTreeHelper.HitTest(GestureFramework.LayoutRoot, point);
-            uiElement = hitTestResult.VisualHit as UIElement;
+            if (GestureFramework.LayoutRoot.Parent == null)
+            {
+                //TODO: Its a fake UI created by the automated UnitTest. The VisualTreeHelper won't work in this case, so find an alternet way
 
+                //Temporary workaround - point to root canvas
+                uiElement = GestureFramework.LayoutRoot;
+            }
+            else
+            {
+                var hitTestResult = VisualTreeHelper.HitTest(GestureFramework.LayoutRoot, point);
+                uiElement = hitTestResult.VisualHit as UIElement;
+            }
 #endif
             self.Source = uiElement;
 
