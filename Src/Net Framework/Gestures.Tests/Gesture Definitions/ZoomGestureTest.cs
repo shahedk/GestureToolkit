@@ -68,35 +68,45 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
         [ClassInitialize()]
         public static void InitializeTest(TestContext testContext)
         {
-            GestureTestFramework.Init("LiveDemo-shahed", "X1");
+            GestureTestFramework.Init("TT", "Test");
         }
 
 
         [TestMethod]
         public void Zoom()
         {
-            bool callbackReceived = false;
+            bool gestureDetected = false;
             var threadHolder = new AutoResetEvent(false);
 
-            GestureTestFramework.Validate("zoom", "resize2", (sender, e) =>
+            GestureTestFramework.Validate("Drag", "T2", 
+                
+                // On successful gesture detection
+                (sender, e) =>
                 {
                     if (e.Error == null)
                     {
-                        var dis = e.Values.Get<DistanceChanged>();
+                        var position = e.Values.Get<Position>();
+                        Assert.IsNotNull(position, "Failed to retrieve return value: position");
 
-                        Assert.IsNull(dis, "Failed to validate gesture");
+                        var positionChanged = e.Values.Get<PositionChanged>();
+                        Assert.IsNotNull(positionChanged, "Failed to retrieve return value: position-changed");
                     }
                     else
                     {
                         Assert.Fail(e.Error.Message);
                     }
 
-                    callbackReceived = true;
+                    gestureDetected = true;
+                },
+
+                // On playback completion
+                () =>
+                {
                     threadHolder.Set();
                 });
 
             threadHolder.WaitOne();
-            Assert.IsTrue(callbackReceived, "Failed to receive the callback from async method call");
+            Assert.IsTrue(gestureDetected, "Failed to detect the gesture!");
         }
     }
 }

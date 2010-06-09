@@ -91,7 +91,7 @@ namespace TouchToolkit.Framework.UI
             StartRecordingButton.Content = ControlCaptions.StartRecording;
 
             // Initialize the recorder
-            _recorder.PlaybackCompleted += _recorder_PlaybackCompleted;
+            //_recorder.PlaybackCompleted += _recorder_PlaybackCompleted;
 
             LoadUserData();
         }
