@@ -26,6 +26,8 @@ namespace TouchToolkit.Framework.TouchInputProviders
         private static ConotoElementManager manager;
         private static ConotoConvert conoto;
         private Panel source;
+
+        private Dictionary<int, TouchInfo> _activeTouchInfos = new Dictionary<int, TouchInfo>();
         long lastTimeStamp = 0;
 
         public AnotoInputProvider(Panel LayoutRoot)
@@ -81,6 +83,10 @@ namespace TouchToolkit.Framework.TouchInputProviders
                            out function, out functionid, out x, out y);
             Point penPosition = new Point(x, y);
             StylusPoint penPositionSP = new StylusPoint(x, y);
+            info.ActionType = actionType;
+            info.Position = penPosition;
+            info.TouchDeviceId = (int)args.PenId;
+
             // handle the type of event we got and call other handler functions
             switch (args.Type)
             {
@@ -94,9 +100,25 @@ namespace TouchToolkit.Framework.TouchInputProviders
                     actionType = TouchAction2.Up;
                     break;
             }
-            info.ActionType = actionType;
-            info.Position = penPosition;
-            info.TouchDeviceId = (int) args.PenId;
+
+            if (actionType == TouchAction2.Down)
+            {
+                AddNewTouchPoint(info, source);
+            }
+            else
+            {
+                UpdateActiveTouchPoint(info);
+            }
+
+            if (_activeTouchInfos.ContainsKey(info.TouchDeviceId))
+            {
+                _activeTouchInfos[info.TouchDeviceId] = info;
+            }
+            else
+            {
+                _activeTouchInfos.Add(info.TouchDeviceId, info);
+            }
+            
             
             //Use hit tests to find
             UIElement element = null;
@@ -107,20 +129,22 @@ namespace TouchToolkit.Framework.TouchInputProviders
                 element = result as UIElement;
             }*/
  
-            TouchPoint2 point = new TouchPoint2(info, source);
+            //TouchPoint2 point = new TouchPoint2(info, source);
             
-            point.Stroke.StylusPoints.Add(penPositionSP);
+            //point.Stroke.StylusPoints.Add(penPositionSP);
             
             if (SingleTouchChanged != null)
             {
-                SingleTouchChanged(this, new SingleTouchEventArgs(point));
+                foreach(var point in ActiveTouchPoints.Values)
+                {
+                    SingleTouchChanged(this, new SingleTouchEventArgs(point));
+                }
             }
 
             if (FrameChanged != null)
             {
                 FrameInfo finfo = new FrameInfo();
-                finfo.Touches = new List<TouchInfo>();
-                finfo.Touches.Add(info);
+                finfo.Touches = _activeTouchInfos.Values.ToList<TouchInfo>();
                 finfo.TimeStamp = args.Timestamp;
                 finfo.WaitTime = (int) args.Timestamp - (int) lastTimeStamp;
                 FrameChanged(this, finfo);
