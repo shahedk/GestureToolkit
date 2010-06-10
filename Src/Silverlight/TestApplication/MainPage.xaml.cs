@@ -41,6 +41,7 @@ namespace TestApplication
             // Add gesture feedbacks
             GestureFramework.AddGesturFeedback("lasso", typeof(HighlightSelectedArea));
 
+
             // Show Recording Panel
             //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
 
@@ -71,13 +72,14 @@ namespace TestApplication
                 GestureFramework.EventManager.AddEvent(img, "pinch", PinchCallback);
                 GestureFramework.EventManager.AddEvent(img, "drag", DragCallback);
                 GestureFramework.EventManager.AddEvent(img, "rotate", RotateCallback);
-                GestureFramework.EventManager.AddEvent(LayoutRoot, "left", LeftCallBack);
-                GestureFramework.EventManager.AddEvent(LayoutRoot, "right", RightCallBack);
-                GestureFramework.EventManager.AddEvent(LayoutRoot, "line", LineCallBack);
+                GestureFramework.EventManager.AddEvent(img, "zoom", ZoomCallback);
             }
 
             // Subscribe to gesture events for the LayoutRoot
             GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
+            GestureFramework.EventManager.AddEvent(LayoutRoot, "left", LeftCallBack);
+            GestureFramework.EventManager.AddEvent(LayoutRoot, "right", RightCallBack);
+            GestureFramework.EventManager.AddEvent(LayoutRoot, "line", LineCallBack);
         }
 
         #region Setting image properties

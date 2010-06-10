@@ -100,6 +100,7 @@
     <Compile Include="Rules\Objects\TouchPathBoundingBoxTest.cs" />
     <Compile Include="Rules\Objects\TouchStepTest.cs" />
     <Compile Include="Rules\Objects\TouchTimeTest.cs" />
+    <Compile Include="TouchShapeValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\Gestures.accessor" />

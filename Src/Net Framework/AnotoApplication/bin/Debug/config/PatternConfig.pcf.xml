@@ -1,5 +1,0 @@
-﻿<penConfiguration version="1.0.0">
-  <areaConfiguration>
-    <area id="0" function="0" functionid="0" pageAddress="70.0.10.3" penPoints="4747,30139,5032,24220,9010,24115,9055,29548" screenPoints="512,288,2048,288,2048,1152,512,1152" minScreenPoint="0,0" maxScreenPoint="2560,1440" />
-  </areaConfiguration>
-</penConfiguration>

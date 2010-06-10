@@ -22,7 +22,6 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
     public class TouchShapeValidator : IRuleValidator
     {
         private TouchShape _data;
-        private double radtodeg = 180 / Math.PI;
         private static int TOLERANCE = 150;
 
 
@@ -44,7 +43,7 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
                     ValidSetOfTouchPoints tps = null;
                     if(_data.Values.Equals("Line"))
                     {
-                    tps = ValidateCircle(point);
+                    tps = ValidateLine(point);
                     }
                     else if(_data.Values.Equals("Box"))
                     {
@@ -169,30 +168,10 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
         private ValidSetOfTouchPoints ValidateCircle(TouchPoint2 points)
         {
             ValidSetOfTouchPoints ret = new ValidSetOfTouchPoints();
-            StylusPointCollection filteredPoints = points.Stroke.StylusPoints;
-
-            for (int i = 0; i < filteredPoints.Count - 1; i++)
+            HoughCircle recognizer = new HoughCircle(points);
+            if (recognizer.IsMatch())
             {
-                if(filteredPoints[i].X - filteredPoints[i+1].X < 0.01 && 
-                    filteredPoints[i].Y - filteredPoints[i+1].Y < 0.01)
-                {
-                    filteredPoints.RemoveAt(i + 1);
-                }
-            }
-            points.Stroke.StylusPoints = filteredPoints;
-            for (int i = 0; i < points.Stroke.StylusPoints.Count - 2; i++)
-            {
-                
-                StylusPoint point1 = points.Stroke.StylusPoints[i];
-                StylusPoint point2 = points.Stroke.StylusPoints[i + 1];
-                StylusPoint point3 = points.Stroke.StylusPoints[i + 2];
-
-                    double slope1 = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point1, point2);
-                    double slope2 = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point2, point3);
-                    bool decreasing = slope2 <= slope1;
-                    slope1 = slope1 * radtodeg;
-                    slope2 = slope2 * radtodeg;
-                    System.Diagnostics.Debug.WriteLine(point1.X + " " + point1.Y + " " + slope1 + " " + decreasing);
+                ret.Add(points);
             }
             return ret;
         }

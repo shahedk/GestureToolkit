@@ -326,8 +326,14 @@
     <None Include="..\..\Silverlight\Gestures\Gesture Definitions\lasso.g">
       <Link>Gesture Definitions\lasso.g</Link>
     </None>
+    <None Include="..\..\Silverlight\Gestures\Gesture Definitions\left.g">
+      <Link>Gesture Definitions\left.g</Link>
+    </None>
     <None Include="..\..\Silverlight\Gestures\Gesture Definitions\pinch.g">
       <Link>Gesture Definitions\pinch.g</Link>
+    </None>
+    <None Include="..\..\Silverlight\Gestures\Gesture Definitions\right.g">
+      <Link>Gesture Definitions\right.g</Link>
     </None>
     <None Include="..\..\Silverlight\Gestures\Gesture Definitions\rotate.g">
       <Link>Gesture Definitions\rotate.g</Link>
