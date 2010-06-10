@@ -71,6 +71,7 @@
   <ItemGroup>
     <None Include="..\Framework\app.config">
       <Link>app.config</Link>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +80,13 @@
     <Compile Include="Return Types\DistanceChangedTest.cs" />
     <Compile Include="Return Types\InfoCalculatorTest.cs" />
     <Compile Include="Return Types\InfoTest.cs" />
+    <Compile Include="Return Types\PositionCalculatorTest.cs" />
+    <Compile Include="Return Types\PositionChangedCalculatorTest.cs" />
+    <Compile Include="Return Types\PositionChangedTest.cs" />
     <Compile Include="Return Types\PositionTest.cs" />
+    <Compile Include="Return Types\SlopeChangedCalculatorTest.cs" />
+    <Compile Include="Return Types\SlopeChangedTest.cs" />
+    <Compile Include="Return Types\TouchPointsCalculatorTest.cs" />
     <Compile Include="Rules\Objects\OnSameObjectTest.cs" />
     <Compile Include="Rules\Objects\ClosedLoopTest.cs" />
     <Compile Include="Rules\Objects\EnclosedAreaTest.cs" />

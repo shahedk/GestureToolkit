@@ -26,17 +26,53 @@ namespace LanguageParser
         private static string GestureDefSourcePath { get; set; }
         private static string LanguageDefPath { get; set; }
         private static string _language = "";
-        private static string AppBinPath { get; set; }
+
+        // i.e. ProjectOutput = bin\Debug\
+        private static string OutDir { get; set; }
+        private static string ProjectDir = string.Empty;
+
 
         static void Main(string[] args)
         {
-            if (args.Length == 5)
+            if (args.Length == 1)
+            {
+                if (args[0] == "vspostbuild")
+                {
+                    DirectoryInfo currDir = new DirectoryInfo(Environment.CurrentDirectory);
+                    ProjectDir = currDir.Parent.Parent.FullName;
+
+                    OutDir = currDir.FullName;
+                }
+
+                CompiledGestureDefPath = ProjectDir + @"bin/gestures.gx";
+                RuleNamesFilePath = ProjectDir + @"bin/rulenames.gx";
+                GestureDefSourcePath = ProjectDir + @"Gesture Definitions";
+                LanguageDefPath = ProjectDir + @"Framework/GDL.mg";
+            }
+            else if (args.Length == 2)
+            {
+                /*
+                 * Used by the VS Post Build Event
+                 * 
+                 * CD ..\..\Framework
+                 * LanguageParser.exe "..\\" $(OutDir)
+                 * 
+                 */
+                ProjectDir = args[0];
+                OutDir = args[1];
+
+                CompiledGestureDefPath = ProjectDir + @"bin/gestures.gx";
+                RuleNamesFilePath = ProjectDir + @"bin/rulenames.gx";
+                GestureDefSourcePath = ProjectDir + @"Gesture Definitions";
+                LanguageDefPath = ProjectDir + @"Framework/GDL.mg";
+            }
+            else if (args.Length == 5)
             {
                 CompiledGestureDefPath = args[0];
                 RuleNamesFilePath = args[1];
                 GestureDefSourcePath = args[2];
                 LanguageDefPath = args[3];
-                LanguageDefPath = args[4];
+                OutDir = args[4];
 
                 // Display arg values
                 WriteMessage("CompiledGestureDefPath:");
@@ -52,77 +88,118 @@ namespace LanguageParser
                 WriteMessage(LanguageDefPath + Environment.NewLine);
 
                 WriteMessage("Local Application Bin Path:");
-                WriteMessage(AppBinPath + Environment.NewLine);
+                WriteMessage(OutDir + Environment.NewLine);
             }
             else if (args.Length == 0)
             {
                 WriteMessage("No args provided. Using default paths!");
 
-                CompiledGestureDefPath = @"../../../../Silverlight/Gestures/Bin/gestures.gx";
-                RuleNamesFilePath = @"../../../../Silverlight/Gestures/Bin/rulenames.gx";
-                GestureDefSourcePath = @"../../../../Silverlight/Gestures/Gesture Definitions";
-                LanguageDefPath = "../GDL.mg";
-                AppBinPath = @"../../../../Net Framework/TestApplication/Bin/Debug/";
+                //CompiledGestureDefPath = @"../../../../Silverlight/Gestures/Bin/gestures.gx";
+                //RuleNamesFilePath = @"../../../../Silverlight/Gestures/Bin/rulenames.gx";
+                //GestureDefSourcePath = @"../../../../Silverlight/Gestures/Gesture Definitions";
+                //LanguageDefPath = "../GDL.mg";
+                //ProjectOutput = @"../../../../Net Framework/TestApplication/Bin/Debug/";
+
+                //ProjectDir = @"../../../../Silverlight/Gestures/";
+                ProjectDir = @"R:\Projects\TouchToolkit2\Src\Solution files\Windows 7 Multi-touch1\";
+                OutDir = @"bin\Debug\";
+
+                CompiledGestureDefPath = ProjectDir + @"bin/gestures.gx";
+                RuleNamesFilePath = ProjectDir + @"bin/rulenames.gx";
+                GestureDefSourcePath = ProjectDir + @"Gesture Definitions";
+                LanguageDefPath = ProjectDir + @"Framework/GDL.mg";
             }
             else
             {
                 WriteMessage("Invalid args!");
+                foreach (var item in args)
+                    WriteMessage(item);
+
                 return;
             }
 
-            // Load language grammar
-            WriteMessage("Loading language grammar...");
-            _language = File.ReadAllText(LanguageDefPath);
+            // Print all parameters
+            foreach (var item in args)
+                WriteMessage(item);
 
-            // Build parser
-            WriteMessage("Building parser from language...");
-            Parser parser = GetParser();
-            List<string> ruleNames = GetRuleNames(parser);
+            DirectoryInfo gestureDefinitions = new DirectoryInfo(GestureDefSourcePath);
 
-            // Build the dictionary with known types: all rule & return types
-            WriteMessage("Building list of rule types...");
-            IEnumerable<Type> ruleTypes = GetAllRuleDataTypes();
-
-            var map = new Dictionary<Identifier, Type>();
-
-            // Adding all types that implements 'IRuleData'
-            foreach (var type in ruleTypes)
+            if (!gestureDefinitions.Exists)
             {
-                map.Add(type.Name, type);
+                WriteMessage("Could not find the \"Gesture Definitions\" folder.");
+                return;
             }
-
-            // Adding additional types
-            map.Add("Return", typeof(ReturnToken));
-            map.Add("Gesture", typeof(GestureToken));
-            //map.Add("States", typeof(List<string>));
-
-            WriteMessage("Compiling gestures (*.g files) ...");
-            List<GestureToken> gestures = new List<GestureToken>();
-            DirectoryInfo gestureFolder = new DirectoryInfo(GestureDefSourcePath);
-            FileInfo[] files = gestureFolder.GetFiles("*.g");
-            foreach (var file in files)
+            else if (gestureDefinitions.GetFiles("*.g").Count() == 0)
             {
-                string data = File.ReadAllText(file.FullName);
+                WriteMessage("Gesture definition parser: No custom gesture definition found.");
+                return;
+            }
+            else
+            {
+                // Load language grammar
+                WriteMessage("Loading language grammar...");
+                _language = File.ReadAllText(LanguageDefPath);
 
-                // Parse
-                var list = parser.Parse<List<object>>(data, map);
-                foreach (GestureToken g in list)
+                // Build parser
+                WriteMessage("Building parser from language...");
+                Parser parser = GetParser();
+                List<string> ruleNames = GetRuleNames(parser);
+
+                // Build the dictionary with known types: all rule & return types
+                WriteMessage("Building list of rule types...");
+                IEnumerable<Type> ruleTypes = GetAllRuleDataTypes();
+
+                var map = new Dictionary<Identifier, Type>();
+
+                // Adding all types that implements 'IRuleData'
+                foreach (var type in ruleTypes)
                 {
-                    gestures.Add(g);
+                    map.Add(type.Name, type);
                 }
-            }
 
-            WriteMessage("Updating deployment folder...");
+                // Adding additional types
+                map.Add("Return", typeof(ReturnToken));
+                map.Add("Gesture", typeof(GestureToken));
+                //map.Add("States", typeof(List<string>));
 
-            UpdateGestureDefFile(gestures);
-            UpdateRuleNamesList(ruleNames);
+                WriteMessage("Compiling gestures (*.g files) ...");
+                List<GestureToken> gestures = new List<GestureToken>();
+                DirectoryInfo gestureFolder = new DirectoryInfo(GestureDefSourcePath);
+                FileInfo[] files = gestureFolder.GetFiles("*.g");
+                foreach (var file in files)
+                {
+                    string data = File.ReadAllText(file.FullName);
 
-            WriteMessage("Done.");
+                    // Parse
+                    var list = parser.Parse<List<object>>(data, map);
+                    foreach (GestureToken g in list)
+                    {
+                        if (gestures.Where(existingGesture => existingGesture.Name == g.Name).Count() > 0)
+                        {
+                            WriteMessage(string.Format("Duplicate definition found for gesture: \"{0}\". Skipping the definition defined in \"{1}\"", g.Name, file.FullName));
+                        }
+                        else
+                        {
+                            gestures.Add(g);
+                        }
+                    }
+                }
+
+                WriteMessage("Updating deployment folder...");
+
+                UpdateGestureDefFile(gestures);
+                UpdateRuleNamesList(ruleNames);
+
+                WriteMessage("Done.");
 
 #if DEBUG
-            // Let users read the console message
-            Thread.Sleep(1000);
+                if (args.Count() == 0)
+                {
+                    // Let users read the console message
+                    Thread.Sleep(1000);
+                }
 #endif
+            }
         }
 
         private static Parser GetParser()
@@ -205,7 +282,7 @@ namespace LanguageParser
         {
 
             List<Type> types = new List<Type>();
-            DirectoryInfo dirInfo = new DirectoryInfo(AppBinPath);
+            DirectoryInfo dirInfo = new DirectoryInfo(ProjectDir + OutDir);
 
             // Scan all user defined dlls
             if (dirInfo.Exists)
@@ -225,7 +302,7 @@ namespace LanguageParser
             // Scan framework dlls
             Assembly framework = typeof(GestureFramework).Assembly;
             types.AddRange(framework.GetTypes());
-            
+
             Assembly gestureProcessor = typeof(IRuleData).Assembly;
             types.AddRange(gestureProcessor.GetTypes());
 

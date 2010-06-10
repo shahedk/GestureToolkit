@@ -30,7 +30,26 @@ namespace TouchToolkit.Framework.Utility
         {
             Stream stream = GetEmbeddedResource(callingObject, resourceName);
 
-            return stream.Deserialize();
+            if (stream != null)
+                return stream.Deserialize();
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// Returns the specified gesture tokens stored as embedded resources in the assembly
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="resourceName"></param>
+        /// <returns></returns>
+        public static List<GestureToken> GetEmbeddedGestureDefinition(Assembly assembly, string resourceName)
+        {
+            Stream stream = GetEmbeddedResource(resourceName, assembly);
+
+            if (stream != null)
+                return stream.Deserialize();
+            else
+                return null;
         }
 
         /// <summary>
@@ -58,7 +77,7 @@ namespace TouchToolkit.Framework.Utility
         {
             Stream s = GetEmbeddedResource(callingObject, imageName);
             BitmapImage img = new BitmapImage();
-            
+
 #if SILVERLIGHT
             img.SetSource(s);
 #else
@@ -75,6 +94,19 @@ namespace TouchToolkit.Framework.Utility
         /// <returns></returns>
         public static Stream GetEmbeddedResource(object callingObject, string resourceName)
         {
+            Type t = callingObject.GetType();
+            Assembly assembly = t.Assembly;
+            return GetEmbeddedResource(resourceName, assembly);
+        }
+
+        /// <summary>
+        /// Returns the specified content as "Stream" in the assembly
+        /// </summary>
+        /// <param name="resourceName"></param>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
+        public static Stream GetEmbeddedResource(string resourceName, Assembly assembly)
+        {
             // The control template must be in an embeded resource - find it
             Stream resourceStream = null;
 
@@ -83,8 +115,6 @@ namespace TouchToolkit.Framework.Utility
             // end after a dot
             string dotResource = '.' + resourceName;
 
-            Type t = callingObject.GetType();
-            Assembly assembly = t.Assembly;
             string[] names = assembly.GetManifestResourceNames();
 
             foreach (string name in names)

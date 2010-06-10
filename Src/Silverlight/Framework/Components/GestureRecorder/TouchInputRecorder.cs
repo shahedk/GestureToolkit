@@ -112,14 +112,15 @@ namespace TouchToolkit.Framework.Components
         /// Simulates the touch(s) as specified in the xml
         /// </summary>
         /// <param name="xml">XML serialized collection of FrameInfo objects</param>
-        public void RunGesture(string xml)
+        public void RunGesture(string xml, GesturePlaybackCompleted playbackCompleted = null)
         {
             GestureInfo gestureInfo = SerializationHelper.Desirialize(xml);
             // Initializing background thread to playback recorded gestures
             _backgroundThreadStart = new ParameterizedThreadStart(RunGesture);
             _backgroundThread = new Thread(_backgroundThreadStart);
 
-            Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted> args = new Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted>(gestureInfo, PlaybackEnded);
+            Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted> args =
+                new Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted>(gestureInfo, playbackCompleted);
 
             _backgroundThread.Start(args);
         }
@@ -139,7 +140,7 @@ namespace TouchToolkit.Framework.Components
             {
                 GestureFramework.UpdateInputProvider(_touchListener);
 
-                Action<FrameInfo> act = delegate(FrameInfo frame)   
+                Action<FrameInfo> act = delegate(FrameInfo frame)
                 {
                     _touchListener.Touch_FrameReported(frame);
                 };
@@ -149,9 +150,27 @@ namespace TouchToolkit.Framework.Components
                     TouchAction2 a = frameInfo.Touches[0].ActionType;
                     object[] val = new object[1];
                     val[0] = frameInfo;
-                    GestureFramework.LayoutRoot.Dispatcher.BeginInvoke(act, frameInfo);
+
+                    if (GestureFramework.LayoutRoot.Parent == null)
+                    {
+                        // Its a fake UI created by the automated UnitTest
+                        act(frameInfo);
+                    }
+                    else
+                    {
+                        // Running from actual UI
+                        GestureFramework.LayoutRoot.Dispatcher.BeginInvoke(act, frameInfo);
+                    }
+
                     Thread.Sleep(frameInfo.WaitTime);
                 }
+
+                // Notify playback complition
+                if (info.Item2 != null)
+                    info.Item2();
+
+                if (PlaybackCompleted != null)
+                    PlaybackCompleted();
             }
             catch
             {
@@ -160,22 +179,23 @@ namespace TouchToolkit.Framework.Components
             finally
             {
                 GestureFramework.UpdateInputProvider(existingInputProvider);
-                info.Item2();
+                if (info.Item2 != null)
+                    info.Item2();
             }
         }
         #endregion
 
-        private void PlaybackEnded()
-        {
-            if (PlaybackCompleted != null)
-                PlaybackCompleted();
-        }
+        //private void PlaybackEnded()
+        //{
+        //    //if (PlaybackCompleted != null)
+        //    //    PlaybackCompleted();
+        //}
 
         public void StopPlayback()
         {
             //TODO: The thread that is playing the recorded gesture needs to be stopped
 
-            PlaybackEnded();
+            //PlaybackEnded();
         }
     }
 }
