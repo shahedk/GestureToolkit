@@ -28,7 +28,7 @@ namespace TouchToolkit.Framework.Components
         private VirtualTouchInputProvider _touchListener = new VirtualTouchInputProvider();
         private ParameterizedThreadStart _backgroundThreadStart;
         private Thread _backgroundThread;
-        //public event GesturePlaybackCompleted PlaybackCompleted;
+        public event GesturePlaybackCompleted PlaybackCompleted;
 
         public delegate void GesturePlaybackCompleted();
 
@@ -119,7 +119,7 @@ namespace TouchToolkit.Framework.Components
             _backgroundThreadStart = new ParameterizedThreadStart(RunGesture);
             _backgroundThread = new Thread(_backgroundThreadStart);
 
-            Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted> args = 
+            Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted> args =
                 new Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted>(gestureInfo, playbackCompleted);
 
             _backgroundThread.Start(args);
@@ -161,22 +161,26 @@ namespace TouchToolkit.Framework.Components
                         // Running from actual UI
                         GestureFramework.LayoutRoot.Dispatcher.BeginInvoke(act, frameInfo);
                     }
-                    
+
                     Thread.Sleep(frameInfo.WaitTime);
                 }
 
                 // Notify playback complition
                 if (info.Item2 != null)
                     info.Item2();
+
+                if (PlaybackCompleted != null)
+                    PlaybackCompleted();
             }
-            catch 
+            catch
             {
                 throw;
             }
             finally
             {
                 GestureFramework.UpdateInputProvider(existingInputProvider);
-                info.Item2();
+                if (info.Item2 != null)
+                    info.Item2();
             }
         }
         #endregion

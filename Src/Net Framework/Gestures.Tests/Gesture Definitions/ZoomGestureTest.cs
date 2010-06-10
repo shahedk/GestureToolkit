@@ -68,7 +68,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
         [ClassInitialize()]
         public static void InitializeTest(TestContext testContext)
         {
-            GestureTestFramework.Init("TT", "Test");
+            GestureTestFramework.Init("TestAccount", "TestProject");
         }
 
 
@@ -78,28 +78,25 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
             bool gestureDetected = false;
             var threadHolder = new AutoResetEvent(false);
 
-            GestureTestFramework.Validate("Drag", "T2", 
-                
+            GestureTestFramework.Validate("Zoom", "TouchInteraction02",
+
                 // On successful gesture detection
                 (sender, e) =>
                 {
+                    gestureDetected = true;
+
                     if (e.Error == null)
                     {
-                        var position = e.Values.Get<Position>();
-                        Assert.IsNotNull(position, "Failed to retrieve return value: position");
-
-                        var positionChanged = e.Values.Get<PositionChanged>();
-                        Assert.IsNotNull(positionChanged, "Failed to retrieve return value: position-changed");
+                        var distanceChanged = e.Values.Get<DistanceChanged>();
+                        Assert.IsNotNull(distanceChanged, "Failed to retrieve return value: distance-changed");
                     }
                     else
                     {
                         Assert.Fail(e.Error.Message);
                     }
-
-                    gestureDetected = true;
                 },
 
-                // On playback completion
+                // On gesture playback completion
                 () =>
                 {
                     threadHolder.Set();
