@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AnotoApplication.Properties
+namespace AnotoTestApp.Properties
 {
 
 

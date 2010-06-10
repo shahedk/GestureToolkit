@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{398B76AD-EA22-4C80-B3EE-D14358798716}</ProjectGuid>
+    <ProjectGuid>{DBF5CB30-FF19-41E7-9AAD-C42670D35895}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AnotoApplication</RootNamespace>
-    <AssemblyName>AnotoApplication</AssemblyName>
+    <RootNamespace>AnotoTestApp</RootNamespace>
+    <AssemblyName>AnotoTestApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -37,19 +37,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnotoPen">
-      <HintPath>Anotolibs\AnotoPen.dll</HintPath>
+      <HintPath>..\Anotolibs\AnotoPen.dll</HintPath>
     </Reference>
     <Reference Include="Conoto.net">
-      <HintPath>Anotolibs\Conoto.net.dll</HintPath>
+      <HintPath>..\Anotolibs\Conoto.net.dll</HintPath>
     </Reference>
     <Reference Include="Framework">
-      <HintPath>..\..\Net Framework\Framework\bin\Debug\Framework.dll</HintPath>
+      <HintPath>..\Framework\bin\Debug\Framework.dll</HintPath>
     </Reference>
     <Reference Include="Franson.BlueTools.350">
-      <HintPath>Anotolibs\Franson.BlueTools.350.dll</HintPath>
+      <HintPath>..\Anotolibs\Franson.BlueTools.350.dll</HintPath>
     </Reference>
     <Reference Include="Gestures">
-      <HintPath>..\..\Net Framework\Framework\bin\Debug\Gestures.dll</HintPath>
+      <HintPath>..\..\Framework\bin\Debug\Gestures.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -60,6 +60,12 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TouchToolkit.Framework">
+      <HintPath>..\Framework\bin\Debug\TouchToolkit.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="TouchToolkit.GestureProcessor">
+      <HintPath>..\Framework\bin\Debug\TouchToolkit.GestureProcessor.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -109,7 +115,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <Resource Include="Pictures\Hydrangeas.jpg" />
+    <Resource Include="Pictures\Jellyfish.jpg" />
+    <Resource Include="Pictures\Koala.jpg" />
+    <Resource Include="Pictures\Lighthouse.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
