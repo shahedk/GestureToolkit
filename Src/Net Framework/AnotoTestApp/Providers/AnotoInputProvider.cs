@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Framework.TouchInputProviders;
 using System.Windows.Controls;
-using Gestures.Objects;
 using System.Windows.Media;
 using mil.AnotoPen;
 using mil.conoto;
 
-namespace AnotoApplication.Providers
+using TouchToolkit.GestureProcessor.Objects;
+
+namespace TouchToolkit.Framework.TouchInputProviders
 {
     public class AnotoInputProvider : TouchInputProvider
     {
@@ -24,6 +26,7 @@ namespace AnotoApplication.Providers
         private static ConotoElementManager manager;
         private static ConotoConvert conoto;
         private Panel source;
+        long lastTimeStamp = 0;
 
         public AnotoInputProvider(Panel LayoutRoot)
         {
@@ -72,11 +75,12 @@ namespace AnotoApplication.Providers
             double x, y; // converted x/y coordinates
             TouchInfo info = new TouchInfo();
             TouchAction2 actionType = TouchAction2.Up;
-
+            
             // convert AnotoPen coordiantes to the configured ones (in this case, screen coordinates)
             conoto.Convert((ulong)args.PageId, args.X, args.Y,
                            out function, out functionid, out x, out y);
             Point penPosition = new Point(x, y);
+            StylusPoint penPositionSP = new StylusPoint(x, y);
             // handle the type of event we got and call other handler functions
             switch (args.Type)
             {
@@ -105,10 +109,23 @@ namespace AnotoApplication.Providers
  
             TouchPoint2 point = new TouchPoint2(info, source);
             
+            point.Stroke.StylusPoints.Add(penPositionSP);
+            
             if (SingleTouchChanged != null)
             {
                 SingleTouchChanged(this, new SingleTouchEventArgs(point));
             }
+
+            if (FrameChanged != null)
+            {
+                FrameInfo finfo = new FrameInfo();
+                finfo.Touches = new List<TouchInfo>();
+                finfo.Touches.Add(info);
+                finfo.TimeStamp = args.Timestamp;
+                finfo.WaitTime = (int) args.Timestamp - (int) lastTimeStamp;
+                FrameChanged(this, finfo);
+            }
+            lastTimeStamp = (int) args.Timestamp;
         }
     }
 }
