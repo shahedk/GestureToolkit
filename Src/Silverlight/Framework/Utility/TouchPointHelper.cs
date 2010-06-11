@@ -59,7 +59,7 @@ namespace TouchToolkit.Framework.Utility
 #else
             TouchAction action = self.ActionType.ToTouchAction();
             Rect rect = new Rect(self.Position, self.Position);
-            
+
             TouchPoint point = new TouchPoint(null, self.Position, rect, action);
 #endif
             return point;
@@ -214,7 +214,11 @@ namespace TouchToolkit.Framework.Utility
             else
             {
                 var hitTestResult = VisualTreeHelper.HitTest(GestureFramework.LayoutRoot, point);
-                uiElement = hitTestResult.VisualHit as UIElement;
+
+                if (hitTestResult == null)
+                    uiElement = GestureFramework.LayoutRoot;
+                else
+                    uiElement = hitTestResult.VisualHit as UIElement;
             }
 #endif
             self.Source = uiElement;
