@@ -17,6 +17,8 @@ using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.Framework;
 using TouchToolkit.Framework.TouchInputProviders;
 using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace AnotoTestApp
 {
@@ -71,21 +73,41 @@ namespace AnotoTestApp
 
         private void LeftCallBack(UIElement sender, GestureEventArgs e)
         {
-            var view = ImageView.View;
-            view.MoveCurrentToPrevious();
-            if (view.IsCurrentBeforeFirst)
+            ThreadStart start = delegate()
             {
-                view.MoveCurrentToLast();
-            }
+                Dispatcher.Invoke(DispatcherPriority.Normal,
+                                  new Action(ViewPrevItem));
+            };
+            new Thread(start).Start();
         }
 
         private void RightCallBack(UIElement sender, GestureEventArgs e)
+        {
+            ThreadStart start = delegate()
+            {
+                Dispatcher.Invoke(DispatcherPriority.Normal,
+                                  new Action(ViewNextItem));
+            };
+            new Thread(start).Start();
+        }
+
+        private void ViewNextItem()
         {
             var view = ImageView.View;
             view.MoveCurrentToNext();
             if (view.IsCurrentAfterLast)
             {
                 view.MoveCurrentToFirst();
+            }
+        }
+
+        private void ViewPrevItem()
+        {
+            var view = ImageView.View;
+            view.MoveCurrentToPrevious();
+            if (view.IsCurrentBeforeFirst)
+            {
+                view.MoveCurrentToLast();
             }
         }
     }
