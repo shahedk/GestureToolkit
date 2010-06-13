@@ -11,6 +11,7 @@ using mil.AnotoPen;
 using mil.conoto;
 
 using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.Utility;
 
 namespace TouchToolkit.Framework.TouchInputProviders
 {
@@ -78,15 +79,6 @@ namespace TouchToolkit.Framework.TouchInputProviders
             TouchInfo info = new TouchInfo();
             TouchAction2 actionType = TouchAction2.Up;
             
-            // convert AnotoPen coordiantes to the configured ones (in this case, screen coordinates)
-            conoto.Convert((ulong)args.PageId, args.X, args.Y,
-                           out function, out functionid, out x, out y);
-            Point penPosition = new Point(x, y);
-            StylusPoint penPositionSP = new StylusPoint(x, y);
-            info.ActionType = actionType;
-            info.Position = penPosition;
-            info.TouchDeviceId = (int)args.PenId;
-
             // handle the type of event we got and call other handler functions
             switch (args.Type)
             {
@@ -101,13 +93,32 @@ namespace TouchToolkit.Framework.TouchInputProviders
                     break;
             }
 
+            // convert AnotoPen coordiantes to the configured ones (in this case, screen coordinates)
+            conoto.Convert((ulong)args.PageId, args.X, args.Y,
+                           out function, out functionid, out x, out y);
+            Point penPosition = new Point(x, y);
+            StylusPoint penPositionSP = new StylusPoint(x, y);
+            info.ActionType = actionType;
+            info.Position = penPosition;
+            info.TouchDeviceId = (int)args.PenId;
+
+            
+
             if (actionType == TouchAction2.Down)
             {
-                AddNewTouchPoint(info, source);
+                AddNewTouchPoint(info, GestureFramework.LayoutRoot);
             }
             else
             {
                 UpdateActiveTouchPoint(info);
+            }
+            
+            foreach (var point in ActiveTouchPoints)
+            {
+                if (point.Value.Action == TouchAction.Down)
+                {
+                    point.Value.UpdateSource();
+                }
             }
 
             if (_activeTouchInfos.ContainsKey(info.TouchDeviceId))
@@ -139,6 +150,11 @@ namespace TouchToolkit.Framework.TouchInputProviders
                 {
                     SingleTouchChanged(this, new SingleTouchEventArgs(point));
                 }
+            }
+
+            if (MultiTouchChanged != null)
+            {
+                MultiTouchChanged(this, new MultiTouchEventArgs(ActiveTouchPoints.Values.ToList<TouchPoint2>()));
             }
 
             if (FrameChanged != null)

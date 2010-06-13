@@ -43,7 +43,7 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
                     ValidSetOfTouchPoints tps = null;
                     if(_data.Values.Equals("Line"))
                     {
-                    tps = ValidateLine(point);
+                        tps = ValidateLine(point);
                     }
                     else if(_data.Values.Equals("Box"))
                     {
