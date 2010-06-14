@@ -11,6 +11,8 @@ using mil.AnotoPen;
 using mil.conoto;
 using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.Framework.Utility;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace TouchToolkit.Framework.TouchInputProviders
 {
@@ -25,7 +27,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
         private AnotoStreamingServer anotoServer;
         private static ConotoElementManager manager;
         private static ConotoConvert conoto;
-        private Panel source;
+        private UIElement source;
 
         private Dictionary<int, TouchInfo> _activeTouchInfos = new Dictionary<int, TouchInfo>();
         long lastTimeStamp = 0;
@@ -116,7 +118,14 @@ namespace TouchToolkit.Framework.TouchInputProviders
             {
                 if (point.Value.Action == TouchAction.Down)
                 {
-                    point.Value.UpdateSource();
+                    //point.Value.UpdateSource();
+
+                    ThreadStart start = delegate()
+                    {
+                        GestureFramework.LayoutRoot.Dispatcher.Invoke(DispatcherPriority.Normal,
+                                          new Action<Point>(PerformHitTest), point);
+                    };
+                    point.Value.Source = source;
                 }
             }
 
@@ -165,6 +174,26 @@ namespace TouchToolkit.Framework.TouchInputProviders
                 FrameChanged(this, finfo);
             }
             lastTimeStamp = (int) args.Timestamp;
+        }
+
+        private void PerformHitTest(Point point)
+        {
+            if (GestureFramework.LayoutRoot.Parent == null)
+            {
+                //TODO: Its a fake UI created by the automated UnitTest. The VisualTreeHelper won't work in this case, so find an alternet way
+
+                //Temporary workaround - point to root canvas
+                source = GestureFramework.LayoutRoot;
+            }
+            else
+            {
+                var hitTestResult = VisualTreeHelper.HitTest(GestureFramework.LayoutRoot, point);
+
+                if (hitTestResult == null)
+                    source = GestureFramework.LayoutRoot;
+                else
+                    source = hitTestResult.VisualHit as UIElement;
+            }
         }
     }
 }
