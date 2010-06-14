@@ -42,14 +42,8 @@
     <Reference Include="Conoto.net">
       <HintPath>..\Anotolibs\Conoto.net.dll</HintPath>
     </Reference>
-    <Reference Include="Framework">
-      <HintPath>..\Framework\bin\Debug\Framework.dll</HintPath>
-    </Reference>
     <Reference Include="Franson.BlueTools.350">
       <HintPath>..\Anotolibs\Franson.BlueTools.350.dll</HintPath>
-    </Reference>
-    <Reference Include="Gestures">
-      <HintPath>..\..\Framework\bin\Debug\Gestures.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -60,12 +54,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="TouchToolkit.Framework">
-      <HintPath>..\Framework\bin\Debug\TouchToolkit.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="TouchToolkit.GestureProcessor">
-      <HintPath>..\Framework\bin\Debug\TouchToolkit.GestureProcessor.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -119,6 +107,16 @@
     <Resource Include="Pictures\Jellyfish.jpg" />
     <Resource Include="Pictures\Koala.jpg" />
     <Resource Include="Pictures\Lighthouse.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\TouchToolkit.Framework.csproj">
+      <Project>{0E89118D-B58A-48DB-A05D-0ADBBB145195}</Project>
+      <Name>TouchToolkit.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gestures\TouchToolkit.GestureProcessor.csproj">
+      <Project>{61A73B75-7404-4A80-9953-80AE47BA05DD}</Project>
+      <Name>TouchToolkit.GestureProcessor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

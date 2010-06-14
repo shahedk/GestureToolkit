@@ -24,6 +24,7 @@ namespace TouchToolkit.Framework
 {
     internal class GestureLanguageProcessor
     {
+        private static readonly string[] assembliesToSkip = { "BlueTools", "Conoto.net" };
         private static List<Type> _allRules = new List<Type>();
         private static List<Tuple<IRuleValidator, Gesture>> _preConGestureMap = new List<Tuple<IRuleValidator, Gesture>>();
         private static List<IRuleValidator> _rules = new List<IRuleValidator>();
@@ -159,6 +160,9 @@ namespace TouchToolkit.Framework
             FileInfo frameworkDll = null;
             foreach (FileInfo assemblyFile in allAssemblies)
             {
+                if (IsExternalAssembly(assemblyFile))
+                    continue;
+
                 if (assemblyFile.Name.Contains("TouchToolkit.GestureProcessor"))
                 {
                     Assembly assembly = Assembly.LoadFile(assemblyFile.FullName);
@@ -177,6 +181,9 @@ namespace TouchToolkit.Framework
             // Then: Load the remaining gesture definitions
             foreach (var assemblyFile in allAssemblies)
             {
+                if (IsExternalAssembly(assemblyFile))
+                    continue;
+
                 if (assemblyFile.Name.Contains("TouchToolkit.GestureProcessor") || assemblyFile.Name.Contains("TouchToolkit.Framework"))
                     continue; // we already processed the framework dlls
 
@@ -191,6 +198,17 @@ namespace TouchToolkit.Framework
 #endif
 
             return tokens;
+        }
+
+        private static bool IsExternalAssembly(FileInfo assemblyFile)
+        {
+            foreach (var name in assembliesToSkip)
+            {
+                if (assemblyFile.FullName.Contains(name))
+                    return true;
+            }
+
+            return false;
         }
 
         private static IRuleValidator GetPreCondition(IRuleData ruleData, Gesture gesture)

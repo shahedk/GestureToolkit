@@ -9,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using mil.AnotoPen;
 using mil.conoto;
-
 using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.Framework.Utility;
 
