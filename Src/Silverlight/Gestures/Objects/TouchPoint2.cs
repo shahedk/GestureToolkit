@@ -125,6 +125,20 @@ namespace TouchToolkit.GestureProcessor.Objects
             return output;
         }
 
+        /// <summary>
+        /// Return an empty version of this point
+        /// </summary>
+        public TouchPoint2 GetEmptyCopy()
+        {
+            TouchInfo info = new TouchInfo();
+            info.ActionType = Action.ToTouchAction();
+            info.Position = Position;
+            info.TouchDeviceId = TouchDeviceId;
+
+            TouchPoint2 output = new TouchPoint2(info, Source);
+            return output;
+        }
+
         private void UpdateTouchInfo(TouchInfo info)
         {
             Action = info.ActionType.ToTouchAction();
