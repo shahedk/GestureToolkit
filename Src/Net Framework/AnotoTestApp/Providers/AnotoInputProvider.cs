@@ -78,7 +78,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
             long functionid; // function id of the area hit by the pen (as configured in configuration)
             double x, y; // converted x/y coordinates
             TouchInfo info = new TouchInfo();
-            TouchAction2 actionType = TouchAction2.Up;
+            TouchAction2 actionType = TouchAction2.Move;
             
             // handle the type of event we got and call other handler functions
             switch (args.Type)
@@ -97,35 +97,42 @@ namespace TouchToolkit.Framework.TouchInputProviders
             // convert AnotoPen coordiantes to the configured ones (in this case, screen coordinates)
             conoto.Convert((ulong)args.PageId, args.X, args.Y,
                            out function, out functionid, out x, out y);
-            Point penPosition = new Point(x, y);
-            StylusPoint penPositionSP = new StylusPoint(x, y);
-            info.ActionType = actionType;
-            info.Position = penPosition;
-            info.TouchDeviceId = (int)args.PenId;
 
-            
+            info.ActionType = actionType;
+            info.Position = new Point(x, y);
+            info.TouchDeviceId = (int)args.PenId;
 
             if (actionType == TouchAction2.Down)
             {
-                AddNewTouchPoint(info, GestureFramework.LayoutRoot);
+                if (!ActiveTouchPoints.ContainsKey(info.TouchDeviceId))
+                {
+                    ActiveTouchPoints.Add(info.TouchDeviceId, new TouchPoint2(info, source));
+                }
+                else
+                {
+                    ActiveTouchPoints[info.TouchDeviceId] = new TouchPoint2(info, source);
+                }
             }
             else
             {
                 UpdateActiveTouchPoint(info);
             }
-            
+
+            bool print = true;
             foreach (var point in ActiveTouchPoints)
             {
                 if (point.Value.Action == TouchAction.Down)
                 {
-                    //point.Value.UpdateSource();
-
                     ThreadStart start = delegate()
                     {
                         GestureFramework.LayoutRoot.Dispatcher.Invoke(DispatcherPriority.Normal,
                                           new Action<Point>(PerformHitTest), point);
                     };
                     point.Value.Source = source;
+                }
+                if (point.Value.Action == TouchAction.Up)
+                {
+                    print = true;
                 }
             }
 
@@ -141,23 +148,13 @@ namespace TouchToolkit.Framework.TouchInputProviders
             
             //Use hit tests to find
             UIElement element = null;
-            /*
-            for (int i = 0; i < source.Children.Count; i++)
-            {
-                IInputElement result = source.Children[i].InputHitTest(penPosition);
-                element = result as UIElement;
-            }*/
- 
-            //TouchPoint2 point = new TouchPoint2(info, source);
-            
-            //point.Stroke.StylusPoints.Add(penPositionSP);
-            
+
             if (SingleTouchChanged != null)
             {
                 foreach(var point in ActiveTouchPoints.Values)
                 {
                     SingleTouchChanged(this, new SingleTouchEventArgs(point));
-                }
+                }   
             }
 
             if (MultiTouchChanged != null)

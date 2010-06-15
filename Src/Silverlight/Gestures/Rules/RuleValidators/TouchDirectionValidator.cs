@@ -37,14 +37,17 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
         {
             ValidSetOfPointsCollection sets = new ValidSetOfPointsCollection();
             ValidSetOfTouchPoints list = new ValidSetOfTouchPoints();
+            List<Queue<int>> PointList = new List<Queue<int>>();
+            Queue<int> AddQueue;
 
             foreach (var point in points)
             {
-
+                
                 int length = point.Stroke.StylusPoints.Count;
-                bool result = true;
-                int step = 3;
-                for (int i = 0; i + step < length - step; i = i + step)
+                bool continuous = true;
+                int step = 1;
+                AddQueue = new Queue<int>();
+                for (int i = 0; i < length - step; i = i + step)
                 {
                     double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point.Stroke.StylusPoints[i], 
                         point.Stroke.StylusPoints[i + step]);
@@ -55,22 +58,47 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
                     {
                         continue;
                     }
-                    //System.Diagnostics.Debug.WriteLine(dist + " " + slope + " " + stringSlope);
-                    if (!stringSlope.Equals(_data.Values))
+                    if (stringSlope.Equals(_data.Values))
                     {
-                        result = false;
+                        if (!continuous)
+                        {
+                            continuous = true;
+                            PointList.Add(AddQueue);
+                            AddQueue = new Queue<int>();
+                        }
+                        AddQueue.Enqueue(i);
+                    }
+                    else
+                    {
+                        continuous = false;
                     }
                 }
-                if (result)
+
+                if (AddQueue.Count > 0)
                 {
-                    list.Add(point);
+                    PointList.Add(AddQueue);
+                }
+
+                //Add seperate points for each queue made
+                foreach (var queue in PointList)
+                {
+                    TouchPoint2 p = point.GetEmptyCopy();
+                    while (queue.Count > 0)
+                    {
+                        int i = queue.Dequeue();
+                        StylusPoint newPoint = point.Stroke.StylusPoints[i];
+                        p.Stroke.StylusPoints.Add(newPoint);
+                    }
+                    if (p.Stroke.StylusPoints.Count > 1)
+                    {
+                        list.Add(p);
+                    }
                 }
             }
             if (list.Count > 0)
             {
                 sets.Add(list);
             }
-            
             return sets;
         }
 
