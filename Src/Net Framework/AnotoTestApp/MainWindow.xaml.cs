@@ -19,6 +19,8 @@ using TouchToolkit.Framework.TouchInputProviders;
 using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
 using System.Threading;
 using System.Windows.Threading;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace AnotoTestApp
 {
@@ -28,15 +30,13 @@ namespace AnotoTestApp
     public partial class MainWindow : Window
     {
         private string ImagePath = "Pictures\\";
-        public CollectionViewSource ImageView { get; set; }
+        public ICollectionView Pictures { get; set; }
         public List<Picture> AllImages;
 
         public MainWindow()
         {
             
             AllImages = new List<Picture>();
-            ImageView = new CollectionViewSource();
-            ImageView.Source = AllImages;
             InitializeComponent();
             this.Loaded += MainPage_Loaded;
         }
@@ -66,11 +66,12 @@ namespace AnotoTestApp
             foreach (var imageName in imageNames)
             {
                 AllImages.Add(new Picture(ImagePath + imageName));
-
-                PictureList.ItemsSource = AllImages;
             }
+            Pictures = CollectionViewSource.GetDefaultView(AllImages);
+            Display.Source = AllImages[Pictures.CurrentPosition].GetImage();
         }
 
+        #region Gesture Callbacks
         private void LeftCallBack(UIElement sender, GestureEventArgs e)
         {
             ThreadStart start = delegate()
@@ -90,34 +91,48 @@ namespace AnotoTestApp
             };
             new Thread(start).Start();
         }
+        #endregion
 
+        #region Navigation Methods
         private void ViewNextItem()
         {
-            var view = ImageView.View;
-            view.MoveCurrentToNext();
-            if (view.IsCurrentAfterLast)
+            Pictures.MoveCurrentToNext();
+            if (Pictures.IsCurrentAfterLast)
             {
-                view.MoveCurrentToFirst();
+                Pictures.MoveCurrentToFirst();
             }
+            Display.Source = AllImages[Pictures.CurrentPosition].GetImage();
         }
 
         private void ViewPrevItem()
         {
-            var view = ImageView.View;
-            view.MoveCurrentToPrevious();
-            if (view.IsCurrentBeforeFirst)
+            Pictures.MoveCurrentToPrevious();
+            if (Pictures.IsCurrentBeforeFirst)
             {
-                view.MoveCurrentToLast();
+                Pictures.MoveCurrentToLast();
             }
+            Display.Source = AllImages[Pictures.CurrentPosition].GetImage();
         }
+        #endregion
     }
 
     public class Picture
     {
-        public string Image{get; set;}
+        private string Image{get; set;}
         public Picture(string img)
         {
             Image = img;
+        }
+        public BitmapImage GetImage()
+        {
+            BitmapImage myBitmapImage = new BitmapImage();
+
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Image, UriKind.Relative);
+
+            myBitmapImage.EndInit();
+
+            return myBitmapImage;
         }
     }
 }
