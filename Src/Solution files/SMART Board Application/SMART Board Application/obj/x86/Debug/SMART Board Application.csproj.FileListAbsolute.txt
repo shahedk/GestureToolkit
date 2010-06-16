@@ -1,0 +1,18 @@
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\bin\Debug\SMART Board Application.exe
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\bin\Debug\SMART Board Application.pdb
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\ResolveAssemblyReference.cache
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\MainWindow.baml
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\MainWindow.g.cs
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\App.g.cs
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\SMART Board Application_Content.g.cs
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\SMART Board Application_MarkupCompile.cache
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\SMART Board Application.g.resources
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\SMART_Board_Application.Properties.Resources.resources
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\GenerateResource.read.1.tlog
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\GenerateResource.write.1.tlog
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\SMART Board Application.exe
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\obj\x86\Debug\SMART Board Application.pdb
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\bin\Debug\TouchToolkit.Framework.dll
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\bin\Debug\TouchToolkit.GestureProcessor.dll
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\bin\Debug\TouchToolkit.Framework.pdb
+I:\TouchToolKit\Src\Solution files\SMART Board Application\SMART Board Application\bin\Debug\TouchToolkit.GestureProcessor.pdb
