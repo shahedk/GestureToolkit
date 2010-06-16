@@ -1,16 +1,12 @@
 ﻿<Window x:Class="AnotoTestApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:AnotoTestApp"
         Title="MainWindow" Height="487" Width="581">
+    <Window.Resources>
+       
+    </Window.Resources>
     <Canvas Height="384" Name="LayoutRoot" Width="507">
-        <ListBox x:Name="PictureList" ItemsSource="{Binding ImageView}" Height="365" Width="488" Canvas.Left="9" Canvas.Top="9" IsSynchronizedWithCurrentItem="True">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Image}" Stretch="Fill"></Image>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            <Image Stretch="Fill" x:Name="Display"/>
     </Canvas>
 </Window>

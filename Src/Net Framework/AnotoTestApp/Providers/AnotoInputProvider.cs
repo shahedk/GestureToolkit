@@ -102,6 +102,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
             info.Position = new Point(x, y);
             info.TouchDeviceId = (int)args.PenId;
 
+            //If there's a Down action detected, add it to the active touch points
             if (actionType == TouchAction2.Down)
             {
                 if (!ActiveTouchPoints.ContainsKey(info.TouchDeviceId))
@@ -118,7 +119,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
                 UpdateActiveTouchPoint(info);
             }
 
-            bool print = true;
+            //Update the source to be the HitTest result
             foreach (var point in ActiveTouchPoints)
             {
                 if (point.Value.Action == TouchAction.Down)
@@ -130,12 +131,9 @@ namespace TouchToolkit.Framework.TouchInputProviders
                     };
                     point.Value.Source = source;
                 }
-                if (point.Value.Action == TouchAction.Up)
-                {
-                    print = true;
-                }
             }
 
+            //Add info to activetouchinfos
             if (_activeTouchInfos.ContainsKey(info.TouchDeviceId))
             {
                 _activeTouchInfos[info.TouchDeviceId] = info;
@@ -144,11 +142,8 @@ namespace TouchToolkit.Framework.TouchInputProviders
             {
                 _activeTouchInfos.Add(info.TouchDeviceId, info);
             }
-            
-            
-            //Use hit tests to find
-            UIElement element = null;
 
+            //Call the delegates
             if (SingleTouchChanged != null)
             {
                 foreach(var point in ActiveTouchPoints.Values)
