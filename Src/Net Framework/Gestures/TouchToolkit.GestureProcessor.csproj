@@ -284,14 +284,14 @@
     <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\ConvexHull\Utility.cs">
       <Link>Utility\ShapeRecognizers\ConvexHull\Utility.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\Correlation.cs">
+      <Link>Utility\ShapeRecognizers\Correlation.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\EllipseRecognizer.cs">
       <Link>Utility\ShapeRecognizers\EllipseRecognizer.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\HoughCircle.cs">
       <Link>Utility\ShapeRecognizers\HoughCircle.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\HoughLine.cs">
-      <Link>Utility\ShapeRecognizers\HoughLine.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\IShapeRecognizer.cs">
       <Link>Utility\ShapeRecognizers\IShapeRecognizer.cs</Link>
@@ -317,6 +317,9 @@
     <EmbeddedResource Include="..\..\Silverlight\Gestures\Bin\rulenames.gx">
       <Link>bin\rulenames.gx</Link>
     </EmbeddedResource>
+    <None Include="..\..\Silverlight\Gestures\Gesture Definitions\box.g">
+      <Link>Gesture Definitions\box.g</Link>
+    </None>
     <None Include="..\..\Silverlight\Gestures\Gesture Definitions\doubleTap.g">
       <Link>Gesture Definitions\doubleTap.g</Link>
     </None>

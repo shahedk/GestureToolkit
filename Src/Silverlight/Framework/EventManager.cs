@@ -101,9 +101,9 @@ namespace TouchToolkit.Framework.GestureEvents
                 {
                     cb.FrameChanged(frameInfo);
                 }
-                catch //(Exception ex)
+                catch (Exception ex)
                 {
-                    // TODO: write to log
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
                 }
             }
         }

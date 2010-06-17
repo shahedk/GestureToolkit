@@ -53,6 +53,7 @@ namespace AnotoTestApp
             //Subscribe to gesture events
             GestureFramework.EventManager.AddEvent(LayoutRoot, "right", RightCallBack);
             GestureFramework.EventManager.AddEvent(LayoutRoot, "left", LeftCallBack);
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Box", BoxCallBack);
             // Show Recording Panel
             //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
 
@@ -76,7 +77,7 @@ namespace AnotoTestApp
         {
             ThreadStart start = delegate()
             {
-                Dispatcher.Invoke(DispatcherPriority.Normal,
+                Dispatcher.Invoke(DispatcherPriority.Render,
                                   new Action(ViewPrevItem));
             };
             new Thread(start).Start();
@@ -86,8 +87,18 @@ namespace AnotoTestApp
         {
             ThreadStart start = delegate()
             {
-                Dispatcher.Invoke(DispatcherPriority.Normal,
+                Dispatcher.Invoke(DispatcherPriority.Render,
                                   new Action(ViewNextItem));
+            };
+            new Thread(start).Start();
+        }
+
+        private void BoxCallBack(UIElement sender, GestureEventArgs e)
+        {
+            ThreadStart start = delegate()
+            {
+                Dispatcher.Invoke(DispatcherPriority.Render,
+                                  new Action(OpenDirectoryWindow));
             };
             new Thread(start).Start();
         }
@@ -114,6 +125,18 @@ namespace AnotoTestApp
             Display.Source = AllImages[Pictures.CurrentPosition].GetImage();
         }
         #endregion
+
+        private void OpenDirectoryWindow()
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.DefaultExt = ".jpg";
+            dialog.Filter = "Images (.jpg)|*.jpg";
+            Nullable<bool> result = dialog.ShowDialog();
+            if (result == true)
+            {
+                string fname = dialog.FileName;
+            }
+        }
     }
 
     public class Picture

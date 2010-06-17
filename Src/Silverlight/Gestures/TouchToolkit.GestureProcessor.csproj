@@ -164,8 +164,8 @@
     <Compile Include="Utility\CommonHelperMethods.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utility\ShapeRecognizers\Correlation.cs" />
     <Compile Include="Utility\ShapeRecognizers\HoughCircle.cs" />
-    <Compile Include="Utility\ShapeRecognizers\HoughLine.cs" />
     <Compile Include="Utility\ShapeRecognizers\RectangleParser.cs" />
     <Compile Include="Utility\TouchHelpers\TouchPointExtensions.cs" />
     <Compile Include="Utility\TrigonometricCalculationHelper.cs" />
@@ -192,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Gesture Definitions\ReadMe.txt" />
+    <None Include="Gesture Definitions\box.g" />
     <None Include="Gesture Definitions\line.g" />
     <None Include="Gesture Definitions\right.g" />
   </ItemGroup>

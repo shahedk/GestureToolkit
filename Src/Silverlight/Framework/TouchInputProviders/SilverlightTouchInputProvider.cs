@@ -68,7 +68,6 @@ namespace TouchToolkit.Framework.TouchInputProviders
             {
                 foreach (TouchPoint2 p in touchPoints)
                 {
-
                     SingleTouchChanged(this, new SingleTouchEventArgs(p));
                 }
             }

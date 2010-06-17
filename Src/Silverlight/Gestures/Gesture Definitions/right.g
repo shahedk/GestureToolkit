@@ -6,6 +6,6 @@ validation state
 
 condition
 	Touch direction: Right and
-    Touch path length: 200..100000
+    Touch path length: 500..100000
 return
 	Position changed
