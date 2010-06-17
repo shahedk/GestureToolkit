@@ -160,7 +160,8 @@ namespace TouchToolkit.Framework.TouchInputProviders
             if (FrameChanged != null)
             {
                 FrameInfo finfo = new FrameInfo();
-                finfo.Touches = _activeTouchInfos.Values.ToList<TouchInfo>();
+                List<TouchInfo> infos = _activeTouchInfos.Values.ToList<TouchInfo>();
+                finfo.Touches = infos;
                 finfo.TimeStamp = args.Timestamp;
                 finfo.WaitTime = (int) args.Timestamp - (int) lastTimeStamp;
                 FrameChanged(this, finfo);

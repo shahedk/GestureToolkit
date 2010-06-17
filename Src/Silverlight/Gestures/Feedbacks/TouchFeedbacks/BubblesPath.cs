@@ -47,10 +47,14 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
                 // Create proxies when touch points move. 
                 // No point of creating at touch down the 
                 // space will be covered by users fingers
-                if (touchInfo.ActionType == TouchAction2.Move)
-                {
-                    CreateProxyObject(touchInfo);
-                }
+                Action action = () =>
+                    {
+                        if (touchInfo.ActionType == TouchAction2.Move)
+                        {
+                            CreateProxyObject(touchInfo);
+                        }
+                    };
+                _dispatcher.BeginInvoke(action);
             }
         }
 

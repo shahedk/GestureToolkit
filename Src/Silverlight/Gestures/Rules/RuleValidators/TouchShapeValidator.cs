@@ -157,8 +157,8 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
         private ValidSetOfTouchPoints ValidateLine(TouchPoint2 points)
         {
             ValidSetOfTouchPoints ret = new ValidSetOfTouchPoints();
-            HoughLine recognizer = new HoughLine(points);
-            if (recognizer.IsMatch())
+            Correlation recognizer = new Correlation(points);
+            if (Math.Abs(recognizer.RSquared) > .8)
             {
                 ret.Add(points);
             }
