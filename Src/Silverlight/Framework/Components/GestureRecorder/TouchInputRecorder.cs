@@ -20,14 +20,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Threading;
 using TouchToolkit.Framework.Storage;
+using System.Diagnostics;
 
 namespace TouchToolkit.Framework.Components
 {
     public class TouchInputRecorder
     {
         private VirtualTouchInputProvider _touchListener = new VirtualTouchInputProvider();
-        private ParameterizedThreadStart _backgroundThreadStart;
-        private Thread _backgroundThread;
+        //private ParameterizedThreadStart _backgroundThreadStart;
+        //private Thread _backgroundThread;
         public event GesturePlaybackCompleted PlaybackCompleted;
 
         public delegate void GesturePlaybackCompleted();
@@ -114,15 +115,41 @@ namespace TouchToolkit.Framework.Components
         /// <param name="xml">XML serialized collection of FrameInfo objects</param>
         public void RunGesture(string xml, GesturePlaybackCompleted playbackCompleted = null)
         {
+            
+            // Set touch provider to virtual touch provider
+            var existingInputProvider = TouchInputManager.ActiveTouchProvider;
+            GestureFramework.UpdateInputProvider(_touchListener);
+
             GestureInfo gestureInfo = SerializationHelper.Desirialize(xml);
+
             // Initializing background thread to playback recorded gestures
-            _backgroundThreadStart = new ParameterizedThreadStart(RunGesture);
-            _backgroundThread = new Thread(_backgroundThreadStart);
+            var threadStart = new ParameterizedThreadStart(RunGesture);
+            var backgroundThread = new Thread(threadStart);
 
             Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted> args =
                 new Tuple<GestureInfo, TouchInputRecorder.GesturePlaybackCompleted>(gestureInfo, playbackCompleted);
 
-            _backgroundThread.Start(args);
+            backgroundThread.Start(args);
+
+            // reset touch provider
+            GestureFramework.UpdateInputProvider(existingInputProvider);
+            
+        }
+
+        public void RunGesture(List<string> xmlContents, GesturePlaybackCompleted playbackCompleted = null)
+        {
+            foreach (string xml in xmlContents)
+            {
+                RunGesture(xml);
+            }
+            
+            // callback passed in the parameter
+            if (playbackCompleted != null)
+                playbackCompleted();
+
+            // Global event
+            if (PlaybackCompleted != null)
+                PlaybackCompleted();
         }
 
         /// <summary>
@@ -134,12 +161,9 @@ namespace TouchToolkit.Framework.Components
             Tuple<GestureInfo, GesturePlaybackCompleted> info = param as Tuple<GestureInfo, GesturePlaybackCompleted>;
 
             GestureInfo gestureInfo = info.Item1;
-            var existingInputProvider = TouchInputManager.ActiveTouchProvider;
-
+            
             try
             {
-                GestureFramework.UpdateInputProvider(_touchListener);
-
                 Action<FrameInfo> act = delegate(FrameInfo frame)
                 {
                     _touchListener.Touch_FrameReported(frame);
@@ -178,7 +202,6 @@ namespace TouchToolkit.Framework.Components
             }
             finally
             {
-                GestureFramework.UpdateInputProvider(existingInputProvider);
                 if (info.Item2 != null)
                     info.Item2();
             }
