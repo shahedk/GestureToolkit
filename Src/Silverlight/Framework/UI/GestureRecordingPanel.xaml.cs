@@ -71,7 +71,7 @@ namespace TouchToolkit.Framework.UI
                 else
                 {
                     RefreshProjectCombobox(projectName);
-                    RefreshGestureCombobox(projectName, gesName);
+                    RefreshGestureListbox(projectName, gesName);
                 }
             });
         }
@@ -121,7 +121,7 @@ namespace TouchToolkit.Framework.UI
                 RegisteredUserGrid.Visibility = System.Windows.Visibility.Visible;
 
                 ExistingProjectNameComboBox.Items.Clear();
-                ExistingGestureNameComboBox.Items.Clear();
+                ExistingGestureNameListBox.Items.Clear();
 
                 RefreshProjectCombobox();
             }
@@ -175,7 +175,7 @@ namespace TouchToolkit.Framework.UI
             });
         }
 
-        public void RefreshGestureCombobox(string projectName, string gestureName = null)
+        public void RefreshGestureListbox(string projectName, string gestureName = null)
         {
             //TODO: Extend the webservice so that we can get only the gestures of a particular project
             _storage.GetAllProjects((projectDetails, error) =>
@@ -185,13 +185,13 @@ namespace TouchToolkit.Framework.UI
                     ProjectDetail selectedProject = projectDetails.SingleOrDefault<ProjectDetail>(p => p.ProjectName == projectName);
                     if (selectedProject != null)
                     {
-                        ExistingGestureNameComboBox.Items.Clear();
+                        ExistingGestureNameListBox.Items.Clear();
                         foreach (string gesName in selectedProject.GestureNames)
                         {
-                            ExistingGestureNameComboBox.Items.Add(gesName);
+                            ExistingGestureNameListBox.Items.Add(gesName);
                         }
 
-                        ExistingGestureNameComboBox.SelectedItem = gestureName;
+                        ExistingGestureNameListBox.SelectedItem = gestureName;
                     }
                     else
                     {
@@ -213,11 +213,44 @@ namespace TouchToolkit.Framework.UI
             // Update "start/stop" button text
             RunButton.Content = ControlCaptions.StopGesture;
 
-            if (ExistingGestureNameComboBox.SelectedItem != null && ExistingGestureNameComboBox.SelectedItem != null)
+            if (ExistingGestureNameListBox.SelectedItems.Count > 0)
+            {
+                List<string> gestureData = new List<string>();
+                int count = 0;
+                int total = ExistingGestureNameListBox.SelectedItems.Count;
+                foreach (var item in ExistingGestureNameListBox.SelectedItems)
+                {
+                    // Get Gesture info
+                    string projectName = (ExistingProjectNameComboBox.SelectedItem as ProjectDetail).ProjectName;
+                    string gestureName = (string)item;
+
+                    // Download gesture data
+                    _storage.GetGesture(projectName, gestureName, (projName, gesName, data, error) =>
+                    {
+                        if (error == null)
+                            gestureData.Add(data);
+                        else
+                            ShowErrorMessage(error.Message);
+
+                        // If this is the last download then start the playback
+                        if (++count == total)
+                        {
+                            _recorder.RunGesture(gestureData);
+                        }
+                    });
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select the \"Gesture\" you want to run!");
+            }
+
+            /*
+            if (ExistingGestureNameListBox.SelectedItem != null && ExistingGestureNameListBox.SelectedItem != null)
             {
                 // Get Gesture Data 
                 string projectName = (ExistingProjectNameComboBox.SelectedItem as ProjectDetail).ProjectName;
-                string gestureName = (string)ExistingGestureNameComboBox.SelectedItem;
+                string gestureName = (string)ExistingGestureNameListBox.SelectedItem;
 
                 _storage.GetGesture(projectName, gestureName, (projName, gesName, data, error) =>
                 {
@@ -236,7 +269,10 @@ namespace TouchToolkit.Framework.UI
             {
                 MessageBox.Show("Please select the \"Gesture\" you want to run!");
             }
+             */
         }
+
+        
         #endregion
 
         #region UI Events
@@ -284,7 +320,7 @@ namespace TouchToolkit.Framework.UI
             if (ExistingProjectNameComboBox.SelectedValue != null)
             {
                 var projName = (ExistingProjectNameComboBox.SelectedValue as ProjectDetail).ProjectName;
-                RefreshGestureCombobox(projName);
+                RefreshGestureListbox(projName);
             }
         }
 

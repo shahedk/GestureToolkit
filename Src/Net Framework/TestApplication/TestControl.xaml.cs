@@ -37,6 +37,7 @@ namespace TestApplication
         void TestControl_Loaded(object sender, RoutedEventArgs e)
         {
             GestureFramework.Initialize(provider, LayoutRoot);
+            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
             SetImages(false);
         }
@@ -147,6 +148,9 @@ namespace TestApplication
 
         private void MoveItem(UIElement sender, PositionChanged posChanged)
         {
+            if (sender == null)
+                return;
+
             Image item = sender as Image;
             double x = (double)item.GetValue(Canvas.LeftProperty);
             double y = (double)item.GetValue(Canvas.TopProperty);

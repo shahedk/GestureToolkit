@@ -181,7 +181,14 @@ namespace TouchToolkit.Framework
             if (_debugPanel == null)
                 _debugPanel = new GestureRecordingPanel();
 
-            _debugPanel.VerticalAlignment = VerticalAlignment.Top;
+            //_debugPanel.VerticalAlignment = VerticalAlignment.Top;
+            //_debugPanel.HorizontalAlignment = HorizontalAlignment.Right;
+
+            var left = LayoutRoot.Width - _debugPanel.Width -40;
+
+            _debugPanel.SetValue(Canvas.TopProperty, 20.0);
+            _debugPanel.SetValue(Canvas.LeftProperty, left);
+
             LayoutRoot.Children.Add(_debugPanel);
         }
 
