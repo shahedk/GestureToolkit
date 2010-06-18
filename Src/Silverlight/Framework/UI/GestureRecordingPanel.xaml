@@ -8,54 +8,60 @@
     d:DesignHeight="60" Height="60" Width="600">
 
     <Grid x:Name="LayoutRootGrid" Background="LightYellow">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!--AnonUser-->
-        <Grid x:Name="LoginScreenGrid" Visibility="Collapsed">
-            <StackPanel Orientation="Horizontal" Height="25" Margin="4">
-                <TextBlock Text="Account name:" Margin="3"/>
-                <TextBox x:Name="UserNameTextBox" KeyUp="UserNameTextBox_KeyUp" Width="200" />
-                <Button x:Name="LoginButton" Content="Login" Margin="5,0" Click="LoginButton_Click"/>
-            </StackPanel>
-        </Grid>
-
-        <!--RegisteredUser-->
-        <Grid x:Name="RegisteredUserGrid">
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4" Height="20" VerticalAlignment="Top">
-                <TextBlock x:Name="ChangeAccountTextBlock" TextDecorations="Underline" Width="60" Height="20" 
-                                                      MouseLeftButtonUp="ChangeAccount_MouseLeftButtonUp" Text="Change  " Foreground="#FF1A1AE2" />
-                <TextBlock x:Name="UserNameTextBlock" Text="User name: ?"  />
-            </StackPanel>
-            <my:TabControl >
-                <my:TabItem Header="Record New Gesture">
-
-                    <StackPanel   Orientation="Horizontal" >
-                        <TextBlock Text="Project name:" Margin="0,5,5,0"/>
-                        <TextBox x:Name="ProjectNameTextBox" Width="150"/>
-                        <TextBlock Text="Gesture name:"  Margin="5,5,5,0"/>
-                        <TextBox x:Name="GestureNameTextBox" Width="150"/>
-                        <Button x:Name="StartRecordingButton" Content="Start Recording" Click="StartRecordingButton_Click" Margin="5,0,0,0" Width="105"/>
+            <TextBlock  FontWeight="Bold">Debug Panel</TextBlock>
+            <Grid Grid.Row="1" Margin="1">
+                <!--AnonUser-->
+                <Grid x:Name="LoginScreenGrid" Visibility="Collapsed" >
+                    <StackPanel Orientation="Vertical" Margin="4">
+                        <TextBlock Text="Account name:" Margin="3"/>
+                        <TextBox x:Name="UserNameTextBox" KeyUp="UserNameTextBox_KeyUp" />
+                        <Button x:Name="LoginButton" Content="Login" Margin="5,5" Click="LoginButton_Click" HorizontalAlignment="Right"/>
                     </StackPanel>
-                </my:TabItem>
+                </Grid>
 
-                <my:TabItem Header="Test Existing Gestures">
-                    <Grid>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Project name:" Margin="0,5,5,0"/>
-                            <ComboBox x:Name="ExistingProjectNameComboBox" ItemsSource="{Binding ProjectList}" Width="170" SelectionChanged="ExistingProjectNameComboBox_SelectionChanged"/>
-                            <TextBlock Text="Gesture name:"  Margin="5,5,5,0"/>
-                            <ComboBox x:Name="ExistingGestureNameComboBox" Width="150" ItemsSource="{Binding GestureList}"/>
-                            <Button x:Name="RunButton" Content="Run" Click="RunButton_Click" Margin="5,0,0,0" Width="60"/>
-                        </StackPanel>
+                <!--RegisteredUser-->
+                <Grid x:Name="RegisteredUserGrid">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4" Height="20" VerticalAlignment="Top">
+                        <TextBlock x:Name="UserNameTextBlock" Text="Account: ?"  TextAlignment="Right"
+                           MouseLeftButtonUp="ChangeAccount_MouseLeftButtonUp" Foreground="#FF1A1AE2" Width="60"/>
+                    </StackPanel>
+                    <my:TabControl >
+                        <my:TabItem Header="Add New">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Project name:" Height="25" Margin="0,5,0,0"/>
+                                <TextBox x:Name="ProjectNameTextBox" Height="25"/>
+                                <TextBlock Text="Gesture name:" Height="25" Margin="0,5,0,0"/>
+                                <TextBox x:Name="GestureNameTextBox" Height="25" />
+                                <Button x:Name="StartRecordingButton" Margin="0,5,0,0"
+                                Content="Start Recording" Click="StartRecordingButton_Click" Width="105" HorizontalAlignment="Right" Height="25"/>
+                            </StackPanel>
+                        </my:TabItem>
 
-                    </Grid>
-                </my:TabItem>
+                        <my:TabItem Header="Existing Gestures">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Project name:" Margin="0,5,5,0"/>
+                                <ComboBox x:Name="ExistingProjectNameComboBox" ItemsSource="{Binding ProjectList}" SelectionChanged="ExistingProjectNameComboBox_SelectionChanged" Height="25" VerticalAlignment="Top"/>
+                                <TextBlock Text="Gesture name:"  Margin="5,5,5,0"/>
+                                <ListBox  SelectionMode="Multiple" x:Name="ExistingGestureNameListBox" ItemsSource="{Binding GestureList}"  Height="70"/>
+                                <Button x:Name="RunButton" Content="Run" Click="RunButton_Click" Margin="5,5,0,0" Width="60" Height="25" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </my:TabItem>
 
-            </my:TabControl>
+                    </my:TabControl>
+                </Grid>
+
+                <Grid x:Name="LoadingScreen" Visibility="Collapsed">
+                    <Rectangle Fill="LightGray" Opacity=".8"/>
+                    <TextBlock x:Name="MessageTextBlock" Text="Loading..."  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+            </Grid>
         </Grid>
 
-        <Grid x:Name="LoadingScreen" Visibility="Collapsed">
-            <Rectangle Fill="LightGray" Opacity=".8"/>
-            <TextBlock x:Name="MessageTextBlock" Text="Loading..."  VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        </Grid>
     </Grid>
 </UserControl>
