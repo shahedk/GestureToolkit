@@ -113,7 +113,7 @@ namespace TouchToolkit.Framework.Components
         /// Simulates the touch(s) as specified in the xml
         /// </summary>
         /// <param name="xml">XML serialized collection of FrameInfo objects</param>
-        public void RunGesture(string xml, GesturePlaybackCompleted playbackCompleted = null)
+        public void RunGesture(string xml, GesturePlaybackCompleted playbackCompleted = null, int groupId = 0)
         {
             
             // Set touch provider to virtual touch provider
@@ -121,6 +121,7 @@ namespace TouchToolkit.Framework.Components
             GestureFramework.UpdateInputProvider(_touchListener);
 
             GestureInfo gestureInfo = SerializationHelper.Desirialize(xml);
+            gestureInfo.GroupId = groupId;
 
             // Initializing background thread to playback recorded gestures
             var threadStart = new ParameterizedThreadStart(RunGesture);
@@ -138,9 +139,11 @@ namespace TouchToolkit.Framework.Components
 
         public void RunGesture(List<string> xmlContents, GesturePlaybackCompleted playbackCompleted = null)
         {
+            int groupId = 0;
             foreach (string xml in xmlContents)
             {
-                RunGesture(xml);
+                RunGesture(xml, null, groupId++);
+                Debug.WriteLine("GroupId: " + groupId);
             }
             
             // callback passed in the parameter
@@ -162,6 +165,18 @@ namespace TouchToolkit.Framework.Components
 
             GestureInfo gestureInfo = info.Item1;
             
+            // TODO: Requires code review
+            
+            // Update group id
+            foreach (var frame in gestureInfo.Frames)
+            {
+                foreach (var touch in frame.Touches)
+                {
+                    touch.GroupId = gestureInfo.GroupId;
+                }
+            }
+
+            // -- End review --
             try
             {
                 Action<FrameInfo> act = delegate(FrameInfo frame)

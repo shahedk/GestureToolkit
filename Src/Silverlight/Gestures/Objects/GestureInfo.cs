@@ -14,6 +14,19 @@ namespace TouchToolkit.GestureProcessor.Objects
 {
     public class GestureInfo
     {
+        int _groupId = 0;
+        public int GroupId
+        {
+            get
+            {
+                return _groupId;
+            }
+            set
+            {
+                _groupId = value;
+            }
+        }
+
         private List<FrameInfo> _frames = new List<FrameInfo>();
         public List<FrameInfo> Frames
         {
