@@ -12,6 +12,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Windows.Threading;
 using TouchToolkit.GestureProcessor.Objects;
+using System.Diagnostics;
 
 namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
 {
@@ -47,20 +48,20 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
                 // Create proxies when touch points move. 
                 // No point of creating at touch down the 
                 // space will be covered by users fingers
-                Action action = () =>
-                    {
-                        if (touchInfo.ActionType == TouchAction2.Move)
-                        {
-                            CreateProxyObject(touchInfo);
-                        }
-                    };
-                _dispatcher.BeginInvoke(action);
+                //Action action = () =>
+                //    {
+                if (touchInfo.ActionType == TouchAction2.Move)
+                {
+                    CreateProxyObject(touchInfo);
+                }
+                //     };
+                // _dispatcher.BeginInvoke(action);
             }
         }
 
         private void CreateProxyObject(TouchInfo touchInfo)
         {
-            ProxyObject po = new ProxyObject(touchInfo.Position.X, touchInfo.Position.Y);
+            ProxyObject po = new ProxyObject(touchInfo.Position.X, touchInfo.Position.Y, touchInfo.GroupId);
             _rootPanel.Children.Add(po);
             _proxyObjects.Add(po);
         }
@@ -103,7 +104,7 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
             int sizeDecayRate = 2;
             float opacityDecayRate = 0.1f;
 
-            public ProxyObject(double x, double y)
+            public ProxyObject(double x, double y, int groupId)
             {
                 Age = 0;
 
@@ -118,7 +119,18 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
                 // 1. Create the circle shape that works as proxy of touch
 
                 Ellipse e = new Ellipse();
-                e.Fill = new SolidColorBrush(Colors.LightGray);
+
+                Debug.WriteLine("B-path:" + groupId);
+                // TODO: Temporary implementation for demo
+                if (groupId == 1)
+                    e.Fill = new SolidColorBrush(Colors.Red);
+                else if (groupId == 2)
+                    e.Fill = new SolidColorBrush(Colors.Blue);
+                else if (groupId == 3)
+                    e.Fill = new SolidColorBrush(Colors.Green);
+                else
+                    e.Fill = new SolidColorBrush(Colors.LightGray);
+
                 e.Opacity = 0.6;
 
                 this.Children.Add(e);

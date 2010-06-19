@@ -184,7 +184,7 @@ namespace TouchToolkit.Framework
             //_debugPanel.VerticalAlignment = VerticalAlignment.Top;
             //_debugPanel.HorizontalAlignment = HorizontalAlignment.Right;
 
-            var left = LayoutRoot.Width - _debugPanel.Width -40;
+            var left = LayoutRoot.Width - _debugPanel.Width - 40;
 
             _debugPanel.SetValue(Canvas.TopProperty, 20.0);
             _debugPanel.SetValue(Canvas.LeftProperty, left);

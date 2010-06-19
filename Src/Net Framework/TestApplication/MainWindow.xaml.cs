@@ -93,7 +93,7 @@ namespace TestApplication
             // Initialize Gesture Framework
             var provider = new Windows7TouchInputProvider();
 
-            LayoutRoot.Children.Add(new TestControl(provider));
+            LayoutRoot.Children.Add(new TestControl2(provider));
         }
 
         #endregion

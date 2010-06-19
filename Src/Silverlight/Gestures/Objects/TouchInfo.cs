@@ -23,5 +23,18 @@ namespace TouchToolkit.GestureProcessor.Objects
         public int TouchDeviceId { get; set; }
         public TouchAction2 ActionType { get; set; }
         public Point Position { get; set; }
+
+        private int _groupId = 0;
+        public int GroupId
+        {
+            get
+            {
+                return _groupId;
+            }
+            set
+            {
+                _groupId = value;
+            }
+        }
     }
 }
