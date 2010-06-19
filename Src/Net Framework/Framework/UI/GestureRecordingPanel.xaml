@@ -13,7 +13,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             
-            <TextBlock Background="LightGray" FontWeight="Bold">Debug Panel</TextBlock>
+            <TextBlock Background="LightGray" FontWeight="Bold">Touch Recorder</TextBlock>
             <Grid Grid.Row="1" Margin="1">
                 <!--AnonUser-->
                 <Grid x:Name="LoginScreenGrid" Visibility="Collapsed" >
@@ -48,7 +48,11 @@
                                 <ComboBox x:Name="ExistingProjectNameComboBox" ItemsSource="{Binding ProjectList}" SelectionChanged="ExistingProjectNameComboBox_SelectionChanged" Height="25" VerticalAlignment="Top"/>
                                 <TextBlock Text="Gesture name:"  Margin="5,5,5,0"/>
                                 <ListBox  SelectionMode="Multiple" x:Name="ExistingGestureNameListBox" ItemsSource="{Binding GestureList}"  Height="70"/>
-                                <Button x:Name="RunButton" Content="Run" Click="RunButton_Click" Margin="5,5,0,0" Width="60" Height="25" HorizontalAlignment="Right"/>
+                                <StackPanel Orientation="Horizontal" Margin="5,5,0,0" >
+                                    <TextBlock Margin="0,5">Speed: 1x</TextBlock>
+                                    <Slider Height="23" Width="105" Value="5" Margin="0,0,5,0" />
+                                <Button x:Name="RunButton" Content="Run" Click="RunButton_Click" Width="60" Height="25" HorizontalAlignment="Right"/>
+                                </StackPanel>
                             </StackPanel>
                         </TabItem>
 
