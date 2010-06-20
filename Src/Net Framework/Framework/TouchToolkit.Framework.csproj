@@ -107,6 +107,9 @@
     <Compile Include="..\..\Silverlight\Framework\Utility\ContentHelper.cs">
       <Link>Utility\ContentHelper.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Framework\Utility\FrameInfoComparer.cs">
+      <Link>Utility\FrameInfoComparer.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Framework\Utility\GestureHelper.cs">
       <Link>Utility\GestureHelper.cs</Link>
     </Compile>
