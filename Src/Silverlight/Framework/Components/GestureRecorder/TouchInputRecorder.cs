@@ -113,15 +113,19 @@ namespace TouchToolkit.Framework.Components
         /// Simulates the touch(s) as specified in the xml
         /// </summary>
         /// <param name="xml">XML serialized collection of FrameInfo objects</param>
-        public void RunGesture(string xml, GesturePlaybackCompleted playbackCompleted = null, int groupId = 0)
+        public void RunGesture(string xml, GesturePlaybackCompleted playbackCompleted = null)
         {
-            
+            GestureInfo gestureInfo = SerializationHelper.Desirialize(xml);
+
+            RunGesture(gestureInfo, playbackCompleted);
+
+        }
+
+        private void RunGesture(GestureInfo gestureInfo, GesturePlaybackCompleted playbackCompleted)
+        {
             // Set touch provider to virtual touch provider
             var existingInputProvider = TouchInputManager.ActiveTouchProvider;
             GestureFramework.UpdateInputProvider(_touchListener);
-
-            GestureInfo gestureInfo = SerializationHelper.Desirialize(xml);
-            gestureInfo.GroupId = groupId;
 
             // Initializing background thread to playback recorded gestures
             var threadStart = new ParameterizedThreadStart(RunGesture);
@@ -134,25 +138,19 @@ namespace TouchToolkit.Framework.Components
 
             // reset touch provider
             GestureFramework.UpdateInputProvider(existingInputProvider);
-            
         }
 
         public void RunGesture(List<string> xmlContents, GesturePlaybackCompleted playbackCompleted = null)
         {
-            int groupId = 0;
+            List<GestureInfo> gestures = new List<GestureInfo>();
             foreach (string xml in xmlContents)
             {
-                RunGesture(xml, null, groupId++);
-                Debug.WriteLine("GroupId: " + groupId);
+                GestureInfo gestureInfo = SerializationHelper.Desirialize(xml);
+                gestures.Add(gestureInfo);
             }
-            
-            // callback passed in the parameter
-            if (playbackCompleted != null)
-                playbackCompleted();
 
-            // Global event
-            if (PlaybackCompleted != null)
-                PlaybackCompleted();
+            GestureInfo merged = gestures.Merge();
+            RunGesture(merged, playbackCompleted);
         }
 
         /// <summary>
@@ -164,9 +162,9 @@ namespace TouchToolkit.Framework.Components
             Tuple<GestureInfo, GesturePlaybackCompleted> info = param as Tuple<GestureInfo, GesturePlaybackCompleted>;
 
             GestureInfo gestureInfo = info.Item1;
-            
+
             // TODO: Requires code review
-            
+
             // Update group id
             foreach (var frame in gestureInfo.Frames)
             {

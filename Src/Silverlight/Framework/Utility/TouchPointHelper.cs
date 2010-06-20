@@ -226,6 +226,45 @@ namespace TouchToolkit.Framework.Utility
             return uiElement;
         }
 
+        /// <summary>
+        /// Merges the frame lists from different gestureInfo into one list
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static GestureInfo Merge(this List<GestureInfo> self)
+        {
 
+            DateTime startTime = DateTime.Now;
+            DateTime timeline = DateTime.Now;
+            GestureInfo mergedGestureInfo = new GestureInfo();
+
+            int groupId = 0;
+            foreach (var gesture in self)
+            {
+                // 1. Update timestamp of each frame in all list
+                timeline = startTime;
+                foreach (var frame in gesture.Frames)
+                {
+                    timeline = timeline.AddMilliseconds(frame.WaitTime);
+                    frame.TimeStamp = timeline.Ticks;
+
+                    // 1.1 Update groupIds for individual touch
+                    foreach (var touch in frame.Touches)
+                    {
+                        touch.GroupId = groupId;
+                    }
+                }
+
+                // 2. Combine lists into one
+                mergedGestureInfo.Frames.AddRange(gesture.Frames);
+
+                groupId++;
+            }
+
+            // 3. Sort the unified list 
+            mergedGestureInfo.Frames.Sort(new FrameInfoComparer());
+
+            return mergedGestureInfo; 
+        }
     }
 }

@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Utility\CommonExtensions.cs" />
     <Compile Include="Utility\ContentHelper.cs" />
+    <Compile Include="Utility\FrameInfoComparer.cs" />
     <Compile Include="Utility\GestureHelper.cs" />
     <Compile Include="Utility\TouchPointHelper.cs" />
     <Compile Include="Utility\MatrixHelper.cs" />
