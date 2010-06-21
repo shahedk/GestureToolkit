@@ -36,3 +36,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: InternalsVisibleTo("TouchToolkit.GestureProcessor.Tests")]
 [assembly: InternalsVisibleTo("TouchToolkit.GestureProcessor.Explorables")]
+
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("TouchToolkit.Gestures.Tests")]

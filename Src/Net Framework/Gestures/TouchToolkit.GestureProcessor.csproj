@@ -269,6 +269,9 @@
     <Compile Include="..\..\Silverlight\Gestures\Utility\CommonHelperMethods.cs">
       <Link>Utility\CommonHelperMethods.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\CircleRecognizer.cs">
+      <Link>Utility\ShapeRecognizers\CircleRecognizer.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\ShapeRecognizers\ConvexHull\CDLL.cs">
       <Link>Utility\ShapeRecognizers\ConvexHull\CDLL.cs</Link>
     </Compile>

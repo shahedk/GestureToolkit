@@ -15,33 +15,57 @@ namespace TouchToolkit.Framework.ShapeRecognizers
 {
     public class Correlation
     {
-        public bool VerticalLine;
-        public double SlopeRad;
-        public double Slope;
-        public double Intercept;
+        public bool VerticalLine { get; private set; }
+        public double SlopeRad { get; private set; }
+        public double Slope { get; private set; }
+        public double Intercept { get; private set; }
 
-        public double RSquared;
+        public double RSquared { get; private set; }
 
         private double xavg;
         private double yavg;
         public Correlation(TouchPoint2 points)
         {
+            //Account for a degenerate amount of points
+            if (points.Stroke.StylusPoints.Count <= 1)
+            {
+                RSquared = 0;
+                Slope = 0;
+                Intercept = 0;
+                VerticalLine = false;
+                SlopeRad = 0;
+                return;
+            }
+
+            var pointlist = points.Stroke.StylusPoints;
+            
+            //Remove duplicate points
+            var workingList = new StylusPointCollection();
+            for (int i = 1; i < pointlist.Count; i++ )
+            {
+                var point1 = pointlist[i - 1];
+                var point2 = pointlist[i];
+                if (!(point1.X == point2.X && point1.Y == point2.Y))
+                {
+                    workingList.Add(point1);
+                }
+            }
             VerticalLine = false;
 
             xavg = 0;
             yavg = 0;
 
-            foreach (var p in points.Stroke.StylusPoints)
+            foreach (var p in workingList)
             {
                 xavg += p.X;
                 yavg += p.Y;
             }
-            xavg = xavg / points.Stroke.StylusPoints.Count;
-            yavg = yavg / points.Stroke.StylusPoints.Count;
+            xavg = xavg / workingList.Count;
+            yavg = yavg / workingList.Count;
 
             double numerator = 0;
             double denominator = 0;
-            foreach (var p in points.Stroke.StylusPoints)
+            foreach (var p in workingList)
             {
                 numerator += (p.X - xavg) * (p.Y - yavg);
                 denominator += Math.Pow(p.X - xavg,2);
@@ -57,8 +81,9 @@ namespace TouchToolkit.Framework.ShapeRecognizers
             {
                 VerticalLine = true;
             }
-
-            RSquared = CalculateRSquared(points);
+            TouchPoint2 tp = points.GetEmptyCopy();
+            tp.Stroke.StylusPoints = workingList;
+            RSquared = CalculateRSquared(tp);
         }
 
         private double CalculateRSquared(TouchPoint2 points)

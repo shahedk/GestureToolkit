@@ -49,11 +49,11 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
                 AddQueue = new Queue<int>();
                 for (int i = 0; i < length - step; i = i + step)
                 {
-                    double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point.Stroke.StylusPoints[i], 
-                        point.Stroke.StylusPoints[i + step]);
+                    var p1 = point.Stroke.StylusPoints[i];
+                    var p2 = point.Stroke.StylusPoints[i + step];
+                    double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(p1, p2);
                     String stringSlope = TouchPointExtensions.SlopeToDirection(slope);
-                    double dist = TrigonometricCalculationHelper.GetDistanceBetweenPoints(point.Stroke.StylusPoints[i],
-                        point.Stroke.StylusPoints[i + step]);
+                    double dist = TrigonometricCalculationHelper.GetDistanceBetweenPoints(p1, p2);
                     if (dist == 0)
                     {
                         continue;

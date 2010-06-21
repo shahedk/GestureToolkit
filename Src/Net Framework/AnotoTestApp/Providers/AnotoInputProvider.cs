@@ -30,6 +30,8 @@ namespace TouchToolkit.Framework.TouchInputProviders
         private UIElement source;
 
         private Dictionary<int, TouchInfo> _activeTouchInfos = new Dictionary<int, TouchInfo>();
+        private Dictionary<int, TouchPoint2> _activeTouchPoints = new Dictionary<int, TouchPoint2>();
+        private List<int> _inactiveTouchPoints = new List<int>();
         long lastTimeStamp = 0;
 
         public AnotoInputProvider(Panel LayoutRoot)
@@ -102,31 +104,58 @@ namespace TouchToolkit.Framework.TouchInputProviders
             info.Position = new Point(x, y);
             info.TouchDeviceId = (int)args.PenId;
 
+            if (_inactiveTouchPoints.Count > 0)
+            {
+                foreach (var key in _inactiveTouchPoints)
+                {
+                    if (_activeTouchPoints.ContainsKey(key))
+                    {
+                        _activeTouchPoints.Remove(key);
+                    }
+                    if (_activeTouchInfos.ContainsKey(key))
+                    {
+                        _activeTouchInfos.Remove(key);
+                    }
+                }
+                _inactiveTouchPoints.Clear();
+            }
+
             //If there's a Down action detected, add it to the active touch points
             if (actionType == TouchAction2.Down)
             {
-                if (!ActiveTouchPoints.ContainsKey(info.TouchDeviceId))
+                if (!_activeTouchPoints.ContainsKey(info.TouchDeviceId))
                 {
-                    ActiveTouchPoints.Add(info.TouchDeviceId, new TouchPoint2(info, source));
+                    _activeTouchPoints.Add(info.TouchDeviceId, new TouchPoint2(info, source));
                 }
                 else
                 {
-                    ActiveTouchPoints[info.TouchDeviceId] = new TouchPoint2(info, source);
+                    _activeTouchPoints[info.TouchDeviceId] = new TouchPoint2(info, source);
+                }
+            }
+            else if (actionType == TouchAction2.Up)
+            {
+                if (_activeTouchPoints.ContainsKey(info.TouchDeviceId))
+                {
+                    _inactiveTouchPoints.Add(info.TouchDeviceId);
+                    _activeTouchPoints[info.TouchDeviceId].Update(info);
                 }
             }
             else
             {
-                UpdateActiveTouchPoint(info);
+                if (_activeTouchPoints.ContainsKey(info.TouchDeviceId))
+                {
+                    _activeTouchPoints[info.TouchDeviceId].Update(info);
+                }
             }
 
             //Update the source to be the HitTest result
-            foreach (var point in ActiveTouchPoints)
+            foreach (var point in _activeTouchPoints)
             {
                 if (point.Value.Action == TouchAction.Down)
                 {
                     ThreadStart start = delegate()
                     {
-                        GestureFramework.LayoutRoot.Dispatcher.Invoke(DispatcherPriority.Normal,
+                        GestureFramework.LayoutRoot.Dispatcher.Invoke(DispatcherPriority.Render,
                                           new Action<Point>(PerformHitTest), point);
                     };
                     point.Value.Source = source;
@@ -146,15 +175,15 @@ namespace TouchToolkit.Framework.TouchInputProviders
             //Call the delegates
             if (SingleTouchChanged != null)
             {
-                foreach(var point in ActiveTouchPoints.Values)
+                foreach (var point in _activeTouchPoints.Values)
                 {
                     SingleTouchChanged(this, new SingleTouchEventArgs(point));
-                }   
+                }
             }
 
             if (MultiTouchChanged != null)
             {
-                MultiTouchChanged(this, new MultiTouchEventArgs(ActiveTouchPoints.Values.ToList<TouchPoint2>()));
+                MultiTouchChanged(this, new MultiTouchEventArgs(_activeTouchPoints.Values.ToList<TouchPoint2>()));
             }
 
             if (FrameChanged != null)

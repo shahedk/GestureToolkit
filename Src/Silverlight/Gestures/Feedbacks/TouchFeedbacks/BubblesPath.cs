@@ -43,20 +43,21 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
 
         private void CreateProxyObjects(List<TouchInfo> touchInfos)
         {
-            foreach (var touchInfo in touchInfos)
+            Action action = () =>
             {
-                // Create proxies when touch points move. 
-                // No point of creating at touch down the 
-                // space will be covered by users fingers
-                //Action action = () =>
-                //    {
-                if (touchInfo.ActionType == TouchAction2.Move)
+                foreach (var touchInfo in touchInfos)
                 {
-                    CreateProxyObject(touchInfo);
+                    //Create proxies when touch points move. 
+                    //No point of creating at touch down the 
+                    //space will be covered by users fingers
+
+                    if (touchInfo.ActionType == TouchAction2.Move)
+                    {
+                        CreateProxyObject(touchInfo);
+                    }
                 }
-                //     };
-                // _dispatcher.BeginInvoke(action);
-            }
+            };
+            _dispatcher.BeginInvoke(action);
         }
 
         private void CreateProxyObject(TouchInfo touchInfo)
