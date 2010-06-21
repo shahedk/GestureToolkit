@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-R:\Projects\TouchToolkit multi user\Src\Net Framework\TestApplication\obj\x86\Debug\
+C:\Users\ASE-WIN\Desktop\Touchtoolkit\Src\Net Framework\TestApplication\obj\x86\Debug\
 TestApplication
 none
 false
 DEBUG;TRACE
-R:\Projects\TouchToolkit multi user\Src\Net Framework\TestApplication\App.xaml
+C:\Users\ASE-WIN\Desktop\Touchtoolkit\Src\Net Framework\TestApplication\App.xaml
 31464462143
 
-8-192393984
-14-173435440
+8492673644
+141107059686
 MainWindow.xaml;TestControl.xaml;TestControl2.xaml;
 
 False
