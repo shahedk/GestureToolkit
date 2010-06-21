@@ -32,60 +32,6 @@ namespace TestApplication
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
         }
 
-
-
-        #region oldCode
-
-        //void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    var provider = new Windows7TouchInputProvider();
-
-        //    GestureFramework.Initialize(provider, LayoutRoot);
-        //    GestureFramework.AddTouchFeedback(typeof(BubblesPath));
-
-        //    GestureFramework.EventManager.AddEvent(rectangle, "Zoom", ResizeCallback);
-        //    GestureFramework.EventManager.AddEvent(rectangle, "Pinch", ResizeCallback);
-        //    GestureFramework.EventManager.AddEvent(rectangle, "Drag", DragCallback);
-
-        //    GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
-        //}
-
-        //public void DragCallback(object sender, GestureEventArgs e)
-        //{
-        //    PositionChanged posChanged = e.Values.Get<PositionChanged>();
-
-        //    MoveItem(sender as Rectangle, posChanged);
-        //}
-
-        //public void ResizeCallback(object sender, GestureEventArgs e)
-        //{
-        //    var distanceChanged = e.Values.Get<DistanceChanged>();
-
-        //    messageTextBlock.Text = distanceChanged.Delta.ToString();
-
-        //    Resize(sender as Rectangle, distanceChanged.Delta);
-        //}
-
-        //private void MoveItem(Rectangle sender, PositionChanged posChanged)
-        //{
-        //    double x = (double)sender.GetValue(Canvas.LeftProperty);
-        //    double y = (double)sender.GetValue(Canvas.TopProperty);
-
-        //    sender.SetValue(Canvas.LeftProperty, x + posChanged.X);
-        //    sender.SetValue(Canvas.TopProperty, y + posChanged.Y);
-        //}
-
-        //private void Resize(Rectangle item, double delta)
-        //{
-        //    if (item.Height + delta > 0)
-        //        item.Height += delta;
-
-        //    if (item.Width + delta > 0)
-        //        item.Width += delta;
-        //}
-
-        #endregion
-
         #region updatedCode
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
