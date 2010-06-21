@@ -53,7 +53,7 @@ namespace AnotoTestApp
             //Subscribe to gesture events
             GestureFramework.EventManager.AddEvent(LayoutRoot, "right", RightCallBack);
             GestureFramework.EventManager.AddEvent(LayoutRoot, "left", LeftCallBack);
-            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Box", BoxCallBack);
+            GestureFramework.EventManager.AddEvent(LayoutRoot, "Line", BoxCallBack);
             // Show Recording Panel
             //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
 
@@ -95,12 +95,15 @@ namespace AnotoTestApp
 
         private void BoxCallBack(UIElement sender, GestureEventArgs e)
         {
+            return;
+            /*
             ThreadStart start = delegate()
             {
                 Dispatcher.Invoke(DispatcherPriority.Render,
                                   new Action(OpenDirectoryWindow));
             };
             new Thread(start).Start();
+             */
         }
         #endregion
 

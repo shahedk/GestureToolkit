@@ -164,6 +164,7 @@
     <Compile Include="Utility\CommonHelperMethods.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utility\ShapeRecognizers\CircleRecognizer.cs" />
     <Compile Include="Utility\ShapeRecognizers\Correlation.cs" />
     <Compile Include="Utility\ShapeRecognizers\HoughCircle.cs" />
     <Compile Include="Utility\ShapeRecognizers\RectangleParser.cs" />
