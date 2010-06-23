@@ -123,11 +123,11 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
 
                 Debug.WriteLine("B-path:" + groupId);
                 // TODO: Temporary implementation for demo
-                if (groupId == 1)
+                if (groupId == 0)
                     e.Fill = new SolidColorBrush(Colors.Red);
-                else if (groupId == 2)
+                else if (groupId == 1)
                     e.Fill = new SolidColorBrush(Colors.Blue);
-                else if (groupId == 3)
+                else if (groupId == 2)
                     e.Fill = new SolidColorBrush(Colors.Green);
                 else
                     e.Fill = new SolidColorBrush(Colors.LightGray);

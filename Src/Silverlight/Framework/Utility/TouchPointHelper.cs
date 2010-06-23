@@ -233,6 +233,8 @@ namespace TouchToolkit.Framework.Utility
         /// <returns></returns>
         public static GestureInfo Merge(this List<GestureInfo> self)
         {
+            // touchIdPadding is used to ensure unique id for each touch point when multiple sets are merged
+            int touchIdPadding = 0;
 
             DateTime startTime = DateTime.Now;
             DateTime timeline = DateTime.Now;
@@ -241,6 +243,8 @@ namespace TouchToolkit.Framework.Utility
             int groupId = 0;
             foreach (var gesture in self)
             {
+                touchIdPadding += 50;
+
                 // 1. Update timestamp of each frame in all list
                 timeline = startTime;
                 foreach (var frame in gesture.Frames)
@@ -252,6 +256,7 @@ namespace TouchToolkit.Framework.Utility
                     foreach (var touch in frame.Touches)
                     {
                         touch.GroupId = groupId;
+                        touch.TouchDeviceId += touchIdPadding;
                     }
                 }
 

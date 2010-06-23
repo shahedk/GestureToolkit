@@ -158,9 +158,9 @@ namespace TouchToolkit.Framework.GestureEvents
                     List<IReturnType> returnObjs = gesture.ReturnTypes.Calculate(validSetOfPoint);
 
                     // Execute gesture effects, if any
-                    if (GestureFramework.GestureFeedbacks.ContainsKey(gesture.Name.ToLower()))
+                    if (GestureFramework.GestureFeedbacks.ContainsKey(gesture.Name))
                     {
-                        var gestureFeeds = GestureFramework.GestureFeedbacks[gesture.Name.ToLower()];
+                        var gestureFeeds = GestureFramework.GestureFeedbacks[gesture.Name];
                         foreach (Type gestureFeedbackTyoe in gestureFeeds)
                         {
                             ExecuteFeedback(gestureFeedbackTyoe, returnObjs);

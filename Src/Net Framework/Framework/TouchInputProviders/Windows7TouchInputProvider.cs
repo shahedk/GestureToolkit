@@ -42,6 +42,15 @@ namespace Framework.TouchInputProviders
             List<TouchInfo> touchInfos = slPoints.ToTouchInfo();
             List<TouchPoint2> touchPoints = base.UpdateActiveTouchPoints(touchInfos);
 
+            // Determine touch source for any new touch point
+            foreach (var touchPoint in touchPoints)
+            {
+                if (touchPoint.Action == TouchAction.Down)
+                {
+                    touchPoint.UpdateSource();
+                }
+            }
+
             // Raw data, frame changed
             if (FrameChanged != null)
             {

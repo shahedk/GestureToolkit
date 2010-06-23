@@ -75,7 +75,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircleRecognizerTest.cs" />
     <Compile Include="Gesture Definitions\ZoomGestureTest.cs" />
     <Compile Include="Return Types\DistanceChangedCalculatorTest.cs" />
     <Compile Include="Return Types\DistanceChangedTest.cs" />

@@ -36,6 +36,7 @@ namespace TouchToolkit.Framework.Components
         #region Recorder
         private List<FrameInfo> _recordedEvents = new List<FrameInfo>(200);
         private bool isStarted = false;
+        private bool isFirstFrame = true;
 
         /// <summary>
         /// Starts capturing touch interactions
@@ -45,6 +46,7 @@ namespace TouchToolkit.Framework.Components
             if (!isStarted)
             {
                 isStarted = true;
+                isFirstFrame = true;
                 _recordedEvents.Clear();
                 TouchInputManager.ActiveTouchProvider.FrameChanged += ActiveHardware_FrameChanged;
             }
@@ -103,6 +105,12 @@ namespace TouchToolkit.Framework.Components
 
         private void ActiveHardware_FrameChanged(object sender, FrameInfo frameInfo)
         {
+            if (isFirstFrame)
+            {
+                isFirstFrame = false;
+                frameInfo.WaitTime = 0;
+            }
+
             _recordedEvents.Add(frameInfo);
         }
 
@@ -160,21 +168,8 @@ namespace TouchToolkit.Framework.Components
         protected void RunGesture(object param)
         {
             Tuple<GestureInfo, GesturePlaybackCompleted> info = param as Tuple<GestureInfo, GesturePlaybackCompleted>;
-
             GestureInfo gestureInfo = info.Item1;
-
-            // TODO: Requires code review
-
-            // Update group id
-            foreach (var frame in gestureInfo.Frames)
-            {
-                foreach (var touch in frame.Touches)
-                {
-                    touch.GroupId = gestureInfo.GroupId;
-                }
-            }
-
-            // -- End review --
+            
             try
             {
                 Action<FrameInfo> act = delegate(FrameInfo frame)
