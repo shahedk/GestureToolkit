@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Storage\IDataStorage.cs" />
     <Compile Include="Storage\Delegates.cs" />
+    <Compile Include="Storage\LocalStorage.cs" />
     <Compile Include="Storage\SilverlightDataStorage.cs">
       <SubType>Code</SubType>
     </Compile>

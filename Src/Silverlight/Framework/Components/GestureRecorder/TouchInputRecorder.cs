@@ -188,7 +188,7 @@ namespace TouchToolkit.Framework.Components
                     object[] val = new object[1];
                     val[0] = frameInfo;
 
-                    if (GestureFramework.LayoutRoot.Parent == null)
+                    if (GestureFramework.LayoutRoot == null)
                     {
                         // Its a fake UI created by the automated UnitTest
                         act(frameInfo);
@@ -209,8 +209,9 @@ namespace TouchToolkit.Framework.Components
                 if (PlaybackCompleted != null)
                     PlaybackCompleted();
             }
-            catch
+            catch(Exception e)
             {
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 throw;
             }
             finally

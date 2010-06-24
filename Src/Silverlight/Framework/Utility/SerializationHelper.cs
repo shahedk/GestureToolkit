@@ -11,10 +11,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Runtime.Serialization.Json;
-using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
-using TouchToolkit.GestureProcessor.Objects;
 using System.Runtime.Serialization;
 using System.Diagnostics.Contracts;
+
+using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
+using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.GestureProcessor.Rules.Objects;
 
 namespace TouchToolkit.Framework.Utility

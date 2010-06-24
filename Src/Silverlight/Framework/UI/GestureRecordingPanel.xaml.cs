@@ -210,11 +210,11 @@ namespace TouchToolkit.Framework.UI
         #region Play Recorded Gestures
         private void RunGesture()
         {
-            // Update "start/stop" button text
-            RunButton.Content = ControlCaptions.StopGesture;
-
             if (ExistingGestureNameListBox.SelectedItems.Count > 0)
             {
+                // Update "start/stop" button text
+                RunButton.Content = ControlCaptions.StopGesture;
+
                 List<string> gestureData = new List<string>();
                 int count = 0;
                 int total = ExistingGestureNameListBox.SelectedItems.Count;
