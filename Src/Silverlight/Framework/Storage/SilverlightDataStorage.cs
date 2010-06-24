@@ -16,7 +16,14 @@ namespace TouchToolkit.Framework.Storage
         {
             get
             {
-                return (string)_userSettings["accountName"];
+                if (_userSettings.Contains("accountName"))
+                {
+                    return (string)_userSettings["accountName"];
+                }
+                else
+                {
+                    return null;
+                }
             }
             protected set
             {

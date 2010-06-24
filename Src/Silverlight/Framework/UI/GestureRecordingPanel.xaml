@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="60" Height="60" Width="600">
+    d:DesignHeight="60" Height="223" Width="600">
 
     <Grid x:Name="LayoutRootGrid" Background="LightYellow">
         <Grid>
@@ -31,7 +31,7 @@
                         <TextBlock x:Name="UserNameTextBlock" Text="Account: ?"  TextAlignment="Right"
                            MouseLeftButtonUp="ChangeAccount_MouseLeftButtonUp" Foreground="#FF1A1AE2" Width="60"/>
                     </StackPanel>
-                    <my:TabControl >
+                    <my:TabControl Margin="0,0,-1,-1" Width="599">
                         <my:TabItem Header="Add New">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Project name:" Height="25" Margin="0,5,0,0"/>
@@ -57,11 +57,10 @@
                 </Grid>
 
                 <Grid x:Name="LoadingScreen" Visibility="Collapsed">
-                    <Rectangle Fill="LightGray" Opacity=".8"/>
-                    <TextBlock x:Name="MessageTextBlock" Text="Loading..."  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Rectangle Fill="LightGray" Opacity=".8" Margin="1,0,-1,0" />
+                    <TextBlock x:Name="MessageTextBlock" Text="Loading..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="260,20,282,6" />
                 </Grid>
             </Grid>
         </Grid>
-
     </Grid>
 </UserControl>
