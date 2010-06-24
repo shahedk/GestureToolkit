@@ -22,6 +22,7 @@ namespace TestApplication
 {
     public partial class MainPage : UserControl
     {
+        private double DEFAULT_TOP_POSITION = 250;
         public MainPage()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace TestApplication
 
 
             // Show Recording Panel
-            //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
+            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
 
             // Load UI
             LoadImages(false);
@@ -95,7 +96,7 @@ namespace TestApplication
             }
             else
             {
-                topPosition = 100;
+                topPosition = DEFAULT_TOP_POSITION;
                 leftPosition = lastImageLeftPost;
             }
 
@@ -331,7 +332,7 @@ namespace TestApplication
             Action action = () =>
             {
                 double x = 50;
-                double y = 100;
+                double y = DEFAULT_TOP_POSITION;
                 foreach (var element in LayoutRoot.Children)
                 {
                     Image img = element as Image;

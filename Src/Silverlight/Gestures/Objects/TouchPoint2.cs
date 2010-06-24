@@ -117,11 +117,12 @@ namespace TouchToolkit.GestureProcessor.Objects
             info.TouchDeviceId = TouchDeviceId;
 
             TouchPoint2 output = new TouchPoint2(info, Source);
-            output.Stroke.StylusPoints = new StylusPointCollection();
+            StylusPointCollection spc = new StylusPointCollection();
             for(int i = index1; i < index2; i++)
             {
-                output.Stroke.StylusPoints.Add(Stroke.StylusPoints[i]);
+                spc.Add(Stroke.StylusPoints[i]);
             }
+            output.Stroke.StylusPoints = spc;
             return output;
         }
 
