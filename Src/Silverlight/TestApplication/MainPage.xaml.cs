@@ -73,7 +73,6 @@ namespace TestApplication
                 GestureFramework.EventManager.AddEvent(img, "pinch", PinchCallback);
                 GestureFramework.EventManager.AddEvent(img, "drag", DragCallback);
                 GestureFramework.EventManager.AddEvent(img, "rotate", RotateCallback);
-                GestureFramework.EventManager.AddEvent(img, "zoom", ZoomCallback);
             }
 
             // Subscribe to gesture events for the LayoutRoot

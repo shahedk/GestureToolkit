@@ -73,6 +73,9 @@
     <Compile Include="..\..\Silverlight\Framework\Storage\Delegates.cs">
       <Link>Storage\Delegates.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Framework\Storage\GestureDictionary.cs">
+      <Link>Storage\GestureDictionary.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Framework\Storage\IDataStorage.cs">
       <Link>Storage\IDataStorage.cs</Link>
     </Compile>
