@@ -186,6 +186,7 @@ namespace TouchToolkit.Framework.Utility
             {
                 // Build the deserializer
                 DataContractSerializer serializer = new DataContractSerializer(typeof(FrameInfo), GetRequiredKnownTypesForTouchFrameEventArgSerialization());
+                System.Diagnostics.Debug.WriteLine(xml);
                 gInfo.Frames = serializer.ReadObject(stream) as List<FrameInfo>;
 
                 return gInfo;
@@ -194,6 +195,7 @@ namespace TouchToolkit.Framework.Utility
             {
                 //TODO: Testing
                 string msg = e.Message;
+                System.Diagnostics.Debug.WriteLine(msg);
                 throw;
             }
             finally
