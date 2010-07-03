@@ -14,6 +14,5 @@ namespace TouchToolkit.GestureProcessor.Objects
 {
     public class ValidSetOfPointsCollection : List<ValidSetOfTouchPoints>
     {
-
     }
 }

@@ -9,23 +9,21 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-using TouchToolkit.GestureProcessor.Utility;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
+using ShapeRecognizers.ConvexHull;
 using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.Objects;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
-    public class ClosedLoopValidator : IPrimitiveConditionValidator
+    public class EnclosedAreaValidator : IPrimitiveConditionValidator
     {
-        private ClosedLoop _data;
-        int threshHold = 100; // 100 pixel
-
+        private EnclosedArea _data;
         #region IRuleValidator Members
 
         public void Init(IPrimitiveConditionData ruleData)
         {
-            _data = ruleData as ClosedLoop;
+            _data = ruleData as EnclosedArea;
         }
 
         public bool Equals(IPrimitiveConditionValidator rule)
@@ -37,10 +35,10 @@ namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
         {
             ValidSetOfPointsCollection sets = new ValidSetOfPointsCollection();
             ValidSetOfTouchPoints set = new ValidSetOfTouchPoints();
-
+            
             foreach (var point in points)
             {
-                if (IsClosedLoop(point))
+                if (IsEnclosedAreaWithinRange(point.Stroke.StylusPoints))
                     set.Add(point);
             }
 
@@ -50,20 +48,17 @@ namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
             return sets;
         }
 
-        private bool IsClosedLoop(TouchPoint2 point)
+        private bool IsEnclosedAreaWithinRange(StylusPointCollection stylusPointCollection)
         {
-            // Check the distance between start and end point
-            if (point.Stroke.StylusPoints.Count > 1)
-            {
-                StylusPoint firstPoint = point.Stroke.StylusPoints[0];
-                StylusPoint lastPoint = point.Stroke.StylusPoints[point.Stroke.StylusPoints.Count - 1];
+            // TODO: Move the magic number to configuration
+            Point[] points = stylusPointCollection.ToFilteredPoints(5);
 
-                double distance = TrigonometricCalculationHelper.GetDistanceBetweenPoints(firstPoint, lastPoint);
+            double area  = ConvexHullArea.GetArea(points);
 
-                if (distance < threshHold)
-                    return true;
-            }
-            return false;
+            if (area >= _data.Min && area <= _data.Max)
+                return true;
+            else
+                return false;
         }
 
         public ValidSetOfPointsCollection Validate(ValidSetOfPointsCollection sets)

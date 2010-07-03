@@ -13,7 +13,7 @@ using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.Objects;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
     public class TouchPathBoundingBoxValidator : IPrimitiveConditionValidator
     {

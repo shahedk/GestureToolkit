@@ -1,11 +1,10 @@
 ﻿name: Left
 
-validation state
+validate
 	Touch state: TouchUp
 	Touch limit: 1
-
-condition
 	Touch direction: Left and
     Touch path length: 500..100000
+
 return
 	Position changed

@@ -15,7 +15,7 @@ using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using TouchToolkit.GestureProcessor.Utility;
 using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
     public class TouchDirectionValidator : IPrimitiveConditionValidator
     {

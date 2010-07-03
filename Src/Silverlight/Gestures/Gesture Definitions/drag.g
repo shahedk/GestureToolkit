@@ -1,10 +1,8 @@
 name: Drag
 
-validation state
+validate
     Touch state: TouchMove
     Touch limit: 1
-
-condition
     On same object
 
 return

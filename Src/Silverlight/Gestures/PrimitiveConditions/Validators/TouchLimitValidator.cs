@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 using Combinatorial;
 using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
-using TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Validators;
 using TouchToolkit.GestureProcessor.Objects;
 
 namespace TouchToolkit.GestureProcessor.PrimitiveConditions

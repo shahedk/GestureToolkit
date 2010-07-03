@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 
-using TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Validators;
 
 namespace TouchToolkit.GestureProcessor.Objects
 {

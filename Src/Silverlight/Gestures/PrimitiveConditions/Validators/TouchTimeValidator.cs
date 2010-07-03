@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using TouchToolkit.GestureProcessor.Objects;
-using TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Validators;
 
 namespace TouchToolkit.GestureProcessor.PrimitiveConditions
 {
