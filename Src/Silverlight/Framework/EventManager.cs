@@ -8,7 +8,7 @@ using TouchToolkit.Framework.Exceptions;
 using TouchToolkit.Framework.Utility;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using System.Windows.Controls;
-using TouchToolkit.GestureProcessor.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators;
 using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
 using System.Windows.Media;
 using System.Diagnostics;

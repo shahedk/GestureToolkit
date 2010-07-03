@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-using TouchToolkit.GestureProcessor.Rules.Objects;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 
 
 namespace TouchToolkit.GestureProcessor.Objects.LanguageTokens
 {
     public class GestureToken : LanguageToken
     {
-        public List<IRuleData> _preConditions = new List<IRuleData>();
-        public List<IRuleData> PreConditions
+        public List<IPrimitiveConditionData> _preConditions = new List<IPrimitiveConditionData>();
+        public List<IPrimitiveConditionData> PreConditions
         {
             get
             {
@@ -19,8 +19,8 @@ namespace TouchToolkit.GestureProcessor.Objects.LanguageTokens
             }
         }
 
-        public List<IRuleData> _rules = new List<IRuleData>();
-        public List<IRuleData> Conditions
+        public List<IPrimitiveConditionData> _rules = new List<IPrimitiveConditionData>();
+        public List<IPrimitiveConditionData> Conditions
         {
             get
             {

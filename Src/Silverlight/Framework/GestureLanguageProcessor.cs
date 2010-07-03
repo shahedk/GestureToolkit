@@ -14,9 +14,9 @@ using System.Collections.Generic;
 
 using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
 using TouchToolkit.GestureProcessor.ReturnTypes;
-using TouchToolkit.GestureProcessor.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators;
 using TouchToolkit.GestureProcessor.Objects;
-using TouchToolkit.GestureProcessor.Rules.Objects;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using System.Reflection;
 using System.IO;
 
@@ -26,9 +26,9 @@ namespace TouchToolkit.Framework
     {
         private static readonly string[] assembliesToSkip = { "BlueTools", "Conoto.net" };
         private static List<Type> _allRules = new List<Type>();
-        private static List<Tuple<IRuleValidator, Gesture>> _preConGestureMap = new List<Tuple<IRuleValidator, Gesture>>();
-        private static List<IRuleValidator> _rules = new List<IRuleValidator>();
-        private static List<IRuleValidator> _preCons = new List<IRuleValidator>();
+        private static List<Tuple<IPrimitiveConditionValidator, Gesture>> _preConGestureMap = new List<Tuple<IPrimitiveConditionValidator, Gesture>>();
+        private static List<IPrimitiveConditionValidator> _rules = new List<IPrimitiveConditionValidator>();
+        private static List<IPrimitiveConditionValidator> _preCons = new List<IPrimitiveConditionValidator>();
 
         private static List<Gesture> _gestures = new List<Gesture>();
         private static Dictionary<string, Gesture> activeGestures = new Dictionary<string, Gesture>();
@@ -37,14 +37,14 @@ namespace TouchToolkit.Framework
             get { return activeGestures; }
         }
 
-        private static List<IRuleValidator> activePreConditions = new List<IRuleValidator>();
-        internal static List<IRuleValidator> ActivePreConditions
+        private static List<IPrimitiveConditionValidator> activePreConditions = new List<IPrimitiveConditionValidator>();
+        internal static List<IPrimitiveConditionValidator> ActivePreConditions
         {
             get { return activePreConditions; }
         }
 
-        private static List<IRuleValidator> activeTouchPatterns = new List<IRuleValidator>();
-        internal static List<IRuleValidator> ActiveTouchPatterns
+        private static List<IPrimitiveConditionValidator> activeTouchPatterns = new List<IPrimitiveConditionValidator>();
+        internal static List<IPrimitiveConditionValidator> ActiveTouchPatterns
         {
             get { return activeTouchPatterns; }
         }
@@ -77,7 +77,7 @@ namespace TouchToolkit.Framework
                 var types = g.GetType().Assembly.GetTypes();
                 foreach (Type t in types)
                 {
-                    if (t.IsTypeOf(typeof(IRuleValidator)))
+                    if (t.IsTypeOf(typeof(IPrimitiveConditionValidator)))
                         _allRules.Add(t);
                 }
 
@@ -98,16 +98,16 @@ namespace TouchToolkit.Framework
                 Gesture g = new Gesture() { Name = gToken.Name };
 
                 // PreConditions
-                foreach (IRuleData ruleData in gToken.PreConditions)
+                foreach (IPrimitiveConditionData ruleData in gToken.PreConditions)
                 {
-                    IRuleValidator preConRule = GetPreCondition(ruleData, g);
+                    IPrimitiveConditionValidator preConRule = GetPreCondition(ruleData, g);
                     g.PreConditions.Add(preConRule);
                 }
 
                 // Conditions
                 foreach (var ruleData in gToken.Conditions)
                 {
-                    IRuleValidator conRule = GetRule(ruleData);
+                    IPrimitiveConditionValidator conRule = GetRule(ruleData);
                     g.Rules.Add(conRule);
                 }
 
@@ -212,10 +212,10 @@ namespace TouchToolkit.Framework
             return false;
         }
 
-        private static IRuleValidator GetPreCondition(IRuleData ruleData, Gesture gesture)
+        private static IPrimitiveConditionValidator GetPreCondition(IPrimitiveConditionData ruleData, Gesture gesture)
         {
-            IRuleValidator preCondition = null;
-            IRuleValidator newPreCondition = GetRule(ruleData);
+            IPrimitiveConditionValidator preCondition = null;
+            IPrimitiveConditionValidator newPreCondition = GetRule(ruleData);
 
             // Check if same preCondition already exists
             foreach (var rule in _preCons)
@@ -229,7 +229,7 @@ namespace TouchToolkit.Framework
             // Update preCondition to gesture mapping
             if (preCondition == null)
                 preCondition = newPreCondition;
-            var map = Tuple.Create<IRuleValidator, Gesture>(preCondition, gesture);
+            var map = Tuple.Create<IPrimitiveConditionValidator, Gesture>(preCondition, gesture);
             _preConGestureMap.Add(map);
 
             return preCondition;
@@ -268,13 +268,13 @@ namespace TouchToolkit.Framework
             return info;
         }
 
-        private static IRuleValidator GetRule(IRuleData ruleData)
+        private static IPrimitiveConditionValidator GetRule(IPrimitiveConditionData ruleData)
         {
             // Get the rule validator class name using the ruleObject name
             string className = ruleData.GetType().Name + "Validator";
 
 
-            IRuleValidator rule = GetInstanceByTypeName(className) as IRuleValidator;
+            IPrimitiveConditionValidator rule = GetInstanceByTypeName(className) as IPrimitiveConditionValidator;
             rule.Init(ruleData);
 
             bool matchFound = false;
@@ -300,10 +300,10 @@ namespace TouchToolkit.Framework
             return rule;
         }
 
-        private static IRuleValidator GetInstanceByTypeName(string className)
+        private static IPrimitiveConditionValidator GetInstanceByTypeName(string className)
         {
             Type type = GetType(className);
-            return Activator.CreateInstance(type) as IRuleValidator;
+            return Activator.CreateInstance(type) as IPrimitiveConditionValidator;
         }
 
         private static Type GetType(string className)
