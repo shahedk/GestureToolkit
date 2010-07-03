@@ -17,7 +17,7 @@ using TouchToolkit.GestureProcessor.Utility;
 using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
 using TouchToolkit.Framework.ShapeRecognizers;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
     public class TouchShapeValidator : IPrimitiveConditionValidator
     {

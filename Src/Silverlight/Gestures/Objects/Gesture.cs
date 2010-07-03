@@ -15,8 +15,9 @@ namespace TouchToolkit.GestureProcessor.Objects
     public class Gesture
     {
         public string Name { get; set; }
-        public PrimitiveConditionCollection PreConditions = new PrimitiveConditionCollection();
-        public PrimitiveConditionCollection Rules = new PrimitiveConditionCollection();
+        public List<ValidationBlock> ValidationBlocks = new List<ValidationBlock>();
+        //public PrimitiveConditionCollection PreConditions = new PrimitiveConditionCollection();
+        //public PrimitiveConditionCollection Rules = new PrimitiveConditionCollection();
         public ReturnTypeInfoCollection ReturnTypes = new ReturnTypeInfoCollection();
     }
 }

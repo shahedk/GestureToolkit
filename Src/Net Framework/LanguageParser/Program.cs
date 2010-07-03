@@ -8,11 +8,11 @@ using System.Dataflow;
 using MGraphXamlReader;
 using System.Runtime.Serialization.Json;
 using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
-using TouchToolkit.GestureProcessor.Rules.Objects;
 
 using System.Threading;
 using System.Reflection;
 using TouchToolkit.Framework;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 
 
 namespace LanguageParser
@@ -101,7 +101,7 @@ namespace LanguageParser
                 //ProjectOutput = @"../../../../Net Framework/TestApplication/Bin/Debug/";
 
                 //ProjectDir = @"../../../../Silverlight/Gestures/";
-                ProjectDir = @"R:\Projects\TouchToolkit2\Src\Solution files\Windows 7 Multi-touch1\";
+                ProjectDir = @"R:\Projects\TouchToolkit - gesture language\Src\Net Framework\LanguageParser\";
                 OutDir = @"bin\Debug\";
 
                 CompiledGestureDefPath = ProjectDir + @"bin/gestures.gx";
@@ -160,7 +160,7 @@ namespace LanguageParser
                 // Adding additional types
                 map.Add("Return", typeof(ReturnToken));
                 map.Add("Gesture", typeof(GestureToken));
-                //map.Add("States", typeof(List<string>));
+                map.Add("Validate", typeof(ValidateToken));
 
                 WriteMessage("Compiling gestures (*.g files) ...");
                 List<GestureToken> gestures = new List<GestureToken>();
@@ -270,7 +270,7 @@ namespace LanguageParser
                 Type[] interfaces = type.GetInterfaces();
                 foreach (var i in interfaces)
                 {
-                    if (i.IsAssignableFrom(typeof(IRuleData)))
+                    if (i.IsAssignableFrom(typeof(IPrimitiveConditionData)))
                         requiredTypes.Add(type);
                 }
             }
@@ -303,7 +303,7 @@ namespace LanguageParser
             Assembly framework = typeof(GestureFramework).Assembly;
             types.AddRange(framework.GetTypes());
 
-            Assembly gestureProcessor = typeof(IRuleData).Assembly;
+            Assembly gestureProcessor = typeof(IPrimitiveConditionData).Assembly;
             types.AddRange(gestureProcessor.GetTypes());
 
             return types.ToArray();

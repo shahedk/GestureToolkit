@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 using TouchToolkit.Framework.GestureEvents;
 using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
-using TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Validators;
 
 using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
 using TouchToolkit.GestureProcessor.Utility.TouchHelpers;

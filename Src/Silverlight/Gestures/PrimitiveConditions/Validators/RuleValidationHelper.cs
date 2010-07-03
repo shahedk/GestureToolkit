@@ -13,24 +13,10 @@ using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
 using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.Objects;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
     public class RuleValidationHelper
     {
-        //static Panel _layoutRoot;
-        //public static void Init(Panel root)
-        //{
-        //    _layoutRoot = root;
-        //}
-
-        //public static Panel LayoutRoot
-        //{
-        //    get
-        //    {
-        //        return GestureFramework.LayoutRoot;
-        //    }
-        //}
-
         public static Rect GetBoundingBox(TouchPoint2 point)
         {
             Rect location = point.Stroke.GetBounds();

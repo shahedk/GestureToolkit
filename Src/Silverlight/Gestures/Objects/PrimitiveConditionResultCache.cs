@@ -13,11 +13,11 @@ using TouchToolkit.GestureProcessor.Objects;
 
 namespace TouchToolkit.GestureProcessor.Base
 {
-    public class RuleResultCache
+    public class PrimitiveConditionResultCache
     {
         List<Tuple<ValidSetOfTouchPoints, ValidSetOfTouchPoints>> _resultCache;
 
-        public RuleResultCache()
+        public PrimitiveConditionResultCache()
         {
             _resultCache = new List<Tuple<ValidSetOfTouchPoints, ValidSetOfTouchPoints>>();
         }

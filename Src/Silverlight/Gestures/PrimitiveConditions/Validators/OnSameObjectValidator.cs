@@ -9,21 +9,20 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
-using ShapeRecognizers.ConvexHull;
 using System.Collections.Generic;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using TouchToolkit.GestureProcessor.Objects;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
-    public class EnclosedAreaValidator : IPrimitiveConditionValidator
+    public class OnSameObjectValidator : IPrimitiveConditionValidator
     {
-        private EnclosedArea _data;
+
         #region IRuleValidator Members
 
         public void Init(IPrimitiveConditionData ruleData)
         {
-            _data = ruleData as EnclosedArea;
+
         }
 
         public bool Equals(IPrimitiveConditionValidator rule)
@@ -33,32 +32,26 @@ namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
 
         public ValidSetOfPointsCollection Validate(System.Collections.Generic.List<TouchPoint2> points)
         {
+            bool result = true;
             ValidSetOfPointsCollection sets = new ValidSetOfPointsCollection();
-            ValidSetOfTouchPoints set = new ValidSetOfTouchPoints();
-            
-            foreach (var point in points)
+
+            if (points.Count > 1)
             {
-                if (IsEnclosedAreaWithinRange(point.Stroke.StylusPoints))
-                    set.Add(point);
+                UIElement source = points[0].Source;
+                for (int i = 1; i < points.Count; i++)
+                {
+                    if (source != points[i].Source)
+                    {
+                        result = false;
+                        break;
+                    }
+                }
             }
 
-            if (set.Count > 0)
-                sets.Add(set);
+            if (result)
+                sets.Add(new ValidSetOfTouchPoints(points));
 
             return sets;
-        }
-
-        private bool IsEnclosedAreaWithinRange(StylusPointCollection stylusPointCollection)
-        {
-            // TODO: Move the magic number to configuration
-            Point[] points = stylusPointCollection.ToFilteredPoints(5);
-
-            double area  = ConvexHullArea.GetArea(points);
-
-            if (area >= _data.Min && area <= _data.Max)
-                return true;
-            else
-                return false;
         }
 
         public ValidSetOfPointsCollection Validate(ValidSetOfPointsCollection sets)

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
 using TouchToolkit.GestureProcessor.ReturnTypes;
-using TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Validators;
 using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using System.Reflection;
@@ -25,6 +25,7 @@ namespace TouchToolkit.Framework
     internal class GestureLanguageProcessor
     {
         private static readonly string[] assembliesToSkip = { "BlueTools", "Conoto.net" };
+
         private static List<Type> _allRules = new List<Type>();
         private static List<Tuple<IPrimitiveConditionValidator, Gesture>> _preConGestureMap = new List<Tuple<IPrimitiveConditionValidator, Gesture>>();
         private static List<IPrimitiveConditionValidator> _rules = new List<IPrimitiveConditionValidator>();
@@ -97,18 +98,19 @@ namespace TouchToolkit.Framework
                 // Name
                 Gesture g = new Gesture() { Name = gToken.Name };
 
-                // PreConditions
-                foreach (IPrimitiveConditionData ruleData in gToken.PreConditions)
+                // Validate blocks
+                foreach (var validateToken in gToken.ValidateTokens)
                 {
-                    IPrimitiveConditionValidator preConRule = GetPreCondition(ruleData, g);
-                    g.PreConditions.Add(preConRule);
-                }
+                    ValidationBlock vb = new ValidationBlock() { Name = validateToken.Name } ;
 
-                // Conditions
-                foreach (var ruleData in gToken.Conditions)
-                {
-                    IPrimitiveConditionValidator conRule = GetRule(ruleData);
-                    g.Rules.Add(conRule);
+                    // Primitive conditions
+                    foreach (var priConData in validateToken.PrimitiveConditions)
+                    {
+                        IPrimitiveConditionValidator primitiveCondition = GetPrimitiveConditionValidator(priConData);
+                        vb.PrimitiveConditions.Add(primitiveCondition);
+                    }
+
+                    g.ValidationBlocks.Add(vb);
                 }
 
                 // Returns
@@ -215,7 +217,7 @@ namespace TouchToolkit.Framework
         private static IPrimitiveConditionValidator GetPreCondition(IPrimitiveConditionData ruleData, Gesture gesture)
         {
             IPrimitiveConditionValidator preCondition = null;
-            IPrimitiveConditionValidator newPreCondition = GetRule(ruleData);
+            IPrimitiveConditionValidator newPreCondition = GetPrimitiveConditionValidator(ruleData);
 
             // Check if same preCondition already exists
             foreach (var rule in _preCons)
@@ -268,14 +270,15 @@ namespace TouchToolkit.Framework
             return info;
         }
 
-        private static IPrimitiveConditionValidator GetRule(IPrimitiveConditionData ruleData)
+        private static IPrimitiveConditionValidator GetPrimitiveConditionValidator(IPrimitiveConditionData data)
         {
             // Get the rule validator class name using the ruleObject name
-            string className = ruleData.GetType().Name + "Validator";
+            string className = data.GetType().Name + "Validator";
 
 
             IPrimitiveConditionValidator rule = GetInstanceByTypeName(className) as IPrimitiveConditionValidator;
-            rule.Init(ruleData);
+
+            rule.Init(data);
 
             bool matchFound = false;
             foreach (var r in _rules)

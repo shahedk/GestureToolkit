@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.Utility;
 using TouchToolkit.GestureProcessor.Objects;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
     public class TouchPathLengthValidator : IPrimitiveConditionValidator
     {

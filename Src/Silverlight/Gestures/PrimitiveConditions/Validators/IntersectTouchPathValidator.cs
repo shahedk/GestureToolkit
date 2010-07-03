@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using TouchToolkit.GestureProcessor.Objects;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
     public class IntersectTouchPathValidator : IPrimitiveConditionValidator
     {

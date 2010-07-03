@@ -6,29 +6,16 @@ namespace TouchToolkit.GestureProcessor.Objects.LanguageTokens
 {
     public class GestureToken : LanguageToken
     {
-        public List<IPrimitiveConditionData> _preConditions = new List<IPrimitiveConditionData>();
-        public List<IPrimitiveConditionData> PreConditions
+        private List<ValidateToken> _validationBlocks = new List<ValidateToken>();
+        public List<ValidateToken> ValidateTokens
         {
             get
             {
-                return _preConditions;
+                return _validationBlocks;
             }
             set
             {
-                _preConditions = value;
-            }
-        }
-
-        public List<IPrimitiveConditionData> _rules = new List<IPrimitiveConditionData>();
-        public List<IPrimitiveConditionData> Conditions
-        {
-            get
-            {
-                return _rules;
-            }
-            set
-            {
-                _rules = value;
+                _validationBlocks = value;
             }
         }
 

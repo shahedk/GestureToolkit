@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.Objects;
 using BehaviourTypes = TouchToolkit.GestureProcessor.PrimitiveConditions.Objects.DistanceBetweenPoints.BehaviourTypes;
 
-namespace TouchToolkit.GestureProcessor.PrimitiveConditions.RuleValidators
+namespace TouchToolkit.GestureProcessor.PrimitiveConditions.Validators
 {
     public class DistanceBetweenPointsValidator : IPrimitiveConditionValidator
     {
