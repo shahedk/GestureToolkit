@@ -180,8 +180,6 @@ namespace TouchToolkit.Framework.Components
                 foreach (FrameInfo frameInfo in gestureInfo.Frames)
                 {
                     TouchAction2 a = frameInfo.Touches[0].ActionType;
-                    object[] val = new object[1];
-                    val[0] = frameInfo;
 
                     if (GestureFramework.LayoutRoot == null)
                     {
