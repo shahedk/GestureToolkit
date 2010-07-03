@@ -27,8 +27,6 @@ namespace TouchToolkit.Framework.Components
     public class TouchInputRecorder
     {
         private VirtualTouchInputProvider _touchListener = new VirtualTouchInputProvider();
-        //private ParameterizedThreadStart _backgroundThreadStart;
-        //private Thread _backgroundThread;
         public event GesturePlaybackCompleted PlaybackCompleted;
 
         public delegate void GesturePlaybackCompleted();
