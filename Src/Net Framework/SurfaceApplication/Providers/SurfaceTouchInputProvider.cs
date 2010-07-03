@@ -12,6 +12,7 @@ using System.Windows;
 using Microsoft.Surface.Core;
 using ContactEventHandler = Microsoft.Surface.Presentation.ContactEventHandler;
 using TouchToolkit.Framework;
+using System.Diagnostics;
 
 namespace SurfaceApplication.Providers
 {
@@ -42,44 +43,49 @@ namespace SurfaceApplication.Providers
             IntPtr hwnd = new System.Windows.Interop.WindowInteropHelper(_window).Handle;
             _contactTarget = new Microsoft.Surface.Core.ContactTarget(hwnd);
 
-            _contactTarget.FrameReceived += new EventHandler<FrameReceivedEventArgs>(_contactTarget_FrameReceived);
+            _contactTarget.FrameReceived += _contactTarget_FrameReceived;
             _contactTarget.EnableInput();
         }
 
         void _contactTarget_FrameReceived(object sender, FrameReceivedEventArgs e)
         {
-            List<TouchInfo> touchInfoList = _activeTouchInfos.Values.ToList<TouchInfo>();
-            List<TouchPoint2> touchPoints = _activeTouchPoints.Values.ToList<TouchPoint2>();
-
-            // Raise "SingleTouchChanged" event if necessary
-            if (SingleTouchChanged != null)
+            if (_activeTouchInfos.Values.Count > 0)
             {
-                foreach (var touchPoint in touchPoints)
+                List<TouchInfo> touchInfoList = _activeTouchInfos.Values.ToList<TouchInfo>();
+                List<TouchPoint2> touchPoints = _activeTouchPoints.Values.ToList<TouchPoint2>();
+
+                // Raise "SingleTouchChanged" event if necessary
+                if (SingleTouchChanged != null)
                 {
-                    SingleTouchChanged(this, new SingleTouchEventArgs(touchPoint));
+                    foreach (var touchPoint in touchPoints)
+                    {
+                        SingleTouchChanged(this, new SingleTouchEventArgs(touchPoint));
+                    }
                 }
-            }
 
-            // Raise "MultiTouchChanged" event if necessary
-            if (MultiTouchChanged != null)
-            {
-                MultiTouchChanged(this, new MultiTouchEventArgs(touchPoints));
-            }
-
-            // Raise "MultiTouchChanged" event if necessary
-            if (FrameChanged != null)
-            {
-                var frameInfo = new FrameInfo() { TimeStamp = e.FrameTimestamp, Touches = touchInfoList };
-                FrameChanged(this, frameInfo);
-            }
-
-            // Clean up local cache
-            foreach (var touchInfo in touchInfoList)
-            {
-                if (touchInfo.ActionType == TouchAction2.Up)
+                // Raise "MultiTouchChanged" event if necessary
+                if (MultiTouchChanged != null)
                 {
-                    _activeTouchInfos.Remove(touchInfo.TouchDeviceId);
-                    _activeTouchPoints.Remove(touchInfo.TouchDeviceId);
+                    MultiTouchChanged(this, new MultiTouchEventArgs(touchPoints));
+                }
+
+                // Raise "MultiTouchChanged" event if necessary
+                if (FrameChanged != null)
+                {
+                    var frameInfo = new FrameInfo() { TimeStamp = DateTime.Now.Ticks, Touches = touchInfoList };
+                    FrameChanged(this, frameInfo);
+
+                    Debug.WriteLine(touchInfoList[0].ActionType.ToString());
+                }
+
+                // Clean up local cache
+                foreach (var touchInfo in touchInfoList)
+                {
+                    if (touchInfo.ActionType == TouchAction2.Up)
+                    {
+                        _activeTouchInfos.Remove(touchInfo.TouchDeviceId);
+                        _activeTouchPoints.Remove(touchInfo.TouchDeviceId);
+                    }
                 }
             }
         }

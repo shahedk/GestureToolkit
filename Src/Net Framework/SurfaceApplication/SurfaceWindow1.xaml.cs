@@ -112,7 +112,7 @@ namespace SurfaceApplication
         void SurfaceWindow1_Loaded(object sender, RoutedEventArgs e)
         {
             // Initialize Gesture Framework
-            var provider = new Windows7TouchInputProvider();
+            var provider = new SurfaceTouchInputProvider(this);
             mainCanvasRoot.Children.Add(new TestControl(provider));
         }
 

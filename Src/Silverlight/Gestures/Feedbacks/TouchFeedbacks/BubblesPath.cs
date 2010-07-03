@@ -121,16 +121,15 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks
 
                 Ellipse e = new Ellipse();
 
-                Debug.WriteLine("B-path:" + groupId);
                 // TODO: Temporary implementation for demo
                 if (groupId == 0)
-                    e.Fill = new SolidColorBrush(Colors.Red);
+                    e.Fill = new SolidColorBrush(Colors.LightGray);
                 else if (groupId == 1)
                     e.Fill = new SolidColorBrush(Colors.Blue);
                 else if (groupId == 2)
                     e.Fill = new SolidColorBrush(Colors.Green);
                 else
-                    e.Fill = new SolidColorBrush(Colors.LightGray);
+                    e.Fill = new SolidColorBrush(Colors.Red);
 
                 e.Opacity = 0.6;
 
