@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchToolkit.GestureProcess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchToolkit.Framework", "..\Net Framework\Framework\TouchToolkit.Framework.csproj", "{0E89118D-B58A-48DB-A05D-0ADBBB145195}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows 7 Multi-touch1", "Windows 7 Multi-touch1\Windows 7 Multi-touch1.csproj", "{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}"
-EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -71,21 +69,6 @@ Global
 		{0E89118D-B58A-48DB-A05D-0ADBBB145195}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0E89118D-B58A-48DB-A05D-0ADBBB145195}.Test|Mixed Platforms.Build.0 = Release|Any CPU
 		{0E89118D-B58A-48DB-A05D-0ADBBB145195}.Test|x86.ActiveCfg = Release|Any CPU
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Debug|x86.ActiveCfg = Debug|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Debug|x86.Build.0 = Debug|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Release|Any CPU.ActiveCfg = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Release|Mixed Platforms.Build.0 = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Release|x86.ActiveCfg = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Release|x86.Build.0 = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Test|Any CPU.ActiveCfg = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Test|Mixed Platforms.ActiveCfg = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Test|Mixed Platforms.Build.0 = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Test|x86.ActiveCfg = Release|x86
-		{1707879B-1424-4DDE-91D4-CAA8F4D0DC34}.Test|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

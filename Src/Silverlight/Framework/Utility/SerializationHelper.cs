@@ -16,7 +16,7 @@ using System.Diagnostics.Contracts;
 
 using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
 using TouchToolkit.GestureProcessor.Objects;
-using TouchToolkit.GestureProcessor.Rules.Objects;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 
 namespace TouchToolkit.Framework.Utility
 {
@@ -35,7 +35,7 @@ namespace TouchToolkit.Framework.Utility
                 Type[] interfaces = type.GetInterfaces();
                 foreach (var i in interfaces)
                 {
-                    if (i.IsAssignableFrom(typeof(IRuleData)))
+                    if (i.IsAssignableFrom(typeof(IPrimitiveConditionData)))
                         requiredTypes.Add(type);
                 }
             }

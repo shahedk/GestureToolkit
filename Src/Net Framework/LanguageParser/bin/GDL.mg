@@ -4,54 +4,32 @@
     {
         // --- Start of main parsing language ---
         syntax Main 
-            = g:Gestures
+            //= g:GestureDefinitions
+            =g:GestureDefinition
             =>g;
     
-        syntax Gestures
-            = g:Gesture
+        syntax GestureDefinitions
+            = g:GestureDefinition
                 =>[g]
-            | list:Gestures "," g:Gesture
+            | list:GestureDefinitions "," g:GestureDefinition
                 => [valuesof(list), g];
             
-        syntax Gesture
-            = g:Gesture_without_precon => g
-            | g:Gesture_without_con=>g
-            | g:Gesture_all =>g;
-            
-        syntax Gesture_without_precon
-            = n:GestureName c:Conditions r:Returns 
-            => Gesture{Name=>n, Conditions=>c, Returns=>r};
-        syntax Gesture_without_con
-            = n:GestureName p:PreConditions r:Returns 
-            => Gesture{Name=>n, PreConditions=>p, Returns=>r};
-        syntax Gesture_all
-            = n:GestureName p:PreConditions c:Conditions r:Returns 
-            => Gesture{Name=>n, PreConditions=>p, Conditions=>c, Returns=>r};
+        syntax GestureDefinition
+            = n:GestureName v:ValidationBlock* r:Returns 
+            => Gesture{Name=>n, ValidationBlocks=>v, Returns=>r};
             
         // -- Gesture Name --
         syntax GestureName
             = "name:" x:ValidName
             => x;
             
-        // -- PreConditions --
-        syntax PreConditions
-            = "validation state"  x:Rules
-            =>x ;
-        
-        /*
-        syntax PreCondition
-            = t:Rules ":" v:ValidNum 
-            =>Rule{ Name=>t, Value=>v};
-        */
-                
-        // -- Conditions --
-        syntax Conditions
-            = "condition" x:Rules 
-            =>x;
+        // -- Validation Block --
+        syntax ValidationBlocks
+            = v:ValidationBlock* =>v;
             
-        syntax Condition
-            = t:Rules ":" v:ValidName
-            =>Rule{ Name=>t, Value=>v };
+        syntax ValidationBlock
+            = "validate" x:PrimitiveCondition*
+            =>ValidationBlock{x};
         
             
         // -- Return --
@@ -79,15 +57,11 @@
             | r: "Info" ":" v:ValidName=>r+":"+v;
         
         /* Generic Rules */
-        syntax Rules
-            = x:Rule* 
+        syntax PrimitiveConditions
+            = x:PrimitiveCondition* 
             =>x;
-        
-        syntax Rule4
-            = r:TouchState =>r
-             | r:TouchAreaRule =>r;
-                
-        syntax Rule
+                              
+        syntax PrimitiveCondition
             = r:TouchState => r
             | r:TouchAreaRule => r
             | r:TouchTime => r
@@ -108,7 +82,7 @@
             =>TouchShape{Values=>s};
         token Shape
             = x: "Line" => x
-            | x: "Box" => x
+            | x: "Rect" => x
             | x: "Circle" => x;
             
         /* Touch direction */
@@ -270,9 +244,8 @@
         @{Classification["Keyword"]} final token OrToken = "or";
         @{Classification["Keyword"]} final token AndToken = "and";
         @{Classification["Keyword"]} final token NameToken = "name:";
-        @{Classification["Keyword"]} final token ValidationStateToken = "validation state";
+        @{Classification["Keyword"]} final token ValidationStateToken = "validate";
         @{Classification["Keyword"]} final token EndToken = "end";
-        @{Classification["Keyword"]} final token ConditionToken = "condition";
         @{Classification["Keyword"]} final token ReturnToken = "return";
         
     }
