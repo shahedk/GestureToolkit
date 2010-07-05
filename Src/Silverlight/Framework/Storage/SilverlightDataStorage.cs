@@ -5,19 +5,19 @@ using System.Text;
 using System.IO.IsolatedStorage;
 using TouchToolkit.Framework.Exceptions;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace TouchToolkit.Framework.Storage
 {
     public class SilverlightDataStorage : IDataStorage
     {
         GestureDictionary _localCache = new GestureDictionary();
-        WebStorage _webStorage = new WebStorage();
+        WebStorage _webStorage;
 
         IsolatedStorageFile _fileStorage = IsolatedStorageFile.GetUserStoreForApplication();
         static IsolatedStorageSettings _userSettings = IsolatedStorageSettings.ApplicationSettings;
 
         private bool _firstTime = true;
-        private bool _online = false;
 
         public string AccountName
         {
@@ -51,47 +51,34 @@ namespace TouchToolkit.Framework.Storage
         {
             if (!string.IsNullOrEmpty(AccountName))
             {
-                if (_online)
-                {
-                    _webStorage.Login(AccountName);
-                }
+                
+                _webStorage.Login(AccountName);
                 return true;
             }
             else
                 return false;
         }
 
+        public SilverlightDataStorage()
+        {
+            _webStorage = new WebStorage();
+        }
+
+
         public void Login(string accountName)
         {
             AccountName = accountName;
-            if (_online)
-            {
-                _webStorage.Login(accountName);
-            }
-            else
-            {
-                LoadFromFile(_filename);
-            }
+            _webStorage.Login(accountName);
             _firstTime = true;
         }
 
         public void Logout()
         {
-            SaveToFile(_filename);
+            
             AccountName = string.Empty;
-            if (_online)
-            {
-                _webStorage.Logout();
-            }
-        }
-
-        public void ToggleOnlineMode()
-        {
-            _online = !_online;
-        }
-        public bool IsOnline()
-        {
-            return _online;
+            _webStorage.Logout();
+            SaveToFile(_filename);
+            _localCache = new GestureDictionary();
         }
 
         #region IDataStorage Members
@@ -100,15 +87,9 @@ namespace TouchToolkit.Framework.Storage
             //Save to local cache
             _localCache.Add(projectName, gestureName, value);
             //Save to permanent storage
-            if (_online)
-            {
-                _webStorage.SaveGesture(projectName, gestureName, value, callback);
-            }
-            else
-            {
-                SaveToFile(_filename);
-                callback(gestureName);
-            }
+            
+            _webStorage.SaveGesture(projectName, gestureName, value, callback);
+            SaveToFile(_filename);
         }
 
         public void GetGesture(string projectName, string gestureName, GetGestureCallback callback)
@@ -134,23 +115,15 @@ namespace TouchToolkit.Framework.Storage
         {
             if (_firstTime)
             {
-                if (_online)
+                //Load from the web
+                _webStorage.GetAllProjects((projectDetails, error) =>
                 {
-                    //Load from the web
-                    _webStorage.GetAllProjects((projectDetails, error) =>
+                    if (error == null)
                     {
-                        if (error == null)
-                        {
-                            LoadDictionary(projectDetails);
-                            callback(projectDetails);
-                        }
-                    });
-                }
-                else
-                {
-                    LoadFromFile(_filename);
-                    callback(_localCache.ProjectDetails);
-                }
+                        LoadDictionary(projectDetails);
+                        callback(projectDetails);
+                    }
+                });
                 _firstTime = false;
             }
             else
@@ -170,7 +143,7 @@ namespace TouchToolkit.Framework.Storage
         #endregion
 
         #region FileStorage Members
-        public void LoadFromFile(string filename)
+        private void LoadFromFile(string filename)
         {
             _localCache = new GestureDictionary();
             try
@@ -198,7 +171,7 @@ namespace TouchToolkit.Framework.Storage
             }
         }
 
-        public void SaveToFile(string filename)
+        private void SaveToFile(string filename)
         {
             Stream mystream = new IsolatedStorageFileStream(filename, FileMode.Create, _fileStorage);
             TextWriter writer = new StreamWriter(mystream);

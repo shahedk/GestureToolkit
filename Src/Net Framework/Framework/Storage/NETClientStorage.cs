@@ -5,19 +5,42 @@ using System.Text;
 using TouchToolkit.Framework.Storage;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Runtime.InteropServices;
 
 namespace TouchToolkit.Framework.Storage
 {
     public class NETClientStorage : IDataStorage
     {
         GestureDictionary _localCache = new GestureDictionary();
-        WebStorage _webStorage = new WebStorage();
+        WebStorage _webStorage;
 
         private string _accountName;
 
         private bool _firstTime = true;
         private bool _online = false;
 
+        [DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
+
+        private bool IsConnectedToInternet()
+        {
+            int Desc;
+            return InternetGetConnectedState(out Desc, 0);
+        }
+
+        public NETClientStorage()
+        {
+            if (IsConnectedToInternet())
+            {
+                _online = true;
+                _webStorage = new WebStorage();
+            }
+            else
+            {
+                _online = false;
+                _webStorage = null;
+            }
+        }
         public string AccountName
         {
             get
@@ -75,21 +98,12 @@ namespace TouchToolkit.Framework.Storage
 
         public void Logout()
         {
-            SaveToFile(_filename);
             AccountName = string.Empty;
             if (_online)
             {
                 _webStorage.Logout();
             }
-        }
-
-        public void ToggleOnlineMode()
-        {
-            _online = !_online;
-        }
-        public bool IsOnline()
-        {
-            return _online;
+            SaveToFile(_filename);
         }
 
         #region IDataStorage Members
@@ -97,6 +111,7 @@ namespace TouchToolkit.Framework.Storage
         {
             //Save to local cache
             _localCache.Add(projectName, gestureName, value);
+            SaveToFile(_filename);
             //Save to permanent storage
             if (_online)
             {
@@ -104,7 +119,6 @@ namespace TouchToolkit.Framework.Storage
             }
             else
             {
-                SaveToFile(_filename);
                 callback(gestureName);
             }
         }
