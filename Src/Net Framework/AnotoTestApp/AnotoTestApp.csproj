@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="My Application.xaml.cs">
+      <DependentUpon>My Application.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Providers\AnotoInputProvider.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +80,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="My Application.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -96,6 +103,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,10 +111,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pictures\Hydrangeas.jpg" />
-    <Resource Include="Pictures\Jellyfish.jpg" />
-    <Resource Include="Pictures\Koala.jpg" />
-    <Resource Include="Pictures\Lighthouse.jpg" />
+    <Resource Include="Images\Hydrangeas.jpg" />
+    <Resource Include="Images\Jellyfish.jpg" />
+    <Resource Include="Images\Koala.jpg" />
+    <Resource Include="Images\Lighthouse.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework\TouchToolkit.Framework.csproj">

@@ -156,8 +156,9 @@ namespace TouchToolkit.Framework.TouchInputProviders
                     ThreadStart start = delegate()
                     {
                         GestureFramework.LayoutRoot.Dispatcher.Invoke(DispatcherPriority.Render,
-                                          new Action<Point>(PerformHitTest), point);
+                                          new Action<Point>(PerformHitTest), point.Value.Position);
                     };
+                    start.Invoke();
                     point.Value.Source = source;
                 }
             }
@@ -215,6 +216,8 @@ namespace TouchToolkit.Framework.TouchInputProviders
                     source = GestureFramework.LayoutRoot;
                 else
                     source = hitTestResult.VisualHit as UIElement;
+                
+                return;
             }
         }
     }

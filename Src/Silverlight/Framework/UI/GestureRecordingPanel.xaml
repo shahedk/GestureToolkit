@@ -18,11 +18,9 @@
             <Grid Grid.Row="1" Margin="1">
                 <!--AnonUser-->
                 <Grid x:Name="LoginScreenGrid" Visibility="Collapsed" >
-                    <StackPanel Orientation="Vertical" Margin="4">
-                        <TextBlock Text="Account name:" Margin="3"/>
-                        <TextBox x:Name="UserNameTextBox" KeyUp="UserNameTextBox_KeyUp" />
-                        <Button x:Name="LoginButton" Content="Login" Margin="5,5" Click="LoginButton_Click" HorizontalAlignment="Right"/>
-                    </StackPanel>
+                    <TextBox x:Name="UserNameTextBox" KeyUp="UserNameTextBox_KeyUp" Margin="0,15,90,165" HorizontalAlignment="Right" Width="410" />
+                    <Button x:Name="LoginButton" Content="Login" Margin="0,15,0,165" Click="LoginButton_Click" HorizontalAlignment="Right" Width="46" />
+                    <TextBlock Text="Account name:" Margin="0,15,520,160" Width="85" />
                 </Grid>
 
                 <!--RegisteredUser-->
@@ -62,5 +60,7 @@
                 </Grid>
             </Grid>
         </Grid>
+        
     </Grid>
+    
 </UserControl>
