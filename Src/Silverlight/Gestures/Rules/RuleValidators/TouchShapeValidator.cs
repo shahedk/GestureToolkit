@@ -77,88 +77,52 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
 
         private ValidSetOfTouchPoints ValidateBox(TouchPoint2 points)
         {
-            ValidSetOfTouchPoints ret = new ValidSetOfTouchPoints();
-            bool hasRect = false;
-            RectangleParser recognizer = new RectangleParser();
-
-            // Find 'stop points' ie. points where the velocity is zero.
-            // These are usually vertices of our shapes.
+            ValidSetOfTouchPoints output = new ValidSetOfTouchPoints();
             int length = points.Stroke.StylusPoints.Count;
-            int step = 1;
-            List<StylusPoint> stopPoints = new List<StylusPoint>();
-            stopPoints.Add(points.Stroke.StylusPoints[0]);
-            string finalSlope = "";
-            bool advancing = false;
-            int startIndex = 0;
-            int endIndex = 0;
-            for (int i = 0; i < length - step; i += step)
+            if(length < 1)
             {
-                StylusPoint currentPoint = points.Stroke.StylusPoints[i];
-                double stopDist = TrigonometricCalculationHelper.GetDistanceBetweenPoints(currentPoint,
-                   stopPoints[stopPoints.Count - 1]);
-                if (stopDist > 0)
-                {
-                    stopPoints.Add(currentPoint);
+                return output;
+            }
 
-                    //Get slope inbetween latest stop points
-                    double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(
-                        stopPoints[stopPoints.Count - 2], 
-                        stopPoints[stopPoints.Count - 1]);
-                    string stringSlope = TouchPointExtensions.SlopeToDirection(slope);
-                    if (finalSlope.Equals(""))
+            List<string> slopes = new List<string>();
+            TouchPoint2 newPoints = points.GetEmptyCopy();
+            
+            for (int i = 0; i < length - 1; i++ )
+            {
+                var point1 = points.Stroke.StylusPoints[i];
+                var point2 = points.Stroke.StylusPoints[i + 1];
+                double slope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(point1, point2);
+                double distance = TrigonometricCalculationHelper.GetDistanceBetweenPoints(point1, point2);
+                string stringSlope = TouchPointExtensions.SlopeToDirection(slope);
+                if (distance > 0)
+                {
+                    newPoints.Stroke.StylusPoints.Add(point1);
+                    Correlation recognizer = new Correlation(newPoints);
+                    if(Math.Abs(recognizer.RSquared) < 0.85)
                     {
-                        //Throw slope through a Parser to determine if a rectangle has been made
-                        if (recognizer.Advance(stringSlope))
-                        {
-                            if (!advancing)
-                            {
-                                advancing = true;
-                                startIndex = i;
-                            }
-                            if (recognizer.IsRect)
-                            {
-                                hasRect = true;
-                                finalSlope = stringSlope;
-                            }
-                        }
-                        else
-                        {
-                            advancing = false;
-                        }
-                    }
-                    else if (hasRect && (!finalSlope.Equals(stringSlope)))
-                    {
-                        endIndex = i;
-                        break;
+                        int linelength = newPoints.Stroke.StylusPoints.Count;
+                        double lineSlope = TrigonometricCalculationHelper.GetSlopeBetweenPoints(newPoints.Stroke.StylusPoints[1],
+                            newPoints.Stroke.StylusPoints[linelength - 1]);
+                        string lineStringSlope = TouchPointExtensions.SlopeToDirection(lineSlope);
+                        slopes.Add(lineStringSlope);
+                        newPoints = newPoints.GetEmptyCopy();
                     }
                 }
             }
-
-            //Make sure our rectangle is a closed loop
+            RectangleParser parser = new RectangleParser();
+            bool hasRect = parser.Advance(slopes);
             if (hasRect)
             {
-                if(endIndex == 0)
-                {
-                    endIndex = points.Stroke.StylusPoints.Count -1;
-                }
-                TouchPoint2 rectangle = points.GetRange(startIndex, endIndex);
-                StylusPoint start= rectangle.Stroke.StylusPoints[0];
-                StylusPoint end = rectangle.Stroke.StylusPoints[rectangle.Stroke.StylusPoints.Count - 1];
-                double distance = TrigonometricCalculationHelper.GetDistanceBetweenPoints(start,end);
-                bool IsClosedLoop =  distance < TOLERANCE;
-                if (IsClosedLoop)
-                {
-                    ret.Add(rectangle);
-                }
+                output.Add(points);
             }
-            return ret;
+            return output;
         }
 
         private ValidSetOfTouchPoints ValidateLine(TouchPoint2 points)
         {
             ValidSetOfTouchPoints ret = new ValidSetOfTouchPoints();
             Correlation recognizer = new Correlation(points);
-            if (Math.Abs(recognizer.RSquared) > .8)
+            if (Math.Abs(recognizer.RSquared) > .975)
             {
                 ret.Add(points);
             }
@@ -168,11 +132,12 @@ namespace TouchToolkit.GestureProcessor.Rules.RuleValidators
         private ValidSetOfTouchPoints ValidateCircle(TouchPoint2 points)
         {
             ValidSetOfTouchPoints ret = new ValidSetOfTouchPoints();
-            HoughCircle recognizer = new HoughCircle(points);
-            if (recognizer.IsMatch())
+            CircleRecognizer recognizer = new CircleRecognizer(points);
+            if (recognizer.R > .975)
             {
                 ret.Add(points);
             }
+
             return ret;
         }
 

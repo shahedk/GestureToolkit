@@ -82,7 +82,8 @@ namespace TouchToolkit.Framework.ShapeRecognizers
                 VerticalLine = true;
             }
             TouchPoint2 tp = points.GetEmptyCopy();
-            tp.Stroke.StylusPoints = workingList;
+            if(workingList.Count > 0)
+                tp.Stroke.StylusPoints = workingList;
             RSquared = CalculateRSquared(tp);
         }
 

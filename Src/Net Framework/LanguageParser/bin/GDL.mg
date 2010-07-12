@@ -76,6 +76,7 @@
             | r: "Direction" => r
             | r: "Enclosed path" => r
             | r: "Touch points" => r
+            | r: "TouchID" => r
             | r: "Info" ":" v:ValidName=>r+":"+v;
         
         /* Generic Rules */

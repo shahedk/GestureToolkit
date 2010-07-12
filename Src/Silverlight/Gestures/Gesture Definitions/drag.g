@@ -8,4 +8,4 @@ condition
     On same object
 
 return
-    Position, Position changed
+    Position, Position changed, TouchID

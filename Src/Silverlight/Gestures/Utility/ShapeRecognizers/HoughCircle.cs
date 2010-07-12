@@ -108,7 +108,7 @@ namespace TouchToolkit.Framework.ShapeRecognizers
                 int rpoint = (int) Math.Floor(
                     Math.Abs(TrigonometricCalculationHelper.GetDistanceBetweenPoints(center, point)));
                     
-                if (rpoint > 0 && rpoint < rmax)
+                if (rpoint > 0 && rpoint < rmax -1)
                 {
                     Accumulator[rpoint]++;
                     Accumulator[rpoint + 1]++;
@@ -149,13 +149,12 @@ namespace TouchToolkit.Framework.ShapeRecognizers
                 {
                     points.Stroke.StylusPoints.RemoveAt(removeStack.Pop());
                 }
-                return points;
             }
             else
             {
-                points.Stroke.StylusPoints.Clear();
-                return points;
+                return null;
             }
+            return points;
         }
 
     }

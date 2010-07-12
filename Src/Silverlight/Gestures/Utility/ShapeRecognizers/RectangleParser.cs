@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace TouchToolkit.Framework.ShapeRecognizers
 {
@@ -81,6 +82,19 @@ namespace TouchToolkit.Framework.ShapeRecognizers
                     break;
             }
             return next;
+        }
+        public bool Advance(List<string> lines)
+        {
+            foreach (var line in lines)
+            {
+                Advance(line);
+                if (IsRect)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
         }
         public bool Advance(string lines)
         {
