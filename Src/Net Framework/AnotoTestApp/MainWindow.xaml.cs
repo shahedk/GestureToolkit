@@ -18,7 +18,7 @@ using TouchToolkit.GestureProcessor.ReturnTypes;
 using TouchToolkit.Framework;
 using TouchToolkit.Framework.TouchInputProviders;
 
-namespace Windows_7_Multi_touch1
+namespace AnotoTestApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

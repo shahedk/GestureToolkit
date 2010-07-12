@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Windows_7_Multi_touch1.My_Application"
+﻿<UserControl x:Class="AnotoTestApp.My_Application"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

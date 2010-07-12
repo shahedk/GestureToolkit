@@ -179,7 +179,7 @@ namespace TouchToolkit.Framework
             }
 
             // Then: Load the remaining gesture definitions
-            /*
+            
             foreach (var assemblyFile in allAssemblies)
             {
                 if (IsExternalAssembly(assemblyFile))
@@ -195,7 +195,7 @@ namespace TouchToolkit.Framework
                 {
                     tokens.AddRange(gestureTokens);
                 }
-            }*/
+            }
 #endif
 
             return tokens;

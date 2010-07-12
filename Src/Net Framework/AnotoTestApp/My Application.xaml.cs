@@ -19,13 +19,15 @@ using System.Threading;
 using TouchToolkit.GestureProcessor.Gesture_Definitions;
 using System.Windows.Threading;
 
-namespace Windows_7_Multi_touch1
+namespace AnotoTestApp
 {
     /// <summary>
     /// Interaction logic for My_Application.xaml
     /// </summary>
     public partial class My_Application : UserControl
     {
+        private Dictionary<UIElement, int> _objectRegistration = new Dictionary<UIElement, int>();
+
         public My_Application()
         {
             InitializeComponent();
@@ -62,22 +64,32 @@ namespace Windows_7_Multi_touch1
 
             }
 
-            GestureFramework.EventManager.AddEvent(LayoutRoot, Gestures.Lasso, LassoCallback);
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, Gestures.Lasso, LassoCallback);
+            GestureFramework.EventManager.AddEvent(LayoutRoot, "Line", BoxCallback);
         }
 
         #region CallBacks
 
+        private void BoxCallback(UIElement sender, GestureEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Box");
+        }
+
         private void DragCallback(UIElement sender, GestureEventArgs e)
         {
             var posChanged = e.Values.Get<PositionChanged>();
-            if (posChanged != null && sender != null)
+            var id = e.Values.Get<TouchID>()[0];
+            if (ValidateID(id, sender))
             {
-                ThreadStart start = delegate()
+                if (posChanged != null && sender != null)
                 {
-                    sender.Dispatcher.Invoke(DispatcherPriority.Send,
-                                      new Action<UIElement, PositionChanged>(MoveItem), sender, posChanged);
-                };
-                start.Invoke();
+                    ThreadStart start = delegate()
+                    {
+                        sender.Dispatcher.Invoke(DispatcherPriority.Send,
+                                          new Action<UIElement, PositionChanged>(MoveItem), sender, posChanged);
+                    };
+                    start.Invoke();
+                }
             }
         }
 
@@ -150,6 +162,41 @@ namespace Windows_7_Multi_touch1
         #endregion
 
         #region Helper Functions
+
+        private bool ValidateID(int id, UIElement obj)
+        {
+            if (_objectRegistration.ContainsKey(obj))
+            {
+                return _objectRegistration[obj] == id;
+            }
+            else
+            {
+                _objectRegistration.Add(obj, id);
+                return true;
+            }
+        }
+        private Ellipse CreateEllipse()
+        {
+            // Create a red Ellipse.
+            Ellipse myEllipse = new Ellipse();
+
+            // Create a SolidColorBrush with a red color to fill the 
+            // Ellipse with.
+            SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+
+            // Describes the brush's color using RGB values. 
+            // Each value has a range of 0-255.
+            mySolidColorBrush.Color = Color.FromArgb(255, 255, 255, 0);
+            myEllipse.Fill = mySolidColorBrush;
+            myEllipse.StrokeThickness = 2;
+            myEllipse.Stroke = Brushes.Black;
+
+            // Set the width and height of the Ellipse.
+            myEllipse.Width = 155;
+            myEllipse.Height = 155;
+
+            return myEllipse;
+        }
 
         bool rotateInProgress = false;
         private void Rotate(Image img, double delta)

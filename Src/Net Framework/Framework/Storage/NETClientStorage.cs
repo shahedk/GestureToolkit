@@ -6,6 +6,7 @@ using TouchToolkit.Framework.Storage;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Runtime.InteropServices;
+using System.Net.NetworkInformation;
 
 namespace TouchToolkit.Framework.Storage
 {
@@ -19,18 +20,36 @@ namespace TouchToolkit.Framework.Storage
         private bool _firstTime = true;
         private bool _online = false;
 
-        [DllImport("wininet.dll")]
-        private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
-
-        private bool IsConnectedToInternet()
+        //Checks to see if the server is available
+        private bool HasConnection(string hostName)
         {
-            int Desc;
-            return InternetGetConnectedState(out Desc, 0);
+            Ping pingSender = new Ping();
+            PingOptions options = new PingOptions();
+
+            // Use the default Ttl value which is 128,
+            // but change the fragmentation behavior.
+            options.DontFragment = true;
+
+            // Create a buffer of 32 bytes of data to be transmitted.
+            string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            byte[] buffer = Encoding.ASCII.GetBytes(data);
+            int timeout = 120;
+            bool connection = false;
+            try
+            {
+                PingReply reply = pingSender.Send(hostName, timeout, buffer, options);
+                connection = reply.Status == IPStatus.Success;
+            }
+            catch
+            {
+                return false;
+            }
+            return connection;
         }
 
         public NETClientStorage()
         {
-            if (IsConnectedToInternet())
+            if (HasConnection("http://g.shahed.me"))
             {
                 _online = true;
                 _webStorage = new WebStorage();

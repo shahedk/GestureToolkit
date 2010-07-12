@@ -96,6 +96,8 @@
     <Compile Include="ReturnTypes\ReturnTypes.cs" />
     <Compile Include="ReturnTypes\SlopeChanged.cs" />
     <Compile Include="ReturnTypes\SlopeChangedCalculator.cs" />
+    <Compile Include="ReturnTypes\TouchIDCalculator.cs" />
+    <Compile Include="ReturnTypes\TouchID.cs" />
     <Compile Include="ReturnTypes\TouchPoints.cs" />
     <Compile Include="ReturnTypes\TouchPointsCalculator.cs" />
     <Compile Include="Rules\Objects\TouchShape.cs" />
