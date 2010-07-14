@@ -16,6 +16,7 @@ using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
 using TouchToolkit.Framework.TouchInputProviders;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
+using TouchToolkit.GestureProcessor.Gesture_Definitions;
 
 namespace SurfaceApplication
 {
@@ -57,6 +58,11 @@ namespace SurfaceApplication
         }
 
         #region CallBacks
+
+        private void TapCallBack(UIElement sender, GestureEventArgs e)
+        {
+            Console.Out.WriteLine("hello world");
+        }
 
         private void DragCallback(UIElement sender, GestureEventArgs e)
         {
