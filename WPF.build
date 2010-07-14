@@ -16,7 +16,7 @@
   <target name="compile" depends="init">
       <exec
       program="C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe"
-      commandline="\"./Src/Solution files/WPF 4.0 Application.sln\""/>
+      commandline="\"${build.dir}/Src/Solution files/WPF 4.0 Application.sln\""/>
  
 
  </target>
@@ -28,7 +28,7 @@
 	<mkdir dir="TestResults"/>
 	<exec
 		  program="C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\mstest.exe"
-		  commandline="/testmetadata:\"./Src/Solution files/WPF 4.0 Application.vsmdi\" /resultsfile:TestResults\testResults.trx"/>
+		  commandline="/testmetadata:\"${build.dir}/Src/Solution files/WPF 4.0 Application.vsmdi\" /resultsfile:TestResults\testResults.trx"/>
 
  </target>
 
