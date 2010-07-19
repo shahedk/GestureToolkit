@@ -87,6 +87,7 @@ namespace TouchToolkit.Framework.Storage
         {
             _online = !_online;
         }
+        
         public bool IsOnline()
         {
             return _online;
