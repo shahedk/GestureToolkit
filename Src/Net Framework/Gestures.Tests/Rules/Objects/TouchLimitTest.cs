@@ -1,6 +1,7 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
+﻿using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+
 
 namespace TouchToolkit.GestureProcessor.Tests
 {
@@ -255,7 +256,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // A second rule
-            IRuleData anotherRuleData = new TouchLimit()
+            IPrimitiveConditionData anotherRuleData = new TouchLimit()
             {
 
                 Min = 3,
@@ -281,7 +282,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // A second rule
-            IRuleData anotherRuleData = new TouchLimit()
+            IPrimitiveConditionData anotherRuleData = new TouchLimit()
             {
 
                 Min = 3,
@@ -309,7 +310,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             TouchLimit target = new TouchLimit();
 
             // Since the ruleData is null, the union should fail
-            IRuleData anotherRuleData = null;
+            IPrimitiveConditionData anotherRuleData = null;
 
             //Union should fail
             target.Union(anotherRuleData);
@@ -325,7 +326,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // The 2nd rule
-            IRuleData anotherRuleData = new TouchLimit()
+            IPrimitiveConditionData anotherRuleData = new TouchLimit()
             {
                 Min = 1
             };
@@ -351,7 +352,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // The 2nd rule
-            IRuleData anotherRuleData = new TouchLimit()
+            IPrimitiveConditionData anotherRuleData = new TouchLimit()
             {
                 Max = 7
             };
@@ -378,7 +379,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // The 2nd rule
-            IRuleData anotherRuleData = new TouchLimit()
+            IPrimitiveConditionData anotherRuleData = new TouchLimit()
             {
                 Max = 7
             };

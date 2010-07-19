@@ -1,6 +1,7 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
+﻿using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+
 
 namespace TouchToolkit.GestureProcessor.Tests
 {
@@ -246,7 +247,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             TouchStep target = new TouchStep();
 
             // Since the ruleData is null, the union should fail
-            IRuleData anotherRuleData = null;
+            IPrimitiveConditionData anotherRuleData = null;
 
             //Union should fail
             target.Union(anotherRuleData);
@@ -263,7 +264,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchStep()
+            IPrimitiveConditionData anotherRuleData = new TouchStep()
             {
                 TouchCount = 5
             };
@@ -289,7 +290,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchStep()
+            IPrimitiveConditionData anotherRuleData = new TouchStep()
             {
                 TimeLimit = 5,
                 Unit = "sec"
@@ -316,7 +317,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchStep();
+            IPrimitiveConditionData anotherRuleData = new TouchStep();
 
             //Union the 2 rules
             target.Union(anotherRuleData);
@@ -345,7 +346,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             TouchStep target = new TouchStep();
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchStep()
+            IPrimitiveConditionData anotherRuleData = new TouchStep()
             {
                 TouchCount = 1,
                 TimeLimit = 2,
@@ -385,7 +386,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchStep()
+            IPrimitiveConditionData anotherRuleData = new TouchStep()
             {
                 TouchCount = 1,
                 TimeLimit = 2000,
@@ -424,7 +425,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchStep()
+            IPrimitiveConditionData anotherRuleData = new TouchStep()
             {
                 TouchCount = 1,
                 TimeLimit = 5,
