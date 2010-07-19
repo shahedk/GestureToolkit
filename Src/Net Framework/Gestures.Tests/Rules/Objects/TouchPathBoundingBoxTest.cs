@@ -1,4 +1,4 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
+﻿using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 

@@ -1,6 +1,9 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using TouchToolkit.GestureProcessor.Utility;
+using Microsoft.VisualStudio.TestTools;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace TouchToolkit.GestureProcessor.Tests
 {
@@ -75,7 +78,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             TouchPathLength target = new TouchPathLength();
 
             // Since the ruleData is null, the union should fail
-            IRuleData anotherRuleData = null;
+            IPrimitiveConditionData anotherRuleData = null;
 
             //Union should fail
             target.Union(anotherRuleData);
@@ -93,7 +96,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchPathLength()
+            IPrimitiveConditionData anotherRuleData = new TouchPathLength()
             {
                 Max = 5,
                 Min = 1
@@ -123,7 +126,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchPathLength()
+            IPrimitiveConditionData anotherRuleData = new TouchPathLength()
             {
                 Max = 7,
                 Min = 1
@@ -152,7 +155,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchPathLength()
+            IPrimitiveConditionData anotherRuleData = new TouchPathLength()
             {
                 Max = 5,
                 Min = 3
@@ -189,7 +192,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchPathLength()
+            IPrimitiveConditionData anotherRuleData = new TouchPathLength()
             {
                 Max = 5,
                 Min = 0
