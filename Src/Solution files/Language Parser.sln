@@ -7,11 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchToolkit.GestureProcess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchToolkit.Framework", "..\Net Framework\Framework\TouchToolkit.Framework.csproj", "{0E89118D-B58A-48DB-A05D-0ADBBB145195}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageParser.TestApp", "..\Net Framework\LanguageParser.TestApp\LanguageParser.TestApp.csproj", "{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
+	
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -69,6 +68,21 @@ Global
 		{0E89118D-B58A-48DB-A05D-0ADBBB145195}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0E89118D-B58A-48DB-A05D-0ADBBB145195}.Test|Mixed Platforms.Build.0 = Release|Any CPU
 		{0E89118D-B58A-48DB-A05D-0ADBBB145195}.Test|x86.ActiveCfg = Release|Any CPU
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Debug|x86.ActiveCfg = Debug|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Debug|x86.Build.0 = Debug|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Release|Any CPU.ActiveCfg = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Release|x86.ActiveCfg = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Release|x86.Build.0 = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Test|Any CPU.ActiveCfg = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Test|Mixed Platforms.ActiveCfg = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Test|Mixed Platforms.Build.0 = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Test|x86.ActiveCfg = Release|x86
+		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Test|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

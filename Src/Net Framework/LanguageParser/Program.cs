@@ -101,7 +101,7 @@ namespace LanguageParser
                 //ProjectOutput = @"../../../../Net Framework/TestApplication/Bin/Debug/";
 
                 //ProjectDir = @"../../../../Silverlight/Gestures/";
-                ProjectDir = @"R:\Projects\TouchToolkit - gesture language\Src\Net Framework\LanguageParser\";
+                ProjectDir = @"R:\Projects\TouchToolkit - gesture language\Src\Net Framework\LanguageParser.TestApp\";
                 OutDir = @"bin\Debug\";
 
                 CompiledGestureDefPath = ProjectDir + @"bin/gestures.gx";
