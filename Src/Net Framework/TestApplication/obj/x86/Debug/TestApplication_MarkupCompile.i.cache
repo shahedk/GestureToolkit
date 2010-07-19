@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-R:\Projects\TouchToolkit - gesture language\Src\Net Framework\TestApplication\obj\x86\Debug\
+D:\Personal\Projects\TouchToolkit Gestures\Src\Net Framework\TestApplication\obj\x86\Debug\
 TestApplication
 none
 false
 DEBUG;TRACE
-R:\Projects\TouchToolkit - gesture language\Src\Net Framework\TestApplication\App.xaml
+D:\Personal\Projects\TouchToolkit Gestures\Src\Net Framework\TestApplication\App.xaml
 31464462143
 
-8-192393984
-141783837455
+81829500603
+14-1186382383
 MainWindow.xaml;TestControl.xaml;TestControl2.xaml;
 
 False

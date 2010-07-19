@@ -110,6 +110,9 @@
     <Compile Include="..\..\Silverlight\Gestures\Objects\TouchPoint2.cs">
       <Link>Objects\TouchPoint2.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Objects\ValidationBlock.cs">
+      <Link>Objects\ValidationBlock.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\ValidSetOfPoints.cs">
       <Link>Objects\ValidSetOfPoints.cs</Link>
     </Compile>
@@ -311,7 +314,6 @@
     <Compile Include="..\..\Silverlight\Gestures\Utility\TrigonometricCalculationHelper.cs">
       <Link>Utility\TrigonometricCalculationHelper.cs</Link>
     </Compile>
-    <Compile Include="Objects\ValidationBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
