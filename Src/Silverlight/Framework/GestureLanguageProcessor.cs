@@ -101,7 +101,7 @@ namespace TouchToolkit.Framework
                 // Validate blocks
                 foreach (var validateToken in gToken.ValidateTokens)
                 {
-                    ValidationBlock vb = new ValidationBlock() { Name = validateToken.Name } ;
+                    ValidationBlock vb = new ValidationBlock() { Name = validateToken.Name };
 
                     // Primitive conditions
                     foreach (var priConData in validateToken.PrimitiveConditions)
@@ -157,7 +157,7 @@ namespace TouchToolkit.Framework
             List<FileInfo> allAssemblies = new List<FileInfo>(dlls.Length + exes.Length);
             allAssemblies.AddRange(dlls);
             allAssemblies.AddRange(exes);
-            
+
             // First: Load the pre-defined definitions from TouchToolkit.GestureProcessor.dll
             FileInfo frameworkDll = null;
             foreach (FileInfo assemblyFile in allAssemblies)
@@ -181,7 +181,6 @@ namespace TouchToolkit.Framework
             }
 
             // Then: Load the remaining gesture definitions
-            /*
             foreach (var assemblyFile in allAssemblies)
             {
                 if (IsExternalAssembly(assemblyFile))
@@ -197,7 +196,7 @@ namespace TouchToolkit.Framework
                 {
                     tokens.AddRange(gestureTokens);
                 }
-            }*/
+            }
 #endif
 
             return tokens;

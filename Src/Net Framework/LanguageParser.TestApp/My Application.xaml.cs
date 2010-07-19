@@ -34,7 +34,6 @@ namespace LanguageParser.TestApp
             InitializeComponent();
 
             GestureFramework.Initialize(provider, LayoutRoot);
-            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
 
             this.Loaded += new RoutedEventHandler(My_Application_Loaded);
         }
