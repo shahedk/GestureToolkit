@@ -81,11 +81,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SdkBinPath)\Microsoft.M.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Dataflow, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SdkBinPath)\System.Dataflow.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
@@ -110,7 +112,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\GDL.mg" />
+    <None Include="Framework\GDL.mg" />
+    <None Include="Gesture Definitions\drag.g" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Microsoft.M.dll" />

@@ -123,6 +123,7 @@ namespace TouchToolkit.Framework.Storage
                 _webStorage.Logout();
             }
             SaveToFile(_filename);
+        
         }
 
         #region IDataStorage Members

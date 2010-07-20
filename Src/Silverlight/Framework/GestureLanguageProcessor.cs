@@ -14,9 +14,9 @@ using System.Collections.Generic;
 
 using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
 using TouchToolkit.GestureProcessor.ReturnTypes;
-using TouchToolkit.GestureProcessor.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Validators;
 using TouchToolkit.GestureProcessor.Objects;
-using TouchToolkit.GestureProcessor.Rules.Objects;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using System.Reflection;
 using System.IO;
 
@@ -25,10 +25,11 @@ namespace TouchToolkit.Framework
     internal class GestureLanguageProcessor
     {
         private static readonly string[] assembliesToSkip = { "BlueTools", "Conoto.net" };
+
         private static List<Type> _allRules = new List<Type>();
-        private static List<Tuple<IRuleValidator, Gesture>> _preConGestureMap = new List<Tuple<IRuleValidator, Gesture>>();
-        private static List<IRuleValidator> _rules = new List<IRuleValidator>();
-        private static List<IRuleValidator> _preCons = new List<IRuleValidator>();
+        private static List<Tuple<IPrimitiveConditionValidator, Gesture>> _preConGestureMap = new List<Tuple<IPrimitiveConditionValidator, Gesture>>();
+        private static List<IPrimitiveConditionValidator> _rules = new List<IPrimitiveConditionValidator>();
+        private static List<IPrimitiveConditionValidator> _preCons = new List<IPrimitiveConditionValidator>();
 
         private static List<Gesture> _gestures = new List<Gesture>();
         private static Dictionary<string, Gesture> activeGestures = new Dictionary<string, Gesture>();
@@ -37,14 +38,14 @@ namespace TouchToolkit.Framework
             get { return activeGestures; }
         }
 
-        private static List<IRuleValidator> activePreConditions = new List<IRuleValidator>();
-        internal static List<IRuleValidator> ActivePreConditions
+        private static List<IPrimitiveConditionValidator> activePreConditions = new List<IPrimitiveConditionValidator>();
+        internal static List<IPrimitiveConditionValidator> ActivePreConditions
         {
             get { return activePreConditions; }
         }
 
-        private static List<IRuleValidator> activeTouchPatterns = new List<IRuleValidator>();
-        internal static List<IRuleValidator> ActiveTouchPatterns
+        private static List<IPrimitiveConditionValidator> activeTouchPatterns = new List<IPrimitiveConditionValidator>();
+        internal static List<IPrimitiveConditionValidator> ActiveTouchPatterns
         {
             get { return activeTouchPatterns; }
         }
@@ -77,7 +78,7 @@ namespace TouchToolkit.Framework
                 var types = g.GetType().Assembly.GetTypes();
                 foreach (Type t in types)
                 {
-                    if (t.IsTypeOf(typeof(IRuleValidator)))
+                    if (t.IsTypeOf(typeof(IPrimitiveConditionValidator)))
                         _allRules.Add(t);
                 }
 
@@ -97,18 +98,19 @@ namespace TouchToolkit.Framework
                 // Name
                 Gesture g = new Gesture() { Name = gToken.Name };
 
-                // PreConditions
-                foreach (IRuleData ruleData in gToken.PreConditions)
+                // Validate blocks
+                foreach (var validateToken in gToken.ValidateTokens)
                 {
-                    IRuleValidator preConRule = GetPreCondition(ruleData, g);
-                    g.PreConditions.Add(preConRule);
-                }
+                    ValidationBlock vb = new ValidationBlock() { Name = validateToken.Name };
 
-                // Conditions
-                foreach (var ruleData in gToken.Conditions)
-                {
-                    IRuleValidator conRule = GetRule(ruleData);
-                    g.Rules.Add(conRule);
+                    // Primitive conditions
+                    foreach (var priConData in validateToken.PrimitiveConditions)
+                    {
+                        IPrimitiveConditionValidator primitiveCondition = GetPrimitiveConditionValidator(priConData);
+                        vb.PrimitiveConditions.Add(primitiveCondition);
+                    }
+
+                    g.ValidationBlocks.Add(vb);
                 }
 
                 // Returns
@@ -135,18 +137,24 @@ namespace TouchToolkit.Framework
         {
             List<GestureToken> tokens = new List<GestureToken>();
 
-            // Since we don't know which one of the user's dll(s) contains the custom gesture definitions, we will check all of them
-            // We assume that all dlls are in the same folder along with the framework dlls.
+            /* 
+             * TODO: Temporary work around
+             * 
+             * Currently, we can only load custom gestures from the main-app assembly
+             */ 
+            
+            /*load definitions from the framework assembly */
+            FrameInfo objectFromFramework = new FrameInfo();
+            List<GestureToken> preDefinedGestureTokens = ContentHelper.GetEmbeddedGestureDefinition(objectFromFramework.GetType().Assembly, "gestures.gx");
+            if (preDefinedGestureTokens != null && preDefinedGestureTokens.Count > 0)
+                tokens.AddRange(preDefinedGestureTokens);
 
-#if SILVERLIGHT
-            // TODO: Temporary work around - only load definitions from the framework assemblies
-            FrameInfo dummy = new FrameInfo();
-            List<GestureToken> gestureTokens = ContentHelper.GetEmbeddedGestureDefinition(dummy.GetType().Assembly, "gestures.gx");
-            if (gestureTokens != null && gestureTokens.Count > 0)
-            {
-                tokens.AddRange(gestureTokens);
-            }
-#else
+            /*load definitions from the executing assembly (user's app for custom gestures)*/
+            List<GestureToken> userDefinedGestureTokens = ContentHelper.GetEmbeddedGestureDefinition(Assembly.GetExecutingAssembly(), "gestures.gx");
+            if (userDefinedGestureTokens != null && userDefinedGestureTokens.Count > 0)
+                tokens.AddRange(userDefinedGestureTokens);
+
+            /*
             // Go through all assemblies (both framework and client) and load the gesture definitions
             DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory);
             var dlls = dirInfo.GetFiles("*.dll");
@@ -155,7 +163,7 @@ namespace TouchToolkit.Framework
             List<FileInfo> allAssemblies = new List<FileInfo>(dlls.Length + exes.Length);
             allAssemblies.AddRange(dlls);
             allAssemblies.AddRange(exes);
-            
+
             // First: Load the pre-defined definitions from TouchToolkit.GestureProcessor.dll
             FileInfo frameworkDll = null;
             foreach (FileInfo assemblyFile in allAssemblies)
@@ -179,7 +187,6 @@ namespace TouchToolkit.Framework
             }
 
             // Then: Load the remaining gesture definitions
-            
             foreach (var assemblyFile in allAssemblies)
             {
                 if (IsExternalAssembly(assemblyFile))
@@ -196,7 +203,7 @@ namespace TouchToolkit.Framework
                     tokens.AddRange(gestureTokens);
                 }
             }
-#endif
+*/
 
             return tokens;
         }
@@ -212,10 +219,10 @@ namespace TouchToolkit.Framework
             return false;
         }
 
-        private static IRuleValidator GetPreCondition(IRuleData ruleData, Gesture gesture)
+        private static IPrimitiveConditionValidator GetPreCondition(IPrimitiveConditionData ruleData, Gesture gesture)
         {
-            IRuleValidator preCondition = null;
-            IRuleValidator newPreCondition = GetRule(ruleData);
+            IPrimitiveConditionValidator preCondition = null;
+            IPrimitiveConditionValidator newPreCondition = GetPrimitiveConditionValidator(ruleData);
 
             // Check if same preCondition already exists
             foreach (var rule in _preCons)
@@ -229,7 +236,7 @@ namespace TouchToolkit.Framework
             // Update preCondition to gesture mapping
             if (preCondition == null)
                 preCondition = newPreCondition;
-            var map = Tuple.Create<IRuleValidator, Gesture>(preCondition, gesture);
+            var map = Tuple.Create<IPrimitiveConditionValidator, Gesture>(preCondition, gesture);
             _preConGestureMap.Add(map);
 
             return preCondition;
@@ -268,14 +275,15 @@ namespace TouchToolkit.Framework
             return info;
         }
 
-        private static IRuleValidator GetRule(IRuleData ruleData)
+        private static IPrimitiveConditionValidator GetPrimitiveConditionValidator(IPrimitiveConditionData data)
         {
             // Get the rule validator class name using the ruleObject name
-            string className = ruleData.GetType().Name + "Validator";
+            string className = data.GetType().Name + "Validator";
 
 
-            IRuleValidator rule = GetInstanceByTypeName(className) as IRuleValidator;
-            rule.Init(ruleData);
+            IPrimitiveConditionValidator rule = GetInstanceByTypeName(className) as IPrimitiveConditionValidator;
+
+            rule.Init(data);
 
             bool matchFound = false;
             foreach (var r in _rules)
@@ -300,10 +308,10 @@ namespace TouchToolkit.Framework
             return rule;
         }
 
-        private static IRuleValidator GetInstanceByTypeName(string className)
+        private static IPrimitiveConditionValidator GetInstanceByTypeName(string className)
         {
             Type type = GetType(className);
-            return Activator.CreateInstance(type) as IRuleValidator;
+            return Activator.CreateInstance(type) as IPrimitiveConditionValidator;
         }
 
         private static Type GetType(string className)

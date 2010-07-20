@@ -1,6 +1,7 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
+﻿using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using TouchToolkit.GestureProcessor.Tests.Rules.Objects;
 
 namespace TouchToolkit.GestureProcessor.Tests
 {
@@ -185,7 +186,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Since the ruleData is null, the union should fail
-            IRuleData anotherRuleData = null;
+            IPrimitiveConditionData anotherRuleData = null;
 
             //Union should fail
             target.Union(anotherRuleData);
@@ -202,7 +203,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new OnSameObject()
+            IPrimitiveConditionData anotherRuleData = new OnSameObject()
             {
                 Condition = true
             };
@@ -229,7 +230,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new OnSameObject()
+            IPrimitiveConditionData anotherRuleData = new OnSameObject()
             {
                 Condition = false
             };
@@ -257,7 +258,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new OnSameObject()
+            IPrimitiveConditionData anotherRuleData = new OnSameObject()
             {
                 Condition = true
             };

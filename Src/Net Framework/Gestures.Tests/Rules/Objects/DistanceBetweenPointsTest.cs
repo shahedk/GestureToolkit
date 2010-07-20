@@ -1,8 +1,9 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using BehaviourTypes = TouchToolkit.GestureProcessor.Rules.Objects.DistanceBetweenPoints_Accessor.BehaviourTypes;
-using TouchToolkit.GestureProcessor.Rules.Objects;
+using BehaviourTypes = TouchToolkit.GestureProcessor.PrimitiveConditions.Objects.DistanceBetweenPoints_Accessor.BehaviourTypes;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
+
 
 namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
 {
@@ -94,7 +95,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Any random type - just not the type that we are testing
-            IRuleData anotherRuleData = new ClosedLoop();
+            IPrimitiveConditionData anotherRuleData = new ClosedLoop();
 
             // Since the ruleData are of different type, it should not be equal
             bool expected = false;
@@ -115,7 +116,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.Decreasing,
                 Max = -1,
@@ -141,7 +142,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.Increasing,
                 Max = -1,
@@ -173,7 +174,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.Decreasing,
                 Max = -1,
@@ -198,7 +199,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.Increasing,
                 Max = -1,
@@ -222,7 +223,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Since the ruleData is null, the union should fail
-            IRuleData anotherRuleData = null;
+            IPrimitiveConditionData anotherRuleData = null;
 
             //Union should fail
             target.Union(anotherRuleData);
@@ -241,7 +242,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.Increasing,
                 Max = 3,
@@ -275,7 +276,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.Decreasing,
                 Max = 4,
@@ -309,7 +310,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.UnChanged,
                 Max = 4,
@@ -343,7 +344,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.UnChanged,
                 Max = 4,
@@ -377,7 +378,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.UnChanged,
                 Max = 4,
@@ -411,7 +412,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.Increasing,
                 Max = 4,
@@ -445,7 +446,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Rules.Objects
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new DistanceBetweenPoints()
+            IPrimitiveConditionData anotherRuleData = new DistanceBetweenPoints()
             {
                 Behaviour = BehaviourTypes.Decreasing,
                 Max = 4,

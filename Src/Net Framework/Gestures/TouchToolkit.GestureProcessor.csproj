@@ -116,20 +116,20 @@
     <Compile Include="..\..\Silverlight\Gestures\Objects\LanguageTokens\ReturnToken.cs">
       <Link>Objects\LanguageTokens\ReturnToken.cs</Link>
     </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Objects\LanguageTokens\RuleToken.cs">
-      <Link>Objects\LanguageTokens\RuleToken.cs</Link>
+    <Compile Include="..\..\Silverlight\Gestures\Objects\LanguageTokens\ValidateToken.cs">
+      <Link>Objects\LanguageTokens\ValidateToken.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Objects\PrimitiveConditionCollection.cs">
+      <Link>Objects\PrimitiveConditionCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Objects\PrimitiveConditionResultCache.cs">
+      <Link>Objects\PrimitiveConditionResultCache.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\ReturnTypeInfo.cs">
       <Link>Objects\ReturnTypeInfo.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\ReturnTypeInfoCollection.cs">
       <Link>Objects\ReturnTypeInfoCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Objects\RuleCollection.cs">
-      <Link>Objects\RuleCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Objects\RuleResultCache.cs">
-      <Link>Objects\RuleResultCache.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\TouchFrame.cs">
       <Link>Objects\TouchFrame.cs</Link>
@@ -140,11 +140,107 @@
     <Compile Include="..\..\Silverlight\Gestures\Objects\TouchPoint2.cs">
       <Link>Objects\TouchPoint2.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Objects\ValidationBlock.cs">
+      <Link>Objects\ValidationBlock.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\ValidSetOfPoints.cs">
       <Link>Objects\ValidSetOfPoints.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\ValidSetOfPointsCollection.cs">
       <Link>Objects\ValidSetOfPointsCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\ClosedLoop.cs">
+      <Link>PrimitiveConditions\Objects\ClosedLoop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\DistanceBetweenPoints.cs">
+      <Link>PrimitiveConditions\Objects\DistanceBetweenPoints.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\EnclosedArea.cs">
+      <Link>PrimitiveConditions\Objects\EnclosedArea.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\IntersectTouchPath.cs">
+      <Link>PrimitiveConditions\Objects\IntersectTouchPath.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\IPrimitiveConditionData.cs">
+      <Link>PrimitiveConditions\Objects\IPrimitiveConditionData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\OnSameObject.cs">
+      <Link>PrimitiveConditions\Objects\OnSameObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchArea.cs">
+      <Link>PrimitiveConditions\Objects\TouchArea.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchDirection.cs">
+      <Link>PrimitiveConditions\Objects\TouchDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchLimit.cs">
+      <Link>PrimitiveConditions\Objects\TouchLimit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchPathBoundingBox.cs">
+      <Link>PrimitiveConditions\Objects\TouchPathBoundingBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchPathLength.cs">
+      <Link>PrimitiveConditions\Objects\TouchPathLength.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchShape.cs">
+      <Link>PrimitiveConditions\Objects\TouchShape.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchState.cs">
+      <Link>PrimitiveConditions\Objects\TouchState.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchStep.cs">
+      <Link>PrimitiveConditions\Objects\TouchStep.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Objects\TouchTime.cs">
+      <Link>PrimitiveConditions\Objects\TouchTime.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\ClosedLoopValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\ClosedLoopValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\DistanceBetweenPointsValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\DistanceBetweenPointsValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\EnclosedAreaValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\EnclosedAreaValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\IntersectTouchPathValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\IntersectTouchPathValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\IPrimitiveConditionValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\IPrimitiveConditionValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\OnSameObjectValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\OnSameObjectValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\RuleValidationHelper.cs">
+      <Link>PrimitiveConditions\RuleValidators\RuleValidationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchAreaValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchAreaValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchDirectionValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchDirectionValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchLimitValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchLimitValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchPathBoundingBoxValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchPathBoundingBoxValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchPathLengthValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchPathLengthValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchShapeValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchShapeValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchStateValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchStateValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchStepValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchStepValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\PrimitiveConditions\Validators\TouchTimeValidator.cs">
+      <Link>PrimitiveConditions\RuleValidators\TouchTimeValidator.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\BoundingBox.cs">
       <Link>ReturnTypes\BoundingBox.cs</Link>
@@ -202,99 +298,6 @@
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\TouchPointsCalculator.cs">
       <Link>ReturnTypes\TouchPointsCalculator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\ClosedLoop.cs">
-      <Link>Rules\Objects\ClosedLoop.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\DistanceBetweenPoints.cs">
-      <Link>Rules\Objects\DistanceBetweenPoints.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\EnclosedArea.cs">
-      <Link>Rules\Objects\EnclosedArea.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\IntersectTouchPath.cs">
-      <Link>Rules\Objects\IntersectTouchPath.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\IRuleData.cs">
-      <Link>Rules\Objects\IRuleData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\OnSameObject.cs">
-      <Link>Rules\Objects\OnSameObject.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchArea.cs">
-      <Link>Rules\Objects\TouchArea.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchDirection.cs">
-      <Link>Rules\Objects\TouchDirection.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchLimit.cs">
-      <Link>Rules\Objects\TouchLimit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchPathBoundingBox.cs">
-      <Link>Rules\Objects\TouchPathBoundingBox.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchPathLength.cs">
-      <Link>Rules\Objects\TouchPathLength.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchShape.cs">
-      <Link>Rules\Objects\TouchShape.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchState.cs">
-      <Link>Rules\Objects\TouchState.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchStep.cs">
-      <Link>Rules\Objects\TouchStep.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\Objects\TouchTime.cs">
-      <Link>Rules\Objects\TouchTime.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\ClosedLoopValidator.cs">
-      <Link>Rules\RuleValidators\ClosedLoopValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\DistanceBetweenPointsValidator.cs">
-      <Link>Rules\RuleValidators\DistanceBetweenPointsValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\EnclosedAreaValidator.cs">
-      <Link>Rules\RuleValidators\EnclosedAreaValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\IntersectTouchPathValidator.cs">
-      <Link>Rules\RuleValidators\IntersectTouchPathValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\IRuleValidator.cs">
-      <Link>Rules\RuleValidators\IRuleValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\OnSameObjectValidator.cs">
-      <Link>Rules\RuleValidators\OnSameObjectValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\RuleValidationHelper.cs">
-      <Link>Rules\RuleValidators\RuleValidationHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchAreaValidator.cs">
-      <Link>Rules\RuleValidators\TouchAreaValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchDirectionValidator.cs">
-      <Link>Rules\RuleValidators\TouchDirectionValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchLimitValidator.cs">
-      <Link>Rules\RuleValidators\TouchLimitValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchPathBoundingBoxValidator.cs">
-      <Link>Rules\RuleValidators\TouchPathBoundingBoxValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchPathLengthValidator.cs">
-      <Link>Rules\RuleValidators\TouchPathLengthValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchShapeValidator.cs">
-      <Link>Rules\RuleValidators\TouchShapeValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchStateValidator.cs">
-      <Link>Rules\RuleValidators\TouchStateValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchStepValidator.cs">
-      <Link>Rules\RuleValidators\TouchStepValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\Rules\RuleValidators\TouchTimeValidator.cs">
-      <Link>Rules\RuleValidators\TouchTimeValidator.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Utility\Combinations\Combinations.cs">
       <Link>Utility\Combinations\Combinations.cs</Link>

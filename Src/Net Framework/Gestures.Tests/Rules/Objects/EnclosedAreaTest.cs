@@ -1,6 +1,7 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
+﻿using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+
 
 namespace TouchToolkit.GestureProcessor.Tests
 {
@@ -77,7 +78,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new EnclosedArea()
+            IPrimitiveConditionData anotherRuleData = new EnclosedArea()
             {
                 Max = 5,
                 Min = 1
@@ -110,7 +111,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new EnclosedArea()
+            IPrimitiveConditionData anotherRuleData = new EnclosedArea()
             {
                 Max = 5,
                 Min = 1
@@ -142,7 +143,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new EnclosedArea()
+            IPrimitiveConditionData anotherRuleData = new EnclosedArea()
             {
                 Max = 2,
                 Min = 1
@@ -175,7 +176,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Since the ruleData is null, the union should fail
-            IRuleData anotherRuleData = null;
+            IPrimitiveConditionData anotherRuleData = null;
 
             //Union should fail
             target.Union(anotherRuleData);
