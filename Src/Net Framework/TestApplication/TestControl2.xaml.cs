@@ -16,6 +16,7 @@ using TouchToolkit.Framework;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.GestureProcessor.Gesture_Definitions;
 using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
+using System.Reflection;
 
 namespace TestApplication
 {
@@ -35,7 +36,7 @@ namespace TestApplication
 
         void TestControl_Loaded(object sender, RoutedEventArgs e)
         {
-            GestureFramework.Initialize(provider, LayoutRoot);
+            GestureFramework.Initialize(provider, LayoutRoot, Assembly.GetExecutingAssembly());
             GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
             GestureFramework.AddGesturFeedback(Gestures.Lasso, typeof(HighlightSelectedArea));
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));

@@ -32,16 +32,12 @@ namespace TestApplication
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
         }
 
-        #region updatedCode
-
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Initialize Gesture Framework
             var provider = new Windows7TouchInputProvider();
 
-            LayoutRoot.Children.Add(new TestControl2(provider));
+            LayoutRoot.Children.Add(new TestControl(provider));
         }
-
-        #endregion
     }
 }
