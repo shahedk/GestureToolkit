@@ -7,6 +7,7 @@ using TouchToolkit.Framework.TouchInputProviders;
 using TouchToolkit.Framework.Storage;
 using TouchToolkit.Framework.Components;
 using TouchToolkit.Framework.Exceptions;
+using System.Reflection;
 
 namespace TouchToolkit.Framework
 {
@@ -55,7 +56,7 @@ namespace TouchToolkit.Framework
 
             _recorder = new TouchInputRecorder();
 
-            GestureFramework.Initialize(_touchProvider, _layoutRoot);
+            GestureFramework.Initialize(_touchProvider, _layoutRoot, Assembly.GetExecutingAssembly());
 
             _isInitialized = true;
         }
