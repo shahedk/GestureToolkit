@@ -8,7 +8,7 @@ using TouchToolkit.Framework.Exceptions;
 using TouchToolkit.Framework.Utility;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using System.Windows.Controls;
-using TouchToolkit.GestureProcessor.Rules.RuleValidators;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Validators;
 using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
 using System.Windows.Media;
 using System.Diagnostics;
@@ -90,7 +90,7 @@ namespace TouchToolkit.Framework.GestureEvents
             TouchInputManager.ActiveTouchProvider.SingleTouchChanged -= ActiveTouchProvider_SingleTouchChanged;
         }
 
-        
+
 
         const int CommonBehaviourInterval = 3;
         private void ActiveHardware_FrameChanged(object sender, FrameInfo frameInfo)
@@ -139,18 +139,22 @@ namespace TouchToolkit.Framework.GestureEvents
 
         private ValidSetOfPointsCollection ValidateGesture(Gesture gesture, ValidSetOfTouchPoints availableTouchPoints)
         {
-            // Validate pre-conditions
             // TODO: Need to sort by precedence order (when we will implement precedence option)
-            ValidSetOfPointsCollection validSets = gesture.PreConditions.Validate(availableTouchPoints);
+
+            // TODO: If user requests the gesture for specific UI element, 
+            // check which valid set satisfies that 
+            
+
+            ValidSetOfPointsCollection validSets = new ValidSetOfPointsCollection();
+            validSets.Add(availableTouchPoints);
+
+            foreach (var validationBlock in gesture.ValidationBlocks)
+            {
+                validSets = validationBlock.PrimitiveConditions.Validate(validSets);
+            }
 
             if (validSets.Count > 0)
             {
-                // Validate gesture rules
-                validSets = gesture.Rules.Validate(validSets);
-
-                // TODO: If user requests the gesture for specific UI element, 
-                // check which valid set satisfies that 
-
                 // Building return objects for each valid sets
                 foreach (var validSetOfPoint in validSets)
                 {

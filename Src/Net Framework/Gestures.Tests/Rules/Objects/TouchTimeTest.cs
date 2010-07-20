@@ -1,6 +1,8 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
+
 
 namespace TouchToolkit.GestureProcessor.Tests
 {
@@ -227,7 +229,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             TouchTime target = new TouchTime();
 
             // Since the ruleData is null, the union should fail
-            IRuleData anotherRuleData = null;
+            IPrimitiveConditionData anotherRuleData = null;
 
             //Union should fail
             target.Union(anotherRuleData);
@@ -243,7 +245,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchTime()
+            IPrimitiveConditionData anotherRuleData = new TouchTime()
             {
                 Value = 5
             };
@@ -269,7 +271,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchTime()
+            IPrimitiveConditionData anotherRuleData = new TouchTime()
             {
                 Unit = "msec"
             };
@@ -292,7 +294,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             TouchTime target = new TouchTime();
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchTime()
+            IPrimitiveConditionData anotherRuleData = new TouchTime()
             {
                 Value = 3,
                 Unit = "sec"
@@ -324,7 +326,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchTime();
+            IPrimitiveConditionData anotherRuleData = new TouchTime();
 
             //Union the 2 rules
             target.Union(anotherRuleData);
@@ -351,7 +353,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchTime()
+            IPrimitiveConditionData anotherRuleData = new TouchTime()
             {
                 Value = 5000,
                 Unit = "msec"
@@ -382,7 +384,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchTime()
+            IPrimitiveConditionData anotherRuleData = new TouchTime()
             {
                 Value = 3,
                 Unit = "secs"
@@ -413,7 +415,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchTime()
+            IPrimitiveConditionData anotherRuleData = new TouchTime()
             {
                 Value = 3,
                 Unit = "msec"
@@ -444,7 +446,7 @@ namespace TouchToolkit.GestureProcessor.Tests
             };
 
             // Another instance of same type of ruleData
-            IRuleData anotherRuleData = new TouchTime()
+            IPrimitiveConditionData anotherRuleData = new TouchTime()
             {
                 Value = 3,
                 Unit = "sec"

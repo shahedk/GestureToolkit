@@ -1,6 +1,7 @@
-﻿using TouchToolkit.GestureProcessor.Rules.Objects;
+﻿using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+
 
 namespace TouchToolkit.GestureProcessor.Tests
 {
@@ -101,7 +102,7 @@ namespace TouchToolkit.GestureProcessor.Tests
         public void ClosedLoop_Union_null_throws_exception()
         {
             ClosedLoop target = new ClosedLoop();
-            IRuleData value = null;
+            IPrimitiveConditionData value = null;
             target.Union(value);
         }
         [TestMethod()]
