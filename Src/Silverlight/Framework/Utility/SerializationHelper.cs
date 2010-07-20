@@ -17,20 +17,39 @@ using System.Diagnostics.Contracts;
 using TouchToolkit.GestureProcessor.Objects.LanguageTokens;
 using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
+using System.Reflection;
+using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 
 namespace TouchToolkit.Framework.Utility
 {
     public static class SerializationHelper
     {
-        private static DataContractJsonSerializer _serializer = new DataContractJsonSerializer(typeof(List<GestureToken>), GetAllRuleDataTypes());
+        private static DataContractJsonSerializer _serializer = new DataContractJsonSerializer(typeof(List<GestureToken>), GetAllPrimitiveConditionDataTypes());
 
-        private static IEnumerable<Type> GetAllRuleDataTypes()
+        private static Type[] GetAllTypes()
         {
-            Gesture dummy = new Gesture();
-            Type[] allTypes = dummy.GetType().Assembly.GetTypes();
 
+            List<Type> types = new List<Type>();
+
+            // Get all type definitions from TouchToolkit.GestureProcessor assembly
+            types.AddRange(GestureFramework.GestureProcessorAssembly.GetTypes());
+
+            // Get all type definitions from users project assembly
+            types.AddRange(GestureFramework.HostAssembly.GetTypes());
+
+            return types.ToArray();
+        }
+
+        /// <summary>
+        /// Returns all primitive condition types defined in framework and also in user assembly
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<Type> GetAllPrimitiveConditionDataTypes()
+        {
             List<Type> requiredTypes = new List<Type>();
-            foreach (var type in allTypes)
+
+            Type[] types = GetAllTypes();
+            foreach (var type in types)
             {
                 Type[] interfaces = type.GetInterfaces();
                 foreach (var i in interfaces)
@@ -102,6 +121,27 @@ namespace TouchToolkit.Framework.Utility
             }
         }
 
+        /// <summary>
+        /// Serializes the gesture tokens into json string
+        /// </summary>
+        /// <param name="gestureTokens"></param>
+        /// <returns></returns>
+        public static string Serialize(List<GestureToken> gestureTokens)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                _serializer.WriteObject(ms, gestureTokens);
+
+                ms.Position = 0;
+                StreamReader sr = new StreamReader(ms);
+                string json = sr.ReadToEnd();
+                sr.Close();
+
+                return json;
+            }
+        }
+
+
         //------------------------
 
         /// <summary>
@@ -161,7 +201,6 @@ namespace TouchToolkit.Framework.Utility
                 _knownTypes.Add(typeof(List<TouchInfo>));
                 _knownTypes.Add(typeof(List<FrameInfo>));
                 _knownTypes.Add(typeof(Point));
-                //_knownTypes.Add(typeof(ArrayOfString));
             }
 
 

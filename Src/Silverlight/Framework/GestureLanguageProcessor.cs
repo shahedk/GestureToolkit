@@ -137,18 +137,24 @@ namespace TouchToolkit.Framework
         {
             List<GestureToken> tokens = new List<GestureToken>();
 
-            // Since we don't know which one of the user's dll(s) contains the custom gesture definitions, we will check all of them
-            // We assume that all dlls are in the same folder along with the framework dlls.
+            /* 
+             * TODO: Temporary work around
+             * 
+             * Currently, we can only load custom gestures from the main-app assembly
+             */ 
+            
+            /*load definitions from the framework assembly */
+            FrameInfo objectFromFramework = new FrameInfo();
+            List<GestureToken> preDefinedGestureTokens = ContentHelper.GetEmbeddedGestureDefinition(objectFromFramework.GetType().Assembly, "gestures.gx");
+            if (preDefinedGestureTokens != null && preDefinedGestureTokens.Count > 0)
+                tokens.AddRange(preDefinedGestureTokens);
 
-#if SILVERLIGHT
-            // TODO: Temporary work around - only load definitions from the framework assemblies
-            FrameInfo dummy = new FrameInfo();
-            List<GestureToken> gestureTokens = ContentHelper.GetEmbeddedGestureDefinition(dummy.GetType().Assembly, "gestures.gx");
-            if (gestureTokens != null && gestureTokens.Count > 0)
-            {
-                tokens.AddRange(gestureTokens);
-            }
-#else
+            /*load definitions from the executing assembly (user's app for custom gestures)*/
+            List<GestureToken> userDefinedGestureTokens = ContentHelper.GetEmbeddedGestureDefinition(Assembly.GetExecutingAssembly(), "gestures.gx");
+            if (userDefinedGestureTokens != null && userDefinedGestureTokens.Count > 0)
+                tokens.AddRange(userDefinedGestureTokens);
+
+            /*
             // Go through all assemblies (both framework and client) and load the gesture definitions
             DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory);
             var dlls = dirInfo.GetFiles("*.dll");
@@ -197,7 +203,7 @@ namespace TouchToolkit.Framework
                     tokens.AddRange(gestureTokens);
                 }
             }
-#endif
+*/
 
             return tokens;
         }

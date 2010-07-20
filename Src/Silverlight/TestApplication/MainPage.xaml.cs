@@ -17,6 +17,7 @@ using System.Threading;
 using System.Text;
 using TouchToolkit.Framework;
 using TouchToolkit.Framework.TouchInputProviders;
+using System.Reflection;
 
 namespace TestApplication
 {
@@ -34,7 +35,7 @@ namespace TestApplication
         {
             // Initialize Gesture Framework
             TouchInputProvider inputProvider = new SilverlightTouchInputProvider();
-            GestureFramework.Initialize(inputProvider, LayoutRoot);
+            GestureFramework.Initialize(inputProvider, LayoutRoot, Assembly.GetExecutingAssembly());
 
             // Add touch feedbacks
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
@@ -43,8 +44,6 @@ namespace TestApplication
             GestureFramework.AddGesturFeedback("lasso", typeof(HighlightSelectedArea));
 
 
-            // Show Recording Panel
-            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
 
             // Load UI
             LoadImages(false);

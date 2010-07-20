@@ -81,6 +81,7 @@
     <Compile Include="Gesture Definitions\Gestures.cs" />
     <Compile Include="Objects\Gesture.cs" />
     <Compile Include="Objects\LanguageTokens\ValidateToken.cs" />
+    <Compile Include="Objects\ValidationBlock.cs" />
     <Compile Include="ReturnTypes\BoundingBox.cs" />
     <Compile Include="ReturnTypes\BoundingBoxCalculator.cs" />
     <Compile Include="ReturnTypes\DistanceChanged.cs" />
