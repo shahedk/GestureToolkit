@@ -20,6 +20,7 @@ using TouchToolkit.Framework.Exceptions;
 using System.Diagnostics.Contracts;
 using TouchToolkit.Framework.TouchInputProviders;
 using TouchToolkit.Framework.UI;
+using System.Reflection;
 
 namespace TouchToolkit.Framework
 {
@@ -83,13 +84,36 @@ namespace TouchToolkit.Framework
             }
         }
 
+        private static Assembly _gestureProcessor = null;
+        internal static Assembly GestureProcessorAssembly
+        {
+            get
+            {
+                if (_gestureProcessor == null)
+                    _gestureProcessor = (new BubblesPath()).GetType().Assembly;
+
+                return _gestureProcessor;
+            }
+        }
+
+    
+
+        private static Assembly _host;
+        internal static Assembly HostAssembly
+        {
+            get { return _host; }
+        }
+
+
         /// <summary>
         /// Initializes necessary components in the framework (i.e. Rule validators, Touch input listeners, Gesture language processors, etc.)
         /// </summary>
         /// <param name="listenerType"></param>
         /// <param name="layoutRoot"></param>
-        public static void Initialize(TouchInputProvider inputProvider, Panel layoutRoot)
+        public static void Initialize(TouchInputProvider inputProvider, Panel layoutRoot, Assembly host)
         {
+            _host = host;
+
             Contract.Requires(inputProvider != null, "You must specify the touch input provider that framework will use to get the raw touch data.");
             Contract.Requires(layoutRoot != null, "You must provide the panel where you want the framework to render UI (i.e. Touch/Gesture effects)");
             Contract.Requires(layoutRoot is Canvas, "Currently, the framework only supports \"Canvas\" as layout root");

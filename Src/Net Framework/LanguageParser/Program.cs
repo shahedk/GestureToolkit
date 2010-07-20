@@ -13,6 +13,7 @@ using System.Threading;
 using System.Reflection;
 using TouchToolkit.Framework;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
+using TouchToolkit.Framework.Utility;
 
 
 namespace LanguageParser
@@ -101,7 +102,7 @@ namespace LanguageParser
                 //ProjectOutput = @"../../../../Net Framework/TestApplication/Bin/Debug/";
 
                 //ProjectDir = @"../../../../Silverlight/Gestures/";
-                ProjectDir = @"R:\Projects\TouchToolkit - gesture language\Src\Net Framework\LanguageParser.TestApp\";
+                ProjectDir = @"D:\Personal\Projects\TouchToolkit Trunk merge with gestures\Src\Net Framework\LanguageParser.TestApp\";
                 OutDir = @"bin\Debug\";
 
                 CompiledGestureDefPath = ProjectDir + @"bin/gestures.gx";
@@ -147,12 +148,12 @@ namespace LanguageParser
 
                 // Build the dictionary with known types: all rule & return types
                 WriteMessage("Building list of rule types...");
-                IEnumerable<Type> ruleTypes = GetAllRuleDataTypes();
+                IEnumerable<Type> premitiveConditionTypes = SerializationHelper.GetAllPrimitiveConditionDataTypes();
 
                 var map = new Dictionary<Identifier, Type>();
 
                 // Adding all types that implements 'IRuleData'
-                foreach (var type in ruleTypes)
+                foreach (var type in premitiveConditionTypes)
                 {
                     map.Add(type.Name, type);
                 }
@@ -248,7 +249,7 @@ namespace LanguageParser
             foreach (var productionInfo in parser.ProductionTable)
             {
                 // Get the rule name from production table
-                if (productionInfo.Description.StartsWith("Rule ="))
+                if (productionInfo.Description.StartsWith("PrimitiveCondition ="))
                 {
                     // Remove the prefix "rule =" from the description
                     string ruleName = productionInfo.Description.Substring(6).Trim();
@@ -260,54 +261,9 @@ namespace LanguageParser
             return ruleNames;
         }
 
-        private static IEnumerable<Type> GetAllRuleDataTypes()
-        {
-            List<Type> requiredTypes = new List<Type>();
 
-            Type[] types = GetAllTypes();
-            foreach (var type in types)
-            {
-                Type[] interfaces = type.GetInterfaces();
-                foreach (var i in interfaces)
-                {
-                    if (i.IsAssignableFrom(typeof(IPrimitiveConditionData)))
-                        requiredTypes.Add(type);
-                }
-            }
 
-            return requiredTypes;
-        }
 
-        private static Type[] GetAllTypes()
-        {
-
-            List<Type> types = new List<Type>();
-            DirectoryInfo dirInfo = new DirectoryInfo(ProjectDir + OutDir);
-
-            // Scan all user defined dlls
-            if (dirInfo.Exists)
-            {
-                FileInfo[] assemblyFiles = dirInfo.GetFiles("*.dll");
-                foreach (var assemblyFile in assemblyFiles)
-                {
-                    string assName = assemblyFile.Name.Replace(".dll", string.Empty);
-                    if (AssembliesToSkip.Contains(assName))
-                        continue;
-
-                    Assembly assembly = Assembly.LoadFile(assemblyFile.FullName);
-                    types.AddRange(assembly.GetTypes());
-                }
-            }
-
-            // Scan framework dlls
-            Assembly framework = typeof(GestureFramework).Assembly;
-            types.AddRange(framework.GetTypes());
-
-            Assembly gestureProcessor = typeof(IPrimitiveConditionData).Assembly;
-            types.AddRange(gestureProcessor.GetTypes());
-
-            return types.ToArray();
-        }
         #endregion
 
         #region Update resources for executables
@@ -320,20 +276,9 @@ namespace LanguageParser
 
         private static void UpdateGestureDefFile(List<GestureToken> gestures)
         {
-            IEnumerable<Type> knownTypes = GetAllRuleDataTypes();
+            string jsonContent = SerializationHelper.Serialize(gestures);
 
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<GestureToken>), knownTypes);
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                serializer.WriteObject(ms, gestures);
-
-                ms.Position = 0;
-                StreamReader sr = new StreamReader(ms);
-                string json = sr.ReadToEnd();
-
-                File.WriteAllText(CompiledGestureDefPath, json);
-            }
+            File.WriteAllText(CompiledGestureDefPath, jsonContent);
         }
         #endregion
     }
