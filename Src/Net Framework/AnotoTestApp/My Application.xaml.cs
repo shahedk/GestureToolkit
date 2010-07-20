@@ -18,6 +18,7 @@ using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
 using TouchToolkit.GestureProcessor.Gesture_Definitions;
 using System.Windows.Threading;
+using System.Reflection;
 
 namespace AnotoTestApp
 {
@@ -36,7 +37,7 @@ namespace AnotoTestApp
         {
             InitializeComponent();
 
-            GestureFramework.Initialize(provider, LayoutRoot);
+            GestureFramework.Initialize(provider, LayoutRoot, Assembly.GetExecutingAssembly());
             this.Loaded += new RoutedEventHandler(My_Application_Loaded);
         }
 
