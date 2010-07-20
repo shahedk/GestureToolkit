@@ -24,7 +24,7 @@
     <delete dir="TestResults"/>
     <mkdir dir="TestResults"/>
     <exec
-        program="C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\mstest.exe">
+        program="C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\MSTest.exe">
         <arg value='/testmetadata:"${build.dir}/Src/Solution files/WPF 4.0 Application.vsmdi"' /> 
         <arg value="/resultsfile:TestResults\testResults.trx" />
     </exec>
