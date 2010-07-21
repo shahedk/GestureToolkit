@@ -89,7 +89,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
             return newTouchPoint;
         }
 
-        public TouchPoint2 UpdateActiveTouchPoint(TouchInfo info)
+        public TouchPoint2 UpdateActiveTouchPoint(TouchInfo info, UIElement source = null)
         {
             TouchPoint2 tPoint = null;
 
@@ -101,7 +101,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
             }
             else
             {
-                tPoint = AddNewTouchPoint(info, null);
+                tPoint = AddNewTouchPoint(info, source);
             }
 
             // Touches that are going to be inactive in next frame
@@ -118,7 +118,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
                 TouchStates.Add(point.ActionType);
         }
 
-        private void RemoveInactiveTouchPoints()
+        protected void RemoveInactiveTouchPoints()
         {
             // Removing inactive touch points
             foreach (int touchId in inactiveTouchPoints)
