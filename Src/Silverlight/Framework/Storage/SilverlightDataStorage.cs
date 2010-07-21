@@ -128,7 +128,10 @@ namespace TouchToolkit.Framework.Storage
             }
             else
             {
-                callback(_localCache.ProjectDetails);
+                if (callback != null)
+                {
+                    callback(_localCache.ProjectDetails);
+                }
             }
         }
         #endregion
