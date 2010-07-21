@@ -203,22 +203,32 @@ namespace TouchToolkit.Framework.Utility
             if (e1.MoveNext())
                 uiElement = e1.Current;
 #else
-
-            if (GestureFramework.LayoutRoot.Parent == null)
+            Action action = delegate()
             {
-                //TODO: Its a fake UI created by the automated UnitTest. The VisualTreeHelper won't work in this case, so find an alternet way
+                if (GestureFramework.LayoutRoot.Parent == null)
+                {
+                    //TODO: Its a fake UI created by the automated UnitTest. The VisualTreeHelper won't work in this case, so find an alternet way
 
-                //Temporary workaround - point to root canvas
-                uiElement = GestureFramework.LayoutRoot;
+                    //Temporary workaround - point to root canvas
+                    uiElement = GestureFramework.LayoutRoot;
+                }
+                else
+                {
+                    var hitTestResult = VisualTreeHelper.HitTest(GestureFramework.LayoutRoot, point);
+
+                    if (hitTestResult == null)
+                        uiElement = GestureFramework.LayoutRoot;
+                    else
+                        uiElement = hitTestResult.VisualHit as UIElement;
+                }
+            };
+            if (!GestureFramework.LayoutRoot.Dispatcher.CheckAccess())
+            {
+                GestureFramework.LayoutRoot.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Send, action);
             }
             else
             {
-                var hitTestResult = VisualTreeHelper.HitTest(GestureFramework.LayoutRoot, point);
-
-                if (hitTestResult == null)
-                    uiElement = GestureFramework.LayoutRoot;
-                else
-                    uiElement = hitTestResult.VisualHit as UIElement;
+                action();
             }
 #endif
             self.Source = uiElement;

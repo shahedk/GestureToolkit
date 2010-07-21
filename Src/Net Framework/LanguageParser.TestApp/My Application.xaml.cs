@@ -17,6 +17,7 @@ using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
 using TouchToolkit.GestureProcessor.Gesture_Definitions;
+using System.Reflection;
 
 namespace LanguageParser.TestApp
 {
@@ -33,7 +34,7 @@ namespace LanguageParser.TestApp
         {
             InitializeComponent();
 
-            GestureFramework.Initialize(provider, LayoutRoot);
+            GestureFramework.Initialize(provider, LayoutRoot, Assembly.GetExecutingAssembly());
 
             this.Loaded += new RoutedEventHandler(My_Application_Loaded);
         }

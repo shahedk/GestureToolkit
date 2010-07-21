@@ -2,17 +2,19 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Framework.TouchInputProviders;
-using System.Windows.Controls;
-using System.Windows.Media;
-using mil.AnotoPen;
-using mil.conoto;
-using TouchToolkit.GestureProcessor.Objects;
-using TouchToolkit.Framework.Utility;
 using System.Threading;
 using System.Windows.Threading;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Linq;
+using System.Text;
+
+using mil.AnotoPen;
+using mil.conoto;
+
+using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.Utility;
+
 
 namespace TouchToolkit.Framework.TouchInputProviders
 {
@@ -27,16 +29,11 @@ namespace TouchToolkit.Framework.TouchInputProviders
         private AnotoStreamingServer anotoServer;
         private static ConotoElementManager manager;
         private static ConotoConvert conoto;
-        private UIElement source;
 
-        private Dictionary<int, TouchInfo> _activeTouchInfos = new Dictionary<int, TouchInfo>();
-        private Dictionary<int, TouchPoint2> _activeTouchPoints = new Dictionary<int, TouchPoint2>();
-        private List<int> _inactiveTouchPoints = new List<int>();
         long lastTimeStamp = 0;
 
-        public AnotoInputProvider(Panel LayoutRoot)
+        public AnotoInputProvider()
         {
-            source = LayoutRoot;
         }
         public override void Init()
         {
@@ -81,7 +78,7 @@ namespace TouchToolkit.Framework.TouchInputProviders
             double x, y; // converted x/y coordinates
             TouchInfo info = new TouchInfo();
             TouchAction2 actionType = TouchAction2.Move;
-            
+
             // handle the type of event we got and call other handler functions
             switch (args.Type)
             {
@@ -104,79 +101,20 @@ namespace TouchToolkit.Framework.TouchInputProviders
             info.Position = new Point(x, y);
             info.TouchDeviceId = (int)args.PenId;
 
-            if (_inactiveTouchPoints.Count > 0)
+            RemoveInactiveTouchPoints();
+            UpdateActiveTouchPoint(info);
+            foreach (var point in ActiveTouchPoints.Values)
             {
-                foreach (var key in _inactiveTouchPoints)
+                if (actionType == TouchAction2.Down)
                 {
-                    if (_activeTouchPoints.ContainsKey(key))
-                    {
-                        _activeTouchPoints.Remove(key);
-                    }
-                    if (_activeTouchInfos.ContainsKey(key))
-                    {
-                        _activeTouchInfos.Remove(key);
-                    }
+                    point.UpdateSource();
                 }
-                _inactiveTouchPoints.Clear();
-            }
-
-            //If there's a Down action detected, add it to the active touch points
-            if (actionType == TouchAction2.Down)
-            {
-                if (!_activeTouchPoints.ContainsKey(info.TouchDeviceId))
-                {
-                    _activeTouchPoints.Add(info.TouchDeviceId, new TouchPoint2(info, source));
-                }
-                else
-                {
-                    _activeTouchPoints[info.TouchDeviceId] = new TouchPoint2(info, source);
-                }
-            }
-            else if (actionType == TouchAction2.Up)
-            {
-                if (_activeTouchPoints.ContainsKey(info.TouchDeviceId))
-                {
-                    _inactiveTouchPoints.Add(info.TouchDeviceId);
-                    _activeTouchPoints[info.TouchDeviceId].Update(info);
-                }
-            }
-            else
-            {
-                if (_activeTouchPoints.ContainsKey(info.TouchDeviceId))
-                {
-                    _activeTouchPoints[info.TouchDeviceId].Update(info);
-                }
-            }
-
-            //Update the source to be the HitTest result
-            foreach (var point in _activeTouchPoints)
-            {
-                if (point.Value.Action == TouchAction.Down)
-                {
-                    ThreadStart start = delegate()
-                    {
-                        GestureFramework.LayoutRoot.Dispatcher.Invoke(DispatcherPriority.Render,
-                                          new Action<Point>(PerformHitTest), point.Value.Position);
-                    };
-                    start.Invoke();
-                    point.Value.Source = source;
-                }
-            }
-
-            //Add info to activetouchinfos
-            if (_activeTouchInfos.ContainsKey(info.TouchDeviceId))
-            {
-                _activeTouchInfos[info.TouchDeviceId] = info;
-            }
-            else
-            {
-                _activeTouchInfos.Add(info.TouchDeviceId, info);
             }
 
             //Call the delegates
             if (SingleTouchChanged != null)
             {
-                foreach (var point in _activeTouchPoints.Values)
+                foreach (var point in ActiveTouchPoints.Values)
                 {
                     SingleTouchChanged(this, new SingleTouchEventArgs(point));
                 }
@@ -184,41 +122,29 @@ namespace TouchToolkit.Framework.TouchInputProviders
 
             if (MultiTouchChanged != null)
             {
-                MultiTouchChanged(this, new MultiTouchEventArgs(_activeTouchPoints.Values.ToList<TouchPoint2>()));
+                MultiTouchChanged(this, new MultiTouchEventArgs(ActiveTouchPoints.Values.ToList<TouchPoint2>()));
             }
 
             if (FrameChanged != null)
             {
                 FrameInfo finfo = new FrameInfo();
-                List<TouchInfo> infos = _activeTouchInfos.Values.ToList<TouchInfo>();
+                List<TouchPoint2> points = ActiveTouchPoints.Values.ToList<TouchPoint2>();
+                List<TouchInfo> infos = new List<TouchInfo>();
+                foreach (var point in points)
+                {
+                    TouchInfo inf = new TouchInfo();
+                    inf.ActionType = point.Action.ToTouchActions();
+                    inf.Position = point.Position;
+                    inf.TouchDeviceId = point.TouchDeviceId;
+                    infos.Add(inf);
+                }
+
                 finfo.Touches = infos;
                 finfo.TimeStamp = args.Timestamp;
-                finfo.WaitTime = (int) args.Timestamp - (int) lastTimeStamp;
+                finfo.WaitTime = (int)args.Timestamp - (int)lastTimeStamp;
                 FrameChanged(this, finfo);
             }
-            lastTimeStamp = (int) args.Timestamp;
-        }
-
-        private void PerformHitTest(Point point)
-        {
-            if (GestureFramework.LayoutRoot.Parent == null)
-            {
-                //TODO: Its a fake UI created by the automated UnitTest. The VisualTreeHelper won't work in this case, so find an alternet way
-
-                //Temporary workaround - point to root canvas
-                source = GestureFramework.LayoutRoot;
-            }
-            else
-            {
-                var hitTestResult = VisualTreeHelper.HitTest(GestureFramework.LayoutRoot, point);
-
-                if (hitTestResult == null)
-                    source = GestureFramework.LayoutRoot;
-                else
-                    source = hitTestResult.VisualHit as UIElement;
-                
-                return;
-            }
+            lastTimeStamp = (int)args.Timestamp;
         }
     }
 }

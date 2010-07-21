@@ -53,9 +53,13 @@ namespace TouchToolkit.Framework.TouchInputProviders
         public void addTuioCursor(TuioCursor c)
         {
             TouchInfo info = MakeInfo(c, TouchAction2.Down);
-            UIElement source = PerformHitTest(info.Position);
+            //UIElement source = PerformHitTest(info.Position);
             RemoveInactiveTouchPoints();
-            UpdateActiveTouchPoint(info, source);
+            UpdateActiveTouchPoint(info);
+            foreach (var p in ActiveTouchPoints.Values)
+            {
+                p.UpdateSource();
+            }
             CallDelegates(c);
         }
 

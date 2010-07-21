@@ -139,7 +139,10 @@ namespace TouchToolkit.Framework.Storage
             }
             else
             {
-                callback(gestureName);
+                if (callback != null)
+                {
+                    callback(gestureName);
+                }
             }
         }
 
@@ -186,7 +189,10 @@ namespace TouchToolkit.Framework.Storage
             }
             else
             {
-                callback(_localCache.ProjectDetails);
+                if (callback != null)
+                {
+                    callback(_localCache.ProjectDetails);
+                }
             }
         }
         #endregion
