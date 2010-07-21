@@ -82,6 +82,8 @@ namespace TouchToolkit.Framework.Tests
         public void PositionChanged_Test()
         {
             PositionChangedCalculator target = new PositionChangedCalculator();
+            int expectedY = 0;
+            int expectedX = 0;
 
             //Setup preamble for 2 touchpoints to be used in calculate
 
@@ -100,9 +102,6 @@ namespace TouchToolkit.Framework.Tests
             test.Add(new TouchPoint2(ti2, new UIElement()));
 
             PositionChanged actualP = target.Calculate(test) as PositionChanged;
-
-            int expectedY = 1;
-            int expectedX = -1;
 
             //Assert that both X and Y of position are correct after calculation
             Assert.AreEqual(expectedX, actualP.X);
