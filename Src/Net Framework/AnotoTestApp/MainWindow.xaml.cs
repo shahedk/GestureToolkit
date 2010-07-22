@@ -33,7 +33,7 @@ namespace AnotoTestApp
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var provider = new AnotoInputProvider(LayoutRoot);
+            var provider = new AnotoInputProvider();
             //var provider = new Windows7TouchInputProvider();
 
             var app = new My_Application(provider);
