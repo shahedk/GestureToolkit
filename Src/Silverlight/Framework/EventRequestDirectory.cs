@@ -102,6 +102,28 @@ namespace TouchToolkit.Framework
                 }
             }
 
+            if (GestureFramework.BubbleUpUnhandledEvents)
+            {
+                if (uniqueRequests.Count() == 0)
+                {
+                    List<UIElement> parents = new List<UIElement>();
+
+                    // Recursively go up (bubbleup) to see if any of the parents like to receive this event
+                    foreach (var uiElement in uiElements)
+                    {
+                        var parent = VisualTreeHelper.GetParent(uiElement);
+                        if (parent != GestureFramework.LayoutRoot)
+                            parents.Add(parent as UIElement);
+                    }
+
+                    if (parents.Count > 0)
+                    {
+                        return GetRequests(gestureName, parents);
+                    }
+                }
+            }
+
+
             return uniqueRequests;
         }
 
@@ -111,6 +133,19 @@ namespace TouchToolkit.Framework
                            where r.Gesture.Name == gestureName && r.UIElement == uiElement
                            select r;
 
+            if (GestureFramework.BubbleUpUnhandledEvents)
+            {
+                if (requests.Count() == 0)
+                {
+                    // Recursively go up (bubbleup) to see if any of the parents like to receive this event
+                    var parent = VisualTreeHelper.GetParent(uiElement);
+                    if (parent != GestureFramework.LayoutRoot)
+                    {
+                        return GetRequests(gestureName, parent as UIElement);
+                    }
+                }
+            }
+
             return requests.ToList<EventRequest>();
         }
 
@@ -119,6 +154,19 @@ namespace TouchToolkit.Framework
             var requests = from r in eventRequests
                            where r.UIElement == uiElement
                            select r;
+
+            if (GestureFramework.BubbleUpUnhandledEvents)
+            {
+                if (requests.Count() == 0)
+                {
+                    // Recursively go up (bubbleup) to see if any of the parents like to receive this event
+                    var parent = VisualTreeHelper.GetParent(uiElement);
+                    if (parent != GestureFramework.LayoutRoot)
+                    {
+                        return GetRequests(parent as UIElement);
+                    }
+                }
+            }
 
             return requests.ToList<EventRequest>();
         }
@@ -139,7 +187,7 @@ namespace TouchToolkit.Framework
 
         public static List<Gesture> GetGestures(List<UIElement> uiElements)
         {
-            var list = uiElements.Join(eventRequests, u => u, e => e.UIElement, (u, e) => e.Gesture ).ToList<Gesture>();
+            var list = uiElements.Join(eventRequests, u => u, e => e.UIElement, (u, e) => e.Gesture).ToList<Gesture>();
 
             return list;
         }
