@@ -38,7 +38,15 @@ namespace TouchToolkit.Framework.GestureEvents
 
         #endregion
 
-        #region public methods
+        #region public methods & properties
+
+
+        bool _bubbleUpUnhandledEvents = false;
+        public bool BubbleUpUnhandledEvents
+        {
+            get { return _bubbleUpUnhandledEvents; }
+            set { _bubbleUpUnhandledEvents = value; }
+        }
 
         /// <summary>
         /// Adds gesture event to specified UI element

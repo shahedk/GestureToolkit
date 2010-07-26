@@ -47,14 +47,6 @@ namespace TouchToolkit.Framework
             Contract.Invariant(LayoutRoot != null, "LayoutRoot cannot be set to null as different modules can interact with the UI from different thread.");
         }
 
-        static bool _bubbleUpUnhandledEvents = false;
-        public static bool BubbleUpUnhandledEvents
-        {
-            get { return _bubbleUpUnhandledEvents; }
-            set { _bubbleUpUnhandledEvents = value; }
-        }
-
-    
         public static Canvas LayoutRoot
         {
             get;

@@ -102,7 +102,7 @@ namespace TouchToolkit.Framework
                 }
             }
 
-            if (GestureFramework.BubbleUpUnhandledEvents)
+            if (GestureFramework.EventManager.BubbleUpUnhandledEvents)
             {
                 if (uniqueRequests.Count() == 0)
                 {
@@ -133,7 +133,7 @@ namespace TouchToolkit.Framework
                            where r.Gesture.Name == gestureName && r.UIElement == uiElement
                            select r;
 
-            if (GestureFramework.BubbleUpUnhandledEvents)
+            if (GestureFramework.EventManager.BubbleUpUnhandledEvents)
             {
                 if (requests.Count() == 0)
                 {
@@ -155,7 +155,7 @@ namespace TouchToolkit.Framework
                            where r.UIElement == uiElement
                            select r;
 
-            if (GestureFramework.BubbleUpUnhandledEvents)
+            if (GestureFramework.EventManager.BubbleUpUnhandledEvents)
             {
                 if (requests.Count() == 0)
                 {
