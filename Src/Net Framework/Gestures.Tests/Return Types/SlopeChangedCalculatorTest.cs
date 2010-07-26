@@ -119,7 +119,7 @@ namespace TouchToolkit.Framework.Tests
 
             double expectedSlope = 0.46;
             double expectedDelta = 0;
-
+            Console.Out.WriteLine(actualP.Delta);
             Assert.IsTrue(expectedDelta == actualP.Delta);
             Assert.IsTrue(expectedSlope == Math.Round(actualP.NewSlope, 2));
         }
