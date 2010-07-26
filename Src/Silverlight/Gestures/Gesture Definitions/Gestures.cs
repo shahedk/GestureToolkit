@@ -20,5 +20,7 @@ namespace TouchToolkit.GestureProcessor.Gesture_Definitions
         public const string Zoom = "Zoom";
         public const string Pinch = "Pinch";
         public const string Rotate = "Rotate";
+        public const string Left = "Left";
+        public const string Right = "Right";
     }
 }
