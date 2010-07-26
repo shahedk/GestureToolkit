@@ -200,6 +200,12 @@ namespace TouchToolkit.Framework.Utility
                 _knownTypes.Add(typeof(FrameInfo));
                 _knownTypes.Add(typeof(List<TouchInfo>));
                 _knownTypes.Add(typeof(List<FrameInfo>));
+                
+                // TODO: Fix cross platform serialization 
+                // NOTE: The 'Point' class is implemented differently in .NET Framework and Silverlight.
+                //       As as result, data recorded in Silverlight application can not be used in .NET App and vise versa
+                // To fix this: we need a generic Point class. Currently the X & Y property is serialized differently in 
+                // the two frameworks.
                 _knownTypes.Add(typeof(Point));
             }
 
