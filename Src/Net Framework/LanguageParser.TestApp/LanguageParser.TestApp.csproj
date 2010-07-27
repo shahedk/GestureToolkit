@@ -10,7 +10,7 @@
     <AppDesignerFolder>Framework</AppDesignerFolder>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LanguageParser.TestApp</RootNamespace>
-    <AssemblyName>Windows 7 Multi-touch1</AssemblyName>
+    <AssemblyName>LanguageParser.TestApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -98,6 +98,7 @@
     <EmbeddedResource Include="bin\rulenames.gx" />
     <None Include="app.config" />
     <None Include="Framework\GDL.mg" />
+    <None Include="Framework\LanguageParser.vshost.exe.manifest" />
     <None Include="Gesture Definitions\doubleTap.g" />
     <None Include="Gesture Definitions\drag.g" />
     <None Include="Gesture Definitions\lasso.g" />
@@ -115,12 +116,18 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Framework\LanguageParser.pdb" />
     <Content Include="Framework\LanguageParser.vshost.exe" />
     <Content Include="Framework\LanguageParser.exe" />
     <Content Include="Framework\MGraphXamlReader.dll" />
+    <Content Include="Framework\MGraphXamlReader.pdb" />
     <Content Include="Framework\Microsoft.M.dll" />
     <Content Include="Framework\Microsoft.Oslo.Internal.dll" />
     <Content Include="Framework\System.Dataflow.dll" />
+    <Content Include="Framework\TouchToolkit.Framework.dll" />
+    <Content Include="Framework\TouchToolkit.Framework.pdb" />
+    <Content Include="Framework\TouchToolkit.GestureProcessor.dll" />
+    <Content Include="Framework\TouchToolkit.GestureProcessor.pdb" />
     <Content Include="Framework\Xaml.dll" />
     <Resource Include="Images\Hydrangeas.jpg" />
     <Resource Include="Images\Jellyfish.jpg" />
@@ -138,6 +145,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
