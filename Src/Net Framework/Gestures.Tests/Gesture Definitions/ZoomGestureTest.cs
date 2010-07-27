@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows.Controls;
-using Framework;
 using TouchToolkit.GestureProcessor.Utility;
 using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
 using TouchToolkit.Framework;
+using TouchToolkit.GestureProcessor.Gesture_Definitions;
 
 namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
 {
@@ -78,7 +78,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
             bool gestureDetected = false;
             var threadHolder = new AutoResetEvent(false);
 
-            GestureTestFramework.Validate("Zoom", "TouchInteraction02",
+            GestureTestFramework.Validate(Gestures.Zoom, "TouchInteraction02",
 
                 // On successful gesture detection
                 (sender, e) =>

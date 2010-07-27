@@ -96,12 +96,13 @@ namespace TouchToolkit.Framework
             }
         }
 
-    
+
 
         private static Assembly _host;
-        internal static Assembly HostAssembly
+        public static Assembly HostAssembly
         {
             get { return _host; }
+            set { _host = value; }
         }
 
 

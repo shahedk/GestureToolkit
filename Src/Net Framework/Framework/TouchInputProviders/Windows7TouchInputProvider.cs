@@ -7,11 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TouchToolkit.Framework.Utility;
 using System.Windows;
-using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.Framework.TouchInputProviders;
 using TouchToolkit.Framework;
 
-namespace Framework.TouchInputProviders
+namespace TouchToolkit.Framework.TouchInputProviders
 {
     public class Windows7TouchInputProvider : TouchInputProvider
     {

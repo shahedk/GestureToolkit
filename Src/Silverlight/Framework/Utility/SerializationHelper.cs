@@ -28,14 +28,16 @@ namespace TouchToolkit.Framework.Utility
 
         private static Type[] GetAllTypes()
         {
-
             List<Type> types = new List<Type>();
 
             // Get all type definitions from TouchToolkit.GestureProcessor assembly
             types.AddRange(GestureFramework.GestureProcessorAssembly.GetTypes());
 
-            // Get all type definitions from users project assembly
-            types.AddRange(GestureFramework.HostAssembly.GetTypes());
+            if (GestureFramework.HostAssembly != null)
+            {
+                // Get all type definitions from users project assembly
+                types.AddRange(GestureFramework.HostAssembly.GetTypes());
+            }
 
             return types.ToArray();
         }
@@ -200,7 +202,7 @@ namespace TouchToolkit.Framework.Utility
                 _knownTypes.Add(typeof(FrameInfo));
                 _knownTypes.Add(typeof(List<TouchInfo>));
                 _knownTypes.Add(typeof(List<FrameInfo>));
-                
+
                 // TODO: Fix cross platform serialization 
                 // NOTE: The 'Point' class is implemented differently in .NET Framework and Silverlight.
                 //       As as result, data recorded in Silverlight application can not be used in .NET App and vise versa
