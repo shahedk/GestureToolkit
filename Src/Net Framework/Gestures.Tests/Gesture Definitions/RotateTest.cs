@@ -12,19 +12,9 @@ using TouchToolkit.GestureProcessor.Gesture_Definitions;
 
 namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
 {
-    /// <summary>
-    /// Summary description for ZoomGestureTest
-    /// </summary>
     [TestClass]
-    public class ZoomGestureTest
+    public class RotateTest
     {
-        public ZoomGestureTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -44,24 +34,32 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
         }
 
         #region Additional test attributes
+        // 
+        //You can use the following additional attributes as you write your tests:
         //
-        // You can use the following additional attributes as you write your tests:
+        //Use ClassInitialize to run code before running the first test in the class
+        //[ClassInitialize()]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //}
         //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
+        //Use ClassCleanup to run code after all tests in a class have run
+        //[ClassCleanup()]
+        //public static void MyClassCleanup()
+        //{
+        //}
         //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
+        //Use TestInitialize to run code before running each test
+        //[TestInitialize()]
+        //public void MyTestInitialize()
+        //{
+        //}
         //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
+        //Use TestCleanup to run code after each test has run
+        //[TestCleanup()]
+        //public void MyTestCleanup()
+        //{
+        //}
         //
         #endregion
 
@@ -71,14 +69,13 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
             GestureTestFramework.Init("DefaultTT", "WPF 4.0 Testing");
         }
 
-
         [TestMethod]
-        public void Zoom()
+        public void Rotate()
         {
             bool gestureDetected = false;
             var threadHolder = new AutoResetEvent(false);
 
-            GestureTestFramework.Validate("Zoom", "Zoom",
+            GestureTestFramework.Validate("Rotate", "Rotate",
 
                 // On successful gesture detection
                 (sender, e) =>
@@ -87,8 +84,12 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
 
                     if (e.Error == null)
                     {
-                        var distanceChanged = e.Values.Get<DistanceChanged>();
-                        Assert.IsNotNull(distanceChanged, "Failed to retrieve return value: distance-changed");
+                        var distanceChanged = e.Values.Get<SlopeChanged>();
+
+                        Assert.IsNotNull(distanceChanged, "Failed to retrieve return value: slope-changed");
+
+                        Assert.IsTrue(distanceChanged.Delta > 0, "Rotate gesture was detected, however the rotation between the touch points was not significant.");
+
                     }
                     else
                     {
@@ -105,7 +106,5 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
             threadHolder.WaitOne();
             Assert.IsTrue(gestureDetected, "Failed to detect the gesture!");
         }
-
-
     }
 }
