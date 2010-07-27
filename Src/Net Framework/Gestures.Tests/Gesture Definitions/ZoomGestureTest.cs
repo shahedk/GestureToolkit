@@ -68,7 +68,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
         [ClassInitialize()]
         public static void InitializeTest(TestContext testContext)
         {
-            GestureTestFramework.Init("TestAccount", "TestProject");
+            GestureTestFramework.Init("DefaultTT", "WPF 4.0 Testing");
         }
 
 
@@ -78,7 +78,7 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
             bool gestureDetected = false;
             var threadHolder = new AutoResetEvent(false);
 
-            GestureTestFramework.Validate(Gestures.Zoom, "TouchInteraction02",
+            GestureTestFramework.Validate("Zoom", "Zoom",
 
                 // On successful gesture detection
                 (sender, e) =>
