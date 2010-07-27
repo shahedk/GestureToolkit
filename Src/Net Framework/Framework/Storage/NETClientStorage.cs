@@ -7,6 +7,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Runtime.InteropServices;
 using System.Net.NetworkInformation;
+using System.Threading;
 
 namespace TouchToolkit.Framework.Storage
 {
@@ -18,7 +19,6 @@ namespace TouchToolkit.Framework.Storage
         private string _accountName;
 
         private bool _firstTime = true;
-        private bool _online = false;
 
         //Checks to see if the server is available
         private bool HasConnection(string hostName)
@@ -49,16 +49,7 @@ namespace TouchToolkit.Framework.Storage
 
         public NETClientStorage()
         {
-            if (HasConnection("http://g.shahed.me"))
-            {
-                _online = true;
-                _webStorage = new WebStorage();
-            }
-            else
-            {
-                _online = false;
-                _webStorage = null;
-            }
+            _webStorage = new WebStorage();
         }
         public string AccountName
         {
@@ -91,10 +82,7 @@ namespace TouchToolkit.Framework.Storage
         {
             if (!string.IsNullOrEmpty(AccountName))
             {
-                if (_online)
-                {
-                    _webStorage.Login(AccountName);
-                }
+                _webStorage.Login(AccountName);
                 return true;
             }
             else
@@ -104,26 +92,16 @@ namespace TouchToolkit.Framework.Storage
         public void Login(string accountName)
         {
             AccountName = accountName;
-            if (_online)
-            {
-                _webStorage.Login(accountName);
-            }
-            else
-            {
-                LoadFromFile(_filename);
-            }
+            _webStorage.Login(accountName);
             _firstTime = true;
         }
 
         public void Logout()
         {
             AccountName = string.Empty;
-            if (_online)
-            {
-                _webStorage.Logout();
-            }
+            _webStorage.Logout();
             SaveToFile(_filename);
-        
+
         }
 
         #region IDataStorage Members
@@ -133,23 +111,18 @@ namespace TouchToolkit.Framework.Storage
             _localCache.Add(projectName, gestureName, value);
             SaveToFile(_filename);
             //Save to permanent storage
-            if (_online)
-            {
-                _webStorage.SaveGesture(projectName, gestureName, value, callback);
-            }
-            else
-            {
-                if (callback != null)
-                {
-                    callback(gestureName);
-                }
-            }
+            _webStorage.SaveGesture(projectName, gestureName, value, callback);
         }
 
         public void GetGesture(string projectName, string gestureName, GetGestureCallback callback)
         {
             Exception e = null;
             string data = string.Empty;
+            if (_firstTime)
+            {
+                GetAllProjects(null);
+                Thread.Sleep(10000); //Wait for all projects to download from web
+            }
             if (_localCache.Contains(projectName, gestureName))
             {
                 data = _localCache.Get(projectName, gestureName);
@@ -169,22 +142,17 @@ namespace TouchToolkit.Framework.Storage
         {
             if (_firstTime)
             {
-                if (_online)
+                _webStorage.GetAllProjects((projectDetails, error) =>
                 {
-                    _webStorage.GetAllProjects((projectDetails, error) =>
+                    if (error == null)
                     {
-                        if (error == null)
+                        LoadDictionary(projectDetails);
+                        if (callback != null)
                         {
-                            LoadDictionary(projectDetails);
                             callback(projectDetails);
                         }
-                    });
-                }
-                else
-                {
-                    LoadFromFile(_filename);
-                    callback(_localCache.ProjectDetails);
-                }
+                    }
+                });
                 _firstTime = false;
             }
             else
