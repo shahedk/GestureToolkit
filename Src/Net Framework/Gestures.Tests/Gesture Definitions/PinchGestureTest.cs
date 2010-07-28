@@ -12,18 +12,16 @@ using TouchToolkit.GestureProcessor.Gesture_Definitions;
 
 namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
 {
+    
+    
     /// <summary>
-    /// Summary description for ZoomGestureTest
-    /// </summary>
-    [TestClass]
-    public class ZoomGestureTest
+    ///This is a test class for GesturesTest and is intended
+    ///to contain all GesturesTest Unit Tests
+    ///</summary>
+    [TestClass()]
+    public class PinchGestureTest
     {
-        public ZoomGestureTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
+
 
         private TestContext testContextInstance;
 
@@ -44,24 +42,32 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
         }
 
         #region Additional test attributes
+        // 
+        //You can use the following additional attributes as you write your tests:
         //
-        // You can use the following additional attributes as you write your tests:
+        //Use ClassInitialize to run code before running the first test in the class
+        //[ClassInitialize()]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //}
         //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
+        //Use ClassCleanup to run code after all tests in a class have run
+        //[ClassCleanup()]
+        //public static void MyClassCleanup()
+        //{
+        //}
         //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
+        //Use TestInitialize to run code before running each test
+        //[TestInitialize()]
+        //public void MyTestInitialize()
+        //{
+        //}
         //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
+        //Use TestCleanup to run code after each test has run
+        //[TestCleanup()]
+        //public void MyTestCleanup()
+        //{
+        //}
         //
         #endregion
 
@@ -73,12 +79,12 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
 
 
         [TestMethod]
-        public void Zoom()
+        public void Pinch()
         {
             bool gestureDetected = false;
             var threadHolder = new AutoResetEvent(false);
 
-            GestureTestFramework.Validate("Zoom", "Zoom",
+            GestureTestFramework.Validate("Pinch", "Pinch",
 
                 // On successful gesture detection
                 (sender, e) =>
@@ -89,6 +95,9 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
                     {
                         var distanceChanged = e.Values.Get<DistanceChanged>();
                         Assert.IsNotNull(distanceChanged, "Failed to retrieve return value: distance-changed");
+
+                        Assert.IsTrue(distanceChanged.Delta < 0, "The distance changed between touchpoints was not decreasing, and is thus the incorrect gesture.");
+
                     }
                     else
                     {
@@ -105,7 +114,5 @@ namespace TouchToolkit.GestureProcessor.Tests.Gesture_Definitions
             threadHolder.WaitOne();
             Assert.IsTrue(gestureDetected, "Failed to detect the gesture!");
         }
-
-
     }
 }
