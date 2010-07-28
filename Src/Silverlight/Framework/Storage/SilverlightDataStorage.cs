@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -84,11 +85,16 @@ namespace TouchToolkit.Framework.Storage
         #region IDataStorage Members
         public void SaveGesture(string projectName, string gestureName, string value, SaveGestureCallback callback)
         {
-            //Save to local cache
-            _localCache.Add(projectName, gestureName, value);
             //Save to permanent storage
+            _webStorage.SaveGesture(projectName, gestureName, value, (gesName, error) =>
+                {
+                    if (error == null)
+                    {
+                        _localCache.Add(projectName, gesName, value);
+                    }
+                    callback(gesName, error);
+                });
             
-            _webStorage.SaveGesture(projectName, gestureName, value, callback);
             SaveToFile(_filename);
         }
 
@@ -192,6 +198,39 @@ namespace TouchToolkit.Framework.Storage
             writer.Flush();
             writer.Close();
         }
+        private bool CheckIsolatedStorageAvaliableSpace(string data)
+        {
+            Int64 requiredSpace = data.Count() * 2;
+            Int64 fiveMB = 1024 * 1024 * 5;
+            bool isEnoughSpaceAvailable = false;
+
+            IsolatedStorageFile storage = null;
+            try
+            {
+                storage = IsolatedStorageFile.GetUserStoreForApplication();
+                if (storage.AvailableFreeSpace < requiredSpace)
+                {
+                    long newQuota = storage.Quota + fiveMB;
+                    isEnoughSpaceAvailable = storage.IncreaseQuotaTo(newQuota);
+
+                    if (!isEnoughSpaceAvailable)
+                    {
+                        throw new FrameworkException("Failed to save content in local cache due to space limitation!");
+                    }
+                }
+                else
+                {
+                    isEnoughSpaceAvailable = true;
+                }
+            }
+            catch
+            {
+                //TODO: handle possible error
+            }
+
+            return isEnoughSpaceAvailable;
+        }
+
         #endregion
 
         private void LoadDictionary(List<ProjectDetail> details)
