@@ -65,8 +65,11 @@
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
+    <Reference Include="TouchToolkit.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="TouchToolkit.GestureProcessor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -89,26 +92,23 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Bin\gestures.gx" />
-    <EmbeddedResource Include="Bin\rulenames.gx" />
     <None Include="Framework\GDL.mg" />
     <None Include="Properties\AppManifest.xml" />
+    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gesture Definitions\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bin\TouchToolkit.Framework.dll" />
+    <Content Include="Bin\TouchToolkit.GestureProcessor.dll" />
     <Content Include="Framework\LanguageParser.exe" />
-    <Content Include="Framework\LanguageParser.pdb" />
-    <Content Include="Framework\LanguageParser.vshost.exe" />
     <Content Include="Framework\MGraphXamlReader.dll" />
-    <Content Include="Framework\MGraphXamlReader.pdb" />
     <Content Include="Framework\Microsoft.M.dll" />
     <Content Include="Framework\Microsoft.Oslo.Internal.dll" />
     <Content Include="Framework\System.Dataflow.dll" />
     <Content Include="Framework\TouchToolkit.Framework.dll" />
-    <Content Include="Framework\TouchToolkit.Framework.pdb" />
     <Content Include="Framework\TouchToolkit.GestureProcessor.dll" />
-    <Content Include="Framework\TouchToolkit.GestureProcessor.pdb" />
     <Content Include="Framework\Xaml.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />

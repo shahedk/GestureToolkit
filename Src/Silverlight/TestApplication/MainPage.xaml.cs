@@ -44,8 +44,6 @@ namespace TestApplication
             // Add gesture feedbacks
             GestureFramework.AddGesturFeedback("lasso", typeof(HighlightSelectedArea));
 
-
-
             // Load UI
             LoadImages(false);
         }

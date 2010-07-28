@@ -113,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Framework\GDL.mg" />
-    <None Include="Gesture Definitions\drag.g" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Microsoft.M.dll" />
@@ -151,6 +150,9 @@
       <Project>{61A73B75-7404-4A80-9953-80AE47BA05DD}</Project>
       <Name>TouchToolkit.GestureProcessor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Gesture Definitions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MTargetsPath)\Microsoft.M.Embedded.targets" />

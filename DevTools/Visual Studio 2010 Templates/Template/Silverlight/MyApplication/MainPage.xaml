@@ -6,7 +6,11 @@
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Canvas x:Name="LayoutRoot" Background="White">
 
-    </Grid>
+        <Rectangle x:Name="rectangle01" Fill="LightBlue" Height="100" Width="150" Canvas.Left="21" Canvas.Top="72" Opacity=".8" />
+
+        <Rectangle x:Name="rectangle02" Fill="LightGreen" Height="100" Width="150" Canvas.Left="337" Canvas.Top="173" Opacity=".8" />
+
+    </Canvas>
 </UserControl>
