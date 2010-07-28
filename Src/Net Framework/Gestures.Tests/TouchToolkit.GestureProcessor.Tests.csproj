@@ -75,6 +75,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gesture Definitions\DragGestureTest.cs" />
+    <Compile Include="Gesture Definitions\LassoGestureTest.cs" />
     <Compile Include="Gesture Definitions\RotateTest.cs" />
     <Compile Include="Gesture Definitions\ZoomGestureTest.cs" />
     <Compile Include="Gesture Definitions\PinchGestureTest.cs" />
