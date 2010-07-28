@@ -20,7 +20,6 @@ using TouchToolkit.Framework;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
-using Framework.TouchInputProviders;
 
 namespace SurfaceApplication
 {

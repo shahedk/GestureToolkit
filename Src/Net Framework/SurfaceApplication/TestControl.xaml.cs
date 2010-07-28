@@ -17,6 +17,7 @@ using System.Threading;
 using TouchToolkit.Framework.TouchInputProviders;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.GestureProcessor.Gesture_Definitions;
+using System.Reflection;
 
 namespace SurfaceApplication
 {
@@ -37,9 +38,16 @@ namespace SurfaceApplication
 
         void TestControl_Loaded(object sender, RoutedEventArgs e)
         {
-            GestureFramework.Initialize(provider, LayoutRoot);
+            GestureFramework.Initialize(provider, LayoutRoot, Assembly.GetExecutingAssembly());
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
             SetImages(false);
+
+            GestureFramework.EventManager.MultiTouchChanged += new TouchInputProvider.MultiTouchChangeEventHandler(EventManager_MultiTouchChanged);
+        }
+
+        void EventManager_MultiTouchChanged(object sender, MultiTouchEventArgs e)
+        {
+            int x = 0;
         }
 
         //Sets the events of the images
