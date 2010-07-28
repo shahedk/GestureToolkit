@@ -7,7 +7,6 @@ using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.Framework.TouchInputProviders;
 using Microsoft.Surface;
 using Microsoft.Surface.Presentation.Controls;
-using Framework;
 using System.Windows;
 using Microsoft.Surface.Core;
 using ContactEventHandler = Microsoft.Surface.Presentation.ContactEventHandler;
