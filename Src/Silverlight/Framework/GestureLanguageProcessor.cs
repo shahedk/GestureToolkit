@@ -141,8 +141,8 @@ namespace TouchToolkit.Framework
              * TODO: Temporary work around
              * 
              * Currently, we can only load custom gestures from the main-app assembly
-             */ 
-            
+             */
+
             /*load definitions from the framework assembly */
             FrameInfo objectFromFramework = new FrameInfo();
             List<GestureToken> preDefinedGestureTokens = ContentHelper.GetEmbeddedGestureDefinition(objectFromFramework.GetType().Assembly, "gestures.gx");
@@ -150,10 +150,12 @@ namespace TouchToolkit.Framework
                 tokens.AddRange(preDefinedGestureTokens);
 
             /*load definitions from the executing assembly (user's app for custom gestures)*/
-            List<GestureToken> userDefinedGestureTokens = ContentHelper.GetEmbeddedGestureDefinition(Assembly.GetExecutingAssembly(), "gestures.gx");
-            if (userDefinedGestureTokens != null && userDefinedGestureTokens.Count > 0)
-                tokens.AddRange(userDefinedGestureTokens);
-
+            if (GestureFramework.HostAssembly != null)
+            {
+                List<GestureToken> userDefinedGestureTokens = ContentHelper.GetEmbeddedGestureDefinition(GestureFramework.HostAssembly, "gestures.gx");
+                if (userDefinedGestureTokens != null && userDefinedGestureTokens.Count > 0)
+                    tokens.AddRange(userDefinedGestureTokens);
+            }
             /*
             // Go through all assemblies (both framework and client) and load the gesture definitions
             DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory);
