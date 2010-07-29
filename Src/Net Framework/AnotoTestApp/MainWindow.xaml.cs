@@ -11,8 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Framework;
-using Framework.TouchInputProviders;
 using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.GestureProcessor.ReturnTypes;
 using TouchToolkit.Framework;
