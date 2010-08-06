@@ -13,6 +13,7 @@ namespace TouchToolKit.GDLService
     //This is a stub class that isn't defined but is required to exist to comply with the MPF
     class GDLScanner : IScanner
     {
+        /*
         private static string _language = File.ReadAllText("../../Resources/GDL.mg");
 
         private static Parser _parser;
@@ -128,7 +129,7 @@ namespace TouchToolKit.GDLService
         private int _offset;
 
         private IVsTextLines _buffer;
-
+        */
         public GDLScanner()
         {
             //_buffer = buffer;

@@ -56,9 +56,15 @@ namespace TestApplication
 
             //Uncomment here to add lasso functionality
             GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
+            GestureFramework.EventManager.AddEvent(LayoutRoot, "Box", BoxCallback);
         }
 
         #region CallBacks
+
+        private void BoxCallback(UIElement sender, GestureEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Box");
+        }
 
         private void DragCallback(UIElement sender, GestureEventArgs e)
         {

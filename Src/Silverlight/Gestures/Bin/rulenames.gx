@@ -1,1 +1,1 @@
-TouchState|TouchAreaRule|TouchTime|TouchLimitRule|TouchPathLength|TouchStepRule|ClosedLoop|EnclosedArea|OnSameObject|DistanceBetweenPoints|TouchPathBoundingBox|TouchDirection|TouchShape
+iveCondition =  TouchState|iveCondition =  TouchAreaRule|iveCondition =  TouchTime|iveCondition =  TouchLimitRule|iveCondition =  TouchPathLength|iveCondition =  TouchStepRule|iveCondition =  ClosedLoop|iveCondition =  EnclosedArea|iveCondition =  OnSameObject|iveCondition =  DistanceBetweenPoints|iveCondition =  TouchPathBoundingBox|iveCondition =  TouchDirection|iveCondition =  TouchShape

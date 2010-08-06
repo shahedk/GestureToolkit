@@ -51,6 +51,7 @@
             | r: "Pressure" => r
             | r: "Direction" => r
             | r: "Enclosed path" => r
+            | r: "TouchID" => r
             | r: "Touch points" => r
             | r: "Info" ":" v:ValidName=>r+":"+v;
         
@@ -80,7 +81,7 @@
             =>TouchShape{Values=>s};
         token Shape
             = x: "Line" => x
-            | x: "Rect" => x
+            | x: "Box" => x
             | x: "Circle" => x;
             
         /* Touch direction */

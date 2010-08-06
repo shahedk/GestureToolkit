@@ -28,3 +28,5 @@ C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\DevTools\GDLSe
 C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\DevTools\GDLService\GDLService_UnitTests\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\DevTools\GDLService\GDLService_UnitTests\obj\Debug\GDLService_UnitTests.dll
 C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\DevTools\GDLService\GDLService_UnitTests\obj\Debug\GDLService_UnitTests.pdb
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\DevTools\GDLService\GDLService_UnitTests\bin\Debug\GestureDefinitionLanguage.dll
+C:\Users\Cosys\Documents\Visual Studio 2010\Projects\TouchToolkit\DevTools\GDLService\GDLService_UnitTests\bin\Debug\GestureDefinitionLanguage.pdb
