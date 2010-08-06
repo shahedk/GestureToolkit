@@ -45,7 +45,7 @@ namespace TouchToolKit.GDLService
                     var commentColor = (TokenColor)3;
                     var keywordColor = (TokenColor)2;
                     var typesColor = (TokenColor)4;
-                    var miscColor = (TokenColor)1;
+                    var miscColor = (TokenColor)5;
                     var black = (TokenColor)1;
 
                     _colorTable = new TokenColor[length];
@@ -85,7 +85,7 @@ namespace TouchToolKit.GDLService
                         }
                         else
                         {
-                            colorDict.Add(entry.Name, typesColor);
+                            colorDict.Add(entry.Name, miscColor);
                         }
                     }
 
@@ -98,7 +98,6 @@ namespace TouchToolKit.GDLService
                     }
                 }
                 return _colorTable;
-
             }
         }
 
@@ -124,7 +123,7 @@ namespace TouchToolKit.GDLService
 
             while (tokens.MoveNext())
             {
-                var token = tokens.Current[0];
+                var token = tokens.Current[tokens.Current.Count - 1];
 
                 int tag = token.Tag;
                 if (tag < 0 || tag >= ColorTable.Length)

@@ -57,6 +57,13 @@ namespace TouchToolKit.GDLService
                     COLORINDEX.CI_SYSPLAINTEXT_BK,
                     System.Drawing.Color.Blue,
                     System.Drawing.Color.Empty,
+                    FONTFLAGS.FF_DEFAULT),
+                    new ColorableItem("(Gesture Definition Language) - Misc",
+                    "Identifier",
+                    COLORINDEX.CI_PURPLE,
+                    COLORINDEX.CI_SYSPLAINTEXT_BK,
+                    System.Drawing.Color.Violet,
+                    System.Drawing.Color.Empty,
                     FONTFLAGS.FF_DEFAULT)
             };
         }
