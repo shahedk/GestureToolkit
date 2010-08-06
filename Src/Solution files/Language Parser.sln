@@ -9,8 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchToolkit.Framework", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageParser.TestApp", "..\Net Framework\LanguageParser.TestApp\LanguageParser.TestApp.csproj", "{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestureDefinitionLanguage", "..\Net Framework\GestureDefinitionLanguage\GestureDefinitionLanguage.csproj", "{E28EDBD2-900A-4608-BF76-5868DEDDEC15}"
+EndProject
 Global
-	
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -83,6 +84,21 @@ Global
 		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Test|Mixed Platforms.Build.0 = Release|x86
 		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Test|x86.ActiveCfg = Release|x86
 		{A0326E9D-B2CA-4B38-B85E-7D1E91E2B438}.Test|x86.Build.0 = Release|x86
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Release|x86.ActiveCfg = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Test|Any CPU.Build.0 = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Test|Mixed Platforms.Build.0 = Release|Any CPU
+		{E28EDBD2-900A-4608-BF76-5868DEDDEC15}.Test|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

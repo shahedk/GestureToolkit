@@ -112,7 +112,7 @@ namespace TouchToolKit.GDLService
 
         public override Colorizer GetColorizer(IVsTextLines buffer)
         {
-            return new MyColorizer(this, buffer, _scanner);
+            return new GDLColorizer(this, buffer, new GDLScanner());
         }
         #endregion
     }
