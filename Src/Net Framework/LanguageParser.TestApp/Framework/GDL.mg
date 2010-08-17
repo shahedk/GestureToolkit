@@ -72,8 +72,14 @@
             | r:DistanceBetweenPoints => r
             | r:TouchPathBoundingBox =>r
             | r:TouchDirection =>r
+            | r:PerpendicularTo => r
             | r:TouchShape =>r;
         
+        /* Perpendicular to*/
+        syntax PerpendicularTo
+            = g1:ValidName "perpendicularTo" g2:ValidName
+            => PerpendicularTo {Gesture1=>g1, Gesture2=>g2};
+            
         /* Touch shape */
         syntax TouchShape
             = "Touch shape" ":" s:Shape

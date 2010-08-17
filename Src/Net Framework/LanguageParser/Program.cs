@@ -14,7 +14,6 @@ using System.Reflection;
 using TouchToolkit.Framework;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using TouchToolkit.Framework.Utility;
-using GestureDefinitionLanguage;
 
 
 namespace LanguageParser
@@ -26,6 +25,8 @@ namespace LanguageParser
         private static string RuleNamesFilePath { get; set; }
         private static string CompiledGestureDefPath { get; set; }
         private static string GestureDefSourcePath { get; set; }
+        private static string LanguageDefPath { get; set; }
+        private static string _language = "";
 
         // i.e. ProjectOutput = bin\Debug\
         private static string OutDir { get; set; }
@@ -63,14 +64,14 @@ namespace LanguageParser
                 CompiledGestureDefPath = ProjectDir + @"bin/gestures.gx";
                 RuleNamesFilePath = ProjectDir + @"bin/rulenames.gx";
                 GestureDefSourcePath = ProjectDir + @"Gesture Definitions";
+                LanguageDefPath = ProjectDir + @"Framework/GDL.mg";
             }
             else if (args.Length == 0)
             {
                 WriteMessage("No args provided. Using default paths!");
 
                 //ProjectDir = @"D:\Personal\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\";
-                ProjectDir = "../../../../Silverlight/Gestures/";
-                //ProjectDir = @"D:\Personal\Projects\TouchToolkit\Src\Src\Net Framework\LanguageParser.TestApp\";
+                ProjectDir = @"E:\Src\Src\Net Framework\LanguageParser.TestApp\";
                 OutDir = @"bin\Debug\";
                 FrameworkType = FrameworkTypes.Silverlight;
 
@@ -81,6 +82,7 @@ namespace LanguageParser
                 CompiledGestureDefPath = ProjectDir + @"bin/gestures.gx";
                 RuleNamesFilePath = ProjectDir + @"bin/rulenames.gx";
                 GestureDefSourcePath = ProjectDir + @"Gesture Definitions";
+                LanguageDefPath = ProjectDir + @"Framework/GDL.mg";
             }
             else
             {
@@ -116,10 +118,13 @@ namespace LanguageParser
                     if (FrameworkType != FrameworkTypes.Silverlight)
                         GestureFramework.HostAssembly = GetHostAssembly();
 
+                    // Load language grammar
+                    WriteMessage("Loading language grammar...");
+                    _language = File.ReadAllText(LanguageDefPath);
+
                     // Build parser
                     WriteMessage("Building parser from language...");
-                    GDL gdl = new GDL();
-                    Parser parser = gdl.Parser;
+                    Parser parser = GetParser();
                     List<string> ruleNames = GetRuleNames(parser);
 
                     // Build the dictionary with known types: all rule & return types
@@ -213,6 +218,39 @@ namespace LanguageParser
             }
 
             return hostAssembly;
+        }
+
+        private static Parser GetParser()
+        {
+            using (var options = new CompilerOptions())
+            {
+                var sourceItems = new SourceItem[]{
+
+                    new TextItem()
+                    {
+                        Name = "GdlGrammer", ContentType = TextItemType.MGrammar, Reader = new StringReader(_language)
+                    }
+                };
+
+                options.AddSourceItems(sourceItems);
+
+                CompilationResults results = Compiler.Compile(options);
+                if (results.HasErrors)
+                {
+                    //TODO: show meaningful error message
+                    throw new Exception("Failed to compile GDL ....");
+                }
+                else
+                {
+                    foreach (var parserFactory in results.ParserFactories)
+                    {
+                        //TODO: Why inside foreach loop!!!
+                        return parserFactory.Value.Create();
+                    }
+                }
+            }
+
+            return null;
         }
 
         private static void WriteMessage(string msg)

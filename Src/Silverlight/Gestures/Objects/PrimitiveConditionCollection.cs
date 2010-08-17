@@ -18,8 +18,14 @@ namespace TouchToolkit.GestureProcessor.Objects
     {
         public ValidSetOfPointsCollection Validate(ValidSetOfPointsCollection sets)
         {
+            // TODO: Consider sorting the list so that less expensive conditions are evaluated first
+
+            
             foreach (var rule in this)
             {
+                /* TODO: Temporary work around for testing new types
+                 */
+
                 sets = rule.Validate(sets);
 
                 if (sets.Count == 0)
