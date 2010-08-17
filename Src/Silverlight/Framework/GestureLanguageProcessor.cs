@@ -24,7 +24,7 @@ namespace TouchToolkit.Framework
 {
     internal class GestureLanguageProcessor
     {
-        private static readonly string[] assembliesToSkip = { "BlueTools", "Conoto.net" };
+        //private static readonly string[] assembliesToSkip = { "BlueTools", "Conoto.net" };
 
         private static List<Type> _allRules = new List<Type>();
         private static List<Tuple<IPrimitiveConditionValidator, Gesture>> _preConGestureMap = new List<Tuple<IPrimitiveConditionValidator, Gesture>>();
@@ -210,16 +210,16 @@ namespace TouchToolkit.Framework
             return tokens;
         }
 
-        private static bool IsExternalAssembly(FileInfo assemblyFile)
-        {
-            foreach (var name in assembliesToSkip)
-            {
-                if (assemblyFile.FullName.Contains(name))
-                    return true;
-            }
+        //private static bool IsExternalAssembly(FileInfo assemblyFile)
+        //{
+        //    foreach (var name in assembliesToSkip)
+        //    {
+        //        if (assemblyFile.FullName.Contains(name))
+        //            return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         private static IPrimitiveConditionValidator GetPreCondition(IPrimitiveConditionData ruleData, Gesture gesture)
         {

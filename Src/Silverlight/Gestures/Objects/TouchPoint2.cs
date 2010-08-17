@@ -38,14 +38,14 @@ namespace TouchToolkit.GestureProcessor.Objects
             set;
         }
 
-        //Guid _uniqueId = Guid.NewGuid();
-        //public Guid UniqueId
-        //{
-        //    get
-        //    {
-        //        return _uniqueId;
-        //    }
-        //}
+        Guid _uniqueId = Guid.NewGuid();
+        public Guid UniqueId
+        {
+            get
+            {
+                return _uniqueId;
+            }
+        }
 
         private Dictionary<object, dynamic> _tags = new Dictionary<object, dynamic>();
         public Dictionary<object, dynamic> Tags

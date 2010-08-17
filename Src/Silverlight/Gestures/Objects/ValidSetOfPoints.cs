@@ -14,12 +14,16 @@ namespace TouchToolkit.GestureProcessor.Objects
 {
     public class ValidSetOfTouchPoints : List<TouchPoint2>
     {
+        public string Tag { get; set; }
 
-        public ValidSetOfTouchPoints():base()
+        public ValidSetOfTouchPoints()
+            : base()
         { }
 
-        public ValidSetOfTouchPoints(int capacity) : base(capacity) 
-        { }
+        public ValidSetOfTouchPoints(int capacity)
+            : base(capacity)
+        {
+        }
 
         public ValidSetOfTouchPoints(List<TouchPoint2> points)
         {

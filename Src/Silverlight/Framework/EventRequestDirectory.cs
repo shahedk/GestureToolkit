@@ -20,6 +20,7 @@ namespace TouchToolkit.Framework
         public Gesture Gesture { get; internal set; }
         public GestureEventHandler EventHandler { get; set; }
         public UIElement UIElement { get; set; }
+        public int StepNo { get; set; }
     }
 
     internal class EventRequestDirectory
@@ -32,16 +33,15 @@ namespace TouchToolkit.Framework
         /// <param name="uiElement"></param>
         /// <param name="gestureName"></param>
         /// <param name="handler"></param>
-        public static void Add(UIElement uiElement, string gestureName, GestureEventHandler handler)
+        public static void Add(UIElement uiElement, Gesture gesture, GestureEventHandler handler, int stepNo)
         {
-            Gesture gesture = GestureLanguageProcessor.GetGesture(gestureName);
-
             // Add new record in the list
             eventRequests.Add(new EventRequest()
             {
                 UIElement = uiElement,
                 Gesture = gesture,
-                EventHandler = handler
+                EventHandler = handler,
+                StepNo = stepNo
             });
         }
 
@@ -52,8 +52,11 @@ namespace TouchToolkit.Framework
         /// <param name="gestureName"></param>
         public static void Remove(UIElement uiElement, string gestureName)
         {
-            var reqs = GetRequests(gestureName, uiElement);
-            foreach (var req in reqs)
+            var requests = from r in eventRequests
+                           where r.Gesture.Name == gestureName && r.UIElement == uiElement
+                           select r;
+
+            foreach (var req in requests)
             {
                 eventRequests.Remove(req);
             }
@@ -80,19 +83,29 @@ namespace TouchToolkit.Framework
             return requests.ToList<EventRequest>();
         }
 
+
+        internal static List<EventRequest> GetRequests(string gestureName, int stepNo)
+        {
+            var requests = from r in eventRequests
+                           where r.Gesture.Name == gestureName && r.StepNo == stepNo
+                           select r;
+
+            return requests.ToList<EventRequest>();
+        }
+
         /// <summary>
         /// Returns the event-requests of specified type of gesture for the specified uiElements
         /// </summary>
         /// <param name="gestureName"></param>
         /// <param name="uiElements"></param>
         /// <returns></returns>
-        internal static List<EventRequest> GetRequests(string gestureName, List<UIElement> uiElements)
+        internal static List<EventRequest> GetRequests(string gestureName, List<UIElement> uiElements, int stepNo)
         {
             List<EventRequest> uniqueRequests = new List<EventRequest>();
 
             foreach (UIElement uiElement in uiElements)
             {
-                var list = GetRequests(gestureName, uiElement);
+                var list = GetRequests(gestureName, uiElement, stepNo);
                 foreach (var eventRequest in list)
                 {
                     if (!uniqueRequests.Contains(eventRequest))
@@ -118,7 +131,7 @@ namespace TouchToolkit.Framework
 
                     if (parents.Count > 0)
                     {
-                        return GetRequests(gestureName, parents);
+                        return GetRequests(gestureName, parents, stepNo);
                     }
                 }
             }
@@ -127,10 +140,10 @@ namespace TouchToolkit.Framework
             return uniqueRequests;
         }
 
-        internal static List<EventRequest> GetRequests(string gestureName, UIElement uiElement)
+        internal static List<EventRequest> GetRequests(string gestureName, UIElement uiElement, int stepNo)
         {
             var requests = from r in eventRequests
-                           where r.Gesture.Name == gestureName && r.UIElement == uiElement
+                           where r.Gesture.Name == gestureName && r.UIElement == uiElement && r.StepNo == stepNo
                            select r;
 
             if (GestureFramework.EventManager.BubbleUpUnhandledEvents)
@@ -141,7 +154,7 @@ namespace TouchToolkit.Framework
                     var parent = VisualTreeHelper.GetParent(uiElement);
                     if (parent != GestureFramework.LayoutRoot)
                     {
-                        return GetRequests(gestureName, parent as UIElement);
+                        return GetRequests(gestureName, parent as UIElement, stepNo);
                     }
                 }
             }
