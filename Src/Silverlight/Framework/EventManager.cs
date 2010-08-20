@@ -147,124 +147,69 @@ namespace TouchToolkit.Framework.GestureEvents
             if (MultiTouchChanged != null)
                 MultiTouchChanged(sender, e);
 
-            if (e.TouchPoints.Count > 0 && e.TouchPoints[0].Action == TouchAction.Up)
-            //TODO: For test only. REMOVE the above if (..) after test
-            {
-            // Validate pre-conditions
-            ValidSetOfTouchPoints availableTouchPoints = e.TouchPoints.Copy();
-
-                ValidSetOfPointsCollection dataToEvaluate = new ValidSetOfPointsCollection();
-                dataToEvaluate.Add(availableTouchPoints);
-
-                // Validate gestures that are in progess
-                ValidateBlockResult[] list = PartiallyEvaluatedGestures.GetAll();
-                foreach (ValidateBlockResult item in list)
-                {
-                    Gesture gesture = GestureLanguageProcessor.ActiveGestures[item.GestureName];
-                    dataToEvaluate.ExpectedGestureName = gesture.Name;
-                    int stepToValidate = item.ValidateBlockNo + 1;
-
-                    if (gesture != null)
-                    {
-                        if (gesture.ValidationBlocks.Count > stepToValidate)
-                        {
-                            var result = ValidateGesture(gesture, dataToEvaluate, stepToValidate);
-
-                            // If its the second last step then also run the last step
-                            if (gesture.ValidationBlocks.Count == stepToValidate + 2)
-                            {
-                                stepToValidate += 1;
-                                result = ValidateGesture(gesture, dataToEvaluate, stepToValidate);
-                            }
-
-                            // If its the final step of a gesture, then delete all related partial results from cache
-                            if (gesture.ValidationBlocks.Count == stepToValidate + 1)
-                            {
-                                PartiallyEvaluatedGestures.Remove(item);
-                            }
-
-                            // Remove touch points that are used in multi-step gesture from 
-                            // touch points list for new gestures
-                            dataToEvaluate.Remove(result);
-                        }
-                    }
-                }
-
-                // Validate gestures from the first validate block as if new gestures
-            foreach (Gesture gesture in GestureLanguageProcessor.ActiveGestures.Values)
-            {
-                    if (dataToEvaluate.Count > 0)
-                        ValidateGesture(gesture, dataToEvaluate, 0);
-                }
-            }
-        }
-
-        /*
-        private void ActiveHardware_MultiTouchChanged2(Object sender, MultiTouchEventArgs e)
-        {
-            if (MultiTouchChanged != null)
-                MultiTouchChanged(sender, e);
-
             // Validate pre-conditions
             ValidSetOfTouchPoints availableTouchPoints = e.TouchPoints.Copy();
 
             ValidSetOfPointsCollection dataToEvaluate = new ValidSetOfPointsCollection();
             dataToEvaluate.Add(availableTouchPoints);
 
-            /* TODO: This is a temporary implementation. Although it works properly 
-             * but is not an efficient implementation. Consider using RETE algorithm
-             *
-
-            // Step 1: Validate any multi-step gestures that are in progress
+            // Validate gestures that are in progess
             ValidateBlockResult[] list = PartiallyEvaluatedGestures.GetAll();
             foreach (ValidateBlockResult item in list)
             {
-                // Get the gesture definition
-                var gesture = GestureLanguageProcessor.ActiveGestures[item.GestureName];
-                int blockToExecute = item.ValidateBlockNo + 1;
+                Gesture gesture = GestureLanguageProcessor.ActiveGestures[item.GestureName];
+                dataToEvaluate.ExpectedGestureName = gesture.Name;
+                int stepToValidate = item.ValidateBlockNo + 1;
 
-                if (item.Data == null)
-                    dataToEvaluate.History.Clear();
-                else
-                    dataToEvaluate.History.Add(item.ValidateBlockName, item.Data);
-
-                // Validate the required block
-                ValidSetOfPointsCollection touchPointsUsed = ValidateGesture(gesture, dataToEvaluate, blockToExecute);
-
-                // If gesture is detected
-                if (touchPointsUsed.Count > 0)
+                if (gesture != null)
                 {
-                    // Add to "PartiallyEvaludatedGestures" if its an intermediate step and has alias defined
-                    if (gesture.ValidationBlocks.Count > blockToExecute)
+                    if (gesture.ValidationBlocks.Count > stepToValidate)
                     {
-                        string blockName = gesture.ValidationBlocks[blockToExecute].Name;
+                        var result = ValidateGesture(gesture, dataToEvaluate, stepToValidate);
 
-                        if (!string.IsNullOrEmpty(blockName))
-                            PartiallyEvaluatedGestures.Add(gesture.Name, blockToExecute, touchPointsUsed, blockName);
+                        // If its the second last step then also run the last step
+                        if (gesture.ValidationBlocks.Count == stepToValidate + 2)
+                        {
+                            stepToValidate += 1;
+                            result = ValidateGesture(gesture, dataToEvaluate, stepToValidate);
+                        }
+
+                        // If its the final step of a gesture, then delete all related partial results from cache
+                        if (gesture.ValidationBlocks.Count == stepToValidate + 1)
+                        {
+                            PartiallyEvaluatedGestures.Remove(item);
+                        }
+
+                        // Remove touch points that are used in multi-step gesture from 
+                        // touch points list for new gestures
+                        dataToEvaluate.Remove(result);
                     }
-
-                    // Remove the touch points that are used to detect a multi-step gesture
-                    availableTouchPoints.Remove(touchPointsUsed);
                 }
             }
 
-            // Step 2: Validate all active gestures (as new gestures rather than partially validate gesture)
+            // Validate gestures from the first validate block as if new gestures
             foreach (Gesture gesture in GestureLanguageProcessor.ActiveGestures.Values)
             {
-                ValidSetOfPointsCollection touchPointsUsed = ValidateGesture(gesture, dataToEvaluate, 0);
-
-                // Remove the touch points that where used to detect this gesture
-                //availableTouchPoints.Remove(touchPointsUsed);
+                if (dataToEvaluate.Count > 0)
+                    ValidateGesture(gesture, dataToEvaluate, 0);
             }
-        } */
+        }
 
         private ValidSetOfPointsCollection ValidateGesture(Gesture gesture, ValidSetOfPointsCollection validResultSets, int blockNo)
         {
             var validateBlock = gesture.ValidationBlocks[blockNo];
 
+            //if (validResultSets.Count > 0 && validResultSets[0].Count > 0)
+            //{
+            //    Console.WriteLine(validResultSets[0][0].Action.ToString());
+
+            //    if (validResultSets[0][0].Action != TouchAction.Up)
+            //        Console.WriteLine("!!!U");
+            //}
+
             // Validate the specified block
             validResultSets = validateBlock.PrimitiveConditions.Validate(validResultSets);
-            
+
             if (validResultSets.Count > 0)
             // current dataset satisfies the validation block
             {
@@ -274,27 +219,27 @@ namespace TouchToolkit.Framework.GestureEvents
                     List<EventRequest> eventReqs = EventRequestDirectory.GetRequests(gesture.Name, validSetOfPoint.GetUIElements(), blockNo);
 
                     if (eventReqs.Count > 0)
-                {
-                    // Build return objects
-                    List<IReturnType> returnObjs = gesture.ReturnTypes.Calculate(validSetOfPoint);
-
-                    // Execute gesture effects, if any
-                    if (GestureFramework.GestureFeedbacks.ContainsKey(gesture.Name))
                     {
-                        var gestureFeeds = GestureFramework.GestureFeedbacks[gesture.Name];
-                        foreach (Type gestureFeedbackTyoe in gestureFeeds)
+                        // Build return objects
+                        List<IReturnType> returnObjs = gesture.ReturnTypes.Calculate(validSetOfPoint);
+
+                        // Execute gesture effects, if any
+                        if (GestureFramework.GestureFeedbacks.ContainsKey(gesture.Name))
                         {
-                            ExecuteFeedback(gestureFeedbackTyoe, returnObjs);
+                            var gestureFeeds = GestureFramework.GestureFeedbacks[gesture.Name];
+                            foreach (Type gestureFeedbackTyoe in gestureFeeds)
+                            {
+                                ExecuteFeedback(gestureFeedbackTyoe, returnObjs);
+                            }
+                        }
+
+                        // Invoke the callback to notify the subscriber(s)
+                        foreach (var eventRequest in eventReqs)
+                        {
+                            GestureEventArgs e = new GestureEventArgs() { Values = returnObjs };
+                            eventRequest.EventHandler(eventRequest.UIElement, e);
                         }
                     }
-
-                    // Invoke the callback to notify the subscriber(s)
-                    foreach (var eventRequest in eventReqs)
-                    {
-                        GestureEventArgs e = new GestureEventArgs() { Values = returnObjs };
-                        eventRequest.EventHandler(eventRequest.UIElement, e);
-                    }
-                }
                 }
 
                 // Its one of the validate blocks of a multi-step gesture (and it is not the last block)
