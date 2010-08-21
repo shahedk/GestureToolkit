@@ -119,6 +119,9 @@
     <Compile Include="..\..\Silverlight\Gestures\Objects\LanguageTokens\ValidateToken.cs">
       <Link>Objects\LanguageTokens\ValidateToken.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Objects\PartiallyEvaluatedGestures.cs">
+      <Link>Objects\PartiallyEvaluatedGestures.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\PrimitiveConditionCollection.cs">
       <Link>Objects\PrimitiveConditionCollection.cs</Link>
     </Compile>
@@ -139,6 +142,9 @@
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\TouchPoint2.cs">
       <Link>Objects\TouchPoint2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\Objects\ValidateBlockResult.cs">
+      <Link>Objects\ValidateBlockResult.cs</Link>
     </Compile>
     <Compile Include="..\..\Silverlight\Gestures\Objects\ValidationBlock.cs">
       <Link>Objects\ValidationBlock.cs</Link>
@@ -293,6 +299,12 @@
     <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\TouchIDCalculator.cs">
       <Link>ReturnTypes\TouchIDCalculator.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\TouchPaths.cs">
+      <Link>ReturnTypes\TouchPaths.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\TouchPathsCalculator.cs">
+      <Link>ReturnTypes\TouchPathsCalculator.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\TouchPoints.cs">
       <Link>ReturnTypes\TouchPoints.cs</Link>
     </Compile>
@@ -350,8 +362,6 @@
     <Compile Include="..\..\Silverlight\Gestures\Utility\TrigonometricCalculationHelper.cs">
       <Link>Utility\TrigonometricCalculationHelper.cs</Link>
     </Compile>
-    <Compile Include="Objects\PartiallyEvaluatedGestures.cs" />
-    <Compile Include="Objects\ValidateBlockResult.cs" />
     <Compile Include="PrimitiveConditions\Objects\PerpendicularTo.cs" />
     <Compile Include="PrimitiveConditions\RuleValidators\PerpendicularToValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

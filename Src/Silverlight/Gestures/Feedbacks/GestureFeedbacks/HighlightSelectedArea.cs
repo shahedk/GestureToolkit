@@ -47,7 +47,7 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks
 
             foreach (var point in touchPoints)
             {
-                _polygon.Points.Add(point);
+                _polygon.Points.Add(point.Position);
             }
 
             _feedbackCanvas.Children.Add(_polygon);

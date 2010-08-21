@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 
 namespace TouchToolkit.GestureProcessor.ReturnTypes
 {
+    [Obsolete("Please use \"TouchPoint\" to get the position of a touch.")]
     public class Position : IReturnType
     {
         public double X { get; set; }

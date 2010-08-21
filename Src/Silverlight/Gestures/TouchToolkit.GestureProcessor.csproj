@@ -81,6 +81,8 @@
     <Compile Include="Gesture Definitions\Gestures.cs" />
     <Compile Include="Objects\Gesture.cs" />
     <Compile Include="Objects\LanguageTokens\ValidateToken.cs" />
+    <Compile Include="Objects\PartiallyEvaluatedGestures.cs" />
+    <Compile Include="Objects\ValidateBlockResult.cs" />
     <Compile Include="Objects\ValidationBlock.cs" />
     <Compile Include="ReturnTypes\BoundingBox.cs" />
     <Compile Include="ReturnTypes\BoundingBoxCalculator.cs" />
@@ -100,6 +102,8 @@
     <Compile Include="ReturnTypes\SlopeChangedCalculator.cs" />
     <Compile Include="ReturnTypes\TouchIDCalculator.cs" />
     <Compile Include="ReturnTypes\TouchID.cs" />
+    <Compile Include="ReturnTypes\TouchPaths.cs" />
+    <Compile Include="ReturnTypes\TouchPathsCalculator.cs" />
     <Compile Include="ReturnTypes\TouchPoints.cs" />
     <Compile Include="ReturnTypes\TouchPointsCalculator.cs" />
     <Compile Include="PrimitiveConditions\Objects\TouchShape.cs" />
