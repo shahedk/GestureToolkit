@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 
 using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.GestureProcessor.Utility.TouchHelpers;
 
 namespace TouchToolkit.GestureProcessor.ReturnTypes
 {
@@ -18,18 +19,12 @@ namespace TouchToolkit.GestureProcessor.ReturnTypes
     {
         public IReturnType Calculate(ValidSetOfTouchPoints set)
         {
-            //Assumption: This return type is for single touch points 
-            //and only returns all points of the first touch 
             TouchPoints points = new TouchPoints();
-            if (set.Count > 0)
+            foreach (var touchPoint in set)
             {
-                foreach (var item in set[0].Stroke.StylusPoints)
-                {
-
-                    points.Add(new Point(item.X, item.Y));
-                }
-
+                points.Add(new TouchInfo() { ActionType = touchPoint.Action.ToTouchAction(), Position = touchPoint.Position, TouchDeviceId = touchPoint.TouchDeviceId });
             }
+
             return points;
         }
     }

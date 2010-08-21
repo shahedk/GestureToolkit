@@ -10,11 +10,24 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.GestureProcessor.Exceptions;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 
 namespace TouchToolkit.GestureProcessor.Utility.TouchHelpers
 {
     public static class TouchPointExtensions
     {
+        public static TouchPath ToTouchPath(this StylusPointCollection self, int deviceId)
+        {
+            TouchPath touchPath = new TouchPath();
+
+            touchPath.TouchDeviceId = deviceId;
+
+            foreach (var item in self)
+                touchPath.Points.Add(new Point(item.X, item.Y));
+
+            return touchPath;
+        }
+
         public static TouchAction2 ToTouchAction(this TouchAction action)
         {
             if (action == TouchAction.Down)
@@ -48,12 +61,12 @@ namespace TouchToolkit.GestureProcessor.Utility.TouchHelpers
             }
 
             if ((slope >= 7 * Math.PI / 8 /*&& slope < Math.Math.PI +0.01*/) ||
-                (/*slope >= -Math.PI - 0.01 &&*/ slope < -7 * Math.PI / 8) )
+                (/*slope >= -Math.PI - 0.01 &&*/ slope < -7 * Math.PI / 8))
             {
                 direction = "Left";
             }
-            else if ( (slope >= 0 && slope < (Math.PI / 8)) ||
-                (slope >= -(Math.PI / 8) && slope < 0) )
+            else if ((slope >= 0 && slope < (Math.PI / 8)) ||
+                (slope >= -(Math.PI / 8) && slope < 0))
             {
                 direction = "Right";
             }
@@ -69,7 +82,7 @@ namespace TouchToolkit.GestureProcessor.Utility.TouchHelpers
             {
                 direction = "DownLeft";
             }
-            
+
             else if (slope >= -7 * Math.PI / 8 && slope < -5 * Math.PI / 8)
             {
                 direction = "UpLeft";

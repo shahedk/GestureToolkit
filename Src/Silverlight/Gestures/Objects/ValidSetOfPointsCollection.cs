@@ -27,9 +27,12 @@ namespace TouchToolkit.GestureProcessor.Objects
                 {
                     // Remove the sets that contain any of the above selected touchPoints
                     // TODO: its a work-around for development purpose... Re-think!!
-            
-                    var items = this.FindAll(x => x.Contains(touch));
-                    itemsToRemove.AddRange(items);
+
+                    foreach (var item in this)
+                    {
+                        if (item.Contains(touch))
+                            itemsToRemove.Add(item);
+                    }
                 }
             }
 

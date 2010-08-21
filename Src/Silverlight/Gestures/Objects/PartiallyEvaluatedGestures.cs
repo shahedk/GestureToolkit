@@ -65,7 +65,9 @@ namespace TouchToolkit.GestureProcessor.Objects
              */
 
             //TODO: Should follow the above logic. The following code is only for testing another feature
-            _cache.RemoveAll(x => x.GestureName == item.GestureName);
+            var itemsToRemove = _cache.Where(x => x.GestureName == item.GestureName);
+            foreach (var g in itemsToRemove)
+                _cache.Remove(g);
         }
     }
 }
