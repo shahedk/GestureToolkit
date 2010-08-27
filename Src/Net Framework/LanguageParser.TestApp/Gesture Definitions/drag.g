@@ -6,4 +6,4 @@ validate
     On same object
 
 return
-    Position, Position changed
+    Touch actions, Touch points, Touch paths

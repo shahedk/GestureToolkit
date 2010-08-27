@@ -60,7 +60,6 @@ namespace LanguageParser.TestApp
                 GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Pinch, PinchCallback);
                 GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Drag, DragCallback);
                 GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Rotate, RotateCallback);
-
             }
 
             GestureFramework.EventManager.AddEvent(LayoutRoot, Gestures.Lasso, LassoCallback);
@@ -171,7 +170,7 @@ namespace LanguageParser.TestApp
 
             foreach (var point in points)
             {
-                p.Points.Add(point);
+                p.Points.Add(point.Position);
             }
 
             return p;

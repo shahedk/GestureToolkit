@@ -293,6 +293,12 @@
     <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\SlopeChangedCalculator.cs">
       <Link>ReturnTypes\SlopeChangedCalculator.cs</Link>
     </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\TouchActions.cs">
+      <Link>ReturnTypes\TouchActions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\TouchActionsCalculator.cs">
+      <Link>ReturnTypes\TouchActionsCalculator.cs</Link>
+    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\TouchID.cs">
       <Link>ReturnTypes\TouchID.cs</Link>
     </Compile>

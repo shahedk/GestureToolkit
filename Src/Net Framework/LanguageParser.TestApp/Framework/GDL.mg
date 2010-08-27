@@ -51,7 +51,9 @@
             | r: "Pressure" => r
             | r: "Direction" => r
             | r: "Enclosed path" => r
+            | r: "Touch paths" => r
             | r: "Touch points" => r
+            | r: "Touch actions" => r
             | r: "Info" ":" v:ValidName=>r+":"+v;
         
         /* Generic Rules */
