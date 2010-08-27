@@ -20,6 +20,7 @@ using TouchToolkit.GestureProcessor.ReturnTypes;
 using TouchToolkit.Framework;
 using TouchToolkit.Framework.TouchInputProviders;
 using TouchToolkit.GestureProcessor.Gesture_Definitions;
+using System.Diagnostics;
 
 namespace TUIOApplication
 {
@@ -77,6 +78,13 @@ namespace TUIOApplication
         private void DragCallback(UIElement sender, GestureEventArgs e)
         {
             var posChanged = e.Values.Get<PositionChanged>();
+
+            var touchActions = e.Values.Get<TouchActions>();
+            foreach (var action in touchActions)
+            {
+                Debug.WriteLine("Touch action: " + action.Value);
+            }
+
             if (posChanged != null && sender != null)
             {
                 ThreadStart start = delegate()
