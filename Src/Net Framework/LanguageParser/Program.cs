@@ -38,7 +38,7 @@ namespace LanguageParser
         {
 
             public static string Silverlight = "SL";
-            public static string DotNetFullFramework = ""; // Default
+            public static string DotNetFullFramework = "NET"; // Default
         }
 
 
@@ -66,10 +66,24 @@ namespace LanguageParser
                 GestureDefSourcePath = ProjectDir + @"Gesture Definitions";
                 LanguageDefPath = ProjectDir + @"Framework/GDL.mg";
             }
+            else if (args.Length == 5)
+            {
+                /*
+                 * LanguageParser.exe [0: framework-type] [1:gesture-def-path] [2:name-file] [3:gesture-source] [4:lang-def]
+                 */
+
+                var root= @"..\..\..\..\";
+                FrameworkType = args[0];
+                CompiledGestureDefPath = root + args[1];
+                RuleNamesFilePath = root + args[2];
+                GestureDefSourcePath = root + args[3];
+                LanguageDefPath = root + args[4];
+
+            }
             else if (args.Length == 0)
             {
                 WriteMessage("No args provided. Using default paths!");
-                
+
                 ProjectDir = @"..\..\..\LanguageParser.TestApp\";
                 OutDir = @"bin\Debug\";
                 FrameworkType = FrameworkTypes.Silverlight;
@@ -82,6 +96,7 @@ namespace LanguageParser
                 RuleNamesFilePath = ProjectDir + @"bin/rulenames.gx";
                 GestureDefSourcePath = ProjectDir + @"Gesture Definitions";
                 LanguageDefPath = ProjectDir + @"Framework/GDL.mg";
+
             }
             else
             {
