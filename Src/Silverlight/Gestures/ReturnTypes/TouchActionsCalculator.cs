@@ -12,7 +12,14 @@ namespace TouchToolkit.GestureProcessor.ReturnTypes
             TouchActions actions = new TouchActions();
 
             foreach (var item in set)
-                actions.Add(item.TouchDeviceId, item.Action);
+            {
+                TouchActionInfo info = new TouchActionInfo()
+                {
+                    Action = item.Action,
+                    TouchDeviceId = item.TouchDeviceId
+                };
+                actions.Add(info);
+            }
 
             return actions;
         }

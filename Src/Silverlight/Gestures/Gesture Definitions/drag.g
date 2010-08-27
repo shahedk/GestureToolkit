@@ -6,4 +6,4 @@ validate
     On same object
 
 return
-    Position, Position changed, TouchID
+    Touch actions, Position changed
