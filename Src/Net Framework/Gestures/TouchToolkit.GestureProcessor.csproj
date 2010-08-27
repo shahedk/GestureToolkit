@@ -272,12 +272,6 @@
     <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\IReturnTypeCalculator.cs">
       <Link>ReturnTypes\IReturnTypeCalculator.cs</Link>
     </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\Position.cs">
-      <Link>ReturnTypes\Position.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\PositionCalculator.cs">
-      <Link>ReturnTypes\PositionCalculator.cs</Link>
-    </Compile>
     <Compile Include="..\..\Silverlight\Gestures\ReturnTypes\PositionChanged.cs">
       <Link>ReturnTypes\PositionChanged.cs</Link>
     </Compile>

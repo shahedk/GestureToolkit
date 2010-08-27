@@ -7,4 +7,4 @@ validate
     Touch area: Rect 50x50 including last 1 touch within 1 sec
 
 return
-    Info:DoubleTap
+    Touch points

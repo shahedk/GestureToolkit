@@ -7,4 +7,4 @@ validate
     and Distance between points: unchanged 10%
 
 return
-    Info:Rotate, Slope changed
+    Slope changed

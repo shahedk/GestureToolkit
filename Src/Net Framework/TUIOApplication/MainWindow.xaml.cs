@@ -46,9 +46,10 @@ namespace TUIOApplication
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var provider = new TUIOProvider();
+            //var provider = new Windows7TouchInputProvider();
 
             GestureFramework.Initialize(provider, LayoutRoot, Assembly.GetExecutingAssembly());
-            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
+            //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
             SetImages(false);
         }
@@ -61,11 +62,10 @@ namespace TUIOApplication
                 GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Pinch, PinchCallback);
                 GestureFramework.EventManager.AddEvent(bitmap as Image, "Drag", DragCallback);
                 GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Rotate, RotateCallback);
-
             }
 
             //GestureFramework.EventManager.AddEvent(LayoutRoot, Gestures.Lasso, LassoCallback);
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "Box", BoxCallback);
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Box", BoxCallback);
         }
 
         #region CallBacks
@@ -82,7 +82,7 @@ namespace TUIOApplication
             var touchActions = e.Values.Get<TouchActions>();
             foreach (var action in touchActions)
             {
-                Debug.WriteLine("Touch action: " + action.Value);
+                Debug.WriteLine("Touch action: " + action.Action);
             }
 
             if (posChanged != null && sender != null)
@@ -226,7 +226,7 @@ namespace TUIOApplication
 
             foreach (var point in points)
             {
-                p.Points.Add(point);
+                p.Points.Add(point.Position);
             }
 
             return p;

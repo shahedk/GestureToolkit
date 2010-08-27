@@ -3,7 +3,7 @@
 validate
 	Touch state: TouchUp
 	Touch limit: 1
-	Touch shape: Box
+	Touch shape: Rect
 
 return
 	Touch points

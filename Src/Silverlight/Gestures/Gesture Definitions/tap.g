@@ -7,4 +7,4 @@ validate
     Touch path bounding box: 1x1..100x100
 
 return
-    Position, Info:Tap-Gesture
+    Position
