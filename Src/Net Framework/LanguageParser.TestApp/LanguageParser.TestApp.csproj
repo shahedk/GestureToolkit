@@ -99,6 +99,16 @@
     <None Include="app.config" />
     <None Include="Framework\GDL.mg" />
     <None Include="Framework\LanguageParser.vshost.exe.manifest" />
+    <None Include="Gesture Definitions\doubleTap.g" />
+    <None Include="Gesture Definitions\drag.g" />
+    <None Include="Gesture Definitions\lasso.g" />
+    <None Include="Gesture Definitions\left.g" />
+    <None Include="Gesture Definitions\line.g" />
+    <None Include="Gesture Definitions\pinch.g" />
+    <None Include="Gesture Definitions\right.g" />
+    <None Include="Gesture Definitions\rotate.g" />
+    <None Include="Gesture Definitions\tap.g" />
+    <None Include="Gesture Definitions\zoom.g" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

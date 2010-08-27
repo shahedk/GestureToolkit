@@ -69,9 +69,8 @@ namespace LanguageParser
             else if (args.Length == 0)
             {
                 WriteMessage("No args provided. Using default paths!");
-
-                //ProjectDir = @"D:\Personal\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\";
-                ProjectDir = @"E:\Src\Src\Net Framework\LanguageParser.TestApp\";
+                
+                ProjectDir = @"..\..\..\LanguageParser.TestApp\";
                 OutDir = @"bin\Debug\";
                 FrameworkType = FrameworkTypes.Silverlight;
 

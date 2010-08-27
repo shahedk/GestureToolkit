@@ -112,9 +112,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Framework\GDL.mg" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="bin\Microsoft.M.dll" />
     <Content Include="bin\Microsoft.Oslo.Internal.dll" />
     <Content Include="bin\System.Dataflow.dll" />
@@ -155,9 +152,7 @@
       <Name>TouchToolkit.GestureProcessor</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Gesture Definitions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MTargetsPath)\Microsoft.M.Embedded.targets" />
 </Project>
