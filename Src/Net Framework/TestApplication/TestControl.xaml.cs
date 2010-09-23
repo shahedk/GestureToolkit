@@ -38,29 +38,10 @@ namespace TestApplication
         void TestControl_Loaded(object sender, RoutedEventArgs e)
         {
             GestureFramework.Initialize(provider, LayoutRoot, Assembly.GetExecutingAssembly());
-            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
+            //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
 
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback);
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback_step1, 0);
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback_step2, 1);
-
-            //SetImages(false);
-        }
-
-        private void ActorCallback(UIElement sender, GestureEventArgs e)
-        {
-            log.Text = "Actor gesture detected" + Environment.NewLine + log.Text;
-        }
-
-        private void ActorCallback_step1(UIElement sender, GestureEventArgs e)
-        {
-            log.Text = "Actor gesture step 1" + Environment.NewLine + log.Text;
-        }
-
-        private void ActorCallback_step2(UIElement sender, GestureEventArgs e)
-        {
-            log.Text = "Actor gesture step 2" + Environment.NewLine + log.Text;
+            SetImages(false);
         }
 
         //Sets the events of the images
