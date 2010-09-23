@@ -64,6 +64,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Extensions\Primitive Conditions\Rule1.cs" />
+    <Compile Include="Extensions\Primitive Conditions\Rule1Validator.cs" />
+    <Compile Include="Extensions\Return Types\ReturnType1.cs" />
+    <Compile Include="Extensions\Return Types\ReturnType1Calculator.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -97,6 +101,9 @@
     <EmbeddedResource Include="bin\gestures.gx" />
     <EmbeddedResource Include="bin\rulenames.gx" />
     <None Include="app.config" />
+    <None Include="Extensions\Language Syntax\PrimitiveConditions.pd" />
+    <None Include="Extensions\Language Syntax\PrimitiveConditionSyntax.pd" />
+    <None Include="Extensions\Language Syntax\ReturnTypes.pd" />
     <None Include="Framework\GDL.mg" />
     <None Include="Framework\LanguageParser.vshost.exe.manifest" />
     <None Include="Gesture Definitions\doubleTap.g" />
@@ -116,6 +123,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Extensions\ReadMe.txt" />
     <Content Include="Framework\LanguageParser.pdb" />
     <Content Include="Framework\LanguageParser.vshost.exe" />
     <Content Include="Framework\LanguageParser.exe" />
@@ -144,6 +152,7 @@
       <Name>TouchToolkit.GestureProcessor</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

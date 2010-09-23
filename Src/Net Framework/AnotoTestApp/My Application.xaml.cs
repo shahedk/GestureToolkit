@@ -245,7 +245,7 @@ namespace AnotoTestApp
 
             foreach (var point in points)
             {
-                p.Points.Add(point);
+                p.Points.Add(point.Position);
             }
 
             return p;
