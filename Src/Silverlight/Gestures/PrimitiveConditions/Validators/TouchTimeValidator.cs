@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Objects;
 using TouchToolkit.GestureProcessor.Objects;
 using TouchToolkit.GestureProcessor.PrimitiveConditions.Validators;
+using TouchToolkit.GestureProcessor.Exceptions;
 
 namespace TouchToolkit.GestureProcessor.PrimitiveConditions
 {
@@ -34,8 +35,26 @@ namespace TouchToolkit.GestureProcessor.PrimitiveConditions
             foreach (var point in points)
             {
                 // TODO: We need to check the unit type (i.e. sec, min,...) and compare accordingly
-                if (point.Age.TotalSeconds <= _data.Value)
-                    result = false;
+
+                if (_data.Unit.StartsWith("msec"))
+                {
+                    if (point.Age.TotalMilliseconds <= _data.Value)
+                        result = false;
+                }
+                else if (_data.Unit.StartsWith("sec"))
+                {
+                    if (point.Age.TotalSeconds <= _data.Value)
+                        result = false;
+                }
+                else
+                {
+                    throw new LanguageSyntaxErrorException("Invalid unit for \"TouchTime\" primitive condition!");
+                }
+
+
+
+
+                
             }
 
             if (result)

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace TouchToolkit.GestureProcessor.Objects
 {
@@ -23,6 +24,7 @@ namespace TouchToolkit.GestureProcessor.Objects
         public int TouchDeviceId { get; set; }
         public TouchAction2 ActionType { get; set; }
         public Point Position { get; set; }
+        public Dictionary<string, string> Tags = new Dictionary<string, string>();
 
         private int _groupId = 0;
         public int GroupId
@@ -35,6 +37,11 @@ namespace TouchToolkit.GestureProcessor.Objects
             {
                 _groupId = value;
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Id:{0} Point:{1},{2} Action:{3} Group:{4}", TouchDeviceId, Position.X, Position.Y, ActionType.ToString(), GroupId);
         }
     }
 }

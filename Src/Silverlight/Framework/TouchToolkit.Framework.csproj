@@ -162,12 +162,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gestures\TouchToolkit.GestureProcessor.csproj">
-      <Project>{6CEA926B-4F66-4C30-A0C2-9CC1C421FD95}</Project>
-      <Name>TouchToolkit.GestureProcessor</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +178,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gestures\TouchToolkit.GestureProcessor.csproj">
+      <Project>{6CEA926B-4F66-4C30-A0C2-9CC1C421FD95}</Project>
+      <Name>TouchToolkit.GestureProcessor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

@@ -90,12 +90,16 @@ namespace TouchToolkit.Framework.TouchInputProviders
             List<TouchInfo> list = new List<TouchInfo>(self.Count);
             foreach (var item in self)
             {
-                list.Add(new TouchInfo()
+                var info = new TouchInfo()
                 {
                     ActionType = item.Action.ToTouchActions(),
                     Position = item.Position,
                     TouchDeviceId = item.TouchDevice.Id
-                });
+                };
+
+                info.Tags.Add("Size", item.Size.ToString());
+
+                list.Add(info);
             }
 
             return list;

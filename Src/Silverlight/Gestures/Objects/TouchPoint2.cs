@@ -47,8 +47,8 @@ namespace TouchToolkit.GestureProcessor.Objects
             }
         }
 
-        private Dictionary<object, dynamic> _tags = new Dictionary<object, dynamic>();
-        public Dictionary<object, dynamic> Tags
+        private Dictionary<string, string> _tags = new Dictionary<string, string>();
+        public Dictionary<string, string> Tags
         {
             get
             {

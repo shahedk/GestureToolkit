@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using TouchToolkit.GestureProcessor.Objects;
+using TouchToolkit.Framework.Exceptions;
 
 namespace TouchToolkit.Framework
 {
@@ -35,6 +36,9 @@ namespace TouchToolkit.Framework
         /// <param name="handler"></param>
         public static void Add(UIElement uiElement, Gesture gesture, GestureEventHandler handler, int stepNo)
         {
+            if (uiElement == null)
+                throw new FrameworkException("UIElement can not be null!");
+
             // Add new record in the list
             eventRequests.Add(new EventRequest()
             {
@@ -124,9 +128,12 @@ namespace TouchToolkit.Framework
                     // Recursively go up (bubbleup) to see if any of the parents like to receive this event
                     foreach (var uiElement in uiElements)
                     {
-                        var parent = VisualTreeHelper.GetParent(uiElement);
-                        if (parent != GestureFramework.LayoutRoot)
-                            parents.Add(parent as UIElement);
+                        if (uiElement != null)
+                        {
+                            var parent = VisualTreeHelper.GetParent(uiElement);
+                            if (parent != GestureFramework.LayoutRoot)
+                                parents.Add(parent as UIElement);
+                        }
                     }
 
                     if (parents.Count > 0)
@@ -142,6 +149,9 @@ namespace TouchToolkit.Framework
 
         internal static List<EventRequest> GetRequests(string gestureName, UIElement uiElement, int stepNo)
         {
+            if (uiElement == null || string.IsNullOrEmpty(gestureName))
+                return new List<EventRequest>();
+
             var requests = from r in eventRequests
                            where r.Gesture.Name == gestureName && r.UIElement == uiElement && r.StepNo == stepNo
                            select r;

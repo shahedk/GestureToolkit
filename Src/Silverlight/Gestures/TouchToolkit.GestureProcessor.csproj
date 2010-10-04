@@ -196,6 +196,7 @@
     <None Include="Gesture Definitions\lasso.g" />
     <None Include="Gesture Definitions\drag.g" />
     <None Include="Gesture Definitions\left.g" />
+    <None Include="Gesture Definitions\multi-finger-selection.g" />
     <None Include="Gesture Definitions\pinch.g" />
     <None Include="Gesture Definitions\rotate.g" />
     <None Include="Gesture Definitions\tap.g" />
