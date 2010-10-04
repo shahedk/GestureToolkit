@@ -35,17 +35,43 @@ namespace TestApplication
 
         }
 
+        Polyline _polyLine = new Polyline() { Stroke = new SolidColorBrush(Colors.Red), StrokeThickness = 1 };
+
         void TestControl_Loaded(object sender, RoutedEventArgs e)
         {
             GestureFramework.Initialize(provider, LayoutRoot, Assembly.GetExecutingAssembly());
             GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
 
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback);
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback_step1, 0);
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback_step2, 1);
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback);
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback_step1, 0);
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback_step2, 1);
+
+            GestureFramework.EventManager.AddEvent(LayoutRoot, "multi_finger_selection", SelectionCallback);
+            LayoutRoot.Children.Add(_polyLine);
+
+            _polyLine.Points.Add(new Point(100, 100));
+            _polyLine.Points.Add(new Point(200, 150));
+            _polyLine.Points.Add(new Point(100, 200));
+            _polyLine.Points.Add(new Point(100, 100));
 
             //SetImages(false);
+        }
+
+        private void SelectionCallback(UIElement sender, GestureEventArgs e)
+        {
+            _polyLine.Points.Clear();
+            var points = e.Values.Get<TouchPoints>();
+            foreach (var point in points)
+            {
+                _polyLine.Points.Add(point.Position);
+            }
+
+            _polyLine.Points.Add(points[0].Position);
+
+
+
+            LassoCallback(sender, e);
         }
 
         private void ActorCallback(UIElement sender, GestureEventArgs e)
@@ -195,7 +221,7 @@ namespace TestApplication
         private List<Polygon> hitlist = new List<Polygon>();
         private void HighlightItems(object param)
         {
-            Thread.Sleep(15);
+            Thread.Sleep(5);
 
             Action action = () =>
             {

@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Canvas Name="LayoutRoot" Height="768" Width="1024">
-        <TextBlock Name="log" Height="500" Width="200" Background="LightGreen"/>
+        <TextBlock Name="log" Height="500" Width="200"/>
         <Image Name="image1" Source="pack://application:,,,/Images/Hydrangeas.jpg" Height="123" Width="130" Canvas.Left="30" Canvas.Top="185" />
         <Image Canvas.Left="210" Canvas.Top="185" Height="123" Name="image2" Source="pack://application:,,,/Images/Jellyfish.jpg" Width="130" />
         <Image Canvas.Left="394" Canvas.Top="185" Height="123" Name="image3" Source="pack://application:,,,/Images/Koala.jpg" Width="130" />

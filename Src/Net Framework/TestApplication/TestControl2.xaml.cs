@@ -17,6 +17,8 @@ using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.GestureProcessor.Gesture_Definitions;
 using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
 using System.Reflection;
+using G = TouchToolkit.Framework.GestureFramework;
+using TouchToolkit.GestureProcessor.ReturnTypes;
 
 namespace TestApplication
 {
@@ -41,11 +43,13 @@ namespace TestApplication
             GestureFramework.AddGesturFeedback(Gestures.Lasso, typeof(HighlightSelectedArea));
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));
 
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
+            //GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);
         }
 
-        public void LassoCallback(UIElement sender, GestureEventArgs e)
+        
+        public void selectCallback(UIElement sender, GestureEventArgs e)
         {
+            var touchPoints = e.Values.Get<TouchPoints>();
         }
 
     }
