@@ -54,6 +54,8 @@
             | r: "Touch paths" => r
             | r: "Touch points" => r
             | r: "Touch actions" => r
+            | r: "Test01ReturnType" => r
+            //##rettype##
             | r: "Info" ":" v:ValidName=>r+":"+v;
         
         /* Generic Rules */
@@ -75,7 +77,18 @@
             | r:TouchPathBoundingBox =>r
             | r:TouchDirection =>r
             | r:PerpendicularTo => r
+            | r:Test01PreCon => r
+            //##pricon##
             | r:TouchShape =>r;
+            
+            
+            //##priconsyntax##
+            
+            
+        /* Rule: Closed loop */
+        syntax Test01PreCon
+            = "Test01PreCon"
+            => Test01PreCon{State=>"true"};
         
         /* Perpendicular to*/
         syntax PerpendicularTo

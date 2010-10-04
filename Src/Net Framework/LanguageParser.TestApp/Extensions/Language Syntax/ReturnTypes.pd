@@ -1,0 +1,9 @@
+﻿/* Define one return type per line. For example:
+ *    
+ *  | r: "ReturnType1" => r
+ *  | r: "ReturnType2" => r
+ *
+ */
+
+ | r: "Returntype1" => r
+ 

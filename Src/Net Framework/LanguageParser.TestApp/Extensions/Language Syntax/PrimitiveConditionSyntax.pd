@@ -1,0 +1,12 @@
+﻿/*
+ *	PreCondition syntax
+ *
+ *	syntax MyNewPreCondition
+ *   = "MyNewPreCondition"
+ *   => MyNewPreCondition{State=>"true"};
+ */
+
+ /* Rule1 */
+	syntax Rule1
+    = "Rule1"
+    => Rule1{State=>"true"};
