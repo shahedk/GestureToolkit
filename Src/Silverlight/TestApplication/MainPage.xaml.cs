@@ -18,6 +18,7 @@ using System.Text;
 using TouchToolkit.Framework;
 using TouchToolkit.Framework.TouchInputProviders;
 using System.Reflection;
+using TouchToolkit.GestureProcessor.Objects;
 
 namespace TestApplication
 {
@@ -33,6 +34,18 @@ namespace TestApplication
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            TouchInfo info = new TouchInfo() { ActionType = TouchAction2.Down, GroupId = 0, Position = new Point(1, 1), TouchDeviceId = 14 };
+            info.Tags.Add("size", "20");
+
+            FrameInfo fi = new FrameInfo() { TimeStamp = 123121, WaitTime = 10 };
+            fi.Touches.Add(info);
+
+            List<FrameInfo> frames = new List<FrameInfo>();
+            frames.Add(fi);
+
+            string content = TouchToolkit.Framework.Utility.SerializationHelper.Serialize(frames);
+            
+
             // Initialize Gesture Framework
             TouchInputProvider inputProvider = new SilverlightTouchInputProvider();
             GestureFramework.Initialize(inputProvider, LayoutRoot, Assembly.GetExecutingAssembly());

@@ -64,7 +64,7 @@ namespace Framework.Tests
         //
         #endregion
 
-
+        /*
         [TestMethod()]
         public void Position_ToString_Null_Test()
         {
@@ -114,5 +114,6 @@ namespace Framework.Tests
 
             Assert.IsTrue(actual == target.Y);
         }
-    }
+  
+         */ }
 }

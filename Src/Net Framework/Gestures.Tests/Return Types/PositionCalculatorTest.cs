@@ -34,7 +34,7 @@ namespace TouchToolkit.Framework.Tests
                 testContextInstance = value;
             }
         }
-
+        /*
         [TestMethod()]
         public void PositionCalculator_Zero_Test()
         {
@@ -76,7 +76,7 @@ namespace TouchToolkit.Framework.Tests
             Assert.AreEqual(expectedY, p_ret.Y);
 
         }
-
+        */
 
     }
 }
