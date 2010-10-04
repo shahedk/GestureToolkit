@@ -156,70 +156,8 @@ namespace TouchToolkit.Framework
                 if (userDefinedGestureTokens != null && userDefinedGestureTokens.Count > 0)
                     tokens.AddRange(userDefinedGestureTokens);
             }
-            /*
-            // Go through all assemblies (both framework and client) and load the gesture definitions
-            DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory);
-            var dlls = dirInfo.GetFiles("*.dll");
-            var exes = dirInfo.GetFiles("*.exe");
-
-            List<FileInfo> allAssemblies = new List<FileInfo>(dlls.Length + exes.Length);
-            allAssemblies.AddRange(dlls);
-            allAssemblies.AddRange(exes);
-
-            // First: Load the pre-defined definitions from TouchToolkit.GestureProcessor.dll
-            FileInfo frameworkDll = null;
-            foreach (FileInfo assemblyFile in allAssemblies)
-            {
-                if (IsExternalAssembly(assemblyFile))
-                    continue;
-
-                if (assemblyFile.Name.Contains("TouchToolkit.GestureProcessor"))
-                {
-                    Assembly assembly = Assembly.LoadFile(assemblyFile.FullName);
-                    List<GestureToken> gestureTokens = ContentHelper.GetEmbeddedGestureDefinition(assembly, "gestures.gx");
-
-                    if (gestureTokens != null && gestureTokens.Count > 0)
-                    {
-                        tokens.AddRange(gestureTokens);
-                    }
-
-                    frameworkDll = assemblyFile;
-                    break;
-                }
-            }
-
-            // Then: Load the remaining gesture definitions
-            foreach (var assemblyFile in allAssemblies)
-            {
-                if (IsExternalAssembly(assemblyFile))
-                    continue;
-
-                if (assemblyFile.Name.Contains("TouchToolkit.GestureProcessor") || assemblyFile.Name.Contains("TouchToolkit.Framework"))
-                    continue; // we already processed the framework dlls
-
-                Assembly assembly = Assembly.LoadFile(assemblyFile.FullName);
-                List<GestureToken> gestureTokens = ContentHelper.GetEmbeddedGestureDefinition(assembly, "gestures.gx");
-
-                if (gestureTokens != null && gestureTokens.Count > 0)
-                {
-                    tokens.AddRange(gestureTokens);
-                }
-            }
-*/
-
             return tokens;
         }
-
-        //private static bool IsExternalAssembly(FileInfo assemblyFile)
-        //{
-        //    foreach (var name in assembliesToSkip)
-        //    {
-        //        if (assemblyFile.FullName.Contains(name))
-        //            return true;
-        //    }
-
-        //    return false;
-        //}
 
         private static IPrimitiveConditionValidator GetPreCondition(IPrimitiveConditionData ruleData, Gesture gesture)
         {
@@ -319,8 +257,24 @@ namespace TouchToolkit.Framework
         private static Type GetType(string className)
         {
             Type type = null;
+            
+            // Check in TouchToolkit assembly (GestureProcessor)
             Gesture g = new Gesture();
             var types = g.GetType().Assembly.GetTypes();
+            type = GetType(className, type, types);
+
+            // If not found, check in application assembly
+            if (type == null)
+            {
+                types = GestureFramework.HostAssembly.GetTypes();
+                type = GetType(className, type, types);
+            }
+
+            return type;
+        }
+
+        private static Type GetType(string className, Type type, Type[] types)
+        {
             foreach (var t in types)
             {
                 if (t.Name.ToLower() == className.ToLower())
@@ -329,7 +283,6 @@ namespace TouchToolkit.Framework
                     break;
                 }
             }
-
             return type;
         }
     }

@@ -20,13 +20,11 @@ namespace LanguageParser
 {
     class Program
     {
-        private static readonly string[] AssembliesToSkip = { "MGraphXamlReader", "Microsoft.Build.Framework", "Microsoft.M", "PresentationCore", "PresentationFramework", "System", "System.Core", "System.Data", "System.Data.DataSetExtensions", "System.Dataflow", "System.Drawing", "System.Runtime.Serialization", "System.Windows.Forms", "System.Xml", "System.Xml.Linq", "WindowsBase", "Xaml", "LanguageParser", "TouchToolkit.Framework", "TouchToolkit.GestureProcessor" };
-
         private static string RuleNamesFilePath { get; set; }
         private static string CompiledGestureDefPath { get; set; }
         private static string GestureDefSourcePath { get; set; }
         private static string LanguageDefPath { get; set; }
-        private static string _language = "";
+        private static string _language = string.Empty;
 
         // i.e. ProjectOutput = bin\Debug\
         private static string OutDir { get; set; }
@@ -36,12 +34,24 @@ namespace LanguageParser
 
         private class FrameworkTypes
         {
-
-            public static string Silverlight = "SL";
-            public static string DotNetFullFramework = "NET"; // Default
+            public const string Silverlight = "SL";
+            public const string DotNetFullFramework = "NET"; // Default
         }
 
+        private class GrammarTokens
+        {
+            public const string PrimitiveConditions = "//##pricon##";
+            public const string ReturnTypes = "//##rettype##";
+            public const string PrimitiveConditionSyntaxes = "//##priconsyntax##";
+        }
 
+        private class FilePaths
+        {
+            public static string CustomPrimitiveConditions { get { return ProjectDir + "Extensions/Language Syntax/PrimitiveConditions.pd"; } }
+            public static string CustomPrimitiveConditionSyntax { get { return ProjectDir + "Extensions/Language Syntax/PrimitiveConditionSyntax.pd"; } }
+            public static string CustomReturnTypes { get { return ProjectDir + "Extensions/Language Syntax/ReturnTypes.pd"; } }
+            public static string LanguageDefinition { get { return ProjectDir + "Framework/GDL.mg"; } }
+        }
 
         static void Main(string[] args)
         {
@@ -72,7 +82,7 @@ namespace LanguageParser
                  * LanguageParser.exe [0: framework-type] [1:gesture-def-path] [2:name-file] [3:gesture-source] [4:lang-def]
                  */
 
-                var root= @"..\..\..\..\";
+                var root = @"..\..\..\..\";
                 FrameworkType = args[0];
                 CompiledGestureDefPath = root + args[1];
                 RuleNamesFilePath = root + args[2];
@@ -126,15 +136,16 @@ namespace LanguageParser
                 int gestureDefCount = gestureDefinitions.GetFiles("*.g").Count();
                 if (gestureDefCount > 0)
                 {
-
-
                     // TODO: Temporary work-around to get exexuting assembly 
-                    if (FrameworkType != FrameworkTypes.Silverlight)
-                        GestureFramework.HostAssembly = GetHostAssembly();
+                    //if (FrameworkType != FrameworkTypes.Silverlight)
+                    GestureFramework.HostAssembly = GetHostAssembly();
 
                     // Load language grammar
                     WriteMessage("Loading language grammar...");
                     _language = File.ReadAllText(LanguageDefPath);
+
+                    // Update grammar for custom primitive conditions & rules
+                    _language = AddUserDefinedSyntax(_language);
 
                     // Build parser
                     WriteMessage("Building parser from language...");
@@ -196,6 +207,29 @@ namespace LanguageParser
                 }
 #endif
             }
+        }
+
+        private  static string AddUserDefinedSyntax(string language)
+        {
+            string priCons = string.Empty;
+            string syntax = string.Empty;
+            string returnTypes = string.Empty;
+
+            if (File.Exists(FilePaths.CustomPrimitiveConditions) && File.Exists(FilePaths.CustomPrimitiveConditionSyntax))
+            {
+                priCons = File.ReadAllText(FilePaths.CustomPrimitiveConditions);
+                syntax = File.ReadAllText(FilePaths.CustomPrimitiveConditionSyntax);
+            }
+
+            language = language.Replace(GrammarTokens.PrimitiveConditions, priCons);
+            language = language.Replace(GrammarTokens.PrimitiveConditionSyntaxes, syntax);
+
+            if (File.Exists(FilePaths.CustomReturnTypes))
+            {
+                returnTypes = File.ReadAllText(FilePaths.CustomReturnTypes);
+            }
+
+            return language.Replace(GrammarTokens.ReturnTypes, returnTypes);
         }
 
         private static Assembly GetHostAssembly()
