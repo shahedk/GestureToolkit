@@ -49,7 +49,7 @@ namespace TestApplication
             // Initialize Gesture Framework
             TouchInputProvider inputProvider = new SilverlightTouchInputProvider();
             GestureFramework.Initialize(inputProvider, LayoutRoot, Assembly.GetExecutingAssembly());
-            GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
+            //GestureFramework.ShowDebugPanel(GestureFramework.DebugPanels.GestureRecorder);
 
             // Add touch feedbacks
             GestureFramework.AddTouchFeedback(typeof(BubblesPath));

@@ -64,10 +64,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Extensions\Primitive Conditions\Rule1.cs" />
-    <Compile Include="Extensions\Primitive Conditions\Rule1Validator.cs" />
-    <Compile Include="Extensions\Return Types\ReturnType1.cs" />
-    <Compile Include="Extensions\Return Types\ReturnType1Calculator.cs" />
+    <Compile Include="TouchToolkit\Extensions\Primitive Conditions\Rule1.cs" />
+    <Compile Include="TouchToolkit\Extensions\Primitive Conditions\Rule1Validator.cs" />
+    <Compile Include="TouchToolkit\Extensions\Return Types\ReturnType1.cs" />
+    <Compile Include="TouchToolkit\Extensions\Return Types\ReturnType1Calculator.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -101,21 +101,21 @@
     <EmbeddedResource Include="bin\gestures.gx" />
     <EmbeddedResource Include="bin\rulenames.gx" />
     <None Include="app.config" />
-    <None Include="Extensions\Language Syntax\PrimitiveConditions.pd" />
-    <None Include="Extensions\Language Syntax\PrimitiveConditionSyntax.pd" />
-    <None Include="Extensions\Language Syntax\ReturnTypes.pd" />
-    <None Include="Framework\GDL.mg" />
-    <None Include="Framework\LanguageParser.vshost.exe.manifest" />
-    <None Include="Gesture Definitions\doubleTap.g" />
-    <None Include="Gesture Definitions\drag.g" />
-    <None Include="Gesture Definitions\lasso.g" />
-    <None Include="Gesture Definitions\left.g" />
-    <None Include="Gesture Definitions\line.g" />
-    <None Include="Gesture Definitions\pinch.g" />
-    <None Include="Gesture Definitions\right.g" />
-    <None Include="Gesture Definitions\rotate.g" />
-    <None Include="Gesture Definitions\tap.g" />
-    <None Include="Gesture Definitions\zoom.g" />
+    <None Include="TouchToolkit\Extensions\Language Syntax\PrimitiveConditions.pd" />
+    <None Include="TouchToolkit\Extensions\Language Syntax\PrimitiveConditionSyntax.pd" />
+    <None Include="TouchToolkit\Extensions\Language Syntax\ReturnTypes.pd" />
+    <None Include="TouchToolkit\Lib\GDL.mg" />
+    <None Include="TouchToolkit\Lib\LanguageParser.vshost.exe.manifest" />
+    <None Include="TouchToolkit\Gesture Definitions\doubleTap.g" />
+    <None Include="TouchToolkit\Gesture Definitions\drag.g" />
+    <None Include="TouchToolkit\Gesture Definitions\lasso.g" />
+    <None Include="TouchToolkit\Gesture Definitions\left.g" />
+    <None Include="TouchToolkit\Gesture Definitions\line.g" />
+    <None Include="TouchToolkit\Gesture Definitions\pinch.g" />
+    <None Include="TouchToolkit\Gesture Definitions\right.g" />
+    <None Include="TouchToolkit\Gesture Definitions\rotate.g" />
+    <None Include="TouchToolkit\Gesture Definitions\tap.g" />
+    <None Include="TouchToolkit\Gesture Definitions\zoom.g" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -123,24 +123,20 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Extensions\ReadMe.txt" />
-    <Content Include="Framework\LanguageParser.pdb" />
-    <Content Include="Framework\LanguageParser.vshost.exe" />
-    <Content Include="Framework\LanguageParser.exe" />
-    <Content Include="Framework\MGraphXamlReader.dll" />
-    <Content Include="Framework\MGraphXamlReader.pdb" />
-    <Content Include="Framework\Microsoft.M.dll" />
-    <Content Include="Framework\Microsoft.Oslo.Internal.dll" />
-    <Content Include="Framework\System.Dataflow.dll" />
-    <Content Include="Framework\TouchToolkit.Framework.dll" />
-    <Content Include="Framework\TouchToolkit.Framework.pdb" />
-    <Content Include="Framework\TouchToolkit.GestureProcessor.dll" />
-    <Content Include="Framework\TouchToolkit.GestureProcessor.pdb" />
-    <Content Include="Framework\Xaml.dll" />
-    <Resource Include="Images\Hydrangeas.jpg" />
-    <Resource Include="Images\Jellyfish.jpg" />
-    <Resource Include="Images\Koala.jpg" />
-    <Resource Include="Images\Lighthouse.jpg" />
+    <Resource Include="TouchToolkit\Extensions\ReadMe.txt" />
+    <Content Include="TouchToolkit\Lib\LanguageParser.pdb" />
+    <Content Include="TouchToolkit\Lib\LanguageParser.vshost.exe" />
+    <Content Include="TouchToolkit\Lib\LanguageParser.exe" />
+    <Content Include="TouchToolkit\Lib\MGraphXamlReader.dll" />
+    <Content Include="TouchToolkit\Lib\MGraphXamlReader.pdb" />
+    <Content Include="TouchToolkit\Lib\Microsoft.M.dll" />
+    <Content Include="TouchToolkit\Lib\Microsoft.Oslo.Internal.dll" />
+    <Content Include="TouchToolkit\Lib\System.Dataflow.dll" />
+    <Content Include="TouchToolkit\Lib\TouchToolkit.Framework.dll" />
+    <Content Include="TouchToolkit\Lib\TouchToolkit.Framework.pdb" />
+    <Content Include="TouchToolkit\Lib\TouchToolkit.GestureProcessor.dll" />
+    <Content Include="TouchToolkit\Lib\TouchToolkit.GestureProcessor.pdb" />
+    <Content Include="TouchToolkit\Lib\Xaml.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework\TouchToolkit.Framework.csproj">
@@ -157,6 +153,10 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

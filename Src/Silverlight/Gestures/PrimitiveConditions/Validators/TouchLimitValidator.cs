@@ -56,9 +56,24 @@ namespace TouchToolkit.GestureProcessor.PrimitiveConditions
             }
             else if (_data.Type == TouchLimitType.Range)
             {
-                if (points.Count >= _data.Min && points.Count <= _data.Max)
+                if (points.Count == _data.Min)
                 {
                     list.Add(new ValidSetOfTouchPoints(points));
+                }
+                else if (points.Count > _data.Min && points.Count <= _data.Max)
+                {
+                    // All possible combinitions of size between min & max-1 
+                    for (int size = _data.Min; size < points.Count; size++)
+                    {
+                        // Generate possible valid combinitions
+                        Combinations c = new Combinations(points.ToArray(), size);
+                        while (c.MoveNext())
+                        {
+                            TouchPoint2[] arr = c.Current as TouchPoint2[];
+                            ValidSetOfTouchPoints set = new ValidSetOfTouchPoints(arr);
+                            list.Add(set);
+                        }
+                    }
                 }
             }
 
