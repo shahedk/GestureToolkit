@@ -18,12 +18,6 @@ using TouchToolkit.GestureProcessor.ReturnTypes;
 
 namespace TouchToolkit.Framework.GestureEvents
 {
-    //public enum TouchInputType
-    //{
-    //    Silverlight,
-    //    Surface,
-    //    SmartTableTop
-    //}
 
     public class EventManager
     {
@@ -57,7 +51,11 @@ namespace TouchToolkit.Framework.GestureEvents
         public void AddEvent(UIElement uiElement, string gestureName, GestureEventHandler handler)
         {
             Gesture g = GestureLanguageProcessor.GetGesture(gestureName);
-            AddEvent(uiElement, g, handler, g.ValidationBlocks.Count - 1);
+
+            if (g != null)
+                AddEvent(uiElement, g, handler, g.ValidationBlocks.Count - 1);
+            else
+                throw new FrameworkException(string.Format("The gesture \"{0}\" does not exists in current context", gestureName));
         }
 
         /// <summary>
@@ -115,8 +113,6 @@ namespace TouchToolkit.Framework.GestureEvents
             TouchInputManager.ActiveTouchProvider.MultiTouchChanged -= ActiveHardware_MultiTouchChanged;
             TouchInputManager.ActiveTouchProvider.SingleTouchChanged -= ActiveTouchProvider_SingleTouchChanged;
         }
-
-
 
         const int CommonBehaviourInterval = 3;
         private void ActiveHardware_FrameChanged(object sender, FrameInfo frameInfo)
@@ -199,20 +195,14 @@ namespace TouchToolkit.Framework.GestureEvents
         {
             var validateBlock = gesture.ValidationBlocks[blockNo];
 
-            //if (validResultSets.Count > 0 && validResultSets[0].Count > 0)
-            //{
-            //    Console.WriteLine(validResultSets[0][0].Action.ToString());
-
-            //    if (validResultSets[0][0].Action != TouchAction.Up)
-            //        Console.WriteLine("!!!U");
-            //}
-
             // Validate the specified block
             validResultSets = validateBlock.PrimitiveConditions.Validate(validResultSets);
 
             if (validResultSets.Count > 0)
             // current dataset satisfies the validation block
             {
+                List<UIElement> alreadyNotifiedUIelements = new List<UIElement>();
+
                 // Building return objects for each valid sets
                 foreach (var validSetOfPoint in validResultSets)
                 {
@@ -236,8 +226,14 @@ namespace TouchToolkit.Framework.GestureEvents
                         // Invoke the callback to notify the subscriber(s)
                         foreach (var eventRequest in eventReqs)
                         {
-                            GestureEventArgs e = new GestureEventArgs() { Values = returnObjs };
-                            eventRequest.EventHandler(eventRequest.UIElement, e);
+                            if (!alreadyNotifiedUIelements.Contains(eventRequest.UIElement))
+                                // Prevent same element from receiving multiple notifications (e.g. 1..3 finger drag)
+                            {
+                                GestureEventArgs e = new GestureEventArgs() { Values = returnObjs };
+                                eventRequest.EventHandler(eventRequest.UIElement, e);
+
+                                alreadyNotifiedUIelements.Add(eventRequest.UIElement);
+                            }
                         }
                     }
                 }
@@ -254,36 +250,6 @@ namespace TouchToolkit.Framework.GestureEvents
             return validResultSets;
         }
 
-        //        private bool IsPointOriginatedOnElement(TouchPoint2 point, UIElement uIElement)
-        //        {
-        //            if (point.Tags.ContainsKey(uIElement))
-        //            {
-        //                return (point.Tags[uIElement] as bool?) == true;
-        //            }
-        //            else
-        //            {
-        //                // Get all elements on the position of the point
-        //                bool result = false;
-
-        //                //TODO: Find a way to do hit-test in WPF 4.0
-        //#if SILVERLIGHT
-        //                var elements = VisualTreeHelper.FindElementsInHostCoordinates(point.StartPoint.ToPoint(), GestureFramework.LayoutRoot);
-        //                foreach (var uiItem in elements)
-        //                {
-        //                    if (uiItem == uIElement)
-        //                    {
-        //                        result = true;
-        //                        break;
-        //                    }
-        //                }
-        //#else
-        //                // Code block for : .NET Framework 4.0 / WPF 4.0 
-        //#endif
-        //                point.Tags[uIElement] = result;
-
-        //                return result;
-        //            }
-        //        }
 
         private void ExecuteFeedback(Type type, List<IReturnType> returnObjects)
         {
