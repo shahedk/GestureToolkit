@@ -1,9 +1,0 @@
-﻿/* Define one primitive condition per line. For example:
- *    
- *  | r: "ClosedLoop" => r
- *  | r: "MyPrimitiveCon02" => r
- *
- */
-
- | r: "Rule1" => r
- 
