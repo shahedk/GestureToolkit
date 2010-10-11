@@ -1,0 +1,36 @@
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\bin\Debug\MyApplication.exe
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\bin\Debug\MyApplication.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\bin\Debug\TouchToolkit.Framework.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\bin\Debug\TouchToolkit.GestureProcessor.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\bin\Debug\TouchToolkit.Framework.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\bin\Debug\TouchToolkit.GestureProcessor.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\MainWindow.baml
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\MainWindow.g.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\App.g.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\MyApplication_Content.g.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\MyApplication_MarkupCompile.cache
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\MyApplication.g.resources
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\MyApplication.Properties.Resources.resources
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\MyApplication.exe
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Win7\MyApplication\obj\x86\Debug\MyApplication.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\MyApplication.exe
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\MyApplication.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\bin\Debug\MyApplication.exe
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\bin\Debug\MyApplication.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\bin\Debug\TouchToolkit.Framework.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\bin\Debug\TouchToolkit.GestureProcessor.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\bin\Debug\TouchToolkit.Framework.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\bin\Debug\TouchToolkit.GestureProcessor.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\MainWindow.baml
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\MainWindow.g.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\App.g.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\MyApplication_Content.g.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\MyApplication_MarkupCompile.cache
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\MyApplication.g.resources
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\MyApplication.Properties.Resources.resources
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Win7\MyApplication\obj\x86\Debug\GenerateResource.write.1.tlog

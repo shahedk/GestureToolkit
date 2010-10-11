@@ -58,7 +58,7 @@ namespace LanguageParser.TestApp
             {
                 GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Zoom, ZoomCallback);
                 GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Pinch, PinchCallback);
-                GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Drag, DragCallback);
+                GestureFramework.EventManager.AddEvent(bitmap as Image, "Drag2", DragCallback);
                 GestureFramework.EventManager.AddEvent(bitmap as Image, Gestures.Rotate, RotateCallback);
             }
 

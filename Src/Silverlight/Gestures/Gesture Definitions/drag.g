@@ -6,4 +6,4 @@ validate
     On same object
 
 return
-    Touch actions, Position changed, Test01ReturnType
+    Touch actions, Position changed, Touch count

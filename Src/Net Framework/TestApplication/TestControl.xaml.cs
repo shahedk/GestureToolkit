@@ -47,15 +47,15 @@ namespace TestApplication
             //GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback_step1, 0);
             //GestureFramework.EventManager.AddEvent(LayoutRoot, "Actor", ActorCallback_step2, 1);
 
-            GestureFramework.EventManager.AddEvent(LayoutRoot, "multi_finger_selection", SelectionCallback);
-            LayoutRoot.Children.Add(_polyLine);
+           // GestureFramework.EventManager.AddEvent(LayoutRoot, "multi_finger_selection", SelectionCallback);
+            //LayoutRoot.Children.Add(_polyLine);
 
-            _polyLine.Points.Add(new Point(100, 100));
-            _polyLine.Points.Add(new Point(200, 150));
-            _polyLine.Points.Add(new Point(100, 200));
-            _polyLine.Points.Add(new Point(100, 100));
+            //_polyLine.Points.Add(new Point(100, 100));
+            //_polyLine.Points.Add(new Point(200, 150));
+            //_polyLine.Points.Add(new Point(100, 200));
+            //_polyLine.Points.Add(new Point(100, 100));
 
-            //SetImages(false);
+            SetImages(false);
         }
 
         private void SelectionCallback(UIElement sender, GestureEventArgs e)
@@ -94,10 +94,13 @@ namespace TestApplication
         {
             foreach (var bitmap in LayoutRoot.Children)
             {
-                GestureFramework.EventManager.AddEvent(bitmap as Image, "Zoom", ZoomCallback);
-                GestureFramework.EventManager.AddEvent(bitmap as Image, "Pinch", PinchCallback);
-                GestureFramework.EventManager.AddEvent(bitmap as Image, "Drag", DragCallback);
-                GestureFramework.EventManager.AddEvent(bitmap as Image, "Rotate", RotateCallback);
+                if (bitmap is Image)
+                {
+                    GestureFramework.EventManager.AddEvent(bitmap as Image, "Zoom", ZoomCallback);
+                    GestureFramework.EventManager.AddEvent(bitmap as Image, "Pinch", PinchCallback);
+                    GestureFramework.EventManager.AddEvent(bitmap as Image, "Drag", DragCallback);
+                    GestureFramework.EventManager.AddEvent(bitmap as Image, "Rotate", RotateCallback);
+                }
             }
 
             //Uncomment here to add lasso functionality
