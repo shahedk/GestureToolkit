@@ -1,0 +1,116 @@
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\MyApplication.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\MyApplication.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\AppManifest.xaml
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\MyApplication.xap
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\MyApplicationTestPage.html
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\System.Windows.Controls.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\TouchToolkit.Framework.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\TouchToolkit.GestureProcessor.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\System.Windows.Controls.xml
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\TouchToolkit.Framework.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\TouchToolkit.GestureProcessor.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\ar\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\bg\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\ca\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\cs\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\da\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\de\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\el\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\es\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\et\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\eu\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\fi\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\fr\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\he\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\hr\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\hu\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\id\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\it\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\ja\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\ko\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\lt\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\lv\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\ms\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\nl\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\no\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\pl\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\pt\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\pt-BR\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\ro\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\ru\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\sk\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\sl\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\sr-Cyrl-CS\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\sr-Latn-CS\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\sv\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\th\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\tr\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\uk\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\vi\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\zh-Hans\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\Bin\Debug\zh-Hant\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\obj\Debug\App.g.i.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\obj\Debug\MainPage.g.i.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\obj\Debug\MyApplication.g.resources
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\obj\Debug\MyApplication.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\obj\Debug\MyApplication.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Template\Silverlight\MyApplication\obj\Debug\XapCacheFile.xml
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\MyApplication.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\MyApplication.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\AppManifest.xaml
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\MyApplication.xap
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\MyApplicationTestPage.html
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\System.Windows.Controls.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\TouchToolkit.Framework.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\TouchToolkit.GestureProcessor.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\System.Windows.Controls.xml
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\TouchToolkit.Framework.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\TouchToolkit.GestureProcessor.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\ar\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\bg\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\ca\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\cs\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\da\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\de\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\el\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\es\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\et\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\eu\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\fi\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\fr\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\he\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\hr\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\hu\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\id\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\it\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\ja\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\ko\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\lt\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\lv\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\ms\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\nl\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\no\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\pl\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\pt\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\pt-BR\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\ro\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\ru\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\sk\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\sl\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\sr-Cyrl-CS\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\sr-Latn-CS\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\sv\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\th\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\tr\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\uk\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\vi\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\zh-Hans\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\Bin\Debug\zh-Hant\System.Windows.Controls.resources.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\obj\Debug\App.g.i.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\obj\Debug\MainPage.g.i.cs
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\obj\Debug\MyApplication.g.resources
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\obj\Debug\MyApplication.dll
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\obj\Debug\MyApplication.pdb
+C:\Projects\TouchToolkit\Src\DevTools\Visual Studio 2010 Templates\Project Templates\Silverlight\MyApplication\obj\Debug\XapCacheFile.xml

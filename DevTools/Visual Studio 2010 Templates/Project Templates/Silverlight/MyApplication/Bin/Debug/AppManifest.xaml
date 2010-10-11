@@ -1,0 +1,8 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="MyApplication" EntryPointType="MyApplication.App" RuntimeVersion="4.0.50401.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="MyApplication" Source="MyApplication.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls" Source="System.Windows.Controls.dll" />
+    <AssemblyPart x:Name="TouchToolkit.Framework" Source="TouchToolkit.Framework.dll" />
+    <AssemblyPart x:Name="TouchToolkit.GestureProcessor" Source="TouchToolkit.GestureProcessor.dll" />
+  </Deployment.Parts>
+</Deployment>
