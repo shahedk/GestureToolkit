@@ -28,16 +28,16 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks
             _dispatcher = dispatcher;
             _feedbackCanvas = feedbackCanvas;
 
-            TouchPoints touchPoints = values.Get<TouchPoints>();
+            TouchPaths touchPaths= values.Get<TouchPaths>();
 
-            if (touchPoints != default(TouchPoints))
+            if (touchPaths != null && touchPaths.Count > 0)
             {
-                DrawLassoArea(touchPoints);
+                DrawLassoArea(touchPaths[0]);
                 StartAnimation();
             }
         }
 
-        private void DrawLassoArea(TouchPoints touchPoints)
+        private void DrawLassoArea(TouchPath touchPath)
         {
             _polygon = new Polygon();
 
@@ -45,9 +45,9 @@ namespace TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks
             _polygon.Opacity = 0.7;
             _polygon.Tag = "SELECTED_AREA";
 
-            foreach (var point in touchPoints)
+            foreach (var point in touchPath.Points)
             {
-                _polygon.Points.Add(point.Position);
+                _polygon.Points.Add(point);
             }
 
             _feedbackCanvas.Children.Add(_polygon);

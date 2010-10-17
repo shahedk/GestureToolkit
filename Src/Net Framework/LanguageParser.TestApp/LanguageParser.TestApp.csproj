@@ -104,7 +104,6 @@
     <None Include="TouchToolkit\Extensions\Language Syntax\PrimitiveConditions.pd" />
     <None Include="TouchToolkit\Extensions\Language Syntax\PrimitiveConditionSyntax.pd" />
     <None Include="TouchToolkit\Extensions\Language Syntax\ReturnTypes.pd" />
-    <None Include="TouchToolkit\Gesture Definitions\Drag2.g" />
     <None Include="TouchToolkit\Lib\GDL.mg" />
     <None Include="TouchToolkit\Lib\LanguageParser.vshost.exe.manifest" />
     <None Include="TouchToolkit\Gesture Definitions\doubleTap.g" />
