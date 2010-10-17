@@ -17,6 +17,8 @@ using TouchToolkit.GestureProcessor.Feedbacks.TouchFeedbacks;
 using TouchToolkit.GestureProcessor.ReturnTypes;
 using System.Threading;
 using System.Reflection;
+using TouchToolkit.GestureProcessor.Gesture_Definitions;
+using TouchToolkit.GestureProcessor.Feedbacks.GestureFeedbacks;
 
 namespace TestApplication
 {
@@ -102,6 +104,9 @@ namespace TestApplication
                     GestureFramework.EventManager.AddEvent(bitmap as Image, "Rotate", RotateCallback);
                 }
             }
+
+            GestureFramework.EventManager.AddEvent(LayoutRoot, Gestures.Lasso, LassoCallback);
+            GestureFramework.AddGesturFeedback(Gestures.Lasso, typeof(HighlightSelectedArea));
 
             //Uncomment here to add lasso functionality
             GestureFramework.EventManager.AddEvent(LayoutRoot, "Lasso", LassoCallback);

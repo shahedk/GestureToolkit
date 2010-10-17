@@ -9,4 +9,4 @@ validate
     Enclosed area:5000..1000000
 
 return
-    Touch points
+    Touch points, Touch paths
