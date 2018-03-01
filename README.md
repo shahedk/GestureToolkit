@@ -8,3 +8,11 @@ This project was developed as part of a Masters thesis at ASE group in Universit
 * A test framework that allows to write unit tests to validate touch interactions and gesture definitions
 * A record/playback tool for testing & debugging applications as well as simulating multi-user scenarios
 * A visual effects framework to provide consistent visual feedback for touch interactions & gestures
+
+
+### Related publications
+* [!A Domain Specific Language to Define Gestures for Multi-Touch Applications.](http://cdn.shahed.me/KhandkarDSM2010_v2.pdf)
+* [!Tool Support for Testing Complex Multi-Touch Gestures. ](http://cdn.shahed.me/KhandkarITS2010.pdf)
+
+### Thesis
+* [!A Domain-Specific Language for Multi-Touch Gestures](http://cdn.shahed.me/KhandkarMSc2010.pdf)
