@@ -11,8 +11,8 @@ This project was developed as part of a Masters thesis at ASE group in Universit
 
 
 ### Related publications
-* [A Domain Specific Language to Define Gestures for Multi-Touch Applications.](http://cdn.shahed.ca/KhandkarDSM2010_v2.pdf)
-* [Tool Support for Testing Complex Multi-Touch Gestures. ](http://cdn.shahed.ca/KhandkarITS2010.pdf)
+* [A Domain Specific Language to Define Gestures for Multi-Touch Applications.](http://cdn.shahed.ca/pub/KhandkarDSM2010.pdf)
+* [Tool Support for Testing Complex Multi-Touch Gestures. ](http://cdn.shahed.ca/pub/KhandkarITS2010.pdf)
 
 ### Thesis
-* [A Domain-Specific Language for Multi-Touch Gestures](http://cdn.shahed.ca/KhandkarMSc2010.pdf)
+* [A Domain-Specific Language for Multi-Touch Gestures](http://cdn.shahed.ca/pub/KhandkarMSc2010.pdf)
