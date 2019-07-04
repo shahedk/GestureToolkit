@@ -1,3 +1,5 @@
+# Gesture Toolkit
+
 This project was developed as part of a Masters thesis at ASE group in University of Calgary. Its a proof of concept implementation of a toolkit to simplify the multi-touch application development and testing. The toolkit supports WPF and Silverlight framework.
 
 ### Features
