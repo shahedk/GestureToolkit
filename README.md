@@ -13,8 +13,8 @@ A toolkit to simplify the large screen (eg. 25"-80") multi-touch application dev
 
 
 ### Related publications
-* [A Domain Specific Language to Define Gestures for Multi-Touch Applications.](http://cdn.shahed.ca/pub/KhandkarDSM2010.pdf)
-* [Tool Support for Testing Complex Multi-Touch Gestures. ](http://cdn.shahed.ca/pub/KhandkarITS2010.pdf)
+* [A Domain Specific Language to Define Gestures for Multi-Touch Applications.](https://ase.cpsc.ucalgary.ca/wp-content/uploads/2018/05/A-Domain-Specific-Language-articl.pdf)
+* [Tool Support for Testing Complex Multi-Touch Gestures. ](https://seriousxr.ca/wp-content/uploads/2022/04/Tool-Support-for-Testing-Complex-Multi-Touch-Gestures.pdf)
 
 ### Thesis
-* [A Domain-Specific Language for Multi-Touch Gestures](http://cdn.shahed.ca/pub/KhandkarMSc2010.pdf)
+* [A Domain-Specific Language for Multi-Touch Gestures](https://ase.cpsc.ucalgary.ca/wp-content/uploads/2018/05/A-Domain-Specific-Language-articl.pdf)
